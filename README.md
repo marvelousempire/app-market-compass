@@ -1,260 +1,165 @@
-# app-market-compass
+# Market Compass
 
-The complete engineering PRD is finished. It is 56 pages and includes the full product architecture, 115 proposed IP nodes, Python microscripts, Makefile commands, scoring formulas, data contracts, repository structure, APIs, model-validation rules, test requirements, delivery phases, and a 41-point audit mapping the original conversation into the product.
+**Market Compass** is a node-based market decision-intelligence system for researching stocks, crypto, ETFs, and, later, options.
 
-Download the complete Market Compass PRD⁠￼
+It is built around a simple idea: a market decision should never be based on one indicator, one headline, or one story. The system gathers evidence from several independent directions, measures the argument **for** and **against** a setup, explains both sides, and shows what would invalidate the current view.
 
-The technical stack was checked against current official documentation. The design uses TA-Lib for standard technical indicators, NetworkX for relationship graphs, statsmodels and scikit-learn for time-series and predictive modeling, vectorbt for backtesting, SHAP for model explanations, Polars/Arrow/DuckDB for analytical data processing, and Optuna with MLflow for tuning and experiment tracking. 
+> Market Compass is not a black-box buy/sell bot. It is an evidence engine.
 
-Market Compass PRD — Engineering Handoff
+## What it answers
 
-Status: Complete engineering draft
-Version: 1.0
-Date: August 27, 2026
-Primary horizon: Swing trades lasting several days to several weeks
-Architecture: One foundation gate, eight evidence layers, and shared decision engines
-Proposed IP registry: 115 independently buildable nodes
+For a selected asset and trading horizon, Market Compass is designed to answer:
 
-Product Definition
+- What is this asset, and is there enough real activity, utility, liquidity, or business substance to analyze it seriously?
+- Is price trending up, down, sideways, or changing direction?
+- Is momentum reversing, continuing, or merely bouncing?
+- Where did price come from?
+- What is the **last bus stop**, and what are the **next bus stops**?
+- How strong is support below price?
+- How strong is resistance above price?
+- How many times has the market visited those areas, and over what span of time?
+- What news directly affects the asset?
+- What news may affect it indirectly through suppliers, customers, sectors, technologies, regulators, or related assets?
+- What happened during similar setups in the past?
+- What market narrative is currently attracting attention and money?
+- What evidence supports the setup, what evidence contradicts it, and what would make the conclusion wrong?
 
-Market Compass is a node-based market decision-intelligence system.
+## Product architecture
 
-It answers two separate questions:
+Market Compass has one foundation gate and eight primary evidence layers.
 
-1. Is the asset real, active, useful, liquid, and worth analyzing?
-2. Does the present evidence support buying, waiting, avoiding, holding, reducing risk, or exiting?
+| Layer | Purpose |
+| --- | --- |
+| **Foundation Gate 0: Asset Reality & Quality** | Understand what the asset is, what gives it value, liquidity, supply or float, dilution, concentration, economic activity, and major operational risks. |
+| **1. Trend** | Measure direction using EMA structure, slope, crossovers, regime, and multiple timeframes. |
+| **2. Momentum & Reversal** | Use RSI, MACD, divergence, and optional stochastic signals to distinguish continuation, bounce, reversal, and overextension. |
+| **3. Price Structure, Fibonacci & Bus Stops** | Find meaningful swings, Fibonacci levels, the last price stop, next destinations, confluence, and invalidation. |
+| **4. Human Factor, News & Event Risk** | Measure headlines, event relevance, source quality, sentiment, novelty, scheduled risk, and actual market reaction. |
+| **5. Historical Context & Analogs** | Find similar prior setups, measure what happened next, and deliberately surface counterexamples. |
+| **6. Price Memory, Support & Resistance** | Measure how often price tested an area, over what period, how strongly it reacted, and whether repeated tests are strengthening or eroding the level. |
+| **7. Relationship Intelligence** | Build the evidence-board graph: companies, protocols, suppliers, customers, sectors, technology, macro factors, regulators, and events connected by sourced relationships. |
+| **8. Market Narrative** | Identify the story the market is trading and determine whether it is emerging, accelerating, crowded, fading, or reversing. |
 
-The product does not return only one conclusion. It presents the case supporting a trade, the case opposing the trade, the strength of each side, the confidence level, the next likely price destinations, and the conditions that would prove the setup wrong.
+## Founder-defined starting profile
 
-Core Architecture
+The first swing-trading profile preserves the original product rules:
 
-The foundation gate evaluates asset reality and quality.
+- **RSI:** 14 periods, with guides at 30, 50, and 70.
+- **EMA:** 13, 27, and 81.
+- **MACD:** a separate momentum and reversal signal.
+- **Stochastic:** optional and disabled by default because duplicated momentum signals can add noise rather than insight.
+- **Fibonacci:** supports automatic and manual anchors. For an upward swing, the default search is the meaningful low on the left to the meaningful high on the right; the direction reverses for a downward swing.
+- **Trading horizon:** initial product focus is several days to several weeks.
 
-The eight evidence layers are:
+## The Bus Stop model
 
-1. Trend
-2. Momentum and reversal
-3. Fibonacci, price structure, and the bus-stop route
-4. Human behavior, news, sentiment, and event risk
-5. Historical context and analogs
-6. Price memory, support, and resistance
-7. Relationship intelligence and the crime-scene evidence board
-8. Market narrative
+Market Compass explains price structure like a route instead of pretending a chart is a collection of mystical colored lines.
 
-Shared engines handle:
+- **Last bus stop:** the most recent meaningful price area that price left.
+- **Current stop:** the present price area.
+- **Next bus stop:** the nearest meaningful destination in the expected direction.
+- **Later stops:** secondary targets.
+- **Wrong road:** the invalidation condition or level.
 
-* Pairwise contrast
-* Disconfirming evidence
-* Evidence normalization
-* Confidence calculation
-* Correlation and duplicate-signal penalties
-* Forecasting
-* Volatility
-* Risk and route analysis
-* Plain-language explanations
-* Technical explanations
-* Backtesting
-* Calibration
-* Monitoring
-* Provenance
-* IP lineage
+Every stop must explain why it matters: historical tests, reaction size, volume, Fibonacci confluence, EMA confluence, prior highs/lows, break-and-retest behavior, and other evidence.
 
-Founder Concepts Preserved
+## Contrast is mandatory
 
-The PRD preserves the founder-defined RSI configuration of 14 periods with guides at 30, 50, and 70.
+Every analytic node must return both sides of the argument.
 
-It preserves EMA periods of 13, 27, and 81.
+A bullish conclusion must include bearish evidence. A bearish conclusion must include bullish evidence. Missing data and invalidation conditions must also be explicit.
 
-MACD is included as a separate momentum signal.
+A two-sided evidence split always totals 100. For example:
 
-Stochastic is optional and disabled by default because it may add noise or duplicate other momentum evidence.
+```text
+Bull evidence: 56
+Bear evidence: 44
+Confidence: Medium
+```
 
-Fibonacci analysis supports the founder’s upward-move method of selecting the meaningful low on the left and the meaningful high on the right. Downward-move anchoring reverses the direction.
+The **56/44 split is evidence balance, not automatically a 56% probability of profit**. Probability may only be shown when a specific prediction target has been tested out of sample and calibrated.
 
-The bus-stop route is a named product feature:
+## Explain Why
 
-* The last bus stop is the meaningful price area price recently left.
-* The current stop is the present price area.
-* The next bus stop is the nearest meaningful price destination.
-* Later stops are secondary targets.
-* The wrong road is the invalidation level.
+No score is valid without an explanation.
 
-The price-memory engine records:
+Every node returns:
 
-* When price first saw a level
-* When price last saw it
-* The number of independent test episodes
-* The period covered
-* Bounce or rejection size
-* Reaction speed
-* Volume near the level
-* Multi-timeframe agreement
-* Break-and-retest behavior
-* False breaks
-* Repeated-test erosion
+- main conclusion;
+- supporting evidence;
+- opposing evidence;
+- missing information;
+- confidence;
+- invalidation conditions;
+- simple explanation;
+- technical explanation;
+- source and calculation provenance.
 
-Support and resistance are analyzed using the same framework.
+The default user-facing explanation targets roughly a fourth- to fifth-grade reading level. Engineers and advanced users can open the technical explanation to inspect parameters, formulas, timestamps, data sources, versions, calibration, and tests.
 
-The crime-scene evidence board maps companies, tokens, protocols, suppliers, customers, technologies, regulators, sectors, macro factors, events, and narratives. Each relationship is represented as an evidence-backed edge. The system traces how a headline may move through several connected entities before affecting the selected asset.
+## Node-first engineering
 
-Mandatory Contrast Rule
+Every distinct product idea is treated as an independent **IP node**. Each node is intended to become:
 
-Every node must produce both sides of its conclusion.
+1. an independently testable Python module;
+2. an independently executable Python microscript;
+3. a stable input/output contract;
+4. an API-capable component;
+5. a separately versioned product capability.
 
-A node returning bullish evidence must also return bearish evidence.
+A Python orchestrator owns dependency resolution, concurrency, retries, caching, partial results, manifests, and final aggregation. The `Makefile` is the developer-facing launch control, not the place where product logic goes to die.
 
-A node returning bearish evidence must also return bullish evidence.
+Example intended launch surface:
 
-Each result must contain:
-
-* Supporting evidence
-* Opposing evidence
-* Missing information
-* Assumptions
-* Data freshness
-* Confidence
-* Invalidation conditions
-* Plain-language explanation
-* Technical explanation
-* Source provenance
-
-A two-sided evidence score must total 100.
-
-A score of 56 on one side therefore produces 44 on the other side.
-
-The score is called an evidence split unless the underlying predictive model has been tested and calibrated as a probability model.
-
-Python Microscript Requirement
-
-Every intellectual-property node is designed as an independently executable Python microscript.
-
-Each script must:
-
-1. Accept a validated request.
-2. Load only the data it needs.
-3. Perform one bounded analytic action.
-4. Return a standard NodeResult.
-5. Show both the main case and the counter-case.
-6. Record its version and provenance.
-7. Save its output inside a run directory.
-8. Fail visibly rather than invent missing data.
-
-The Makefile acts as launch control. Python retains all decision logic, orchestration, dependency management, retries, concurrency, caching, and manifest creation.
-
-The primary launch command is specified as:
-
+```bash
 make analyze ASSET=HYPE-USD HORIZON=2-6w PROFILE=swing_weeks_v1
+make node NODE=L2-001 REQUEST=runs/<run-id>/request.json
+make test
+make backtest ASSET=HYPE-USD STRATEGY=swing_weeks_v1
+```
 
-Individual nodes and layers can also be executed separately.
+## Technical direction
 
-Evidence Scoring
+The planned Python stack includes:
 
-Each evidence item is weighted using:
+- NumPy, SciPy, Polars, pandas, PyArrow, DuckDB, and Numba for numerical and analytical work;
+- TA-Lib plus audited custom implementations for technical indicators and founder-specific logic;
+- statsmodels, `arch`, and scikit-learn for statistical forecasting, volatility, pipelines, calibration, and validation;
+- XGBoost, LightGBM, CatBoost, PyMC, and optional PyTorch models when advanced methods demonstrate measurable value;
+- NetworkX for the initial evidence-board graph;
+- spaCy, transformers, and sentence-transformers for entity linking, event classification, semantic similarity, and narrative analysis;
+- SHAP for compatible model explanations, while keeping predictive explanations distinct from causal claims;
+- vectorbt plus custom event-driven simulation for backtesting;
+- Optuna and MLflow for controlled model tuning and experiment tracking;
+- Pydantic, FastAPI, pytest, Hypothesis, Pandera, Ruff, and mypy for contracts, APIs, testing, and engineering quality.
 
-* Direction
-* Strength
-* Relevance
-* Source reliability
-* Freshness
-* Rule or model reliability
-* Data quality
-* Independence from other signals
+Sophisticated tools are permitted. Unnecessary complexity is not. Every advanced model must beat a simpler baseline or provide materially better calibration, stability, or uncertainty estimates before it becomes the production champion.
 
-The scoring engine reduces the weight of correlated signals. RSI, MACD, stochastic, and moving averages cannot be counted as fully independent proof merely because all point in the same direction.
+## Repository documents
 
-Confidence remains separate from the evidence split. Confidence reflects:
+The canonical engineering specification is separate from this README:
 
-* Data coverage
-* Data quality
-* Source reliability
-* Feature agreement
-* Historical sample size
-* Model calibration
-* Freshness
-* Regime stability
+- [`docs/PRODUCT-REQUIREMENTS.md`](docs/PRODUCT-REQUIREMENTS.md) — complete product requirements document and engineering specification.
+- [`docs/IP-NODE-REGISTRY.md`](docs/IP-NODE-REGISTRY.md) — stable intellectual-property node catalog and proposed Python script mapping.
 
-Forecasting Standard
+The README is the front door. The PRD is the law. The node registry is the construction inventory. Humanity has survived enough repositories where all three are one 4,000-line README.
 
-The model ladder begins with simple baselines. More sophisticated models must beat those baselines during time-respecting out-of-sample tests.
+## Current status
 
-The PRD specifies:
+**Stage:** Product architecture and engineering specification.
 
-* Naive and drift baselines
-* Exponential smoothing
-* Regularized lagged-feature models
-* ARIMA and SARIMAX
-* State-space models
-* Regime-switching models
-* GARCH-family volatility models
-* Gradient boosting
-* XGBoost
-* LightGBM
-* CatBoost
-* Bayesian models
-* Optional neural and graph-informed models
+The repository is being established from the product requirements outward. The initial implementation target is the Python microscript architecture, canonical data contracts, Makefile launch surface, deterministic technical-analysis nodes, contrast scoring, and an auditable end-to-end report.
 
-Forecast targets include:
+## Important product boundary
 
-* Reversal probability
-* Continuation probability
-* Probability of reaching the next upside stop before invalidation
-* Probability of reaching the next downside stop first
-* Expected price range
-* Expected time to the next stop
-* Volatility
-* Maximum favorable excursion
-* Maximum adverse excursion
+Market Compass is decision-support software. It does not guarantee market outcomes, and the initial release does not place trades automatically. Evidence scores, historical analogs, forecasts, and narratives must remain transparent, testable, and explicitly uncertain.
 
-A model may display probability only after out-of-sample testing and probability calibration.
+## Canonical product statement
 
-Engineering Deliverables Included
+Market Compass asks what the asset is, what price is doing, where price has been, where it may go, what people are reacting to, what happened in similar cases, what companies and events are connected, and what story the market is trading.
 
-The full PRD includes:
+Then it shows both sides.
 
-* Product vision
-* Problem statement
-* Goals and non-goals
-* User profiles and use cases
-* One foundation gate
-* Eight complete evidence-layer specifications
-* Pairwise contrast engine
-* Disconfirming-evidence engine
-* Evidence and confidence formulas
-* Forecasting architecture
-* Risk and route engine
-* Explanation requirements
-* JSON data contracts
-* Python repository tree
-* Makefile specification
-* 115-node IP registry
-* 50 functional requirements
-* User-interface requirements
-* API endpoints
-* Data and storage architecture
-* Recommended Python stack
-* Backtesting and calibration requirements
-* Unit, contract, golden, property-based, leakage, integration, and performance tests
-* Non-functional requirements
-* Product and model metrics
-* Risks and mitigations
-* Delivery roadmap
-* Version 1 definition of done
-* A complete conversation-to-IP audit
-
-Final Product Standard
-
-Market Compass is not designed as another chart covered in indicators.
-
-It is designed as a transparent market evidence engine.
-
-It asks what the asset is, what price is doing, where price has been, where price may go, what people are reacting to, what occurred in similar cases, what companies and events are connected, and what story the market is trading.
-
-It then shows both sides.
-
-It explains the route.
-
-It explains the risk.
-
-It explains why.
+It explains the route. It explains the risk. It explains why.
 
 Every idea remains its own node, script, feature, and product.
