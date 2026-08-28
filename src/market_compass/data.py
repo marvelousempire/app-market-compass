@@ -1,15 +1,18 @@
 from __future__ import annotations
 
 import json
+import ssl
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
+import certifi
 import pandas as pd
 
 UA = "Mozilla/5.0 MarketCompass/0.1"
+SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
 
 
 @dataclass
@@ -22,7 +25,7 @@ class MarketData:
 
 def _get_json(url: str, timeout: int = 12) -> dict:
     req = Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
-    with urlopen(req, timeout=timeout) as r:  # noqa: S310 - fixed public HTTPS endpoint
+    with urlopen(req, timeout=timeout, context=SSL_CONTEXT) as r:  # noqa: S310
         return json.loads(r.read().decode("utf-8"))
 
 
