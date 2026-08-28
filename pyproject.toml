@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "market-compass"
-version = "0.1.0"
+version = "0.2.0"
 description = "Explainable market decision intelligence with paired bull/bear evidence."
 requires-python = ">=3.11"
 dependencies = [
@@ -28,6 +28,9 @@ market-compass-app = "market_compass.launcher:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+market_compass = ["web/*.html", "web/*.css", "web/*.js"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
