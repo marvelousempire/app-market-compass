@@ -1,30 +1,82 @@
 from __future__ import annotations
 
+import json
 import socket
 import threading
 import time
 import webbrowser
+from urllib.error import URLError
+from urllib.request import urlopen
 
 import uvicorn
 
 HOST = "127.0.0.1"
-PORT = 8000
-URL = f"http://{HOST}:{PORT}"
+DEFAULT_PORT = 8000
+MAX_PORT_SCAN = 25
 
 
-def _open_when_ready() -> None:
-    for _ in range(100):
+def _health(port: int) -> dict | None:
+    try:
+        with urlopen(f"http://{HOST}:{port}/health", timeout=0.4) as response:  # noqa: S310
+            return json.loads(response.read().decode("utf-8"))
+    except (OSError, URLError, ValueError, json.JSONDecodeError):
+        return None
+
+
+def _is_market_compass(port: int) -> bool:
+    health = _health(port)
+    return bool(
+        health
+        and health.get("status") == "ok"
+        and str(health.get("surface", "")).startswith("application-")
+    )
+
+
+def _port_is_free(port: int) -> bool:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try:
-            with socket.create_connection((HOST, PORT), timeout=0.1):
-                webbrowser.open(URL)
-                return
+            sock.bind((HOST, port))
+            return True
         except OSError:
-            time.sleep(0.1)
+            return False
+
+
+def select_port(start: int = DEFAULT_PORT) -> tuple[int, bool]:
+    """Return (port, reuse_existing_market_compass)."""
+    if _is_market_compass(start):
+        return start, True
+    for port in range(start, start + MAX_PORT_SCAN):
+        if _port_is_free(port):
+            return port, False
+    raise RuntimeError(f"No free local port found between {start} and {start + MAX_PORT_SCAN - 1}")
+
+
+def _open_when_ready(port: int) -> None:
+    url = f"http://{HOST}:{port}"
+    for _ in range(120):
+        if _is_market_compass(port):
+            webbrowser.open(url)
+            return
+        time.sleep(0.1)
 
 
 def main() -> None:
-    threading.Thread(target=_open_when_ready, daemon=True).start()
-    uvicorn.run("market_compass.api:app", host=HOST, port=PORT)
+    port, reuse_existing = select_port()
+    url = f"http://{HOST}:{port}"
+
+    if reuse_existing:
+        print(f"Market Compass is already running at {url}. Opening it in your browser.")
+        webbrowser.open(url)
+        return
+
+    if port != DEFAULT_PORT:
+        print(f"Port {DEFAULT_PORT} is in use. Starting Market Compass at {url} instead.")
+    else:
+        print(f"Starting Market Compass at {url}.")
+
+    threading.Thread(target=_open_when_ready, args=(port,), daemon=True).start()
+    uvicorn.run("market_compass.api:app", host=HOST, port=port)
 
 
 if __name__ == "__main__":
