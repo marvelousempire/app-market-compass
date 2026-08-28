@@ -35,9 +35,10 @@ backtest: doctor
 	$(RUN_PYTHON) -m market_compass backtest $(ASSET) --horizon $(HORIZON)
 
 app: doctor
-	$(RUN_PYTHON) -m uvicorn market_compass.api:app --reload --port 8000
+	$(RUN_PYTHON) -m market_compass.launcher
 
-api: app
+api: doctor
+	$(RUN_PYTHON) -m uvicorn market_compass.api:app --reload --port 8000
 
 clean:
 	rm -rf $(VENV) .pytest_cache .ruff_cache
