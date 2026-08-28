@@ -49,16 +49,35 @@ The complete product requirements remain in [`docs/PRODUCT-REQUIREMENTS.md`](doc
 
 ## Install
 
-Python 3.11+ is required.
+Python 3.11+ is required. On macOS the Makefile uses `python3` by default.
+
+For a fresh clone:
 
 ```bash
+git clone https://github.com/marvelousempire/app-market-compass.git
+cd app-market-compass
+make doctor
 make setup
 ```
 
-Or:
+If you already cloned the repository, update before installing:
 
 ```bash
-python -m pip install -e '.[dev]'
+git pull
+make doctor
+make setup
+```
+
+`make doctor` prints the Python interpreter and validates that it is Python 3.11 or newer. To use a specific interpreter:
+
+```bash
+make setup PYTHON=/path/to/python3
+```
+
+Or install directly:
+
+```bash
+python3 -m pip install -e '.[dev]'
 ```
 
 ## Run the full analysis
