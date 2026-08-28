@@ -14,20 +14,23 @@ def test_ssl_context_verifies_certificates():
 
 def test_browser_opens_when_server_is_ready(monkeypatch):
     opened = []
-
-    class Connection:
-        def __enter__(self):
-            return self
-
-        def __exit__(self, *_args):
-            return None
-
-    monkeypatch.setattr(launcher.socket, "create_connection", lambda *_args, **_kwargs: Connection())
+    monkeypatch.setattr(launcher, "_is_market_compass", lambda _port: True)
     monkeypatch.setattr(launcher.webbrowser, "open", lambda url: opened.append(url))
 
-    launcher._open_when_ready()
+    launcher._open_when_ready(8000)
 
-    assert opened == [launcher.URL]
+    assert opened == ["http://127.0.0.1:8000"]
+
+
+def test_select_port_reuses_running_market_compass(monkeypatch):
+    monkeypatch.setattr(launcher, "_is_market_compass", lambda port: port == 8000)
+    assert launcher.select_port() == (8000, True)
+
+
+def test_select_port_skips_unrelated_process(monkeypatch):
+    monkeypatch.setattr(launcher, "_is_market_compass", lambda _port: False)
+    monkeypatch.setattr(launcher, "_port_is_free", lambda port: port == 8001)
+    assert launcher.select_port() == (8001, False)
 
 
 def test_rich_application_surface_is_served():
