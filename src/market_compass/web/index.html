@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Market Compass</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">MARKET DECISION INTELLIGENCE</p>
+      <h1>Market Compass</h1>
+      <p class="subhead">Evidence, counter-evidence, route, memory, history, relationships and narrative.</p>
+    </div>
+    <div class="mode-switch" aria-label="Explanation mode">
+      <button class="mode active" data-mode="simple">Simple</button>
+      <button class="mode" data-mode="technical">Technical</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="control-bar panel">
+      <label>Asset<input id="symbol" value="HYPE-USD" autocomplete="off" spellcheck="false"></label>
+      <label>Horizon<input id="horizon" type="number" value="20" min="1" max="120"></label>
+      <div class="timeframe-control" aria-label="Timeframe">
+        <span>Timeframe</span>
+        <div class="segmented">
+          <button disabled title="Multi-timeframe backend is the next engine expansion">4H</button>
+          <button class="active" data-timeframe="1d">1D</button>
+          <button disabled title="Multi-timeframe backend is the next engine expansion">1W</button>
+        </div>
+      </div>
+      <button id="analyze" class="primary">Analyze</button>
+      <div id="run-status" class="run-status" role="status"></div>
+    </section>
+
+    <section id="error" class="panel error hidden"></section>
+
+    <section id="workspace" class="hidden">
+      <div id="identity-strip" class="identity-strip panel"></div>
+
+      <section class="summary-grid" id="summary-grid"></section>
+
+      <section class="panel route-panel">
+        <div class="section-head"><div><p class="eyebrow">PRICE PATH</p><h2>Bus Stop Route</h2></div><div id="route-badge"></div></div>
+        <div id="route"></div>
+      </section>
+
+      <section class="two-col">
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">MARKET STRUCTURE</p><h2>Price + EMA Map</h2></div></div>
+          <div id="price-chart" class="chart-wrap"></div>
+        </article>
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">PRICE MEMORY</p><h2>Support vs Resistance</h2></div></div>
+          <div id="price-memory"></div>
+        </article>
+      </section>
+
+      <section class="four-col" id="signal-grid"></section>
+
+      <section class="two-col">
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">HUMAN FACTOR</p><h2>News + Event Risk</h2></div></div>
+          <div id="news-panel"></div>
+        </article>
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">PAST STATES</p><h2>Historical Analogs</h2></div></div>
+          <div id="history-panel"></div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <div><p class="eyebrow">RELATIONSHIP INTELLIGENCE</p><h2>Evidence Board</h2></div>
+          <span class="trust-chip">Inferred links are labeled</span>
+        </div>
+        <div class="board-layout">
+          <div id="evidence-board" class="board"></div>
+          <div id="board-detail" class="board-detail"></div>
+        </div>
+      </section>
+
+      <section class="two-col">
+        <article class="panel"><div class="section-head"><div><p class="eyebrow">MARKET STORY</p><h2>Narrative</h2></div></div><div id="narrative-panel"></div></article>
+        <article class="panel"><div class="section-head"><div><p class="eyebrow">MODEL CHECK</p><h2>Forecast</h2></div></div><div id="forecast-panel"></div></article>
+      </section>
+
+      <section class="two-col contrast">
+        <article class="panel bull-panel"><div class="section-head"><div><p class="eyebrow">MAIN CASE</p><h2>Why Bullish</h2></div></div><div id="bull-case"></div></article>
+        <article class="panel bear-panel"><div class="section-head"><div><p class="eyebrow">COUNTER-CASE</p><h2>Why Bearish</h2></div></div><div id="bear-case"></div></article>
+      </section>
+
+      <section class="panel invalidation-panel">
+        <div class="section-head"><div><p class="eyebrow">DISCONFIRMING EVIDENCE</p><h2>What Changes My Mind?</h2></div></div>
+        <div id="invalidation"></div>
+      </section>
+
+      <section class="panel explorer">
+        <div class="explorer-tabs" role="tablist">
+          <button class="explorer-tab active" data-tab="simple">Simple Read</button>
+          <button class="explorer-tab" data-tab="technical">Technical</button>
+          <button class="explorer-tab" data-tab="sources">Sources</button>
+          <button class="explorer-tab" data-tab="nodes">115 Nodes</button>
+          <button class="explorer-tab" data-tab="backtest">Backtest</button>
+        </div>
+        <div id="explorer-content"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
