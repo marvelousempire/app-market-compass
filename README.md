@@ -1,165 +1,222 @@
 # Market Compass
 
-**Market Compass** is a node-based market decision-intelligence system for researching stocks, crypto, ETFs, and, later, options.
+Market Compass is a runnable market decision-intelligence app for stocks, crypto, and other OHLCV-traded assets. It combines technical signals, price memory, news, historical analogs, relationship intelligence, market narratives, and a time-series forecast into one explainable bull-vs-bear evidence report.
 
-It is built around a simple idea: a market decision should never be based on one indicator, one headline, or one story. The system gathers evidence from several independent directions, measures the argument **for** and **against** a setup, explains both sides, and shows what would invalidate the current view.
+It does **not** turn a 56/44 evidence split into a fake 56% chance of profit. Humans have produced enough confident numbers already.
 
-> Market Compass is not a black-box buy/sell bot. It is an evidence engine.
+## What works now
 
-## What it answers
+The current v0.1 engine implements:
 
-For a selected asset and trading horizon, Market Compass is designed to answer:
+- Asset reality/quality gate using available instrument metadata, trading history, and liquidity.
+- EMA 13 / 27 / 81 trend structure, plus EMA 50 as an available reference.
+- RSI 14 with 30 / 50 / 70 interpretation.
+- MACD and optional stochastic momentum.
+- Reversal-vs-continuation classification.
+- Fibonacci swing analysis using left-to-right swing ordering.
+- **Bus Stop Route**: last stop, next stops, downside stops, invalidation, and reward/risk.
+- **Price Memory**: support and resistance using repeated test episodes, time span, reaction size, volume, recency, and erosion from repeated testing.
+- News sentiment, event-risk keywords, freshness decay, and observed price-reaction comparison.
+- Historical analog retrieval with nearest-neighbor matching and explicit counterexamples.
+- Relationship/Evidence Board graph built from news co-mentions, including multi-hop paths. Inferred links are labeled as inferred, not causal facts.
+- Narrative detection for major themes such as AI/chips, rates/Fed, crypto adoption, regulation, and geopolitics.
+- Ridge time-series forecast with chronological cross-validation. The forecast is excluded from the final score when it does not beat a simple baseline.
+- Correlation discounts so RSI/MACD/trend and news/narrative/relationship evidence are not counted as fully independent proof.
+- Bull/bear evidence that always totals 100, with confidence shown separately.
+- Plain-language and technical explanations.
+- A 115-ID node registry that keeps every PRD IP node addressable while routing related nodes to shared implementations.
+- CLI, FastAPI endpoints, a no-build browser UI, CSV input, unit tests, and a compact research backtest.
 
-- What is this asset, and is there enough real activity, utility, liquidity, or business substance to analyze it seriously?
-- Is price trending up, down, sideways, or changing direction?
-- Is momentum reversing, continuing, or merely bouncing?
-- Where did price come from?
-- What is the **last bus stop**, and what are the **next bus stops**?
-- How strong is support below price?
-- How strong is resistance above price?
-- How many times has the market visited those areas, and over what span of time?
-- What news directly affects the asset?
-- What news may affect it indirectly through suppliers, customers, sectors, technologies, regulators, or related assets?
-- What happened during similar setups in the past?
-- What market narrative is currently attracting attention and money?
-- What evidence supports the setup, what evidence contradicts it, and what would make the conclusion wrong?
+## Architecture
 
-## Product architecture
+The code stays intentionally small. A node is a stable addressable action, **not necessarily a physical Python file**.
 
-Market Compass has one foundation gate and eight primary evidence layers.
+```text
+src/market_compass/
+├── data.py        # Yahoo/CSV data and symbol resolution
+├── technical.py   # EMA, RSI, MACD, stochastic, Fib, price memory, Bus Stops
+├── context.py     # quality, news, history, forecast, graph, narrative
+├── scoring.py     # contrast, correlation discounts, confidence, action state
+├── engine.py      # end-to-end orchestration
+├── registry.py    # all 115 stable IP node IDs
+├── backtest.py    # past-only research backtest
+├── api.py         # FastAPI + browser UI
+├── cli.py         # analyze/node/registry/backtest commands
+└── models.py      # typed report contracts
+```
 
-| Layer | Purpose |
-| --- | --- |
-| **Foundation Gate 0: Asset Reality & Quality** | Understand what the asset is, what gives it value, liquidity, supply or float, dilution, concentration, economic activity, and major operational risks. |
-| **1. Trend** | Measure direction using EMA structure, slope, crossovers, regime, and multiple timeframes. |
-| **2. Momentum & Reversal** | Use RSI, MACD, divergence, and optional stochastic signals to distinguish continuation, bounce, reversal, and overextension. |
-| **3. Price Structure, Fibonacci & Bus Stops** | Find meaningful swings, Fibonacci levels, the last price stop, next destinations, confluence, and invalidation. |
-| **4. Human Factor, News & Event Risk** | Measure headlines, event relevance, source quality, sentiment, novelty, scheduled risk, and actual market reaction. |
-| **5. Historical Context & Analogs** | Find similar prior setups, measure what happened next, and deliberately surface counterexamples. |
-| **6. Price Memory, Support & Resistance** | Measure how often price tested an area, over what period, how strongly it reacted, and whether repeated tests are strengthening or eroding the level. |
-| **7. Relationship Intelligence** | Build the evidence-board graph: companies, protocols, suppliers, customers, sectors, technology, macro factors, regulators, and events connected by sourced relationships. |
-| **8. Market Narrative** | Identify the story the market is trading and determine whether it is emerging, accelerating, crowded, fading, or reversing. |
+The complete product requirements remain in [`docs/PRODUCT-REQUIREMENTS.md`](docs/PRODUCT-REQUIREMENTS.md). The original conceptual IP inventory remains in [`docs/IP-NODE-REGISTRY.md`](docs/IP-NODE-REGISTRY.md); the live 115-ID runtime map is `src/market_compass/registry.py`.
 
-## Founder-defined starting profile
+## Install
 
-The first swing-trading profile preserves the original product rules:
+Python 3.11+ is required.
 
-- **RSI:** 14 periods, with guides at 30, 50, and 70.
-- **EMA:** 13, 27, and 81.
-- **MACD:** a separate momentum and reversal signal.
-- **Stochastic:** optional and disabled by default because duplicated momentum signals can add noise rather than insight.
-- **Fibonacci:** supports automatic and manual anchors. For an upward swing, the default search is the meaningful low on the left to the meaningful high on the right; the direction reverses for a downward swing.
-- **Trading horizon:** initial product focus is several days to several weeks.
+```bash
+make setup
+```
 
-## The Bus Stop model
+Or:
 
-Market Compass explains price structure like a route instead of pretending a chart is a collection of mystical colored lines.
+```bash
+python -m pip install -e '.[dev]'
+```
 
-- **Last bus stop:** the most recent meaningful price area that price left.
-- **Current stop:** the present price area.
-- **Next bus stop:** the nearest meaningful destination in the expected direction.
-- **Later stops:** secondary targets.
-- **Wrong road:** the invalidation condition or level.
+## Run the full analysis
 
-Every stop must explain why it matters: historical tests, reaction size, volume, Fibonacci confluence, EMA confluence, prior highs/lows, break-and-retest behavior, and other evidence.
+```bash
+make analyze ASSET=HYPE-USD HORIZON=20
+```
 
-## Contrast is mandatory
+Equivalent CLI command:
 
-Every analytic node must return both sides of the argument.
+```bash
+market-compass analyze HYPE-USD --horizon 20
+```
 
-A bullish conclusion must include bearish evidence. A bearish conclusion must include bullish evidence. Missing data and invalidation conditions must also be explicit.
+For JSON:
 
-A two-sided evidence split always totals 100. For example:
+```bash
+market-compass analyze HYPE-USD --horizon 20 --json
+```
+
+Yahoo sometimes uses internal symbols for crypto. Market Compass first searches the requested symbol and records both `requested_symbol` and `resolved_symbol` in the report metadata.
+
+## Run the app
+
+```bash
+make app
+```
+
+Then open `http://127.0.0.1:8000`.
+
+The same process serves both the UI and API, which avoids maintaining a separate frontend build for a young product that has more important things to prove first.
+
+### API
+
+```text
+GET /health
+GET /api/analyze?symbol=HYPE-USD&horizon=20
+GET /api/nodes
+GET /api/nodes/L2-001?symbol=HYPE-USD&horizon=20
+```
+
+## Run any IP node
+
+List all 115 node IDs:
+
+```bash
+market-compass registry
+```
+
+Run one:
+
+```bash
+market-compass node L2-001 HYPE-USD --horizon 20
+```
+
+Related node IDs share implementations on purpose. For example, the L2 momentum family uses the same enriched price frame and momentum layer instead of seven wrapper files containing approximately four useful lines each.
+
+## CSV mode
+
+If the live provider is unavailable, use a CSV containing:
+
+```text
+date,open,high,low,close,volume
+```
+
+Example:
+
+```bash
+market-compass analyze TEST --csv ./prices.csv --horizon 20
+```
+
+This makes the analytic engine independent of the live data provider and makes testing reproducible.
+
+## Backtest
+
+```bash
+make backtest ASSET=HYPE-USD HORIZON=20
+```
+
+The current backtest uses only information available at each historical bar. It includes a fee assumption and reports signal-observation outcomes. It is a research test, not a brokerage cash-account simulator.
+
+## Tests
+
+```bash
+make test
+```
+
+CI runs the test suite on pushes and pull requests.
+
+Current tests cover:
+
+- all 115 stable node IDs;
+- RSI bounds;
+- EMA 13/27/81 and MACD feature creation;
+- 100-point bull/bear contrast math;
+- complete layer output;
+- symmetric support/resistance price-memory fields;
+- Bus Stop/Fibonacci routing;
+- research backtest output.
+
+## Evidence model
+
+Every layer returns:
+
+- a state;
+- score from -1 to +1;
+- confidence from 0 to 1;
+- supporting evidence;
+- opposing evidence;
+- metrics;
+- missing data.
+
+The aggregate engine applies confidence and independence discounts, then converts the final net evidence to a two-sided split:
 
 ```text
 Bull evidence: 56
 Bear evidence: 44
-Confidence: Medium
+Confidence: 61%
 ```
 
-The **56/44 split is evidence balance, not automatically a 56% probability of profit**. Probability may only be shown when a specific prediction target has been tested out of sample and calibrated.
+The split is **evidence balance**, not a calibrated probability.
 
-## Explain Why
+## Forecast rule
 
-No score is valid without an explanation.
+The forecasting layer currently uses Ridge regression over lagged returns, RSI, volatility, and volume features. It uses `TimeSeriesSplit`, not random train/test splitting.
 
-Every node returns:
+If its cross-validated error is not better than the baseline error, the model is marked `baseline_not_beaten` and its forecast is **not allowed to influence the final score**.
 
-- main conclusion;
-- supporting evidence;
-- opposing evidence;
-- missing information;
-- confidence;
-- invalidation conditions;
-- simple explanation;
-- technical explanation;
-- source and calculation provenance.
+More complicated models can be added later, but complexity has to earn rent.
 
-The default user-facing explanation targets roughly a fourth- to fifth-grade reading level. Engineers and advanced users can open the technical explanation to inspect parameters, formulas, timestamps, data sources, versions, calibration, and tests.
+## Relationship intelligence boundary
 
-## Node-first engineering
+The current Evidence Board creates graph links from related-news co-mentions. Those edges are explicitly marked `inferred=true` and are not treated as proof that one company supplies, owns, controls, or causes another.
 
-Every distinct product idea is treated as an independent **IP node**. Each node is intended to become:
+Curated supplier/customer/ownership/regulatory edges can be added as a future data source without changing the graph/report contract.
 
-1. an independently testable Python module;
-2. an independently executable Python microscript;
-3. a stable input/output contract;
-4. an API-capable component;
-5. a separately versioned product capability.
+## Important limits
 
-A Python orchestrator owns dependency resolution, concurrency, retries, caching, partial results, manifests, and final aggregation. The `Makefile` is the developer-facing launch control, not the place where product logic goes to die.
+This is a complete runnable **v0.1 research application**, not a production trading platform.
 
-Example intended launch surface:
+It does not currently:
 
-```bash
-make analyze ASSET=HYPE-USD HORIZON=2-6w PROFILE=swing_weeks_v1
-make node NODE=L2-001 REQUEST=runs/<run-id>/request.json
-make test
-make backtest ASSET=HYPE-USD STRATEGY=swing_weeks_v1
-```
+- place trades;
+- guarantee price direction;
+- provide calibrated profit probabilities;
+- maintain a licensed institutional news feed;
+- verify crypto token utility, unlock schedules, holder concentration, or protocol revenue unless that data is supplied by a future provider;
+- infer causation from news co-mentions;
+- model options chains or broker execution.
 
-## Technical direction
+Missing data lowers confidence rather than being invented.
 
-The planned Python stack includes:
+## Product documents
 
-- NumPy, SciPy, Polars, pandas, PyArrow, DuckDB, and Numba for numerical and analytical work;
-- TA-Lib plus audited custom implementations for technical indicators and founder-specific logic;
-- statsmodels, `arch`, and scikit-learn for statistical forecasting, volatility, pipelines, calibration, and validation;
-- XGBoost, LightGBM, CatBoost, PyMC, and optional PyTorch models when advanced methods demonstrate measurable value;
-- NetworkX for the initial evidence-board graph;
-- spaCy, transformers, and sentence-transformers for entity linking, event classification, semantic similarity, and narrative analysis;
-- SHAP for compatible model explanations, while keeping predictive explanations distinct from causal claims;
-- vectorbt plus custom event-driven simulation for backtesting;
-- Optuna and MLflow for controlled model tuning and experiment tracking;
-- Pydantic, FastAPI, pytest, Hypothesis, Pandera, Ruff, and mypy for contracts, APIs, testing, and engineering quality.
+- [`docs/PRODUCT-REQUIREMENTS.md`](docs/PRODUCT-REQUIREMENTS.md) — full PRD and long-term product specification.
+- [`docs/IP-NODE-REGISTRY.md`](docs/IP-NODE-REGISTRY.md) — original 115-node product inventory and conceptual module plan.
+- [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) — what v0.1 implements, how data flows, and where later extensions plug in.
 
-Sophisticated tools are permitted. Unnecessary complexity is not. Every advanced model must beat a simpler baseline or provide materially better calibration, stability, or uncertainty estimates before it becomes the production champion.
+## Disclaimer
 
-## Repository documents
-
-The canonical engineering specification is separate from this README:
-
-- [`docs/PRODUCT-REQUIREMENTS.md`](docs/PRODUCT-REQUIREMENTS.md) — complete product requirements document and engineering specification.
-- [`docs/IP-NODE-REGISTRY.md`](docs/IP-NODE-REGISTRY.md) — stable intellectual-property node catalog and proposed Python script mapping.
-
-The README is the front door. The PRD is the law. The node registry is the construction inventory. Humanity has survived enough repositories where all three are one 4,000-line README.
-
-## Current status
-
-**Stage:** Product architecture and engineering specification.
-
-The repository is being established from the product requirements outward. The initial implementation target is the Python microscript architecture, canonical data contracts, Makefile launch surface, deterministic technical-analysis nodes, contrast scoring, and an auditable end-to-end report.
-
-## Important product boundary
-
-Market Compass is decision-support software. It does not guarantee market outcomes, and the initial release does not place trades automatically. Evidence scores, historical analogs, forecasts, and narratives must remain transparent, testable, and explicitly uncertain.
-
-## Canonical product statement
-
-Market Compass asks what the asset is, what price is doing, where price has been, where it may go, what people are reacting to, what happened in similar cases, what companies and events are connected, and what story the market is trading.
-
-Then it shows both sides.
-
-It explains the route. It explains the risk. It explains why.
-
-Every idea remains its own node, script, feature, and product.
+Market Compass is research and decision-support software. It is not investment advice and does not guarantee outcomes. Historical patterns can fail, news can be wrong or incomplete, and models can break when market regimes change.
