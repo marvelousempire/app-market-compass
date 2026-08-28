@@ -28,9 +28,9 @@ def analyze_frame(symbol: str, data: MarketData, horizon: int = 20, use_stochast
     biggest_for = max(layers.values(), key=lambda z: z.score * z.confidence)
     biggest_against = min(layers.values(), key=lambda z: z.score * z.confidence)
     if bull >= bear:
-        summary = f"Buyers have a small edge ({bull} to {bear}), but this is evidence, not a promise. The strongest help is {biggest_for.label.lower()}. The biggest problem is {biggest_against.label.lower()}."
+        summary = f"Buyers have the evidence edge ({bull} to {bear}), but this is evidence, not a promise. The strongest help is {biggest_for.label.lower()}. The biggest problem is {biggest_against.label.lower()}."
     else:
-        summary = f"Sellers have the edge ({bear} to {bull}). The strongest warning is {biggest_against.label.lower()}. The best thing on the other side is {biggest_for.label.lower()}."
+        summary = f"Sellers have the evidence edge ({bear} to {bull}), but this is evidence, not a promise. The strongest warning is {biggest_against.label.lower()}. The best thing on the other side is {biggest_for.label.lower()}."
     if route.next_bus_stops:
         summary += f" The next bus stop is near {route.next_bus_stops[0]:.4g}."
     if route.invalidation:
