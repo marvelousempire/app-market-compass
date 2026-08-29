@@ -6,6 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Market Compass</title>
   <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/overview.css">
   <link rel="stylesheet" href="/static/analyst.css">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
@@ -47,6 +48,15 @@
           <div class="decision-line"><span id="action-pill" class="action-pill">WAIT</span><span id="decision-sentence"></span></div>
         </div>
         <div class="cockpit-grid" id="cockpit-grid"></div>
+      </section>
+
+      <section class="intelligence-overview">
+        <div class="section-head overview-heading">
+          <div><p class="eyebrow">INTELLIGENCE OVERVIEW</p><h2>Asset Reality, State, Evidence & Core Signals</h2></div>
+          <span class="trust-chip">The original analysis surfaces, preserved in the latest workbench</span>
+        </div>
+        <div id="reality-overview" class="reality-overview"></div>
+        <div id="signal-overview" class="signal-overview"></div>
       </section>
 
       <section class="panel analyst-panel">
