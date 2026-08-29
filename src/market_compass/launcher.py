@@ -13,6 +13,7 @@ import uvicorn
 HOST = "127.0.0.1"
 DEFAULT_PORT = 8000
 MAX_PORT_SCAN = 25
+EXPECTED_SURFACE = "application-v0.4"
 
 
 def _health(port: int) -> dict | None:
@@ -28,7 +29,7 @@ def _is_market_compass(port: int) -> bool:
     return bool(
         health
         and health.get("status") == "ok"
-        and str(health.get("surface", "")).startswith("application-")
+        and health.get("surface") == EXPECTED_SURFACE
     )
 
 
