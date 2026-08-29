@@ -2,7 +2,7 @@ PYTHON ?= python3
 VENV ?= .venv
 VENV_PYTHON := $(VENV)/bin/python
 RUN_PYTHON = $(if $(wildcard $(VENV_PYTHON)),$(VENV_PYTHON),$(PYTHON))
-ASSET ?= HYPE-USD
+ASSET ?= HYPE
 HORIZON ?= 20
 
 .PHONY: setup test lint analyze node backtest app api doctor clean

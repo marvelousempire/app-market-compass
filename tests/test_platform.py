@@ -51,4 +51,5 @@ def test_health_identifies_application_surface():
     assert response.status_code == 200
     payload = response.json()
     assert payload["nodes"] == 115
-    assert payload["surface"] == "application-v0.3"
+    assert payload["surface"] == "application-v0.4"
+    assert payload["analyst"] == "ok"

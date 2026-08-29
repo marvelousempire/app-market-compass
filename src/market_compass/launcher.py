@@ -17,7 +17,7 @@ MAX_PORT_SCAN = 25
 
 def _health(port: int) -> dict | None:
     try:
-        with urlopen(f"http://{HOST}:{port}/health", timeout=0.4) as response:  # noqa: S310
+        with urlopen(f"http://{HOST}:{port}/health", timeout=0.4) as response:
             return json.loads(response.read().decode("utf-8"))
     except (OSError, URLError, ValueError, json.JSONDecodeError):
         return None

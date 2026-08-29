@@ -18,9 +18,9 @@ This document is the repository's expectation contract. If another document soun
 
 | Capability | Status | What exists now | What is still expected |
 | --- | --- | --- | --- |
-| Browser app | Implemented | v0.2 no-build FastAPI-served dashboard; `make app` auto-opens the browser. The dashboard exposes asset reality, market/reversal state, evidence/confidence, full Bus Stop route, price/EMA chart, Price Memory support/resistance, technical signal cards, news/event risk, historical analogs/counterexamples, inferred Evidence Board, narrative, forecast gating, bull/bear contrast, invalidation/missing data, simple/technical modes, source inspection, 115-node inspector, and research backtest. | True multi-timeframe analysis, saved workspaces/reports, richer verified graph, manual Fibonacci controls, authentication. |
+| Browser app | Implemented | v0.4 no-build FastAPI workbench launched by `make app`. It exposes the full trading surface, 4H/1D/1W analysis, watchlist/snapshots, catalysts, inferred Evidence Board, node inspector, backtest, friendly ticker search, and Nephew analyst panel. | Persistent workspaces, richer verified graph/data, manual Fibonacci controls, authentication, and cross-model comparison. |
 | CLI | Implemented | Analyze, node, registry, and backtest commands. | Batch jobs, richer export controls, job persistence. |
-| FastAPI | Implemented | Health, analysis, node listing/output, browser surface, and research backtest endpoint. | Auth, versioned production API contracts, quotas, async jobs, persistence. |
+| FastAPI | Implemented | Health, analysis, symbol search, analyst provider/health/interpretation, node listing/output, browser surface, and research backtest endpoints. | Auth, server-side cloud approval, versioned production contracts, quotas, async jobs, persistence. |
 | CSV mode | Implemented | Reproducible OHLCV input independent of live provider. | Browser upload workflow, broader schemas and dataset manifests. |
 | Live market data | Partial | Yahoo public search/chart endpoints with TLS trust bundle and symbol resolution. | Licensed provider(s), retries, caching, provider failover, SLA monitoring, intraday/multi-timeframe provider contract. |
 
@@ -101,13 +101,16 @@ A user can:
 6. launch a rich local browser dashboard with `make app` and inspect the current analysis instead of a four-card demo;
 7. inspect the full Bus Stop route, chart, support/resistance history, news risk, analogs, inferred relationship graph, narrative, opposing evidence, invalidation and data sources;
 8. inspect all 115 node IDs from the browser and run a selected node against the current asset;
-9. run the current research backtest from the browser or CLI.
+9. run the current research backtest from the browser or CLI;
+10. type friendly symbols without provider suffixes and receive provider-aware suggestions;
+11. ask the grounded offline analyst, or a configured Nephew/local/cloud model, for a schema-validated interpretation with a model receipt.
 
 ### Does not work yet
 
 A user cannot yet:
 
-- compare true 4H / 1D / 1W analysis in one run;
+- compare multiple model interpretations in a single consensus view;
+- use the M5, DGX, or cloud lanes until their private endpoints/credentials are commissioned;
 - set manual Fibonacci anchors from the browser;
 - save a persistent portfolio, workspace, or report;
 - reproduce a run from an immutable data/run manifest;
@@ -160,7 +163,7 @@ Production readiness requires more than feature completion. It requires evidence
 
 When describing Market Compass publicly:
 
-- call v0.2 a **runnable research application with a rich local analysis surface**;
+- call v0.4 a **runnable research workbench with a grounded, configurable AI interpretation bridge**;
 - call current relationship edges **inferred** unless verified data is added;
 - call the 56/44 output an **evidence split**, not a probability;
 - call the current backtest a **research backtest**, not proof of profitability;

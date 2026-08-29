@@ -76,7 +76,7 @@ def aggregate(layers: dict[str, LayerResult], forecast: dict) -> tuple[float, in
         fw = forecast.get("confidence", .4) * .7
         net = (net * denom + fscore * fw) / (denom + fw)
     net = float(np.clip(net, -1, 1))
-    bull = int(round(50 * (net + 1)))
+    bull = round(50 * (net + 1))
     bull = min(100, max(0, bull))
     bear = 100 - bull
     confs = [max(.05, l.confidence) for l in layers.values()]

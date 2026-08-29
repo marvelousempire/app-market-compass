@@ -22,7 +22,7 @@ def backtest_frame(df: pd.DataFrame, horizon: int = 20, fee_bps: float = 10.0) -
     if trades.empty:
         return {"trades": 0, "mean_return": 0.0, "win_rate": 0.0, "max_loss": 0.0, "note": "No qualifying signals."}
     return {
-        "trades": int(len(trades)),
+        "trades": len(trades),
         "mean_return": float(trades.mean()),
         "median_return": float(trades.median()),
         "win_rate": float((trades > 0).mean()),

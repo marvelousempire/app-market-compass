@@ -12,11 +12,12 @@ It is intentionally **not** a black-box trading bot. It does not turn a 56/44 ev
 
 ## Product status at a glance
 
-**Current release:** runnable research application, `v0.1`  
+**Current release:** trading workbench with grounded multi-model analyst bridge, `v0.4`
 **Primary use case:** swing-trade research over days to several weeks  
 **Current interfaces:** browser app, CLI, FastAPI, CSV input  
 **Current default market-data source:** Yahoo public search/chart endpoints  
 **Runtime model:** 115 stable IP node IDs routed through compact shared Python implementations  
+**AI interpretation:** Nephew/local/cloud provider mesh with explicit privacy consent and model receipts
 **Trading execution:** not implemented  
 **Production-grade institutional data:** not implemented
 
@@ -92,7 +93,7 @@ That distinction is a core product rule, not legal decoration.
 
 # What works today
 
-The current `v0.1` implementation includes the following real, runnable capabilities.
+The current `v0.4` implementation includes the following real, runnable capabilities.
 
 ## 0. Asset reality / quality gate
 
@@ -342,7 +343,7 @@ make test
 ## Analyze HYPE
 
 ```bash
-make analyze ASSET=HYPE-USD HORIZON=20
+make analyze ASSET=HYPE HORIZON=20
 ```
 
 ## Launch the browser application
@@ -368,7 +369,7 @@ make api
 ## Run a specific node
 
 ```bash
-.venv/bin/market-compass node L2-001 HYPE-USD --horizon 20
+.venv/bin/market-compass node L2-001 HYPE --horizon 20
 ```
 
 ## List all node IDs
@@ -380,7 +381,7 @@ make api
 ## JSON report
 
 ```bash
-.venv/bin/market-compass analyze HYPE-USD --horizon 20 --json
+.venv/bin/market-compass analyze HYPE --horizon 20 --json
 ```
 
 ---
@@ -411,9 +412,9 @@ Current local endpoints include:
 
 ```text
 GET /health
-GET /api/analyze?symbol=HYPE-USD&horizon=20
+GET /api/analyze?symbol=HYPE&horizon=20
 GET /api/nodes
-GET /api/nodes/L2-001?symbol=HYPE-USD&horizon=20
+GET /api/nodes/L2-001?symbol=HYPE&horizon=20
 ```
 
 The API currently serves a local research application. Authentication, quotas, persistence, tenancy, and production deployment controls are future work.
@@ -423,7 +424,7 @@ The API currently serves a local research application. Authentication, quotas, p
 # Backtesting expectations
 
 ```bash
-make backtest ASSET=HYPE-USD HORIZON=20
+make backtest ASSET=HYPE HORIZON=20
 ```
 
 The current backtest is a **research validation tool**. It respects historical time order and includes a fee assumption, but it is not yet a complete broker/exchange execution simulator.

@@ -4,7 +4,13 @@ from typing import Any
 
 import pandas as pd
 
-from .context import foundation_layer, forecast, historical_layer, news_layer, relationship_and_narrative
+from .context import (
+    forecast,
+    foundation_layer,
+    historical_layer,
+    news_layer,
+    relationship_and_narrative,
+)
 from .data import MarketData, get_market_data, get_timeframe_bars
 from .models import Report
 from .scoring import action_state, aggregate, contribution_breakdown
@@ -98,8 +104,5 @@ def analyze_frame(
 
 def analyze(symbol: str, horizon: int = 20, csv_path: str | None = None, use_stochastic: bool = False) -> Report:
     data = get_market_data(symbol, csv_path)
-    try:
-        frames = get_timeframe_bars(symbol, data)
-    except Exception:
-        frames = {"1d": data.bars}
+    frames = get_timeframe_bars(symbol, data)
     return analyze_frame(symbol, data, horizon, use_stochastic, frames)
