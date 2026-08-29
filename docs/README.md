@@ -4,6 +4,13 @@ This directory separates **product vision**, **current implementation**, **curre
 
 ## Read in this order
 
+### 0. [`PRODUCT-INTENTION.md`](PRODUCT-INTENTION.md)
+
+**Canonical founder intention and feature-purpose registry.**
+
+This controls why Market Compass exists, what every named feature is meant to accomplish, what
+the user must receive, and what each feature must never be allowed to become.
+
 ### 1. [`../README.md`](../README.md)
 
 Start here.
@@ -111,6 +118,11 @@ Covers:
 - CSV fallback;
 - environment reset.
 
+### 9. [`../CHANGELOG.md`](../CHANGELOG.md) and [`FEATURE-JOURNAL.md`](FEATURE-JOURNAL.md)
+
+The change log records what shipped. The separate feature journal records founder direction,
+product interpretation, preservation decisions, evidence, and unresolved work.
+
 ---
 
 # Source-of-truth hierarchy
@@ -139,8 +151,16 @@ ROADMAP.md
 For **long-term product intent**:
 
 ```text
-PRODUCT-REQUIREMENTS.md
+PRODUCT-INTENTION.md
+  -> PRODUCT-REQUIREMENTS.md
   -> IP-NODE-REGISTRY.md
+```
+
+For **history and reasoning**:
+
+```text
+CHANGELOG.md (what changed)
+FEATURE-JOURNAL.md (why it changed)
 ```
 
 The README is the product front door and should summarize all of the above without pretending that planned features are already implemented.
@@ -151,11 +171,13 @@ The README is the product front door and should summarize all of the above witho
 
 When updating the project:
 
-1. If runtime capability changes, update `STATUS.md`.
-2. If module/data/control-flow design changes, update `ARCHITECTURE.md` and/or `IMPLEMENTATION.md`.
-3. If priorities change, update `ROADMAP.md`.
-4. If a new long-term product requirement appears, update `PRODUCT-REQUIREMENTS.md` and the node registry when appropriate.
-5. If installation/runtime failure behavior changes, update `TROUBLESHOOTING.md`.
-6. Keep the root README readable by someone who did not participate in the original design conversation.
+1. If founder intention or a feature's purpose changes, update `PRODUCT-INTENTION.md` and append `FEATURE-JOURNAL.md`.
+2. If shipped code changes, update `CHANGELOG.md` and `STATUS.md`.
+3. If module/data/control-flow design changes, update `ARCHITECTURE.md` and/or `IMPLEMENTATION.md`.
+4. If priorities change, update `ROADMAP.md`.
+5. If a new long-term product requirement appears, update `PRODUCT-REQUIREMENTS.md` and the node registry when appropriate.
+6. If installation/runtime failure behavior changes, update `TROUBLESHOOTING.md`.
+7. A later projection must explicitly map and preserve earlier named features.
+8. Keep the root README readable by someone who did not participate in the original design conversation.
 
 The goal is boring consistency. Boring documentation is underrated because the alternative is six files confidently describing six different products.
