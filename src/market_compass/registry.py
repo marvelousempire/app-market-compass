@@ -36,13 +36,13 @@ def node_output(report, node_id: str):
     if group == "forecast":
         return report.forecast
     if group == "data":
-        return report.data_meta
+        return {"data_meta": report.data_meta, "timeframes": report.timeframes}
     if group == "risk":
         return {"action": report.action, "route": report.route.model_dump(mode="json"), "confidence": report.confidence}
     if group == "explain":
         return {"plain": report.summary, "technical": report.technical_summary}
     if group == "scoring":
-        return {"bull_evidence": report.bull_evidence, "bear_evidence": report.bear_evidence, "confidence": report.confidence}
+        return {"bull_evidence": report.bull_evidence, "bear_evidence": report.bear_evidence, "confidence": report.confidence, "contributions": report.contributions}
     if group == "orchestrator":
         return {"status": "success", "layers": list(report.layers), "as_of": report.as_of.isoformat()}
     if group == "ip":
