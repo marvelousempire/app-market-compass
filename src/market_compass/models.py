@@ -33,6 +33,8 @@ class Route(BaseModel):
     invalidation: float | None = None
     reward_risk: float | None = None
     fibonacci: dict[str, float] = Field(default_factory=dict)
+    fibonacci_anchors: dict[str, Any] = Field(default_factory=dict)
+    confluence: list[dict[str, Any]] = Field(default_factory=list)
 
 
 class Report(BaseModel):
@@ -52,3 +54,7 @@ class Report(BaseModel):
     evidence_board: dict[str, Any] = Field(default_factory=dict)
     data_meta: dict[str, Any] = Field(default_factory=dict)
     chart: dict[str, list[Any]] = Field(default_factory=dict)
+    timeframes: dict[str, Any] = Field(default_factory=dict)
+    contributions: list[dict[str, Any]] = Field(default_factory=list)
+    catalysts: list[dict[str, Any]] = Field(default_factory=list)
+    calibration: dict[str, Any] = Field(default_factory=dict)
