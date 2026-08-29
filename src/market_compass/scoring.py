@@ -10,22 +10,71 @@ WEIGHTS = {
 }
 
 
+def _effective_weight(key: str, layer: LayerResult, layers: dict[str, LayerResult]) -> tuple[float, float]:
+    base = WEIGHTS.get(key, .5)
+    independence = 1.0
+    if key == "momentum" and np.sign(layer.score) == np.sign(layers.get("trend", layer).score):
+        independence *= .72
+    if key in {"relationships", "narrative"}:
+        independence *= .65
+    return base * independence, independence
+
+
+def contribution_breakdown(layers: dict[str, LayerResult], forecast: dict) -> list[dict]:
+    rows: list[dict] = []
+    denom = 0.0
+    raw: list[tuple[str, LayerResult, float, float, float]] = []
+    for key, layer in layers.items():
+        w, independence = _effective_weight(key, layer, layers)
+        effective = layer.confidence * w
+        denom += effective
+        raw.append((key, layer, w, independence, layer.score * effective))
+
+    forecast_effective = 0.0
+    forecast_score = 0.0
+    if forecast.get("beats_baseline") and forecast.get("expected_return") is not None:
+        forecast_score = float(np.clip(np.tanh(forecast["expected_return"] * 6), -1, 1))
+        forecast_effective = forecast.get("confidence", .4) * .7
+        denom += forecast_effective
+
+    for key, layer, w, independence, signed in raw:
+        normalized = signed / denom if denom else 0.0
+        rows.append({
+            "key": key,
+            "label": layer.label,
+            "score": round(float(layer.score), 4),
+            "confidence": round(float(layer.confidence), 4),
+            "weight": round(float(w), 4),
+            "independence": round(float(independence), 4),
+            "net_contribution": round(float(normalized), 4),
+            "evidence_points": round(float(normalized * 50), 2),
+        })
+    if forecast_effective:
+        normalized = forecast_score * forecast_effective / denom
+        rows.append({
+            "key": "forecast",
+            "label": "Validated Forecast",
+            "score": round(forecast_score, 4),
+            "confidence": round(float(forecast.get("confidence", .4)), 4),
+            "weight": .7,
+            "independence": 1.0,
+            "net_contribution": round(float(normalized), 4),
+            "evidence_points": round(float(normalized * 50), 2),
+        })
+    return sorted(rows, key=lambda x: abs(x["evidence_points"]), reverse=True)
+
+
 def aggregate(layers: dict[str, LayerResult], forecast: dict) -> tuple[float, int, int, float]:
     weighted, denom = 0.0, 0.0
     for key, layer in layers.items():
-        w = WEIGHTS.get(key, .5)
-        # Price-derived trend and momentum are correlated. Do not count them twice at full weight.
-        if key == "momentum" and np.sign(layer.score) == np.sign(layers.get("trend", layer).score):
-            w *= .72
-        # News-derived relationships and narratives are also dependent on the news layer.
-        if key in {"relationships", "narrative"}:
-            w *= .65
+        w, _ = _effective_weight(key, layer, layers)
         weighted += layer.score * layer.confidence * w
         denom += layer.confidence * w
     net = weighted / denom if denom else 0.0
     if forecast.get("beats_baseline") and forecast.get("expected_return") is not None:
         fscore = float(np.clip(np.tanh(forecast["expected_return"] * 6), -1, 1))
-        net = (net * denom + fscore * forecast.get("confidence", .4) * .7) / (denom + forecast.get("confidence", .4) * .7)
+        fw = forecast.get("confidence", .4) * .7
+        net = (net * denom + fscore * fw) / (denom + fw)
     net = float(np.clip(net, -1, 1))
     bull = int(round(50 * (net + 1)))
     bull = min(100, max(0, bull))
