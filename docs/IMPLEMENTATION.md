@@ -160,13 +160,13 @@ The 56/44 result is an **evidence balance**, not a 56% probability of profit.
 ### Full report
 
 ```bash
-.venv/bin/market-compass analyze HYPE-USD --horizon 20
+.venv/bin/market-compass analyze HYPE --horizon 20
 ```
 
 ### Node output
 
 ```bash
-.venv/bin/market-compass node L2-001 HYPE-USD --horizon 20
+.venv/bin/market-compass node L2-001 HYPE --horizon 20
 ```
 
 ### Registry
@@ -178,7 +178,7 @@ The 56/44 result is an **evidence balance**, not a 56% probability of profit.
 ### Research backtest
 
 ```bash
-.venv/bin/market-compass backtest HYPE-USD --horizon 20
+.venv/bin/market-compass backtest HYPE --horizon 20
 ```
 
 ### Browser app

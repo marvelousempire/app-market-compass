@@ -17,7 +17,7 @@ def test_complete_report_and_contrast(sample_data):
     r = analyze_frame("TEST", sample_data, horizon=20)
     assert r.bull_evidence + r.bear_evidence == 100
     assert 0 <= r.confidence <= 1
-    assert set(["foundation", "trend", "momentum", "route", "news", "history", "memory", "relationships", "narrative"]) <= set(r.layers)
+    assert {"foundation", "trend", "momentum", "route", "news", "history", "memory", "relationships", "narrative"} <= set(r.layers)
     assert r.summary
     assert node_output(r, "L2-001")["key"] == "momentum"
 

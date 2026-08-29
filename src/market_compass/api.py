@@ -1,17 +1,22 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
+from urllib.error import URLError
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
+from .ai import AnalystRequest, AnalystRouter
+from .ai.providers import ProviderError
 from .backtest import backtest_frame
-from .data import get_market_data
+from .data import get_market_data, search_symbols
 from .engine import analyze
 from .registry import NODE_REGISTRY, node_output
 
-app = FastAPI(title="Market Compass", version="0.3.0")
+app = FastAPI(title="Market Compass", version="0.4.0")
+analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
 app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
 
@@ -23,7 +28,38 @@ def home():
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "nodes": len(NODE_REGISTRY), "surface": "application-v0.3"}
+    return {
+        "status": "ok",
+        "nodes": len(NODE_REGISTRY),
+        "surface": "application-v0.4",
+        "analyst": analyst_router.health()["status"],
+    }
+
+
+@app.get("/api/symbols")
+def symbols(q: str = Query(min_length=1, max_length=40), limit: int = Query(8, ge=1, le=20)):
+    try:
+        return search_symbols(q, limit)
+    except (OSError, URLError, TimeoutError, ValueError, json.JSONDecodeError) as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@app.get("/api/analyst/health")
+def analyst_health():
+    return analyst_router.health()
+
+
+@app.get("/api/analyst/providers")
+def analyst_providers():
+    return [x.model_dump(mode="json") for x in analyst_router.statuses()]
+
+
+@app.post("/api/analyst")
+def analyst(request: AnalystRequest):
+    try:
+        return analyst_router.analyze(request).model_dump(mode="json")
+    except ProviderError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
 
 
 @app.get("/api/analyze")

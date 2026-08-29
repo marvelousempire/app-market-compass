@@ -102,14 +102,14 @@ You do not need to activate the environment for Make targets.
 For direct CLI commands, either use:
 
 ```bash
-.venv/bin/market-compass analyze HYPE-USD --horizon 20
+.venv/bin/market-compass analyze HYPE --horizon 20
 ```
 
 or activate it:
 
 ```bash
 source .venv/bin/activate
-market-compass analyze HYPE-USD --horizon 20
+market-compass analyze HYPE --horizon 20
 ```
 
 ---
@@ -136,7 +136,7 @@ make setup
 Then retry:
 
 ```bash
-make analyze ASSET=HYPE-USD HORIZON=20
+make analyze ASSET=HYPE HORIZON=20
 ```
 
 Do **not** solve this by disabling TLS certificate verification. A research application that fixes trust errors by choosing not to trust anything has misunderstood the assignment.
@@ -162,7 +162,7 @@ Then use:
 or Make targets:
 
 ```bash
-make analyze ASSET=HYPE-USD HORIZON=20
+make analyze ASSET=HYPE HORIZON=20
 ```
 
 No global PATH changes are required.
@@ -222,7 +222,7 @@ Market Compass first searches the requested symbol because providers sometimes u
 For example, a user may request:
 
 ```text
-HYPE-USD
+HYPE
 ```
 
 while the provider may expose an internal symbol with an additional suffix.
@@ -285,7 +285,7 @@ Debug sequence:
 ```bash
 make doctor
 make test
-make analyze ASSET=HYPE-USD HORIZON=20
+make analyze ASSET=HYPE HORIZON=20
 ```
 
 If the last command fails, inspect the bottom of the traceback for the first Market Compass/provider-specific error.
@@ -360,7 +360,7 @@ Do not paste API keys or credentials. Market Compass does not require broker cre
 git pull
 make setup
 make test
-make analyze ASSET=HYPE-USD HORIZON=20
+make analyze ASSET=HYPE HORIZON=20
 make app
 ```
 

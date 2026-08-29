@@ -1,4 +1,10 @@
-from market_compass.technical import enrich, fibonacci, memory_and_route_layers, price_memory, trend_layer
+from market_compass.technical import (
+    enrich,
+    fibonacci,
+    memory_and_route_layers,
+    price_memory,
+    trend_layer,
+)
 
 
 def test_price_memory_is_symmetric(sample_data):

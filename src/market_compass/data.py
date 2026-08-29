@@ -3,8 +3,9 @@ from __future__ import annotations
 import json
 import ssl
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
+from urllib.error import URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
@@ -25,7 +26,7 @@ class MarketData:
 
 def _get_json(url: str, timeout: int = 12) -> dict:
     req = Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
-    with urlopen(req, timeout=timeout, context=SSL_CONTEXT) as r:  # noqa: S310
+    with urlopen(req, timeout=timeout, context=SSL_CONTEXT) as r:
         return json.loads(r.read().decode("utf-8"))
 
 
@@ -71,7 +72,7 @@ def _search_symbol(symbol: str, news_count: int = 20) -> tuple[dict, list[dict],
     url = f"https://query1.finance.yahoo.com/v1/finance/search?q={query}&quotesCount=8&newsCount={news_count}"
     try:
         search = _get_json(url)
-    except Exception:
+    except (OSError, URLError, TimeoutError, ValueError, json.JSONDecodeError):
         search = {}
     quotes = search.get("quotes") or []
     selected = _choose_quote(symbol, quotes)
@@ -82,9 +83,33 @@ def _search_symbol(symbol: str, news_count: int = 20) -> tuple[dict, list[dict],
             "title": item.get("title", ""),
             "publisher": item.get("publisher", ""),
             "url": item.get("link", ""),
-            "published": datetime.fromtimestamp(ts, timezone.utc).isoformat() if ts else None,
+            "published": datetime.fromtimestamp(ts, UTC).isoformat() if ts else None,
         })
     return selected, news, quotes
+
+
+def search_symbols(query: str, limit: int = 8) -> list[dict]:
+    """Return provider symbols for a friendly ticker fragment such as HYPE or BTC."""
+    value = query.strip().upper()
+    if not value:
+        return []
+    encoded = quote(value, safe="")
+    url = f"https://query1.finance.yahoo.com/v1/finance/search?q={encoded}&quotesCount={limit}&newsCount=0"
+    payload = _get_json(url)
+    results = []
+    for item in payload.get("quotes") or []:
+        symbol = str(item.get("symbol") or "").upper()
+        if not symbol:
+            continue
+        results.append({
+            "input": value,
+            "symbol": symbol,
+            "display_symbol": symbol.removesuffix("-USD"),
+            "name": item.get("longname") or item.get("shortname") or symbol,
+            "type": item.get("quoteType") or item.get("typeDisp") or "asset",
+            "exchange": item.get("exchange") or item.get("exchDisp") or "",
+        })
+    return results[:limit]
 
 
 def _chart_bars(resolved: str, range_: str, interval: str) -> tuple[pd.DataFrame, dict]:
@@ -110,7 +135,8 @@ def yahoo_market_data(symbol: str, range_: str = "5y", interval: str = "1d") -> 
     df, meta = _chart_bars(resolved, range_, interval)
     meta = meta | {
         "provider": "yahoo", "requested_symbol": symbol, "resolved_symbol": resolved,
-        "retrieved_at": datetime.now(timezone.utc).isoformat(), "interval": interval,
+        "retrieved_at": datetime.now(UTC).isoformat(), "interval": interval,
+        "quote": selected, "bars": len(df),
     }
     return MarketData(df, selected, news, meta)
 
@@ -131,6 +157,6 @@ def get_timeframe_bars(symbol: str, daily: MarketData) -> dict[str, pd.DataFrame
         four_hour = _resample_bars(hourly, "4h")
         if len(four_hour) >= 90:
             frames["4h"] = four_hour
-    except Exception:
-        pass
+    except (OSError, URLError, TimeoutError, ValueError, KeyError, TypeError):
+        return frames
     return frames

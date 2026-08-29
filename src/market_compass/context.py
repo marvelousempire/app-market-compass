@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from itertools import combinations
 
 import networkx as nx
@@ -61,7 +61,7 @@ def foundation_layer(x: pd.DataFrame, quote: dict) -> LayerResult:
 def news_layer(x: pd.DataFrame, news: list[dict], symbol: str) -> LayerResult:
     if not news:
         return LayerResult(key="news", label="Human Factor & News", state="no current news data", score=0, confidence=.15, missing=["headlines"], metrics={"timeline": []})
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     scored, risk_hits, timeline = [], [], []
     for n in news[:30]:
         title = n.get("title", "")
@@ -69,7 +69,7 @@ def news_layer(x: pd.DataFrame, news: list[dict], symbol: str) -> LayerResult:
         try:
             dt = datetime.fromisoformat(n["published"]) if n.get("published") else now
             age_days = max((now - dt).total_seconds() / 86400, 0)
-        except Exception:
+        except (KeyError, TypeError, ValueError):
             dt, age_days = now, 7
         decay = np.exp(-age_days / 10)
         words = set(re.findall(r"[a-zA-Z]+", title.lower()))
@@ -230,7 +230,7 @@ def relationship_and_narrative(news: list[dict], symbol: str, quote: dict | None
                 sentiments[name].append(_sentiment(n.get("title", "")))
     dominant = max(counts, key=counts.get) if counts and max(counts.values(), default=0) else "No clear narrative"
     n = counts.get(dominant, 0)
-    avg = float(np.mean(sentiments[dominant])) if dominant in sentiments and sentiments[dominant] else 0
+    avg = float(np.mean(sentiments[dominant])) if sentiments.get(dominant) else 0
     stage = "emerging" if 1 <= n <= 2 else "confirming" if n <= 4 else "mainstream/crowded" if n else "unclear"
     nar = LayerResult(
         key="narrative", label="Market Narrative", state=f"{dominant}: {stage}",

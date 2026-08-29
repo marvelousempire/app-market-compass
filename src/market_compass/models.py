@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -39,7 +39,7 @@ class Route(BaseModel):
 
 class Report(BaseModel):
     symbol: str
-    as_of: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    as_of: datetime = Field(default_factory=lambda: datetime.now(UTC))
     horizon_days: int
     price: float
     action: str

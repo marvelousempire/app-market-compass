@@ -6,6 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Market Compass</title>
   <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/analyst.css">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
@@ -24,7 +25,7 @@
 
   <main class="shell">
     <section class="control-bar panel">
-      <label class="search-field"><span>Asset</span><input id="symbol" value="HYPE-USD" autocomplete="off" spellcheck="false"></label>
+      <label class="search-field"><span>Asset</span><input id="symbol" value="HYPE" list="symbol-suggestions" autocomplete="off" spellcheck="false"><datalist id="symbol-suggestions"></datalist></label>
       <label><span>Horizon</span><input id="horizon" type="number" value="20" min="1" max="120"></label>
       <button id="analyze" class="primary">Analyze</button>
       <button id="watch-current" class="secondary">+ Watch</button>
@@ -46,6 +47,23 @@
           <div class="decision-line"><span id="action-pill" class="action-pill">WAIT</span><span id="decision-sentence"></span></div>
         </div>
         <div class="cockpit-grid" id="cockpit-grid"></div>
+      </section>
+
+      <section class="panel analyst-panel">
+        <div class="section-head">
+          <div><p class="eyebrow">NEPHEW ANALYST</p><h2>Ask the Local or Cloud Intelligence Panel</h2></div>
+          <div id="analyst-lane" class="trust-chip">Loading providers…</div>
+        </div>
+        <div class="analyst-controls">
+          <label><span>Model lane</span><select id="analyst-provider"><option value="auto">Auto</option></select></label>
+          <label><span>Depth</span><select id="analyst-depth"><option value="fast">Fast</option><option value="deep" selected>Deep</option><option value="super-heavy">Super Heavy</option></select></label>
+          <label class="cloud-consent"><input id="cloud-allowed" type="checkbox"> Allow this report to leave the local network</label>
+        </div>
+        <div class="analyst-question-row">
+          <textarea id="analyst-question" rows="3">Give me a grounded analysis and the strongest case against this setup.</textarea>
+          <button id="ask-nephew" class="primary">Ask Nephew</button>
+        </div>
+        <div id="analyst-result" class="analyst-result"><p class="muted">Market Compass calculates the evidence. Nephew interprets it without changing the score.</p></div>
       </section>
 
       <section class="panel timeframe-panel">
@@ -149,5 +167,6 @@
 
   <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
   <script src="/static/app.js" defer></script>
+  <script src="/static/analyst.js" defer></script>
 </body>
 </html>
