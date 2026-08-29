@@ -11,7 +11,7 @@ from .data import get_market_data
 from .engine import analyze
 from .registry import NODE_REGISTRY, node_output
 
-app = FastAPI(title="Market Compass", version="0.2.0")
+app = FastAPI(title="Market Compass", version="0.3.0")
 WEB_DIR = Path(__file__).with_name("web")
 app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
 
@@ -23,7 +23,7 @@ def home():
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "nodes": len(NODE_REGISTRY), "surface": "application-v0.2"}
+    return {"status": "ok", "nodes": len(NODE_REGISTRY), "surface": "application-v0.3"}
 
 
 @app.get("/api/analyze")
@@ -58,11 +58,6 @@ def backtest_api(
     try:
         data = get_market_data(symbol)
         result = backtest_frame(data.bars, horizon=horizon, fee_bps=fee_bps)
-        return {
-            "symbol": symbol.upper(),
-            "provider": data.meta.get("provider"),
-            "resolved_symbol": data.meta.get("resolved_symbol", symbol.upper()),
-            **result,
-        }
+        return {"symbol": symbol.upper(), "provider": data.meta.get("provider"), "resolved_symbol": data.meta.get("resolved_symbol", symbol.upper()), **result}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
