@@ -6,107 +6,143 @@
   <meta name="color-scheme" content="dark">
   <title>Market Compass</title>
   <link rel="stylesheet" href="/static/styles.css">
+  <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
-  <header class="app-header">
-    <div>
-      <p class="eyebrow">MARKET DECISION INTELLIGENCE</p>
-      <h1>Market Compass</h1>
-      <p class="subhead">Evidence, counter-evidence, route, memory, history, relationships and narrative.</p>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">MC</div>
+      <div><p class="eyebrow">MARKET DECISION INTELLIGENCE</p><h1>Market Compass</h1></div>
     </div>
-    <div class="mode-switch" aria-label="Explanation mode">
+    <div class="top-actions">
+      <button class="view-btn active" data-view="quick">Quick</button>
+      <button class="view-btn" data-view="research">Research</button>
       <button class="mode active" data-mode="simple">Simple</button>
       <button class="mode" data-mode="technical">Technical</button>
     </div>
   </header>
 
-  <main>
+  <main class="shell">
     <section class="control-bar panel">
-      <label>Asset<input id="symbol" value="HYPE-USD" autocomplete="off" spellcheck="false"></label>
-      <label>Horizon<input id="horizon" type="number" value="20" min="1" max="120"></label>
-      <div class="timeframe-control" aria-label="Timeframe">
-        <span>Timeframe</span>
-        <div class="segmented">
-          <button disabled title="Multi-timeframe backend is the next engine expansion">4H</button>
-          <button class="active" data-timeframe="1d">1D</button>
-          <button disabled title="Multi-timeframe backend is the next engine expansion">1W</button>
-        </div>
-      </div>
+      <label class="search-field"><span>Asset</span><input id="symbol" value="HYPE-USD" autocomplete="off" spellcheck="false"></label>
+      <label><span>Horizon</span><input id="horizon" type="number" value="20" min="1" max="120"></label>
       <button id="analyze" class="primary">Analyze</button>
+      <button id="watch-current" class="secondary">+ Watch</button>
+      <button id="save-snapshot" class="secondary">Save Snapshot</button>
       <div id="run-status" class="run-status" role="status"></div>
+    </section>
+
+    <section class="watch-row panel compact-panel">
+      <div><p class="eyebrow">WATCHLIST</p><div id="watchlist" class="chips"></div></div>
+      <div class="snapshot-peek"><p class="eyebrow">RECENT SNAPSHOTS</p><div id="snapshot-chips" class="chips"></div></div>
     </section>
 
     <section id="error" class="panel error hidden"></section>
 
     <section id="workspace" class="hidden">
-      <div id="identity-strip" class="identity-strip panel"></div>
+      <section class="decision-cockpit panel">
+        <div class="cockpit-left">
+          <div id="identity-strip" class="identity-strip"></div>
+          <div class="decision-line"><span id="action-pill" class="action-pill">WAIT</span><span id="decision-sentence"></span></div>
+        </div>
+        <div class="cockpit-grid" id="cockpit-grid"></div>
+      </section>
 
-      <section class="summary-grid" id="summary-grid"></section>
+      <section class="panel timeframe-panel">
+        <div class="section-head">
+          <div><p class="eyebrow">MULTI-TIMEFRAME</p><h2>4H / 1D / 1W Alignment</h2></div>
+          <div id="timeframe-consensus"></div>
+        </div>
+        <div id="timeframe-grid" class="timeframe-grid"></div>
+      </section>
 
-      <section class="panel route-panel">
-        <div class="section-head"><div><p class="eyebrow">PRICE PATH</p><h2>Bus Stop Route</h2></div><div id="route-badge"></div></div>
-        <div id="route"></div>
+      <section class="panel chart-panel">
+        <div class="section-head">
+          <div><p class="eyebrow">TRADING WORKBENCH</p><h2>Price, EMA, Fibonacci, Memory & Bus Stops</h2></div>
+          <div class="chart-controls" id="chart-timeframes"></div>
+        </div>
+        <div id="price-chart" class="pro-chart"></div>
+        <div id="chart-legend" class="legend"></div>
+      </section>
+
+      <section class="indicator-stack">
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">MOMENTUM</p><h2>RSI 14</h2></div><div id="rsi-state"></div></div>
+          <div id="rsi-chart" class="indicator-chart"></div>
+          <div id="rsi-readout" class="indicator-readout"></div>
+        </article>
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">MOMENTUM SHIFT</p><h2>MACD</h2></div><div id="macd-state"></div></div>
+          <div id="macd-chart" class="indicator-chart"></div>
+          <div id="macd-readout" class="indicator-readout"></div>
+        </article>
       </section>
 
       <section class="two-col">
         <article class="panel">
-          <div class="section-head"><div><p class="eyebrow">MARKET STRUCTURE</p><h2>Price + EMA Map</h2></div></div>
-          <div id="price-chart" class="chart-wrap"></div>
+          <div class="section-head"><div><p class="eyebrow">PRICE PATH</p><h2>Bus Stop Route</h2></div><div id="route-badge"></div></div>
+          <div id="route"></div>
         </article>
         <article class="panel">
-          <div class="section-head"><div><p class="eyebrow">PRICE MEMORY</p><h2>Support vs Resistance</h2></div></div>
+          <div class="section-head"><div><p class="eyebrow">PRICE MEMORY</p><h2>Support / Resistance Heatmap</h2></div></div>
           <div id="price-memory"></div>
         </article>
       </section>
 
-      <section class="four-col" id="signal-grid"></section>
+      <section class="two-col">
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">WHY THE SCORE MOVED</p><h2>Evidence Contributions</h2></div></div>
+          <div id="contributions"></div>
+        </article>
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">HISTORICAL CONTEXT</p><h2>Analog Calibration</h2></div></div>
+          <div id="calibration"></div>
+        </article>
+      </section>
 
       <section class="two-col">
         <article class="panel">
-          <div class="section-head"><div><p class="eyebrow">HUMAN FACTOR</p><h2>News + Event Risk</h2></div></div>
-          <div id="news-panel"></div>
+          <div class="section-head"><div><p class="eyebrow">MAIN CASE</p><h2>Why Bullish</h2></div></div>
+          <div id="bull-case"></div>
         </article>
         <article class="panel">
-          <div class="section-head"><div><p class="eyebrow">PAST STATES</p><h2>Historical Analogs</h2></div></div>
-          <div id="history-panel"></div>
+          <div class="section-head"><div><p class="eyebrow">COUNTER-CASE</p><h2>Why Bearish</h2></div></div>
+          <div id="bear-case"></div>
         </article>
       </section>
 
       <section class="panel">
-        <div class="section-head">
-          <div><p class="eyebrow">RELATIONSHIP INTELLIGENCE</p><h2>Evidence Board</h2></div>
-          <span class="trust-chip">Inferred links are labeled</span>
-        </div>
-        <div class="board-layout">
-          <div id="evidence-board" class="board"></div>
-          <div id="board-detail" class="board-detail"></div>
-        </div>
+        <div class="section-head"><div><p class="eyebrow">HUMAN FACTOR</p><h2>Catalyst Timeline</h2></div><span class="trust-chip">Recent news events, not a complete scheduled macro calendar</span></div>
+        <div id="catalyst-timeline" class="timeline"></div>
       </section>
 
-      <section class="two-col">
-        <article class="panel"><div class="section-head"><div><p class="eyebrow">MARKET STORY</p><h2>Narrative</h2></div></div><div id="narrative-panel"></div></article>
-        <article class="panel"><div class="section-head"><div><p class="eyebrow">MODEL CHECK</p><h2>Forecast</h2></div></div><div id="forecast-panel"></div></article>
-      </section>
+      <section class="research-only">
+        <section class="two-col">
+          <article class="panel"><div class="section-head"><div><p class="eyebrow">PAST STATES</p><h2>Historical Analogs</h2></div></div><div id="history-panel"></div></article>
+          <article class="panel"><div class="section-head"><div><p class="eyebrow">MODEL CHECK</p><h2>Forecast</h2></div></div><div id="forecast-panel"></div></article>
+        </section>
 
-      <section class="two-col contrast">
-        <article class="panel bull-panel"><div class="section-head"><div><p class="eyebrow">MAIN CASE</p><h2>Why Bullish</h2></div></div><div id="bull-case"></div></article>
-        <article class="panel bear-panel"><div class="section-head"><div><p class="eyebrow">COUNTER-CASE</p><h2>Why Bearish</h2></div></div><div id="bear-case"></div></article>
-      </section>
+        <section class="panel">
+          <div class="section-head"><div><p class="eyebrow">RELATIONSHIP INTELLIGENCE</p><h2>Evidence Board</h2></div><span class="trust-chip">Verified context and inferred links are distinct</span></div>
+          <div class="board-layout"><div id="evidence-board" class="board"></div><div id="board-detail" class="board-detail"></div></div>
+        </section>
 
-      <section class="panel invalidation-panel">
-        <div class="section-head"><div><p class="eyebrow">DISCONFIRMING EVIDENCE</p><h2>What Changes My Mind?</h2></div></div>
-        <div id="invalidation"></div>
-      </section>
+        <section class="two-col">
+          <article class="panel"><div class="section-head"><div><p class="eyebrow">MARKET STORY</p><h2>Narrative</h2></div></div><div id="narrative-panel"></div></article>
+          <article class="panel"><div class="section-head"><div><p class="eyebrow">DISCONFIRMING EVIDENCE</p><h2>What Changes My Mind?</h2></div></div><div id="invalidation"></div></article>
+        </section>
 
-      <section class="panel explorer">
-        <div class="explorer-tabs" role="tablist">
-          <button class="explorer-tab active" data-tab="simple">Simple Read</button>
-          <button class="explorer-tab" data-tab="technical">Technical</button>
-          <button class="explorer-tab" data-tab="sources">Sources</button>
-          <button class="explorer-tab" data-tab="nodes">115 Nodes</button>
-          <button class="explorer-tab" data-tab="backtest">Backtest</button>
-        </div>
-        <div id="explorer-content"></div>
+        <section class="panel explorer">
+          <div class="explorer-tabs" role="tablist">
+            <button class="explorer-tab active" data-tab="simple">Simple Read</button>
+            <button class="explorer-tab" data-tab="technical">Technical</button>
+            <button class="explorer-tab" data-tab="sources">Sources</button>
+            <button class="explorer-tab" data-tab="nodes">115 Nodes</button>
+            <button class="explorer-tab" data-tab="backtest">Backtest</button>
+            <button class="explorer-tab" data-tab="snapshots">Snapshots</button>
+          </div>
+          <div id="explorer-content"></div>
+        </section>
       </section>
     </section>
   </main>

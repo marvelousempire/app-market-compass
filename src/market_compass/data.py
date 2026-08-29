@@ -11,7 +11,7 @@ from urllib.request import Request, urlopen
 import certifi
 import pandas as pd
 
-UA = "Mozilla/5.0 MarketCompass/0.1"
+UA = "Mozilla/5.0 MarketCompass/0.3"
 SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
 
 
@@ -41,6 +41,12 @@ def _normalize_bars(df: pd.DataFrame) -> pd.DataFrame:
     return df.sort_index()
 
 
+def _resample_bars(df: pd.DataFrame, rule: str) -> pd.DataFrame:
+    return _normalize_bars(df.resample(rule).agg({
+        "open": "first", "high": "max", "low": "min", "close": "last", "volume": "sum",
+    }).dropna(subset=["close"]))
+
+
 def load_csv(path: str | Path) -> MarketData:
     raw = pd.read_csv(path)
     date_col = next((c for c in raw.columns if c.lower() in {"date", "datetime", "timestamp"}), None)
@@ -60,33 +66,16 @@ def _choose_quote(symbol: str, quotes: list[dict]) -> dict:
     return related[0] if related else (quotes[0] if quotes else {})
 
 
-def yahoo_market_data(symbol: str, range_: str = "5y", interval: str = "1d") -> MarketData:
-    # Resolve first because Yahoo occasionally uses an internal suffix (for example HYPE32196-USD).
+def _search_symbol(symbol: str, news_count: int = 20) -> tuple[dict, list[dict], list[dict]]:
     query = quote(symbol, safe="")
-    search_url = f"https://query1.finance.yahoo.com/v1/finance/search?q={query}&quotesCount=8&newsCount=20"
+    url = f"https://query1.finance.yahoo.com/v1/finance/search?q={query}&quotesCount=8&newsCount={news_count}"
     try:
-        search = _get_json(search_url)
+        search = _get_json(url)
     except Exception:
         search = {}
     quotes = search.get("quotes") or []
     selected = _choose_quote(symbol, quotes)
-    resolved = selected.get("symbol") or symbol
-    safe = quote(resolved, safe="")
-    chart_url = f"https://query1.finance.yahoo.com/v8/finance/chart/{safe}?range={range_}&interval={interval}&events=div%2Csplits"
-    payload = _get_json(chart_url).get("chart", {})
-    results = payload.get("result") or []
-    if not results:
-        raise ValueError(payload.get("error", {}).get("description") or f"No market data found for {symbol}")
-    chart = results[0]
-    timestamps = chart.get("timestamp") or []
-    q = (chart.get("indicators", {}).get("quote") or [{}])[0]
-    rows = {
-        "open": q.get("open", []), "high": q.get("high", []), "low": q.get("low", []),
-        "close": q.get("close", []), "volume": q.get("volume", []),
-    }
-    df = pd.DataFrame(rows, index=pd.to_datetime(timestamps, unit="s", utc=True))
-    df = _normalize_bars(df)
-    news = []
+    news: list[dict] = []
     for item in search.get("news") or []:
         ts = item.get("providerPublishTime")
         news.append({
@@ -95,12 +84,53 @@ def yahoo_market_data(symbol: str, range_: str = "5y", interval: str = "1d") -> 
             "url": item.get("link", ""),
             "published": datetime.fromtimestamp(ts, timezone.utc).isoformat() if ts else None,
         })
-    meta = chart.get("meta", {}) | {
+    return selected, news, quotes
+
+
+def _chart_bars(resolved: str, range_: str, interval: str) -> tuple[pd.DataFrame, dict]:
+    safe = quote(resolved, safe="")
+    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{safe}?range={range_}&interval={interval}&events=div%2Csplits"
+    payload = _get_json(url).get("chart", {})
+    results = payload.get("result") or []
+    if not results:
+        raise ValueError(payload.get("error", {}).get("description") or f"No market data found for {resolved}")
+    chart = results[0]
+    timestamps = chart.get("timestamp") or []
+    q = (chart.get("indicators", {}).get("quote") or [{}])[0]
+    rows = {
+        "open": q.get("open", []), "high": q.get("high", []), "low": q.get("low", []),
+        "close": q.get("close", []), "volume": q.get("volume", []),
+    }
+    return _normalize_bars(pd.DataFrame(rows, index=pd.to_datetime(timestamps, unit="s", utc=True))), chart.get("meta", {})
+
+
+def yahoo_market_data(symbol: str, range_: str = "5y", interval: str = "1d") -> MarketData:
+    selected, news, _ = _search_symbol(symbol)
+    resolved = selected.get("symbol") or symbol
+    df, meta = _chart_bars(resolved, range_, interval)
+    meta = meta | {
         "provider": "yahoo", "requested_symbol": symbol, "resolved_symbol": resolved,
-        "retrieved_at": datetime.now(timezone.utc).isoformat(),
+        "retrieved_at": datetime.now(timezone.utc).isoformat(), "interval": interval,
     }
     return MarketData(df, selected, news, meta)
 
 
 def get_market_data(symbol: str, csv_path: str | None = None) -> MarketData:
     return load_csv(csv_path) if csv_path else yahoo_market_data(symbol)
+
+
+def get_timeframe_bars(symbol: str, daily: MarketData) -> dict[str, pd.DataFrame]:
+    """Best-effort 4H / 1D / 1W frames. Failure of intraday data never blocks daily analysis."""
+    frames = {"1d": daily.bars}
+    frames["1w"] = _resample_bars(daily.bars, "W-FRI")
+    if daily.meta.get("provider") != "yahoo":
+        return frames
+    resolved = daily.meta.get("resolved_symbol") or symbol
+    try:
+        hourly, _ = _chart_bars(resolved, "6mo", "1h")
+        four_hour = _resample_bars(hourly, "4h")
+        if len(four_hour) >= 90:
+            frames["4h"] = four_hour
+    except Exception:
+        pass
+    return frames
