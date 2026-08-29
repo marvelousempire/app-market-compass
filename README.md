@@ -525,6 +525,9 @@ The product should become more sophisticated without becoming less inspectable.
 
 | Document | Purpose |
 | --- | --- |
+| [`docs/PRODUCT-INTENTION.md`](docs/PRODUCT-INTENTION.md) | Canonical founder intention, non-negotiable rules, and purpose of every named feature. |
+| [`CHANGELOG.md`](CHANGELOG.md) | Factual chronological record of shipped repository changes. |
+| [`docs/FEATURE-JOURNAL.md`](docs/FEATURE-JOURNAL.md) | Separate chronological journal of founder direction, feature interpretation, evidence, and unresolved work. |
 | [`README.md`](README.md) | Product front door: what Market Compass is, what works, and how to run it. |
 | [`docs/STATUS.md`](docs/STATUS.md) | Truth table of implemented, partial, planned, and out-of-scope capabilities. |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | Staged path from research v0.1 to a production research platform. |
