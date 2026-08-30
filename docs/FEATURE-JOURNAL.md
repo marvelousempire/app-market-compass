@@ -23,6 +23,24 @@ supersedes the earlier interpretation.
 
 ---
 
+## 2026-08-30 — Fold 8001 information logic into the current desk
+
+**Founder direction:** “fold 8001's look into 8006. I love the way 8001 provides that logic of info.”
+
+**Intention:** Keep the fuller product (Analyst, charts, watchlist, multi-timeframe) and recover the older page's first-screen sequence. Do not roll the daily app back to `application-v0.2`. After this restyle is live, stop the leftover 8001 process so the old page cannot reopen.
+
+**Features protected:** Asset Reality, Market State, Evidence, Confidence, Trend, Momentum, Fibonacci, Reversal, Price Memory, Nephew Analyst, Trading Workbench, Historical Analogs, Evidence Board.
+
+**User-visible requirement:** Opening the current application shows a large Market Compass header, identity, a single decision sentence, then the four summary cards, then the rest of the desk. The six-card cockpit must not sit above those cards.
+
+**Implementation:** HTML/CSS/JS restyle on the v0.4 workbench; health surface `application-v0.5`.
+
+**Evidence:** Regression tests pin the 8001 sequence IDs (`summary-grid`, `signal-grid`, `identity-strip`) and refuse leftover cockpit/overview IDs.
+
+**Still open:** Real data-provider depth, persistent workspaces, private M5/DGX commissioning, server-side Approval Engine authorization, and cross-model comparison.
+
+---
+
 ## 2026-08-29 — Preserve original intelligence features in every later projection
 
 **Founder direction:** “We had v1 things I need in the latest app.”

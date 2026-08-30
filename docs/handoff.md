@@ -1,8 +1,9 @@
 # Market Compass handoff — remaining user-visible gaps
 
-This handoff reflects the v0.4 application, not the old developer-demo surface. The trading
-workbench, indicators, multi-timeframe analysis, watchlist, catalysts, Evidence Board, node
-inspector, research backtest, and Nephew analyst panel are visible in the running app.
+This handoff reflects the v0.5 application, not the old developer-demo surface. The first
+screen follows the 8001 information sequence (header, identity, four summary cards, then the
+desk). The trading workbench, indicators, multi-timeframe analysis, watchlist, catalysts,
+Evidence Board, node inspector, research backtest, and Nephew analyst panel remain visible.
 
 ## What is now visible
 

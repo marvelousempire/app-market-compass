@@ -12,7 +12,7 @@ It is intentionally **not** a black-box trading bot. It does not turn a 56/44 ev
 
 ## Product status at a glance
 
-**Current release:** trading workbench with grounded multi-model analyst bridge, `v0.4`
+**Current release:** trading workbench with 8001 information sequence folded into the v0.4 desk, `v0.5`
 **Primary use case:** swing-trade research over days to several weeks  
 **Current interfaces:** browser app, CLI, FastAPI, CSV input  
 **Current default market-data source:** Yahoo public search/chart endpoints  
@@ -93,7 +93,7 @@ That distinction is a core product rule, not legal decoration.
 
 # What works today
 
-The current `v0.4` implementation includes the following real, runnable capabilities.
+The current `v0.5` implementation includes the following real, runnable capabilities.
 
 ## 0. Asset reality / quality gate
 

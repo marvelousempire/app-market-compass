@@ -40,25 +40,30 @@ def test_select_port_skips_unrelated_process(monkeypatch):
     assert launcher.select_port() == (8001, False)
 
 
-def test_v03_workbench_surface_is_served():
+def test_v05_workbench_surface_is_served():
     client = TestClient(app)
     page = client.get("/")
     assert page.status_code == 200
     for text in [
-        "INTELLIGENCE OVERVIEW", "TRADING WORKBENCH", "PRICE MEMORY", "RSI 14", "MACD",
-        "Historical Analogs", "Evidence Contributions", "Catalyst Timeline", "Evidence Board",
-        "NEPHEW ANALYST",
+        "MARKET DECISION INTELLIGENCE", "INTELLIGENCE OVERVIEW", "TRADING WORKBENCH",
+        "PRICE MEMORY", "RSI 14", "MACD", "Historical Analogs", "Evidence Contributions",
+        "Catalyst Timeline", "Evidence Board", "NEPHEW ANALYST", "summary-grid",
+        "signal-grid", "identity-strip", "decision-line",
     ]:
         assert text in page.text
     assert "lightweight-charts" in page.text
+    assert "cockpit-grid" not in page.text
 
     script = client.get("/static/app.js")
     assert script.status_code == 200
     for function in [
         "renderIntelligenceOverview", "ASSET REALITY", "MARKET STATE", "FIBONACCI", "REVERSAL",
         "renderCharts", "renderContributions", "renderCatalysts", "saveSnapshot",
+        "summary-grid", "signal-grid", "Requested",
     ]:
         assert function in script.text
+    assert "reality-overview" not in script.text
+    assert "cockpit-grid" not in script.text
 
 
 def test_health_identifies_application_surface():
@@ -67,5 +72,5 @@ def test_health_identifies_application_surface():
     assert response.status_code == 200
     payload = response.json()
     assert payload["nodes"] == 115
-    assert payload["surface"] == "application-v0.4"
+    assert payload["surface"] == "application-v0.5"
     assert payload["analyst"] == "ok"

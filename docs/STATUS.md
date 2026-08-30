@@ -18,7 +18,7 @@ This document is the repository's expectation contract. If another document soun
 
 | Capability | Status | What exists now | What is still expected |
 | --- | --- | --- | --- |
-| Browser app | Implemented | v0.4 no-build FastAPI workbench launched by `make app`. It exposes the full trading surface, 4H/1D/1W analysis, watchlist/snapshots, catalysts, inferred Evidence Board, node inspector, backtest, friendly ticker search, and Nephew analyst panel. | Persistent workspaces, richer verified graph/data, manual Fibonacci controls, authentication, and cross-model comparison. |
+| Browser app | Implemented | v0.5 no-build FastAPI workbench launched by `make app`. First screen follows the 8001 information sequence (header, identity, four summary cards) then the full trading desk: 4H/1D/1W analysis, watchlist/snapshots, catalysts, inferred Evidence Board, node inspector, backtest, friendly ticker search, and Nephew analyst panel. | Persistent workspaces, richer verified graph/data, manual Fibonacci controls, authentication, and cross-model comparison. |
 | CLI | Implemented | Analyze, node, registry, and backtest commands. | Batch jobs, richer export controls, job persistence. |
 | FastAPI | Implemented | Health, analysis, symbol search, analyst provider/health/interpretation, node listing/output, browser surface, and research backtest endpoints. | Auth, server-side cloud approval, versioned production contracts, quotas, async jobs, persistence. |
 | CSV mode | Implemented | Reproducible OHLCV input independent of live provider. | Browser upload workflow, broader schemas and dataset manifests. |
@@ -163,7 +163,7 @@ Production readiness requires more than feature completion. It requires evidence
 
 When describing Market Compass publicly:
 
-- call v0.4 a **runnable research workbench with a grounded, configurable AI interpretation bridge**;
+- call v0.5 a **runnable research workbench with a grounded, configurable AI interpretation bridge**;
 - call current relationship edges **inferred** unless verified data is added;
 - call the 56/44 output an **evidence split**, not a probability;
 - call the current backtest a **research backtest**, not proof of profitability;

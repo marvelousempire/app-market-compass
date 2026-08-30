@@ -7,6 +7,15 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 - No unmerged product changes are currently recorded.
 
+## [0.5.0] — Sunday, August 30, 2026 at 2:33:48 PM Eastern · *Fold 8001 information sequence into the workbench*
+**Signed:** Grok > grok-4.6
+
+- Restyled the live desk so the first screen follows the 8001 information sequence: large header, identity strip, decision sentence, then Asset Reality / Market State / Evidence / Confidence, then Trend / Momentum / Fibonacci / Reversal.
+- Kept the v0.4 tools: Nephew Analyst, 4H/1D/1W, Price Memory, charts, contributions, catalysts, and research surfaces.
+- Replaced the six-card cockpit with one action line so Evidence and Confidence are not shown twice.
+- Advanced the health surface to `application-v0.5` so the launcher will not reopen an older process as current.
+
+
 ## 2026-08-29 — Intelligence overview preservation
 
 - Restored explicit Asset Reality, Market State, Evidence, Confidence, Trend, Momentum,
