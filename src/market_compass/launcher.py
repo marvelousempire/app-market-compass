@@ -44,9 +44,15 @@ def _port_is_free(port: int) -> bool:
 
 
 def select_port(start: int = DEFAULT_PORT) -> tuple[int, bool]:
-    """Return (port, reuse_existing_market_compass)."""
-    if _is_market_compass(start):
-        return start, True
+    """Return (port, reuse_existing_market_compass).
+
+    Reuse any matching current surface in the scan range first. Only then bind
+    the first free port. Checking only the default port used to spawn a second
+    desk (and leave the promised URL dead) whenever 8000 was an older process.
+    """
+    for port in range(start, start + MAX_PORT_SCAN):
+        if _is_market_compass(port):
+            return port, True
     for port in range(start, start + MAX_PORT_SCAN):
         if _port_is_free(port):
             return port, False

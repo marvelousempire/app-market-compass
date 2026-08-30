@@ -7,6 +7,12 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 - No unmerged product changes are currently recorded.
 
+## [0.5.1] — Sunday, August 30, 2026 at 5:34:50 PM Eastern · *Reuse the live desk instead of starting a second one*
+**Signed:** Grok > grok-4.6
+
+- Launcher now reuses any matching `application-v0.5` process in the port scan, not only port 8000.
+- This stops `make app` from opening a new empty door (8001) while the working desk on 8006 is already running — which left the promised URL dead.
+
 ## [0.5.0] — Sunday, August 30, 2026 at 2:33:48 PM Eastern · *Fold 8001 information sequence into the workbench*
 **Signed:** Grok > grok-4.6
 
