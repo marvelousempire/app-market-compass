@@ -11,16 +11,21 @@
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-mark">MC</div>
-      <div><p class="eyebrow">MARKET DECISION INTELLIGENCE</p><h1>Market Compass</h1></div>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">MARKET DECISION INTELLIGENCE</p>
+      <h1>Market Compass</h1>
+      <p class="subhead">Evidence, counter-evidence, route, memory, history, relationships and narrative — then the trading desk.</p>
     </div>
-    <div class="top-actions">
-      <button class="view-btn active" data-view="quick">Quick</button>
-      <button class="view-btn" data-view="research">Research</button>
-      <button class="mode active" data-mode="simple">Simple</button>
-      <button class="mode" data-mode="technical">Technical</button>
+    <div class="header-controls" aria-label="View and explanation mode">
+      <div class="mode-switch">
+        <button class="view-btn active" data-view="quick">Quick</button>
+        <button class="view-btn" data-view="research">Research</button>
+      </div>
+      <div class="mode-switch">
+        <button class="mode active" data-mode="simple">Simple</button>
+        <button class="mode" data-mode="technical">Technical</button>
+      </div>
     </div>
   </header>
 
@@ -42,21 +47,27 @@
     <section id="error" class="panel error hidden"></section>
 
     <section id="workspace" class="hidden">
-      <section class="decision-cockpit panel">
-        <div class="cockpit-left">
-          <div id="identity-strip" class="identity-strip"></div>
-          <div class="decision-line"><span id="action-pill" class="action-pill">WAIT</span><span id="decision-sentence"></span></div>
-        </div>
-        <div class="cockpit-grid" id="cockpit-grid"></div>
+      <div id="identity-strip" class="identity-strip panel"></div>
+
+      <section class="decision-line panel compact-panel">
+        <span id="action-pill" class="action-pill">WAIT</span>
+        <span id="decision-sentence"></span>
       </section>
 
       <section class="intelligence-overview">
         <div class="section-head overview-heading">
-          <div><p class="eyebrow">INTELLIGENCE OVERVIEW</p><h2>Asset Reality, State, Evidence & Core Signals</h2></div>
-          <span class="trust-chip">The original analysis surfaces, preserved in the latest workbench</span>
+          <div>
+            <p class="eyebrow">INTELLIGENCE OVERVIEW</p>
+            <h2>Asset Reality, State, Evidence &amp; Core Signals</h2>
+          </div>
         </div>
-        <div id="reality-overview" class="reality-overview"></div>
-        <div id="signal-overview" class="signal-overview"></div>
+        <section class="summary-grid" id="summary-grid"></section>
+        <section class="four-col signal-overview" id="signal-grid"></section>
+      </section>
+
+      <section class="panel route-panel">
+        <div class="section-head"><div><p class="eyebrow">PRICE PATH</p><h2>Bus Stop Route</h2></div><div id="route-badge"></div></div>
+        <div id="route"></div>
       </section>
 
       <section class="panel analyst-panel">
@@ -84,13 +95,19 @@
         <div id="timeframe-grid" class="timeframe-grid"></div>
       </section>
 
-      <section class="panel chart-panel">
-        <div class="section-head">
-          <div><p class="eyebrow">TRADING WORKBENCH</p><h2>Price, EMA, Fibonacci, Memory & Bus Stops</h2></div>
-          <div class="chart-controls" id="chart-timeframes"></div>
-        </div>
-        <div id="price-chart" class="pro-chart"></div>
-        <div id="chart-legend" class="legend"></div>
+      <section class="two-col chart-memory">
+        <article class="panel chart-panel">
+          <div class="section-head">
+            <div><p class="eyebrow">TRADING WORKBENCH</p><h2>Price, EMA, Fibonacci, Memory &amp; Bus Stops</h2></div>
+            <div class="chart-controls" id="chart-timeframes"></div>
+          </div>
+          <div id="price-chart" class="pro-chart"></div>
+          <div id="chart-legend" class="legend"></div>
+        </article>
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">PRICE MEMORY</p><h2>Support vs Resistance</h2></div></div>
+          <div id="price-memory"></div>
+        </article>
       </section>
 
       <section class="indicator-stack">
@@ -108,17 +125,6 @@
 
       <section class="two-col">
         <article class="panel">
-          <div class="section-head"><div><p class="eyebrow">PRICE PATH</p><h2>Bus Stop Route</h2></div><div id="route-badge"></div></div>
-          <div id="route"></div>
-        </article>
-        <article class="panel">
-          <div class="section-head"><div><p class="eyebrow">PRICE MEMORY</p><h2>Support / Resistance Heatmap</h2></div></div>
-          <div id="price-memory"></div>
-        </article>
-      </section>
-
-      <section class="two-col">
-        <article class="panel">
           <div class="section-head"><div><p class="eyebrow">WHY THE SCORE MOVED</p><h2>Evidence Contributions</h2></div></div>
           <div id="contributions"></div>
         </article>
@@ -128,19 +134,22 @@
         </article>
       </section>
 
-      <section class="two-col">
-        <article class="panel">
+      <section class="two-col contrast">
+        <article class="panel bull-panel">
           <div class="section-head"><div><p class="eyebrow">MAIN CASE</p><h2>Why Bullish</h2></div></div>
           <div id="bull-case"></div>
         </article>
-        <article class="panel">
+        <article class="panel bear-panel">
           <div class="section-head"><div><p class="eyebrow">COUNTER-CASE</p><h2>Why Bearish</h2></div></div>
           <div id="bear-case"></div>
         </article>
       </section>
 
       <section class="panel">
-        <div class="section-head"><div><p class="eyebrow">HUMAN FACTOR</p><h2>Catalyst Timeline</h2></div><span class="trust-chip">Recent news events, not a complete scheduled macro calendar</span></div>
+        <div class="section-head">
+          <div><p class="eyebrow">HUMAN FACTOR</p><h2>Catalyst Timeline</h2></div>
+          <span class="trust-chip">Recent news events, not a complete scheduled macro calendar</span>
+        </div>
         <div id="catalyst-timeline" class="timeline"></div>
       </section>
 
@@ -151,13 +160,16 @@
         </section>
 
         <section class="panel">
-          <div class="section-head"><div><p class="eyebrow">RELATIONSHIP INTELLIGENCE</p><h2>Evidence Board</h2></div><span class="trust-chip">Verified context and inferred links are distinct</span></div>
+          <div class="section-head">
+            <div><p class="eyebrow">RELATIONSHIP INTELLIGENCE</p><h2>Evidence Board</h2></div>
+            <span class="trust-chip">Verified context and inferred links are distinct</span>
+          </div>
           <div class="board-layout"><div id="evidence-board" class="board"></div><div id="board-detail" class="board-detail"></div></div>
         </section>
 
         <section class="two-col">
           <article class="panel"><div class="section-head"><div><p class="eyebrow">MARKET STORY</p><h2>Narrative</h2></div></div><div id="narrative-panel"></div></article>
-          <article class="panel"><div class="section-head"><div><p class="eyebrow">DISCONFIRMING EVIDENCE</p><h2>What Changes My Mind?</h2></div></div><div id="invalidation"></div></article>
+          <article class="panel invalidation-panel"><div class="section-head"><div><p class="eyebrow">DISCONFIRMING EVIDENCE</p><h2>What Changes My Mind?</h2></div></div><div id="invalidation"></div></article>
         </section>
 
         <section class="panel explorer">

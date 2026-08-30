@@ -15,7 +15,7 @@ from .data import get_market_data, search_symbols
 from .engine import analyze
 from .registry import NODE_REGISTRY, node_output
 
-app = FastAPI(title="Market Compass", version="0.4.0")
+app = FastAPI(title="Market Compass", version="0.5.0")
 analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
 app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
@@ -31,7 +31,7 @@ def health():
     return {
         "status": "ok",
         "nodes": len(NODE_REGISTRY),
-        "surface": "application-v0.4",
+        "surface": "application-v0.5",
         "analyst": analyst_router.health()["status"],
     }
 

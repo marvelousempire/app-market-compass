@@ -13,7 +13,7 @@ import uvicorn
 HOST = "127.0.0.1"
 DEFAULT_PORT = 8000
 MAX_PORT_SCAN = 25
-EXPECTED_SURFACE = "application-v0.4"
+EXPECTED_SURFACE = "application-v0.5"
 
 
 def _health(port: int) -> dict | None:
