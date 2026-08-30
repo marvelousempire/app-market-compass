@@ -40,6 +40,12 @@ def test_select_port_skips_unrelated_process(monkeypatch):
     assert launcher.select_port() == (8001, False)
 
 
+def test_select_port_reuses_matching_surface_off_default_port(monkeypatch):
+    monkeypatch.setattr(launcher, "_is_market_compass", lambda port: port == 8006)
+    monkeypatch.setattr(launcher, "_port_is_free", lambda port: port == 8001)
+    assert launcher.select_port() == (8006, True)
+
+
 def test_v05_workbench_surface_is_served():
     client = TestClient(app)
     page = client.get("/")

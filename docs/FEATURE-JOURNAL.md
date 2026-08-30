@@ -23,6 +23,22 @@ supersedes the earlier interpretation.
 
 ---
 
+## 2026-08-30 — Dead desk after restyle (launcher opened the wrong door)
+
+**Founder direction:** “not working - 2hrs and nothing”
+
+**Intention:** The daily door is the running v0.5 desk. `make app` must open that desk, not spawn a second process on the next free port while the promised URL sits dead.
+
+**Features protected:** Market Compass application launcher, live desk URL.
+
+**User-visible requirement:** After a restyle is live, refreshing the desk URL still shows the current workbench. Running the app again reopens the same matching surface.
+
+**Implementation:** `select_port` scans the whole port range for `application-v0.5` before binding a free port.
+
+**Evidence:** Unit test `test_select_port_reuses_matching_surface_off_default_port`; live `GET /health` on 8006 returns `application-v0.5`.
+
+**Still open:** Stale v0.3/v0.4 processes on 8000–8005 remain as leftovers from earlier days; they are skipped, not auto-killed.
+
 ## 2026-08-30 — Fold 8001 information logic into the current desk
 
 **Founder direction:** “fold 8001's look into 8006. I love the way 8001 provides that logic of info.”
