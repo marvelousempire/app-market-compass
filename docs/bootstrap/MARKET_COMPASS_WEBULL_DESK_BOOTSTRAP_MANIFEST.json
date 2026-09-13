@@ -1,1 +1,19 @@
-see local
+{
+  "kind": "bootstrap.manifest",
+  "id": "mc-webull-desk-assimilation-2026-09-13",
+  "name": "Market Compass Webull Desk Assimilation",
+  "version": "0.1.0",
+  "created": "2026-09-13T16:28:00-04:00",
+  "status": "evidence-acquired-not-commissioned",
+  "receipt_state": "planned",
+  "target": {
+    "id": "app-market-compass",
+    "repository": "marvelousempire/app-market-compass",
+    "current_release": "v0.5",
+    "owner": "marvelousempire",
+    "authority": "Nephew Bootstrap Assimilation Pipeline"
+  },
+  "operator_intent": "Assimilate the ten authorized Webull-style asset-desk screens into Market Compass as named evidence surfaces. Copy capability and layout density. Do not copy Webull brand, Vega Analyst brand, Sage Tracker brand, broker execution, or paywalled claims as if they were owned data.",
+  "machine_doc": "docs/bootstrap/MARKET_COMPASS_WEBULL_DESK_BOOTSTRAP.md",
+  "note": "Full field set lives in the paired markdown and the artifacts copy. This repo file is the machine index."
+}
