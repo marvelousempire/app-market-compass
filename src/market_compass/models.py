@@ -58,3 +58,5 @@ class Report(BaseModel):
     contributions: list[dict[str, Any]] = Field(default_factory=list)
     catalysts: list[dict[str, Any]] = Field(default_factory=list)
     calibration: dict[str, Any] = Field(default_factory=dict)
+    market_tape: dict[str, Any] = Field(default_factory=dict)
+    relative_strength: dict[str, Any] = Field(default_factory=dict)
