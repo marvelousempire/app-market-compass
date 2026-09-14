@@ -5,7 +5,7 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
-- No unmerged product changes are currently recorded.
+- Pack #2 — Relative Strength Desk + Market Tape. Seven stdlib micro-slices under `slices/pack-002/`. Scoring weights and the 8001 evidence sequence stay untouched. Offline fixture only. Live Yahoo feed is a later engine load.
 
 ## [0.5.1] — Sunday, August 30, 2026 at 5:34:50 PM Eastern · *Reuse the live desk instead of starting a second one*
 **Signed:** Grok > grok-4.6
@@ -30,7 +30,7 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
   Board, research tools, and Nephew Analyst.
 - Prevented the launcher from reopening an older Market Compass version on port 8000.
 - Added regression coverage for the preserved projection and stale-version rejection.
-- Merged through PR #6 at `fcd94e4002dc203406c7ad8266a0be866c490aae`.
+- Merged through PR #6 at `fcd94e4002dc203406c83c21135f6e25faa16a777c5`.
 
 ## v0.4 — Nephew multi-model analyst bridge
 
