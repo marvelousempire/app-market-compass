@@ -13,9 +13,10 @@ from .ai.providers import ProviderError
 from .backtest import backtest_frame
 from .data import get_market_data, search_symbols
 from .engine import analyze
+from .pack002 import desk_from_bars
 from .registry import NODE_REGISTRY, node_output
 
-app = FastAPI(title="Market Compass", version="0.5.1")
+app = FastAPI(title="Market Compass", version="0.5.2")
 analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
 app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
@@ -32,6 +33,7 @@ def health():
         "status": "ok",
         "nodes": len(NODE_REGISTRY),
         "surface": "application-v0.5",
+        "pack_002": True,
         "analyst": analyst_router.health()["status"],
     }
 
@@ -66,6 +68,15 @@ def analyst(request: AnalystRequest):
 def analyze_api(symbol: str = Query(min_length=1), horizon: int = Query(20, ge=1, le=120)):
     try:
         return analyze(symbol, horizon).model_dump(mode="json")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@app.get("/api/desk")
+def desk_api(symbol: str = Query(min_length=1)):
+    try:
+        data = get_market_data(symbol)
+        return desk_from_bars(symbol, data.bars)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
 

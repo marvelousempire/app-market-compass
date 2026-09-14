@@ -13,6 +13,7 @@ from .context import (
 )
 from .data import MarketData, get_market_data, get_timeframe_bars
 from .models import Report
+from .pack002 import attach as attach_pack_002
 from .scoring import action_state, aggregate, contribution_breakdown
 from .technical import (
     apply_timeframe_context,
@@ -92,11 +93,12 @@ def analyze_frame(
         f"({consensus.get('agreement', 0)}). Correlated technical and news-derived layers are discounted before aggregation."
     )
     catalysts = (news.metrics or {}).get("timeline", [])
+    meta = attach_pack_002(data.meta | {"bars": len(data.bars), "quote": data.quote}, symbol, data.bars)
     return Report(
         symbol=symbol.upper(), horizon_days=horizon, price=float(x.close.iloc[-1]), action=action,
         bull_evidence=bull, bear_evidence=bear, confidence=round(confidence, 3), summary=summary,
         technical_summary=technical, route=route, layers=layers, forecast=fc, evidence_board=board,
-        data_meta=data.meta | {"bars": len(data.bars), "quote": data.quote}, chart=compact_chart(x, 360),
+        data_meta=meta, chart=compact_chart(x, 360),
         timeframes=timeframes, contributions=contributions, catalysts=catalysts,
         calibration=_calibration(history),
     )
