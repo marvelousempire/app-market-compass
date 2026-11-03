@@ -9,3 +9,13 @@
 .universal-records{max-height:175px;overflow:auto}
 .universal-records p{font-size:12px;margin:4px 0}
 .universal-result small{display:block;margin-top:8px;color:#a1aec3;font-size:11px}
+
+/* Selectable draft Hybrid CCK schedule details, deliberately distinct from certified CCK. */
+.hcck-profiles{margin-top:16px}
+.hcck-profiles label{display:block;margin:12px 0 6px;font-size:13px;font-weight:650}
+#hcck-profile-select{width:min(100%,550px);min-height:44px;padding:9px 12px;border:1px solid #35445a;border-radius:10px;background:#0d1724;color:#e4ebf5;font-size:16px}
+#hcck-profile-detail{margin:12px 0;line-height:1.55;overflow-wrap:anywhere}
+#hcck-profile-detail h3{margin:6px 0;font-size:16px}
+#hcck-profile-detail p{margin:7px 0;font-size:12px}
+#hcck-profile-detail small{display:block;color:#a1aec3;font-size:11px}
+.hcck-profiles button:disabled,.universal-actions button:disabled{cursor:not-allowed;opacity:.5}
