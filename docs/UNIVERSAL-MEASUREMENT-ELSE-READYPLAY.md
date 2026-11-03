@@ -13,7 +13,7 @@
 
 **Portable flow:** Author an interpretable, versioned method and evidence rules in ELSE -> obtain authorized measurements from the original source (READYPLAY, user device/inventory, an uploaded table, etc.) -> pass a bounded method+observations snapshot to Market Compass -> review chart, changes, uncertainty and missing data -> export local JSON. No consumer writes back a rating or changes source truth without a separate authority contract.
 
-**Current reality:** The new `POST /api/simulate` endpoint accepts a *user-supplied* versioned methodology payload and a time series. It DOES NOT claim that a method came from, was verified by, or was authorized by the running ELSE service. A proposed ELSE publisher/adapter must add provenance/authentication and owner readback before that claim becomes true. The browser simulator keeps its input in the form only and the API is stateless; no server-side record storage or saving/export button is commissioned yet. Do not paste sensitive information or private profiles into a server you don't control. The current app preview should run on localhost only.
+**Current reality:** The new `POST /api/simulate` endpoint accepts a *user-supplied* versioned methodology payload and a time series. It DOES NOT claim that a method came from, was verified by, or was authorized by the running ELSE service. A proposed ELSE publisher/adapter must add provenance/authentication and owner readback before that claim becomes true. The browser simulator keeps input and calculated results in the form's local page state. It can export the supplied method, observations and returned result as a portable JSON download. The API is stateless; no server-side record storage, cross-app import, or managed history is commissioned yet. Do not paste sensitive information or private profiles into a server you don't control. The current app preview should run on localhost only.
 
 ### Contract v1: example
 
@@ -46,7 +46,7 @@ Only measurements with every required metric are calculated; missing/extra metri
 
 Source reference: `marvelousempire/red-e-play-app/docs/plans/Plan-Player-Market-Studio-Hub.md` and merged Player Market work, including PRs #1547, #1552, #1554. READYPLAY retains its sports formula/match-point facts until a tested owner-approved consumer adapter exists.
 
-- **Done in Market Compass branch:** Existing financial candles/EMA/RSI/MACD/Fibonacci; existing intelTHAT receipt bridge; named participant directory; ten-room study index; new generic simulated-index kernel and a browser-input example.
+- **Done in Market Compass branch:** Existing financial candles/EMA/RSI/MACD/Fibonacci; existing intelTHAT receipt bridge; named participant directory; ten-room study index; generic simulated-index kernel, browser-input example and local JSON export.
 - **Not done:** Full source-equivalent READYPLAY market chart/workbench extraction, multi-book generic chart math, complete scenario/option-chain UI, actual player-record adapter, ELSE method publisher and verifier, identity/consent mapping, versioned SDKs, export flow and network authentication.
 - **Acceptance gate:** A consented READYPLAY player observation and a device observation are both consumed by a single Market Compass contract, with identical method-version rules, explicit missing evidence, correct separate source receipts, read-only output, and reproducible test vectors. READYPLAY then calls Market Compass as a consumer rather than owning a diverging copy. Until then, no statement that the entire READYPLAY market stack is migrated.
 
