@@ -47,6 +47,23 @@
 
     <section id="error" class="panel error hidden"></section>
 
+    <section class="panel market-participants" id="market-participants" aria-label="Market Compass participants">
+      <div class="section-head"><div><p class="eyebrow">MARKET COMPASS CONTRIBUTORS</p><h2>Market Compass Participants</h2></div></div>
+      <p class="trust-note">Named research sections do not grant trading authority. Missing owner-authored content stays pending.</p>
+      <div id="market-participants-output" role="status" aria-live="polite"><p class="muted">Loading participant directory…</p></div>
+    </section>
+
+        <section class="panel" id="intelthat-panel" aria-label="Omo's Intel research receipts">
+          <div class="section-head">
+            <div><p class="eyebrow">OMO'S INTEL · intelTHAT</p><h2>Omo's Intel Research / Proof Health</h2></div>
+            <button type="button" class="secondary" id="intelthat-load">Read Local Receipts</button>
+          </div>
+          <p class="trust-note">Read-only research. These receipts do not change Market Compass scores or place orders. A current file is not independently verified market truth.</p>
+          <div id="intelthat-output" role="status" aria-live="polite">
+            <p class="muted">Select a symbol and open its source receipts. Nothing is fetched until you choose Read Local Receipts.</p>
+          </div>
+        </section>
+
     <section id="workspace" class="hidden">
       <div id="identity-strip" class="identity-strip panel"></div>
 
@@ -155,16 +172,6 @@
       </section>
 
       <section class="research-only">
-        <section class="panel" id="intelthat-panel" aria-label="intelTHAT research receipts">
-          <div class="section-head">
-            <div><p class="eyebrow">INDEPENDENT SOURCE</p><h2>intelTHAT Research / Proof Health</h2></div>
-            <button type="button" class="secondary" id="intelthat-load">Read Local Receipts</button>
-          </div>
-          <p class="trust-note">Read-only research. These receipts do not change Market Compass scores or place orders. A current file is not independently verified market truth.</p>
-          <div id="intelthat-output" role="status" aria-live="polite">
-            <p class="muted">Select a symbol and open its source receipts. Nothing is fetched until you choose Read Local Receipts.</p>
-          </div>
-        </section>
         <section class="two-col">
           <article class="panel"><div class="section-head"><div><p class="eyebrow">PAST STATES</p><h2>Historical Analogs</h2></div></div><div id="history-panel"></div></article>
           <article class="panel"><div class="section-head"><div><p class="eyebrow">MODEL CHECK</p><h2>Forecast</h2></div></div><div id="forecast-panel"></div></article>
