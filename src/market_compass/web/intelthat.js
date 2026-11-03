@@ -41,6 +41,41 @@ document.addEventListener('DOMContentLoaded', () => {
     root.appendChild(grid);
   }
 
+  // Participant directory is descriptive metadata, not live-source verification.
+  async function loadParticipantDirectory() {
+    const output = document.getElementById('market-participants-output');
+    if (!output) return;
+    try {
+      const response = await fetch('/api/participants', {
+        headers: { Accept: 'application/json' }, credentials: 'same-origin'
+      });
+      if (!response.ok) throw new Error('Participant directory unavailable.');
+      const directory = await response.json();
+      const grid = el('div', '', 'participant-grid');
+      for (const participant of directory.participants || []) {
+        const card = el('article', '', 'participant-card');
+        card.appendChild(el('h3', participant.name));
+        const state = participant.status === 'adapter-implemented-not-commissioned'
+          ? 'Read-only adapter · Not commissioned' : 'Awaiting owner content';
+        card.appendChild(el('p', state, 'participant-state'));
+        card.appendChild(el('p', participant.description || 'Definition pending.'));
+        if (participant.id === 'omos-intel') {
+          card.appendChild(el('small', 'Existing source: intelTHAT · no repository rename'));
+          const link = el('a', "Read Omo's Intel receipts", 'participant-link');
+          link.href = '#intelthat-panel';
+          card.appendChild(link);
+        } else {
+          card.appendChild(el('small', 'No rules, calculations, or evidence published yet.'));
+        }
+        grid.appendChild(card);
+      }
+      output.replaceChildren(grid);
+    } catch (err) {
+      output.replaceChildren(el('p', 'Participant directory unavailable: ' + err.message));
+    }
+  }
+  void loadParticipantDirectory();
+
   button.addEventListener('click', async () => {
     const symbol = symbolField.value.trim();
     if (!symbol) return;
