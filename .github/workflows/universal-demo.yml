@@ -57,3 +57,64 @@ jobs:
             runs/demo-preflight.json
             runs/runtime-inspection.json
           if-no-files-found: error
+
+  macos-rehearsal:
+    # Hosted macOS is an intermediate gate, NOT the owner's FiveMac.
+    runs-on: macos-15
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Assert hosted macOS runtime and install Python dependencies
+        run: |
+          python -c 'import platform; assert platform.system() == "Darwin", platform.platform(); print(platform.platform())'
+          python -m pip install -e '.[dev]'
+      - name: Preserve every original market control on macOS
+        run: |
+          bash -n scripts/commission-demo.sh
+          node --check src/market_compass/web/app.js
+          node --check src/market_compass/web/simulator.js
+          node --check src/market_compass/web/hcck.js
+          node --check src/market_compass/web/intelthat.js
+          python -m pytest -q
+      - name: Produce synthetic macOS preflight receipt
+        run: python scripts/demo_preflight.py
+      - name: Inspect actual hosted-macOS localhost HTTP responses
+        run: |
+          python -m uvicorn market_compass.api:app --host 127.0.0.1 --port 18340 > /tmp/market-compass-macos-preview.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for attempt in $(seq 1 60); do
+            if python -c 'from urllib.request import urlopen; urlopen("http://127.0.0.1:18340/health", timeout=1).close()' 2>/dev/null; then
+              ready=1
+              break
+            fi
+            sleep 0.25
+          done
+          if [ "$ready" -ne 1 ]; then cat /tmp/market-compass-macos-preview.log; exit 1; fi
+          python -m market_compass.runtime_inspection --url http://127.0.0.1:18340 --receipt runs/runtime-inspection.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          receipt = json.loads(Path("runs/runtime-inspection.json").read_text())
+          assert receipt["host_os_reported"] == "Darwin", receipt
+          assert receipt["http_contract_verified"] is True, receipt
+          assert receipt["five_mac_commissioned"] is False, receipt
+          print("PASS: hosted macOS HTTP rehearsal only, FiveMac not yet verified.")
+          PY
+      - name: Upload hosted-macOS receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-compass-macos-hosted-rehearsal
+          path: |
+            runs/demo-preflight.json
+            runs/runtime-inspection.json
+          if-no-files-found: error
