@@ -1,5 +1,10 @@
 # Market Compass
 
+> **Universal measurement identity (2026-11-03 founder clarification):** Market Compass is not limited to securities. The reusable product measures and simulates *any authorized subject that has observations over time*: a laptop, camera, eggs, equipment, organization, or consented READYPLAY profile. Financial research is one specialized mode, not the definition of the platform. A simulated points index is not a sale price, personal worth, trade, token issuance, or wager. **ELSE** remains the independent authority for owner-authored measurement methodology, and **READYPLAY** supplies authorized player facts as a consumer/source, not as the owner of generic visualization. See [Universal Measurement / ELSE / READYPLAY](docs/UNIVERSAL-MEASUREMENT-ELSE-READYPLAY.md).
+
+> **Draft branch implementation:** `POST /api/simulate` accepts a bounded versioned methodology and user-supplied observations, producing a method-relative 0–100 point index, missing-data holds, changes, an index-change volatility measure and input fingerprint. The browser Simulation Lab shows a synthetic laptop example and exports JSON. It does **not** connect to ELSE or READYPLAY yet, and is not commissioned on a user's Mac.
+
+
 **Market Compass is an explainable market-research and decision-intelligence application.** It is designed to answer a harder question than “is RSI oversold?” or “did the news sound bullish?”:
 
 > **Given the evidence available right now, what supports the bullish case, what supports the bearish case, where could price go next, and what would prove the current thesis wrong?**
