@@ -45,7 +45,7 @@ PROFILES = (
     },
     {
         "id": "equity-v1", "title": "Stock or listed-equity study",
-        "subject_kind": "organization", "domain": "equity",
+        "subject_kind": "equity", "domain": "equity",
         "source_owner": "user-specified-data-provider", "fields": (
             "symbol", "exchange", "quote_currency", "source_id",
         ),
@@ -57,7 +57,7 @@ PROFILES = (
     },
     {
         "id": "option-v1", "title": "Options contract study",
-        "subject_kind": "other", "domain": "options",
+        "subject_kind": "option", "domain": "options",
         "source_owner": "user-specified-data-provider", "fields": (
             "underlying", "expiry", "right", "strike", "quote_currency", "source_id",
         ),
