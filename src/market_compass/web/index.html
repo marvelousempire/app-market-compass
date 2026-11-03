@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/static/overview.css">
   <link rel="stylesheet" href="/static/analyst.css">
   <link rel="stylesheet" href="/static/intelthat.css">
+  <link rel="stylesheet" href="/static/simulator.css">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
@@ -63,6 +64,18 @@
             <p class="muted">Select a symbol and open its source receipts. Nothing is fetched until you choose Read Local Receipts.</p>
           </div>
         </section>
+
+    <section class="panel universal-simulator" id="universal-simulator" aria-label="Universal measurement simulation">
+      <div class="section-head"><div><p class="eyebrow">ANY MEASURABLE THING</p><h2>Market Compass Simulation Lab</h2></div></div>
+      <p class="trust-note">Define any authorized subject, a versioned evaluation method, and observations. See a hypothetical points index and its volatility. ELSE remains an independent methodology app. No money, sales, wagers, or live data are involved.</p>
+      <label class="universal-json-label" for="universal-input">Simulation input (JSON)</label>
+      <textarea id="universal-input" rows="8" spellcheck="false" aria-label="Editable subject, method and measurement observations JSON"></textarea>
+      <div class="universal-actions">
+        <button id="universal-example" type="button" class="secondary">Load example: old laptop</button>
+        <button id="universal-run" type="button" class="primary">Simulate</button>
+      </div>
+      <div id="universal-output" role="status" aria-live="polite"><p class="muted">Load the synthetic laptop example, or paste your own authorized measurements.</p></div>
+    </section>
 
     <section id="workspace" class="hidden">
       <div id="identity-strip" class="identity-strip panel"></div>
@@ -209,5 +222,6 @@
   <script src="/static/app.js" defer></script>
   <script src="/static/analyst.js" defer></script>
   <script src="/static/intelthat.js" defer></script>
+  <script src="/static/simulator.js" defer></script>
 </body>
 </html>
