@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   exporter.addEventListener('click', () => {
     if (!lastExport) return;
-    const blob = new Blob([JSON.stringify(lastExport, null, 2) + '\\n'], {type: 'application/json'});
+    const blob = new Blob([JSON.stringify(lastExport, null, 2) + '\n'], {type: 'application/json'});
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
