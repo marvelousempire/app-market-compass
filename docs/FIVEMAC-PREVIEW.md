@@ -39,6 +39,17 @@ The original `app.js` startup call `runAnalysis()` is still active. The preview 
 
 The `runs/demo-preflight.json` record contains the actual checked commit, timestamp, synthetic index series, input fingerprints and explicit unverified flags. The `runs/` folder is ignored by Git. There is no need to send personal READYPLAY data to the demo.
 
+**New localhost runtime inspection:** Once the preview server answers, it performs read-only HTTP requests to `/health`, the seven-profile catalog, five participant sections, the original HTML controls and served JavaScript. It writes `runs/runtime-inspection.json` with the observed commit, endpoint content SHA-256 digests, pass/held checks and errors. It never requests a live market analysis or modifies the existing stock startup. If the inspection is held, the browser is still opened and the failure is printed; nothing is silently removed or represented as commissioned. This proves a live local HTTP response, **not** browser visual execution, live data-provider success, FiveMac identity, or owner signoff. The same HTTP check runs in GitHub CI, but a CI receipt is not a FiveMac receipt.
+
+After running the launcher on FiveMac, inspect both local receipts:
+
+```bash
+cat "$HOME/MarketCompass-preview/runs/demo-preflight.json"
+cat "$HOME/MarketCompass-preview/runs/runtime-inspection.json"
+```
+
+The operator must still visually inspect the browser, test the original automatic market views and simulator, and record an explicit signoff before describing the FiveMac as commissioned.
+
 GitHub CI also checks the full tests, browser JavaScript syntax, shell syntax and this synthetic preflight. CI evidence validates the code in GitHub's test environment, **not** the Mac's hardware, display, local permissions or attached Gitea.
 
 ## What still needs owner verification
