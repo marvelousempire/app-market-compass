@@ -50,7 +50,7 @@ cat "$HOME/MarketCompass-preview/runs/runtime-inspection.json"
 
 The operator must still visually inspect the browser, test the original automatic market views and simulator, and record an explicit signoff before describing the FiveMac as commissioned.
 
-GitHub CI also checks the full tests, browser JavaScript syntax, shell syntax and this synthetic preflight. CI evidence validates the code in GitHub's test environment, **not** the Mac's hardware, display, local permissions or attached Gitea.
+GitHub CI checks full tests, browser JavaScript syntax, shell syntax, the synthetic preflight, and real localhost HTTP responses on Linux. A **second, independent hosted-macOS-15 rehearsal** now runs the same checks on a GitHub macOS runner and uploads `market-compass-macos-hosted-rehearsal` receipts. It asserts `host_os_reported=Darwin` and `five_mac_commissioned=false`. Passing hosted macOS narrows the platform gap, but **does not verify FiveMac hardware, its browser rendering, source permissions, local Gitea, or commissioning**. If the hosted macOS CI job is unavailable or held, do not silently equate Linux success with macOS acceptance.
 
 ## What still needs owner verification
 
