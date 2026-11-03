@@ -16,4 +16,4 @@ No broker execution, trade authorization, changes to Market Compass's bull/bear 
 
 Run: python -m pytest tests/test_intelthat_bridge.py -q
 
-Follow-up: add a browser proof-health surface, a fully versioned intelTHAT publisher contract, and tests of complete market data provenance before promoting anything into scored evidence. Gitea authority reconciliation must precede an authoritative release.
+The Research view includes a **read-on-click** intelTHAT Proof Health panel displaying four source states, allowlisted metrics, timestamps, and file fingerprints. No write or brokerage actions exist. Follow-up: add a versioned intelTHAT publisher contract, verify source provenance and Gitea owner authority, and consider authenticated deployment before exposing this outside localhost. None of this promotes a result into scored evidence. Gitea authority reconciliation must precede an authoritative release.

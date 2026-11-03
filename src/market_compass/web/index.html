@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/static/styles.css">
   <link rel="stylesheet" href="/static/overview.css">
   <link rel="stylesheet" href="/static/analyst.css">
+  <link rel="stylesheet" href="/static/intelthat.css">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
@@ -154,6 +155,16 @@
       </section>
 
       <section class="research-only">
+        <section class="panel" id="intelthat-panel" aria-label="intelTHAT research receipts">
+          <div class="section-head">
+            <div><p class="eyebrow">INDEPENDENT SOURCE</p><h2>intelTHAT Research / Proof Health</h2></div>
+            <button type="button" class="secondary" id="intelthat-load">Read Local Receipts</button>
+          </div>
+          <p class="trust-note">Read-only research. These receipts do not change Market Compass scores or place orders. A current file is not independently verified market truth.</p>
+          <div id="intelthat-output" role="status" aria-live="polite">
+            <p class="muted">Select a symbol and open its source receipts. Nothing is fetched until you choose Read Local Receipts.</p>
+          </div>
+        </section>
         <section class="two-col">
           <article class="panel"><div class="section-head"><div><p class="eyebrow">PAST STATES</p><h2>Historical Analogs</h2></div></div><div id="history-panel"></div></article>
           <article class="panel"><div class="section-head"><div><p class="eyebrow">MODEL CHECK</p><h2>Forecast</h2></div></div><div id="forecast-panel"></div></article>
@@ -190,5 +201,6 @@
   <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
   <script src="/static/app.js" defer></script>
   <script src="/static/analyst.js" defer></script>
+  <script src="/static/intelthat.js" defer></script>
 </body>
 </html>
