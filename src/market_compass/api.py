@@ -14,6 +14,7 @@ from .backtest import backtest_frame
 from .data import get_market_data, search_symbols
 from .engine import analyze
 from .pack002 import desk_from_bars
+from .intelthat_bridge import read_snapshot
 from .registry import NODE_REGISTRY, node_output
 
 app = FastAPI(title="Market Compass", version="0.5.2")
@@ -108,3 +109,11 @@ def backtest_api(
         return {"symbol": symbol.upper(), "provider": data.meta.get("provider"), "resolved_symbol": data.meta.get("resolved_symbol", symbol.upper()), **result}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@app.get("/api/intelthat/{symbol}")
+def intelthat_api(symbol: str):
+    try:
+        return read_snapshot(symbol)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
