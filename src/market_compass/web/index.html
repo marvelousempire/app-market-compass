@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="/static/styles.css">
   <link rel="stylesheet" href="/static/overview.css">
   <link rel="stylesheet" href="/static/analyst.css">
+  <link rel="stylesheet" href="/static/intelthat.css">
+  <link rel="stylesheet" href="/static/operator-controls.css">
+  <link rel="stylesheet" href="/static/research-cassettes.css">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
@@ -30,13 +33,48 @@
   </header>
 
   <main class="shell">
+    <section class="operator-deck panel" aria-labelledby="operator-deck-title">
+      <div class="operator-deck-heading">
+        <div>
+          <p class="eyebrow">GITTHAT PREVIEW CONTROLS</p>
+          <h2 id="operator-deck-title">Ready on this Mac</h2>
+          <p>Plan, inspect, open, prove, or safely stop this read-only research preview.</p>
+        </div>
+        <span class="operator-state" id="operator-state" data-state="checking" role="status">Checking runtime…</span>
+      </div>
+      <div class="operator-actions" aria-label="GitThat preview actions">
+        <button type="button" class="operator-action" data-operator-action="plan"><span aria-hidden="true">⌖</span><strong>Preview plan</strong><small>See the bounded work order</small></button>
+        <button type="button" class="operator-action" data-operator-action="status"><span aria-hidden="true">✓</span><strong>Check status</strong><small>Verify host, mode, and safety</small></button>
+        <button type="button" class="operator-action" data-operator-action="launch"><span aria-hidden="true">▶</span><strong>Launch preview</strong><small>Confirm the live runtime</small></button>
+        <button type="button" class="operator-action" data-operator-action="open"><span aria-hidden="true">↗</span><strong>Open live preview</strong><small>Open another local view</small></button>
+        <button type="button" class="operator-action" data-operator-action="receipts"><span aria-hidden="true">≣</span><strong>View receipts</strong><small>Read health and proof state</small></button>
+        <button type="button" class="operator-action danger" data-operator-action="stop"><span aria-hidden="true">■</span><strong>Stop safely</strong><small>End only this local preview</small></button>
+      </div>
+      <div class="operator-result" id="operator-result" tabindex="-1" aria-live="polite">
+        <p>Trading stays off. Gitea promotion and broker actions are not available here.</p>
+      </div>
+    </section>
     <section class="control-bar panel">
-      <label class="search-field"><span>Asset</span><input id="symbol" value="HYPE" list="symbol-suggestions" autocomplete="off" spellcheck="false"><datalist id="symbol-suggestions"></datalist></label>
+      <label class="search-field"><span>Asset</span><input id="symbol" value="BB" list="symbol-suggestions" autocomplete="off" spellcheck="false"><datalist id="symbol-suggestions"></datalist></label>
       <label><span>Horizon</span><input id="horizon" type="number" value="20" min="1" max="120"></label>
       <button id="analyze" class="primary">Analyze</button>
       <button id="watch-current" class="secondary">+ Watch</button>
       <button id="save-snapshot" class="secondary">Save Snapshot</button>
       <div id="run-status" class="run-status" role="status"></div>
+    </section>
+
+    <section class="cassette-stage panel" aria-labelledby="cassette-title">
+      <div class="cassette-heading">
+        <div><p class="eyebrow">FLOWTHAT · ACTOR SPACES</p><h2 id="cassette-title">Choose an Actor</h2></div>
+        <span class="trust-chip">Local presentation · no execution authority</span>
+      </div>
+      <div class="cassette-canvas" id="cassette-canvas" aria-live="polite"></div>
+      <div class="cassette-rail" role="tablist" aria-label="Actor spaces">
+        <button type="button" role="tab" class="cassette-tab active" data-cassette="omo" aria-selected="true"><span aria-hidden="true">O</span><strong>Omo</strong></button>
+        <button type="button" role="tab" class="cassette-tab" data-cassette="prince" aria-selected="false"><span aria-hidden="true">P</span><strong>Prince</strong></button>
+        <button type="button" role="tab" class="cassette-tab" data-cassette="wuda" aria-selected="false"><span aria-hidden="true">W</span><strong>Wuda</strong></button>
+        <button type="button" role="tab" class="cassette-tab" data-cassette="browns-barometers" aria-selected="false"><span aria-hidden="true">B</span><strong>Brown’s Barometers</strong></button>
+      </div>
     </section>
 
     <section class="watch-row panel compact-panel">
@@ -154,6 +192,16 @@
       </section>
 
       <section class="research-only">
+        <section class="panel" id="intelthat-panel" aria-label="intelTHAT research receipts">
+          <div class="section-head">
+            <div><p class="eyebrow">INDEPENDENT SOURCE</p><h2>intelTHAT Research / Proof Health</h2></div>
+            <button type="button" class="secondary" id="intelthat-load">Read Local Receipts</button>
+          </div>
+          <p class="trust-note">Read-only research. These receipts do not change Market Compass scores or place orders. A current file is not independently verified market truth.</p>
+          <div id="intelthat-output" role="status" aria-live="polite">
+            <p class="muted">Select a symbol and open its source receipts. Nothing is fetched until you choose Read Local Receipts.</p>
+          </div>
+        </section>
         <section class="two-col">
           <article class="panel"><div class="section-head"><div><p class="eyebrow">PAST STATES</p><h2>Historical Analogs</h2></div></div><div id="history-panel"></div></article>
           <article class="panel"><div class="section-head"><div><p class="eyebrow">MODEL CHECK</p><h2>Forecast</h2></div></div><div id="forecast-panel"></div></article>
@@ -190,5 +238,8 @@
   <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
   <script src="/static/app.js" defer></script>
   <script src="/static/analyst.js" defer></script>
+  <script src="/static/intelthat.js" defer></script>
+  <script src="/static/operator-controls.js" defer></script>
+  <script src="/static/research-cassettes.js" defer></script>
 </body>
 </html>

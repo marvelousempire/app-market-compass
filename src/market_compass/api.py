@@ -1,7 +1,12 @@
 from __future__ import annotations
 
 import json
+import os
+import signal
+import socket
+from datetime import UTC, datetime
 from pathlib import Path
+from threading import Timer
 from urllib.error import URLError
 
 from fastapi import FastAPI, HTTPException, Query
@@ -14,11 +19,13 @@ from .backtest import backtest_frame
 from .data import get_market_data, search_symbols
 from .engine import analyze
 from .pack002 import desk_from_bars
+from .intelthat_bridge import read_snapshot
 from .registry import NODE_REGISTRY, node_output
 
 app = FastAPI(title="Market Compass", version="0.5.2")
 analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
+PREVIEW_STARTED_AT = datetime.now(UTC).isoformat()
 app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
 
 
@@ -35,6 +42,59 @@ def health():
         "surface": "application-v0.5",
         "pack_002": True,
         "analyst": analyst_router.health()["status"],
+    }
+
+
+def operator_status():
+    return {
+        "state": "live", "host": socket.gethostname(), "pid": os.getpid(),
+        "started_at": PREVIEW_STARTED_AT, "bind": "127.0.0.1:8000",
+        "mode": "research_only", "preview_only": True, "commissioned": False,
+        "trade_execution": False, "score_influence": False,
+        "authority": "github-preview-unverified",
+    }
+
+
+@app.get("/api/operator/plan")
+def operator_plan():
+    return {
+        "job": "market-first-look", "state": "ready",
+        "steps": [
+            "Verify the pinned preview source and local runtime.",
+            "Open Market Compass with intelTHAT receipts in read-only mode.",
+            "Keep missing evidence visible and keep trading disabled.",
+        ],
+        "prohibits": ["broker-order", "git-merge", "git-push", "gitea-authority-cutover"],
+        "launch_owner": "GitThat",
+    }
+
+
+@app.get("/api/operator/status")
+def operator_status_api():
+    return operator_status()
+
+
+@app.post("/api/operator/launch")
+def operator_launch_api():
+    return {**operator_status(), "result": "already-running", "message": "The preview is live and ready."}
+
+
+@app.get("/api/operator/receipts")
+def operator_receipts(symbol: str = Query("QQQ", min_length=1, max_length=24)):
+    return {"runtime": operator_status(), "health": health(), "research": read_snapshot(symbol)}
+
+
+def _stop_preview():
+    os.kill(os.getpid(), signal.SIGTERM)
+
+
+@app.post("/api/operator/stop")
+def operator_stop_api():
+    Timer(0.35, _stop_preview).start()
+    return {
+        "state": "stopping",
+        "message": "The local preview is stopping. Run GitThat again to relaunch it.",
+        "trade_execution": False,
     }
 
 
@@ -108,3 +168,11 @@ def backtest_api(
         return {"symbol": symbol.upper(), "provider": data.meta.get("provider"), "resolved_symbol": data.meta.get("resolved_symbol", symbol.upper()), **result}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@app.get("/api/intelthat/{symbol}")
+def intelthat_api(symbol: str):
+    try:
+        return read_snapshot(symbol)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc

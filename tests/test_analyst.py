@@ -67,7 +67,7 @@ def test_v04_ui_contains_nephew_and_friendly_symbol():
     page = TestClient(app).get("/")
     assert page.status_code == 200
     assert "NEPHEW ANALYST" in page.text
-    assert 'value="HYPE"' in page.text
+    assert 'value="BB"' in page.text
     assert "symbol-suggestions" in page.text
 
 

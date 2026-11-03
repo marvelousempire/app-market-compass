@@ -360,6 +360,23 @@ Default address:
 http://127.0.0.1:8000
 ```
 
+### GitThat preview controls
+
+The browser opens with six ready controls for the local research preview:
+
+- **Preview plan** reads the bounded work order and its prohibited effects.
+- **Check status** reads the current host, process, mode, authority and safety state.
+- **Launch preview** confirms that the in-app runtime is already live. A stopped server cannot launch itself; GitThat owns cold launch and relaunch.
+- **Open live preview** opens another local browser view.
+- **View receipts** reads runtime health and the selected symbol's intelTHAT proof state.
+- **Stop safely** asks for confirmation, then stops only this loopback preview process. Run GitThat again to relaunch it.
+
+These controls do not merge code, push branches, change Gitea authority, connect a broker, influence scores, or enable trading. The preview remains `research_only`, `trade_execution:false`, and localhost-only.
+
+The browser starts on **BB** with **BB**, **AAPL**, **QQQ**, and the operator-requested literal **SPCX** in the default watch choices. An untouched legacy default list is migrated once; a personally edited watchlist is preserved.
+
+The local preview shows **Omo**, **Prince**, **Wuda**, and **Brown’s Barometers** as Actors in FlowThat-shaped spaces: one centered stage, a compact Actor rail, and one active space at a time. Every Actor has a comp card for identity, role, individual trading-psychology preferences/rules, and authority. Wuda presents trends, hottest pointers, and notable RSI threshold events. Brown’s Barometers groups measured market/process metrics, technical-analysis instruments, and view governance. These names and groupings are operator-owned presentation labels. Until owner data and receipts are bound, every Actor clearly reports that psychology is unconfigured and that it has no market-data, score, broker, or approval authority.
+
 ## Headless API mode
 
 ```bash
