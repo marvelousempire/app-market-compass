@@ -65,6 +65,17 @@
           </div>
         </section>
 
+    <section class="panel hcck-profiles" id="hcck-profiles" aria-label="Hybrid CCK profile schedules">
+      <div class="section-head"><div><p class="eyebrow">HYBRID CCK PROFILE SCHEDULES</p><h2>Choose the Measurement Profile</h2></div></div>
+      <p class="trust-note">Domain schedules declare which fields, evidence and observation cadence apply. CCK That owns certification; these are draft Market Compass templates, not minted CCK identities or running jobs.</p>
+      <label for="hcck-profile-select">Profile template</label>
+      <select id="hcck-profile-select" aria-label="Select a Hybrid CCK profile schedule" disabled>
+        <option>Loading templates…</option>
+      </select>
+      <div id="hcck-profile-detail" role="status" aria-live="polite"><p class="muted">Loading schema references and schedule fields…</p></div>
+      <button type="button" id="hcck-load-example" class="secondary" disabled>Load synthetic profile into Simulation Lab</button>
+    </section>
+
     <section class="panel universal-simulator" id="universal-simulator" aria-label="Universal measurement simulation">
       <div class="section-head"><div><p class="eyebrow">ANY MEASURABLE THING</p><h2>Market Compass Simulation Lab</h2></div></div>
       <p class="trust-note">Define any authorized subject, a versioned evaluation method, and observations. See a hypothetical points index and its volatility. ELSE remains an independent methodology app. No money, sales, wagers, or live data are involved.</p>
@@ -224,5 +235,6 @@
   <script src="/static/analyst.js" defer></script>
   <script src="/static/intelthat.js" defer></script>
   <script src="/static/simulator.js" defer></script>
+  <script src="/static/hcck.js" defer></script>
 </body>
 </html>
