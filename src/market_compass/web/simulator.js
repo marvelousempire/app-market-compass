@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const output = document.getElementById('universal-output');
   const load = document.getElementById('universal-example');
   const run = document.getElementById('universal-run');
-  if (!input || !output || !load || !run) return;
+  const exporter = document.getElementById('universal-export');
+  let lastExport = null;
+  if (!input || !output || !load || !run || !exporter) return;
 
   const demo = {
     subject: {id: 'demo-old-laptop', name: 'Illustrative old laptop', kind: 'device',
@@ -57,8 +59,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     return svg;
   }
+  input.addEventListener('input', () => {
+    lastExport = null;
+    exporter.disabled = true;
+  });
+  exporter.addEventListener('click', () => {
+    if (!lastExport) return;
+    const blob = new Blob([JSON.stringify(lastExport, null, 2) + '\\n'], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'market-compass-simulation.json';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  });
   load.addEventListener('click', () => {
     input.value = JSON.stringify(demo, null, 2);
+    lastExport = null;
+    exporter.disabled = true;
     output.replaceChildren(el('p', 'Illustrative laptop data loaded. Select Simulate to calculate.'));
   });
   run.addEventListener('click', async () => {
@@ -69,6 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     run.disabled = true;
+    exporter.disabled = true;
+    lastExport = null;
     output.replaceChildren(el('p', 'Calculating supplied measurements without storing them…'));
     try {
       const response = await fetch('/api/simulate', {
@@ -95,6 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
       panel.appendChild(list);
       panel.appendChild(el('small', 'Input SHA-256: ' + result.input_sha256));
       panel.appendChild(el('small', 'Synthetic study only. No money, ownership transfer, real market, live ELSE link, or record storage.'));
+      lastExport = {
+        schema: 'market-compass.portable-study/v1',
+        exported_at: new Date().toISOString(),
+        user_supplied_input: request,
+        hypothetical_result: result
+      };
+      exporter.disabled = false;
       output.replaceChildren(panel);
     } catch (err) {
       output.replaceChildren(el('p', 'Simulation held: ' + err.message));
