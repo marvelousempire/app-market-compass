@@ -13,6 +13,8 @@ def test_hcck_selector_assets_and_two_simulation_routes():
         'id="hcck-profile-select"',
         'id="hcck-profile-detail"',
         'id="hcck-load-example"',
+        'id="hcck-seat-wrapper"',
+        'id="hcck-seat-select"',
         'id="universal-simulator"',
         'id="universal-input"',
         'id="universal-run"',
@@ -26,6 +28,8 @@ def test_hcck_selector_assets_and_two_simulation_routes():
     assert selector.status_code == 200
     source = selector.text
     assert "/api/hcck/profiles" in source
+    assert "directory.participant_instances" in source
+    assert "seatSelector" in source
     assert "draft:synthetic-only" in source
     assert "target.dispatchEvent" in source
     assert 'selector.addEventListener' in source
