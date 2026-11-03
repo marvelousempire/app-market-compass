@@ -1,5 +1,6 @@
 """HCCK draft schedules: visible registry, bounded execution and refusal gates."""
-from copy import deepcopy
+import json
+from pathlib import Path
 
 from fastapi.testclient import TestClient
 
@@ -144,3 +145,34 @@ def test_authorization_remains_required():
     payload = fixture()
     payload["cck_profile_ref"] = ""
     assert CLIENT.post("/api/hcck/simulate", json=payload).status_code == 422
+
+
+def test_named_sections_share_participant_template_without_impersonation():
+    d = CLIENT.get("/api/hcck/profiles").json()
+    instances = d["participant_instances"]
+    assert len(instances) == 5
+    assert {p["profile_id"] for p in instances} == {"participant-v1"}
+    cards = {p["name"]: p["card"]["title"] if p["card"] else None for p in instances}
+    assert cards["Marvin's Metrics"] == "King of Spades"
+    assert cards["Prince's Principles"] == "King of Diamonds"
+    assert cards["Omo's Intel"] == "King of Clubs"
+    assert cards["Wuda's Watch"] == "King of Hearts"
+    assert cards["Prince's Intel"] is None
+    assert all(p["state"] == "draft-not-certified" for p in instances)
+
+
+def test_draft_schedule_json_schema_is_parseable_and_matches_profiles():
+    root = Path(__file__).resolve().parents[1]
+    path = root / "contracts" / "hcck-profile-schedule.v1.schema.json"
+    definition = json.loads(path.read_text(encoding="utf-8"))
+    assert definition["$schema"].endswith("/2020-12/schema")
+    assert definition["additionalProperties"] is False
+    assert definition["properties"]["schedule"]["properties"]["automatic_job"]["const"] is False
+    profiles = CLIENT.get("/api/hcck/profiles").json()["profiles"]
+    required = set(definition["required"])
+    for profile in profiles:
+        assert required <= set(profile)
+        assert set(profile["schedule"]) == set(definition["properties"]["schedule"]["required"])
+        assert profile["schedule"]["timezone"] == "UTC"
+        assert profile["schedule"]["timestamp"] == "observation.at"
+        assert profile["schedule"]["automatic_job"] is False
