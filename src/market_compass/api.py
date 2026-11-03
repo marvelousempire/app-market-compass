@@ -15,6 +15,7 @@ from .data import get_market_data, search_symbols
 from .engine import analyze
 from .pack002 import desk_from_bars
 from .intelthat_bridge import read_snapshot
+from .participants import participant_directory
 from .registry import NODE_REGISTRY, node_output
 
 app = FastAPI(title="Market Compass", version="0.5.2")
@@ -109,6 +110,11 @@ def backtest_api(
         return {"symbol": symbol.upper(), "provider": data.meta.get("provider"), "resolved_symbol": data.meta.get("resolved_symbol", symbol.upper()), **result}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@app.get("/api/participants")
+def participants_api():
+    return participant_directory()
 
 
 @app.get("/api/intelthat/{symbol}")
