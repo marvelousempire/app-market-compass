@@ -10,6 +10,7 @@ from __future__ import annotations
 from pydantic import BaseModel, Field
 
 from .simulation import SimulationRequest, simulate
+from .participants import participant_directory
 
 CCK_OWNER = "marvelousempire/cck-that"
 SCHEMA_OWNER = "marvelousempire/schema-that-studio"
@@ -93,7 +94,7 @@ PROFILES = (
     },
     {
         "id": "participant-v1", "title": "Market Compass named participant",
-        "subject_kind": "person", "domain": "participant",
+        "subject_kind": "participant", "domain": "participant",
         "source_owner": "participant-or-delegated-owner", "fields": (
             "participant_id", "role_ref", "source_scope",
         ),
@@ -124,6 +125,12 @@ def profile_directory() -> dict:
                       "cck_witness_verified": False},
         "cck_minimum_fields": CCK_MINIMUM,
         "schedules_running": False,
+        "participant_instances": [
+            {"id": "seat-" + p["id"], "name": p["name"],
+             "profile_id": "participant-v1", "participant_id": p["id"],
+             "card": p["card"], "state": "draft-not-certified"}
+            for p in participant_directory()["participants"]
+        ],
         "profiles": [
             {**p, "fields": list(p["fields"]), "example_metrics": list(p["example_metrics"]),
              "schedule": dict(p["schedule"])}
