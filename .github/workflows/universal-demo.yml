@@ -1,0 +1,42 @@
+name: universal-measurement-preservation
+on:
+  push:
+    branches:
+      - feat/intelthat-proof-health-bridge
+  pull_request:
+    paths:
+      - "scripts/**"
+      - "src/market_compass/**"
+      - "tests/**"
+      - "contracts/**"
+      - ".github/workflows/universal-demo.yml"
+
+jobs:
+  rehearsal:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test runtime
+        run: python -m pip install -e '.[dev]'
+      - name: Preserve existing application behavior
+        run: |
+          bash -n scripts/commission-demo.sh
+          node --check src/market_compass/web/app.js
+          node --check src/market_compass/web/simulator.js
+          node --check src/market_compass/web/hcck.js
+          node --check src/market_compass/web/intelthat.js
+      - name: Verify backend and browser contracts
+        run: python -m pytest -q
+      - name: Exercise synthetic profile models and write receipt
+        run: python scripts/demo_preflight.py
+      - name: Upload synthetic receipt for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-compass-synthetic-demo-preflight
+          path: runs/demo-preflight.json
+          if-no-files-found: error
