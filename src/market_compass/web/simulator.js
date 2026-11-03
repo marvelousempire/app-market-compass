@@ -93,18 +93,44 @@ document.addEventListener('DOMContentLoaded', () => {
     lastExport = null;
     output.replaceChildren(el('p', 'Calculating supplied measurements without storing them…'));
     try {
-      const response = await fetch('/api/simulate', {
+      const profiled = typeof request?.profile_id === 'string' &&
+        request?.simulation && typeof request.simulation === 'object';
+      const endpoint = profiled ? '/api/hcck/simulate' : '/api/simulate';
+      const response = await fetch(endpoint, {
         method: 'POST', headers: {'Content-Type': 'application/json', Accept: 'application/json'},
         credentials: 'same-origin', body: JSON.stringify(request)
       });
-      const result = await response.json();
+      const payload = await response.json();
       if (!response.ok) {
-        const detail = typeof result.detail === 'string' ? result.detail
-          : (result.detail || []).map(x => (x.loc || []).join('.') + ': ' + x.msg).slice(0, 5).join('; ');
+        const detail = typeof payload.detail === 'string' ? payload.detail
+          : (payload.detail || []).map(x => (x.loc || []).join('.') + ': ' + x.msg).slice(0, 5).join('; ');
         throw new Error(detail || 'Request rejected.');
       }
+      if (profiled && payload.state === 'held') {
+        const reasons = (payload.reasons || ['profile-validation-held']).join(', ');
+        const missing = (payload.missing_fields || []).join(', ');
+        const unknown = (payload.unrecognized_fields || []).join(', ');
+        output.replaceChildren(
+          el('h3', 'Profile held: ' + request.profile_id),
+          el('p', 'Reasons: ' + reasons),
+          el('p', missing ? 'Missing source fields: ' + missing : 'No missing source fields.'),
+          el('p', unknown ? 'Unrecognized source fields: ' + unknown : 'No unrecognized fields.'),
+          el('small', 'No simulation was calculated or saved.')
+        );
+        return;
+      }
+      if (profiled && (payload.state !== 'draft-shape-matched' || !payload.simulation)) {
+        throw new Error('Profile response could not be safely interpreted.');
+      }
+      const result = profiled ? payload.simulation : payload;
       const panel = el('div', '', 'universal-result');
       panel.appendChild(el('h3', result.subject.name + ' · ' + result.method.id));
+      if (profiled) {
+        panel.appendChild(el('p', 'Hybrid CCK template: ' + payload.profile_id +
+          ' · draft shape matched · not certified'));
+        panel.appendChild(el('p', 'Observation cadence: ' + payload.schedule.cadence +
+          ' · Evidence from source is not independently verified.'));
+      }
       panel.appendChild(el('p', result.observed_points + ' calculated · ' + result.held_points + ' held · 0–100 method-relative points'));
       panel.appendChild(drawChart(result.records));
       panel.appendChild(el('p', 'Volatility: ' +
@@ -121,7 +147,14 @@ document.addEventListener('DOMContentLoaded', () => {
         schema: 'market-compass.portable-study/v1',
         exported_at: new Date().toISOString(),
         user_supplied_input: request,
-        hypothetical_result: result
+        hypothetical_result: result,
+        profile_check: profiled ? {
+          profile_id: payload.profile_id,
+          state: payload.state,
+          schedule: payload.schedule,
+          cck_witness_verified: payload.cck_witness_verified,
+          source_verified: payload.source_verified
+        } : null
       };
       exporter.disabled = false;
       output.replaceChildren(panel);
