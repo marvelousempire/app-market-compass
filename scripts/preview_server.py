@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 import socket
 import threading
 import time
@@ -11,6 +12,7 @@ from urllib.request import urlopen
 from urllib.error import URLError
 
 import uvicorn
+from market_compass.runtime_inspection import inspect_runtime, save_receipt
 
 HOST = "127.0.0.1"
 START_PORT = 18340
@@ -41,6 +43,18 @@ def open_when_ready(port: int) -> None:
             with urlopen(base + "/api/hcck/profiles", timeout=0.5) as response:
                 payload = json.load(response)
             if payload.get("schema") == "market-compass.hybrid-cck-profile-schedule/v1":
+                # Inspect actual localhost HTTP responses, not just source files.
+                # The receipt does NOT imply visual/browser signoff or Gitea approval.
+                try:
+                    receipt = inspect_runtime(base)
+                    path = Path(__file__).resolve().parents[1] / "runs" / "runtime-inspection.json"
+                    save_receipt(receipt, path)
+                    print(f"Runtime inspection: {receipt['status']}; receipt: {path}", flush=True)
+                    if not receipt["http_contract_verified"]:
+                        print(f"Runtime gate held: {receipt['failed_checks']} {receipt['errors']}", flush=True)
+                    print("FiveMac browser inspection and upstream certification still pending.", flush=True)
+                except Exception as exc:
+                    print(f"Runtime inspection FAILED, browser remains available: {exc}", flush=True)
                 webbrowser.open(base + "/#hcck-profiles")
                 return
         except (OSError, URLError, ValueError, TimeoutError):
