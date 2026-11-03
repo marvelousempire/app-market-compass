@@ -4,9 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const detail = document.getElementById('hcck-profile-detail');
   const load = document.getElementById('hcck-load-example');
   const target = document.getElementById('universal-input');
+  const seatWrapper = document.getElementById('hcck-seat-wrapper');
+  const seatSelector = document.getElementById('hcck-seat-select');
   if (!selector || !detail || !load || !target) return;
 
   let profiles = [];
+  let seats = [];
   function node(tag, value, className) {
     const item = document.createElement(tag);
     item.textContent = String(value ?? '');
@@ -21,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     detail.replaceChildren();
     load.disabled = !profile;
     if (!profile) return;
+    if (seatWrapper) seatWrapper.hidden = profile.id !== 'participant-v1';
     detail.appendChild(node('h3', profile.title));
     detail.appendChild(node('p', 'Domain: ' + profile.domain +
       ' · Subject: ' + (profile.subject_kind || 'any') +
@@ -31,6 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ' · evidence reference: ' + (profile.schedule.evidence_required ? 'required' : 'optional')));
     detail.appendChild(node('p', 'Example metric ideas: ' + profile.example_metrics.join(', ')));
     detail.appendChild(node('p', profile.notes, 'trust-note'));
+    if (profile.id === 'participant-v1') {
+      const seat = seats.find(item => item.id === seatSelector?.value);
+      if (seat) detail.appendChild(node('p',
+        'Named section: ' + seat.name + ' · ' +
+        (seat.card?.title || 'no King card assigned') +
+        ' · no participant evidence imported'));
+    }
     detail.appendChild(node('small',
       'Draft profile template. CCK certification, owner authority, and automatic scheduling are not active.'));
   }
@@ -54,9 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profile.id === 'batch-v1') Object.assign(source_fields, {
       batch_ref: 'fixture-eggs', category: 'eggs', quantity_unit: 'cartons'
     });
-    if (profile.id === 'participant-v1') Object.assign(source_fields, {
-      participant_id: 'fixture-participant', role_ref: 'observer', source_scope: 'synthetic-only'
-    });
+    if (profile.id === 'participant-v1') {
+      const seat = seats.find(item => item.id === seatSelector?.value);
+      Object.assign(source_fields, {
+        participant_id: seat?.participant_id || 'fixture-participant',
+        role_ref: 'observer', source_scope: 'synthetic-only'
+      });
+    }
     return {
       profile_id: profile.id,
       cck_profile_ref: 'draft:synthetic-only',
@@ -89,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   selector.addEventListener('change', render);
+  seatSelector?.addEventListener('change', render);
   load.addEventListener('click', () => {
     const profile = current();
     if (!profile) return;
@@ -111,6 +127,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (directory.schema !== 'market-compass.hybrid-cck-profile-schedule/v1' ||
           !Array.isArray(directory.profiles)) throw new Error('unexpected profile directory');
       profiles = directory.profiles;
+      seats = Array.isArray(directory.participant_instances) ? directory.participant_instances : [];
+      if (seatSelector) {
+        seatSelector.replaceChildren();
+        for (const seat of seats) {
+          const choice = document.createElement('option');
+          choice.value = seat.id;
+          choice.textContent = seat.name + ' · ' + (seat.card?.title || 'Unassigned');
+          seatSelector.appendChild(choice);
+        }
+        seatSelector.disabled = seats.length === 0;
+      }
       selector.replaceChildren();
       for (const profile of profiles) {
         const option = document.createElement('option');
