@@ -69,6 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
           card.appendChild(el('small', 'Existing source: intelTHAT · no repository rename'));
           const link = el('a', "Read Omo's Intel receipts", 'participant-link');
           link.href = '#intelthat-panel';
+          link.addEventListener('click', event => {
+            event.preventDefault();
+            document.querySelector('.view-btn[data-view="research"]')?.click();
+            const panel = document.getElementById('intelthat-panel');
+            if (panel) {
+              panel.scrollIntoView({behavior: 'smooth', block: 'start'});
+              panel.focus({preventScroll: true});
+            }
+          });
           card.appendChild(link);
         } else {
           card.appendChild(el('small', 'No rules, calculations, or evidence published yet.'));
