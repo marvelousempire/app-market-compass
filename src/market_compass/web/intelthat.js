@@ -55,6 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
       for (const participant of directory.participants || []) {
         const card = el('article', '', 'participant-card');
         card.appendChild(el('h3', participant.name));
+        if (participant.card?.title) {
+          const suit = el('p', participant.card.symbol + ' ' + participant.card.title, 'participant-king-card');
+          card.appendChild(suit);
+        } else {
+          card.appendChild(el('p', 'No card assigned', 'participant-state'));
+        }
         const state = participant.status === 'adapter-implemented-not-commissioned'
           ? 'Read-only adapter · Not commissioned' : 'Awaiting owner content';
         card.appendChild(el('p', state, 'participant-state'));
@@ -67,6 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           card.appendChild(el('small', 'No rules, calculations, or evidence published yet.'));
         }
+        grid.appendChild(card);
+      }
+      for (const reserved of directory.reserved_cards || []) {
+        if (reserved.status !== 'reserved-unassigned') continue;
+        const card = el('article', '', 'participant-card participant-reserved');
+        card.appendChild(el('h3', reserved.symbol + ' ' + reserved.title));
+        card.appendChild(el('p', 'Reserved · Unassigned', 'participant-state'));
+        card.appendChild(el('small', 'Held open for a future participant. No content, privileges, or owner assigned.'));
         grid.appendChild(card);
       }
       output.replaceChildren(grid);
