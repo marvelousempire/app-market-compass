@@ -13,7 +13,7 @@ def test_participants_have_exact_founder_names_and_bounded_status():
     assert body["score_influence"] is False
     participants = body["participants"]
     assert [entry["name"] for entry in participants] == [
-        "Omo's Intel", "Prince's Principles", "Prince's Intel", "Marvin's Metrics"
+        "Omo's Intel", "Prince's Principles", "Prince's Intel", "Marvin's Metrics", "Wuda's Watch"
     ]
     assert participants[0]["source_app"] == "intelTHAT"
     assert "intelTHAT" in participants[0]["aliases"]
@@ -21,6 +21,17 @@ def test_participants_have_exact_founder_names_and_bounded_status():
     assert participants[0]["evidence_endpoint"] == "/api/intelthat/{symbol}"
     assert all(entry["status"] == "awaiting-owner-content" for entry in participants[1:])
     assert all(entry["evidence_endpoint"] is None for entry in participants[1:])
+    cards = {entry["name"]: entry["card"] for entry in participants}
+    assert cards["Marvin's Metrics"]["title"] == "King of Spades"
+    assert cards["Prince's Principles"]["title"] == "King of Diamonds"
+    assert cards["Omo's Intel"]["title"] == "King of Clubs"
+    assert cards["Wuda's Watch"]["title"] == "King of Hearts"
+    assert cards["Prince's Intel"] is None
+    assert participants[-1]["aliases"] == ["Wooda's Watch"]
+    assert body["reserved_cards"] == []
+    assert sorted(card["suit"] for card in cards.values() if card) == [
+        "clubs", "diamonds", "hearts", "spades"
+    ]
 
 
 def test_participants_are_visible_without_market_analysis():
