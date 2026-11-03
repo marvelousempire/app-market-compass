@@ -92,6 +92,18 @@ PROFILES = (
         "notes": "Supply and condition studies use a user-declared method, not a commodity market.",
     },
     {
+        "id": "participant-v1", "title": "Market Compass named participant",
+        "subject_kind": "person", "domain": "participant",
+        "source_owner": "participant-or-delegated-owner", "fields": (
+            "participant_id", "role_ref", "source_scope",
+        ),
+        "schedule": {"clock": "event", "cadence": "authorized-method-or-evidence-update",
+                     "timestamp": "observation.at", "timezone": "UTC",
+                     "evidence_required": True, "automatic_job": False},
+        "example_metrics": ("owner_authored_metric",),
+        "notes": "Spades, Diamonds, Clubs and Hearts are display role mappings. Prince's Intel has no card assignment. No person ownership or access grant.",
+    },
+    {
         "id": "general-v1", "title": "Any authorized measurable subject",
         "subject_kind": None, "domain": "general",
         "source_owner": "subject-data-owner", "fields": ("category", "source_ref"),
