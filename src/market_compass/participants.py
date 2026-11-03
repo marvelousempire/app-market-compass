@@ -10,11 +10,9 @@ KING_CARDS = {
     "marvins-metrics": {"rank": "king", "suit": "spades", "symbol": "♠", "title": "King of Spades"},
     "princes-principles": {"rank": "king", "suit": "diamonds", "symbol": "♦", "title": "King of Diamonds"},
     "omos-intel": {"rank": "king", "suit": "clubs", "symbol": "♣", "title": "King of Clubs"},
+    "wudas-watch": {"rank": "king", "suit": "hearts", "symbol": "♥", "title": "King of Hearts"},
 }
-RESERVED_CARDS = (
-    {"rank": "king", "suit": "hearts", "symbol": "♥", "title": "King of Hearts",
-     "status": "reserved-unassigned", "assigned_participant_id": None},
-)
+RESERVED_CARDS = ()
 
 PARTICIPANTS = (
     {
@@ -52,6 +50,15 @@ PARTICIPANTS = (
         "source_app": None,
         "status": "awaiting-owner-content",
         "description": "Marvin's metrics and measures. Definitions and calculations still to be supplied.",
+        "evidence_endpoint": None,
+    },
+    {
+        "id": "wudas-watch",
+        "name": "Wuda's Watch",
+        "aliases": ["Wooda's Watch"],
+        "source_app": None,
+        "status": "awaiting-owner-content",
+        "description": "Wuda's market watch section. Owner-authored watch items are pending.",
         "evidence_endpoint": None,
     },
 )
