@@ -5,6 +5,17 @@ commissioning receipt. Only Omo's Intel has an implemented read-only adapter.
 """
 from __future__ import annotations
 
+# Card symbolism is an identity/display mapping, not an authorization hierarchy.
+KING_CARDS = {
+    "marvins-metrics": {"rank": "king", "suit": "spades", "symbol": "♠", "title": "King of Spades"},
+    "princes-principles": {"rank": "king", "suit": "diamonds", "symbol": "♦", "title": "King of Diamonds"},
+    "omos-intel": {"rank": "king", "suit": "clubs", "symbol": "♣", "title": "King of Clubs"},
+}
+RESERVED_CARDS = (
+    {"rank": "king", "suit": "hearts", "symbol": "♥", "title": "King of Hearts",
+     "status": "reserved-unassigned", "assigned_participant_id": None},
+)
+
 PARTICIPANTS = (
     {
         "id": "omos-intel",
@@ -53,5 +64,9 @@ def participant_directory() -> dict:
         "commissioned": False,
         "trade_execution": False,
         "score_influence": False,
-        "participants": [dict(item) for item in PARTICIPANTS],
+        "participants": [
+            {**item, "card": dict(KING_CARDS[item["id"]]) if item["id"] in KING_CARDS else None}
+            for item in PARTICIPANTS
+        ],
+        "reserved_cards": [dict(card) for card in RESERVED_CARDS],
     }
