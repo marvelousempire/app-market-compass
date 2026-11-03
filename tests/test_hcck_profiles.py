@@ -42,7 +42,7 @@ def fixture(profile="device-v1", kind="device"):
     }
 
 
-def test_six_profile_schedules_and_cck_authority_boundary():
+def test_seven_profile_schedules_and_cck_authority_boundary():
     r = CLIENT.get("/api/hcck/profiles")
     assert r.status_code == 200
     d = r.json()
@@ -54,7 +54,7 @@ def test_six_profile_schedules_and_cck_authority_boundary():
     assert d["schedules_running"] is False
     ids = {p["id"] for p in d["profiles"]}
     assert ids == {"readyplay-player-v1", "equity-v1", "option-v1",
-                   "device-v1", "batch-v1", "general-v1"}
+                   "device-v1", "batch-v1", "general-v1", "participant-v1"}
     assert len(d["cck_minimum_fields"]["crown"]) == 8
     assert len(d["cck_minimum_fields"]["character"]) == 6
     assert len(d["cck_minimum_fields"]["key"]) == 4
