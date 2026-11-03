@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="/static/styles.css">
   <link rel="stylesheet" href="/static/overview.css">
   <link rel="stylesheet" href="/static/analyst.css">
+  <link rel="stylesheet" href="/static/intelthat.css">
+  <link rel="stylesheet" href="/static/simulator.css">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
@@ -45,6 +47,40 @@
     </section>
 
     <section id="error" class="panel error hidden"></section>
+
+    <section class="panel market-participants" id="market-participants" aria-label="Market Compass participants">
+      <div class="section-head"><div><p class="eyebrow">MARKET COMPASS CONTRIBUTORS</p><h2>Market Compass Participants</h2></div></div>
+      <p class="trust-note">Named research sections do not grant trading authority. Missing owner-authored content stays pending.</p>
+      <div id="market-participants-output" role="status" aria-live="polite"><p class="muted">Loading participant directory…</p></div>
+    </section>
+
+    <section class="panel hcck-profiles" id="hcck-profiles" aria-label="Hybrid CCK profile schedules">
+      <div class="section-head"><div><p class="eyebrow">HYBRID CCK PROFILE SCHEDULES</p><h2>Choose the Measurement Profile</h2></div></div>
+      <p class="trust-note">Domain schedules declare which fields, evidence and observation cadence apply. CCK That owns certification; these are draft Market Compass templates, not minted CCK identities or running jobs.</p>
+      <label for="hcck-profile-select">Profile template</label>
+      <select id="hcck-profile-select" aria-label="Select a Hybrid CCK profile schedule" disabled>
+        <option>Loading templates…</option>
+      </select>
+      <div id="hcck-seat-wrapper" hidden>
+        <label for="hcck-seat-select">Named participant section</label>
+        <select id="hcck-seat-select" aria-label="Choose a named participant seat"></select>
+      </div>
+      <div id="hcck-profile-detail" role="status" aria-live="polite"><p class="muted">Loading schema references and schedule fields…</p></div>
+      <button type="button" id="hcck-load-example" class="secondary" disabled>Load synthetic profile into Simulation Lab</button>
+    </section>
+
+    <section class="panel universal-simulator" id="universal-simulator" aria-label="Universal measurement simulation">
+      <div class="section-head"><div><p class="eyebrow">ANY MEASURABLE THING</p><h2>Market Compass Simulation Lab</h2></div></div>
+      <p class="trust-note">Define any authorized subject, a versioned evaluation method, and observations. See a hypothetical points index and its volatility. ELSE remains an independent methodology app. No money, sales, wagers, or live data are involved.</p>
+      <label class="universal-json-label" for="universal-input">Simulation input (JSON)</label>
+      <textarea id="universal-input" rows="8" spellcheck="false" aria-label="Editable subject, method and measurement observations JSON"></textarea>
+      <div class="universal-actions">
+        <button id="universal-example" type="button" class="secondary">Load example: old laptop</button>
+        <button id="universal-run" type="button" class="primary">Simulate</button>
+        <button id="universal-export" type="button" class="secondary" disabled>Export JSON</button>
+      </div>
+      <div id="universal-output" role="status" aria-live="polite"><p class="muted">Load the synthetic laptop example, or paste your own authorized measurements.</p></div>
+    </section>
 
     <section id="workspace" class="hidden">
       <div id="identity-strip" class="identity-strip panel"></div>
@@ -154,6 +190,17 @@
       </section>
 
       <section class="research-only">
+        <section class="panel" id="intelthat-panel" aria-label="Omo's Intel research receipts">
+          <div class="section-head">
+            <div><p class="eyebrow">OMO'S INTEL · intelTHAT</p><h2>Omo's Intel Research / Proof Health</h2></div>
+            <button type="button" class="secondary" id="intelthat-load">Read Local Receipts</button>
+          </div>
+          <p class="trust-note">Read-only research. These receipts do not change Market Compass scores or place orders. A current file is not independently verified market truth.</p>
+          <div id="intelthat-output" role="status" aria-live="polite">
+            <p class="muted">Select a symbol and open its source receipts. Nothing is fetched until you choose Read Local Receipts.</p>
+          </div>
+        </section>
+
         <section class="two-col">
           <article class="panel"><div class="section-head"><div><p class="eyebrow">PAST STATES</p><h2>Historical Analogs</h2></div></div><div id="history-panel"></div></article>
           <article class="panel"><div class="section-head"><div><p class="eyebrow">MODEL CHECK</p><h2>Forecast</h2></div></div><div id="forecast-panel"></div></article>
@@ -190,5 +237,8 @@
   <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
   <script src="/static/app.js" defer></script>
   <script src="/static/analyst.js" defer></script>
+  <script src="/static/intelthat.js" defer></script>
+  <script src="/static/simulator.js" defer></script>
+  <script src="/static/hcck.js" defer></script>
 </body>
 </html>

@@ -14,6 +14,11 @@ from .backtest import backtest_frame
 from .data import get_market_data, search_symbols
 from .engine import analyze
 from .pack002 import desk_from_bars
+from .intelthat_bridge import read_snapshot
+from .participants import participant_directory
+from .studio_rooms import studio_registry
+from .simulation import SimulationRequest, simulate
+from .hcck_profiles import ProfiledSimulationRequest, profile_directory, run_profiled_simulation
 from .registry import NODE_REGISTRY, node_output
 
 app = FastAPI(title="Market Compass", version="0.5.2")
@@ -108,3 +113,36 @@ def backtest_api(
         return {"symbol": symbol.upper(), "provider": data.meta.get("provider"), "resolved_symbol": data.meta.get("resolved_symbol", symbol.upper()), **result}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@app.get("/api/hcck/profiles")
+def hybrid_cck_profiles_api():
+    return profile_directory()
+
+
+@app.post("/api/hcck/simulate")
+def hybrid_cck_simulation_api(request: ProfiledSimulationRequest):
+    return run_profiled_simulation(request)
+
+
+@app.post("/api/simulate")
+def simulate_api(request: SimulationRequest):
+    return simulate(request)
+
+
+@app.get("/api/studio/rooms")
+def studio_rooms_api():
+    return studio_registry()
+
+
+@app.get("/api/participants")
+def participants_api():
+    return participant_directory()
+
+
+@app.get("/api/intelthat/{symbol}")
+def intelthat_api(symbol: str):
+    try:
+        return read_snapshot(symbol)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc

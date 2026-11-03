@@ -1,0 +1,15 @@
+.intelthat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:12px}
+.intelthat-card{border:1px solid #2b3950;border-radius:12px;padding:12px;background:#0d1724;min-width:0}
+.intelthat-card h3{font-size:13px;margin:0 0 8px}.intelthat-card p,.intelthat-card small{font-size:11px;line-height:1.5;display:block;overflow-wrap:anywhere}
+.intelthat-card small{color:#a1aec3}.intelthat-card dl{display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:11px}
+.intelthat-card dt{color:#9aa8bc;overflow-wrap:anywhere}.intelthat-card dd{margin:0;overflow-wrap:anywhere}
+
+/* Founder-named display sections. State never implies trading permission. */
+.participant-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0 0}
+.participant-card{border:1px solid #2b3950;border-radius:12px;padding:14px;background:#0d1724;min-width:0}
+.participant-card h3{font-size:16px;margin:0 0 10px}
+.participant-card p{font-size:12px;line-height:1.5;margin:8px 0;overflow-wrap:anywhere}
+.participant-card small{display:block;font-size:11px;color:#a1aec3;line-height:1.5;overflow-wrap:anywhere}
+.participant-card .participant-state{font-weight:650;color:#b3d4f2}
+.participant-link{display:inline-block;margin-top:10px;font-size:12px;text-decoration:underline;text-underline-offset:3px}
+.participant-link:focus-visible{outline:2px solid currentColor;outline-offset:4px}

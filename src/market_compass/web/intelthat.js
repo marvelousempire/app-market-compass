@@ -1,0 +1,120 @@
+/* intelTHAT independent research receipt panel. Never sends an order. */
+document.addEventListener('DOMContentLoaded', () => {
+  const button = document.getElementById('intelthat-load');
+  const root = document.getElementById('intelthat-output');
+  const symbolField = document.getElementById('symbol');
+  if (!button || !root || !symbolField) return;
+
+  const el = (tag, text, cls) => {
+    const node = document.createElement(tag);
+    node.textContent = String(text ?? '');
+    if (cls) node.className = cls;
+    return node;
+  };
+
+  function show(data) {
+    root.replaceChildren();
+    const stats = data.proof_health || {};
+    root.appendChild(el('p',
+      'Proof health: ' + ['observed', 'held', 'excluded', 'missing']
+        .map(key => key + ' ' + (stats[key] ?? 0)).join(' · ')));
+    if (!data.configured) {
+      root.appendChild(el('p',
+        'The intelTHAT runs directory has not been configured on this server. Set MARKET_COMPASS_INTELTHAT_DIR before launching the app.'));
+    }
+    const grid = el('div', '', 'intelthat-grid');
+    for (const kind of ['pack', 'macro', 'rss', 'edgar']) {
+      const item = data.sources?.[kind] || {};
+      const card = el('article', '', 'intelthat-card');
+      card.appendChild(el('h3', kind.toUpperCase() + ' · ' + (item.state || 'unknown')));
+      card.appendChild(el('p', item.reason || 'No receipt found.'));
+      if (item.as_of) card.appendChild(el('small', 'Source as of: ' + item.as_of));
+      if (item.sha256) card.appendChild(el('small', 'File SHA-256: ' + item.sha256.slice(0, 16) + '…'));
+      const info = el('dl');
+      for (const [label, value] of Object.entries(item.metrics || {})) {
+        info.appendChild(el('dt', label));
+        info.appendChild(el('dd', value));
+      }
+      card.appendChild(info);
+      grid.appendChild(card);
+    }
+    root.appendChild(grid);
+  }
+
+  // Participant directory is descriptive metadata, not live-source verification.
+  async function loadParticipantDirectory() {
+    const output = document.getElementById('market-participants-output');
+    if (!output) return;
+    try {
+      const response = await fetch('/api/participants', {
+        headers: { Accept: 'application/json' }, credentials: 'same-origin'
+      });
+      if (!response.ok) throw new Error('Participant directory unavailable.');
+      const directory = await response.json();
+      const grid = el('div', '', 'participant-grid');
+      for (const participant of directory.participants || []) {
+        const card = el('article', '', 'participant-card');
+        card.appendChild(el('h3', participant.name));
+        if (participant.card?.title) {
+          const suit = el('p', participant.card.symbol + ' ' + participant.card.title, 'participant-king-card');
+          card.appendChild(suit);
+        } else {
+          card.appendChild(el('p', 'No card assigned', 'participant-state'));
+        }
+        const state = participant.status === 'adapter-implemented-not-commissioned'
+          ? 'Read-only adapter · Not commissioned' : 'Awaiting owner content';
+        card.appendChild(el('p', state, 'participant-state'));
+        card.appendChild(el('p', participant.description || 'Definition pending.'));
+        if (participant.id === 'omos-intel') {
+          card.appendChild(el('small', 'Existing source: intelTHAT · no repository rename'));
+          const link = el('a', "Read Omo's Intel receipts", 'participant-link');
+          link.href = '#intelthat-panel';
+          link.addEventListener('click', event => {
+            event.preventDefault();
+            document.querySelector('.view-btn[data-view="research"]')?.click();
+            const panel = document.getElementById('intelthat-panel');
+            if (panel) {
+              panel.scrollIntoView({behavior: 'smooth', block: 'start'});
+              panel.focus({preventScroll: true});
+            }
+          });
+          card.appendChild(link);
+        } else {
+          card.appendChild(el('small', 'No rules, calculations, or evidence published yet.'));
+        }
+        grid.appendChild(card);
+      }
+      for (const reserved of directory.reserved_cards || []) {
+        if (reserved.status !== 'reserved-unassigned') continue;
+        const card = el('article', '', 'participant-card participant-reserved');
+        card.appendChild(el('h3', reserved.symbol + ' ' + reserved.title));
+        card.appendChild(el('p', 'Reserved · Unassigned', 'participant-state'));
+        card.appendChild(el('small', 'Held open for a future participant. No content, privileges, or owner assigned.'));
+        grid.appendChild(card);
+      }
+      output.replaceChildren(grid);
+    } catch (err) {
+      output.replaceChildren(el('p', 'Participant directory unavailable: ' + err.message));
+    }
+  }
+  void loadParticipantDirectory();
+
+  button.addEventListener('click', async () => {
+    const symbol = symbolField.value.trim();
+    if (!symbol) return;
+    button.disabled = true;
+    root.replaceChildren(el('p', 'Reading local intelTHAT research receipts…'));
+    try {
+      const response = await fetch('/api/intelthat/' + encodeURIComponent(symbol), {
+        headers: { Accept: 'application/json' }, credentials: 'same-origin'
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.detail || 'Receipt request refused.');
+      show(data);
+    } catch (err) {
+      root.replaceChildren(el('p', 'Source unavailable: ' + err.message));
+    } finally {
+      button.disabled = false;
+    }
+  });
+});
