@@ -17,6 +17,7 @@ from .pack002 import desk_from_bars
 from .intelthat_bridge import read_snapshot
 from .participants import participant_directory
 from .studio_rooms import studio_registry
+from .simulation import SimulationRequest, simulate
 from .registry import NODE_REGISTRY, node_output
 
 app = FastAPI(title="Market Compass", version="0.5.2")
@@ -111,6 +112,11 @@ def backtest_api(
         return {"symbol": symbol.upper(), "provider": data.meta.get("provider"), "resolved_symbol": data.meta.get("resolved_symbol", symbol.upper()), **result}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@app.post("/api/simulate")
+def simulate_api(request: SimulationRequest):
+    return simulate(request)
 
 
 @app.get("/api/studio/rooms")
