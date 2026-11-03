@@ -34,9 +34,26 @@ jobs:
         run: python -m pytest -q
       - name: Exercise synthetic profile models and write receipt
         run: python scripts/demo_preflight.py
-      - name: Upload synthetic receipt for review
+      - name: Verify actual localhost HTTP runtime and write a separate receipt
+        run: |
+          python -m uvicorn market_compass.api:app --host 127.0.0.1 --port 18340 > /tmp/market-compass-preview.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for attempt in $(seq 1 40); do
+            if python -c 'from urllib.request import urlopen; urlopen("http://127.0.0.1:18340/health", timeout=1).close()' 2>/dev/null; then
+              ready=1
+              break
+            fi
+            sleep 0.25
+          done
+          if [ "$ready" -ne 1 ]; then cat /tmp/market-compass-preview.log; exit 1; fi
+          python -m market_compass.runtime_inspection --url http://127.0.0.1:18340 --receipt runs/runtime-inspection.json
+      - name: Upload synthetic and HTTP receipts for review
         uses: actions/upload-artifact@v4
         with:
-          name: market-compass-synthetic-demo-preflight
-          path: runs/demo-preflight.json
+          name: market-compass-demo-and-runtime-receipts
+          path: |
+            runs/demo-preflight.json
+            runs/runtime-inspection.json
           if-no-files-found: error
