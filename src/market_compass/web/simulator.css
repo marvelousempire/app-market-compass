@@ -1,0 +1,11 @@
+.universal-simulator{margin-top:16px}
+.universal-json-label{display:block;font-size:13px;font-weight:650;margin:12px 0 8px}
+#universal-input{width:100%;min-height:190px;box-sizing:border-box;resize:vertical;padding:12px;border:1px solid #35445a;border-radius:10px;background:#0d1724;color:#e4ebf5;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.5}
+.universal-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+#universal-output{margin-top:12px;overflow-wrap:anywhere}
+.universal-result{border-top:1px solid #35445a;padding-top:14px}
+.universal-result h3{margin-top:0;font-size:16px}
+.universal-chart{display:block;width:100%;height:auto;max-height:260px;border:1px solid #35445a;border-radius:8px;background:#0d1724}
+.universal-records{max-height:175px;overflow:auto}
+.universal-records p{font-size:12px;margin:4px 0}
+.universal-result small{display:block;margin-top:8px;color:#a1aec3;font-size:11px}
