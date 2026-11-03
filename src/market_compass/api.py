@@ -46,12 +46,14 @@ def health():
 
 
 def operator_status():
+    commissioned = os.getenv("MARKET_COMPASS_COMMISSIONED", "false").lower() == "true"
     return {
         "state": "live", "host": socket.gethostname(), "pid": os.getpid(),
         "started_at": PREVIEW_STARTED_AT, "bind": "127.0.0.1:8000",
-        "mode": "research_only", "preview_only": True, "commissioned": False,
+        "mode": "research_only", "preview_only": not commissioned, "commissioned": commissioned,
         "trade_execution": False, "score_influence": False,
-        "authority": "github-preview-unverified",
+        "authority": os.getenv("MARKET_COMPASS_AUTHORITY", "github-preview-unverified"),
+        "source_revision": os.getenv("MARKET_COMPASS_SOURCE_REVISION", "unverified"),
     }
 
 

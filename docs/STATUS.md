@@ -63,6 +63,7 @@ This document is the repository's expectation contract. If another document soun
 | --- | --- | --- |
 | Unit tests | Implemented | Covers core calculations/contracts, browser application/static surface, and the six GitThat preview controls with explicit no-trading and no-promotion boundaries. |
 | Actor spaces | Presentation-only | Omo, Prince, Wuda and Brown’s Barometers are Actors with individual comp cards, including an unconfigured trading-psychology field. Wuda groups trends and notable RSI thresholds; Brown’s groups metrics, instruments and view governance. No source data, score influence, broker action or approval authority is inferred. |
+| Runtime source authority | Environment-bound | Canonical installs bind authority, commissioned state and exact source revision at launch; preview remains the default and trading stays disabled in both states. |
 | GitHub Actions CI | Implemented | Runs tests on pushes and pull requests. |
 | Chronological validation | Implemented for Ridge forecast | No random train/test split for the current forecast. |
 | Research backtest | Research | Past-only signal observation with fee assumption; runnable from CLI and browser. |

@@ -59,7 +59,10 @@
   request('/api/operator/status').then(payload => {
     setState('Live · research only', 'live');
     result.dataset.ready = 'true';
-    result.querySelector('p').textContent = `Ready on ${payload.host}. Trading stays off; Gitea promotion is unavailable here.`;
+    const source = payload.commissioned
+      ? `Canonical Gitea source ${payload.source_revision}`
+      : 'Gitea promotion is unavailable here';
+    result.querySelector('p').textContent = `Ready on ${payload.host}. Trading stays off; ${source}.`;
   }).catch(error => {
     setState('Needs attention', 'error');
     show('Runtime check held', { reason: error.message });

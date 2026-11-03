@@ -41,6 +41,9 @@ def test_default_assets_and_flowthat_cassettes_are_visible():
 
 def test_operator_plan_status_launch_and_receipts_are_safe(monkeypatch):
     monkeypatch.delenv("MARKET_COMPASS_INTELTHAT_DIR", raising=False)
+    monkeypatch.delenv("MARKET_COMPASS_AUTHORITY", raising=False)
+    monkeypatch.delenv("MARKET_COMPASS_COMMISSIONED", raising=False)
+    monkeypatch.delenv("MARKET_COMPASS_SOURCE_REVISION", raising=False)
     client = TestClient(app)
 
     plan = client.get("/api/operator/plan")
@@ -63,6 +66,18 @@ def test_operator_plan_status_launch_and_receipts_are_safe(monkeypatch):
     assert receipts.status_code == 200
     assert receipts.json()["research"]["proof_health"]["missing"] == 4
     assert receipts.json()["research"]["trade_execution"] is False
+
+
+def test_operator_status_can_report_canonical_source_without_enabling_trading(monkeypatch):
+    monkeypatch.setenv("MARKET_COMPASS_AUTHORITY", "gitea:averygoodman/app-market-compass")
+    monkeypatch.setenv("MARKET_COMPASS_COMMISSIONED", "true")
+    monkeypatch.setenv("MARKET_COMPASS_SOURCE_REVISION", "394ecdd")
+    status = TestClient(app).get("/api/operator/status").json()
+    assert status["authority"] == "gitea:averygoodman/app-market-compass"
+    assert status["commissioned"] is True
+    assert status["preview_only"] is False
+    assert status["source_revision"] == "394ecdd"
+    assert status["trade_execution"] is False
 
 
 def test_stop_route_is_post_only_and_source_keeps_relaunch_truth():

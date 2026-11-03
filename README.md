@@ -373,6 +373,8 @@ The browser opens with six ready controls for the local research preview:
 
 These controls do not merge code, push branches, change Gitea authority, connect a broker, influence scores, or enable trading. The preview remains `research_only`, `trade_execution:false`, and localhost-only.
 
+An accepted installation can bind `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMISSIONED=true`, and `MARKET_COMPASS_SOURCE_REVISION` at launch. That changes only the runtime source receipt: research mode and `trade_execution:false` remain invariant.
+
 The browser starts on **BB** with **BB**, **AAPL**, **QQQ**, and the operator-requested literal **SPCX** in the default watch choices. An untouched legacy default list is migrated once; a personally edited watchlist is preserved.
 
 The local preview shows **Omo**, **Prince**, **Wuda**, and **Brown’s Barometers** as Actors in FlowThat-shaped spaces: one centered stage, a compact Actor rail, and one active space at a time. Every Actor has a comp card for identity, role, individual trading-psychology preferences/rules, and authority. Wuda presents trends, hottest pointers, and notable RSI threshold events. Brown’s Barometers groups measured market/process metrics, technical-analysis instruments, and view governance. These names and groupings are operator-owned presentation labels. Until owner data and receipts are bound, every Actor clearly reports that psychology is unconfigured and that it has no market-data, score, broker, or approval authority.
