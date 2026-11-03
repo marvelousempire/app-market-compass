@@ -19,7 +19,7 @@ from pydantic import BaseModel, Field, FiniteFloat, model_validator
 class Subject(BaseModel):
     id: str = Field(min_length=1, max_length=80)
     name: str = Field(min_length=1, max_length=120)
-    kind: Literal["person", "player_profile", "device", "product", "batch", "team", "organization", "equity", "option", "other"]
+    kind: Literal["person", "player_profile", "device", "product", "batch", "team", "organization", "equity", "option", "participant", "other"]
     source_owner: str = Field(min_length=1, max_length=120)
     authorized_use: bool = False
 
