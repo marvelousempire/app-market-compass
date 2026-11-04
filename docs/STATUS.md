@@ -64,7 +64,7 @@ This document is the repository's expectation contract. If another document soun
 | Unit tests | Implemented | Covers core calculations/contracts, browser application/static surface, and the six GitThat preview controls with explicit no-trading and no-promotion boundaries. |
 | Actor spaces | Presentation-only | Omo, Prince, Wuda and Brown’s Barometers are Actors with individual comp cards, including an unconfigured trading-psychology field. Wuda groups trends and notable RSI thresholds; Brown’s groups metrics, instruments and view governance. No source data, score influence, broker action or approval authority is inferred. |
 | Runtime source authority | Environment-bound | Canonical installs bind authority, commissioned state and exact source revision at launch; preview remains the default and trading stays disabled in both states. |
-| GitHub Actions CI | Implemented | Runs tests on pushes and pull requests. |
+| Canonical Gitea Actions CI | Implemented | Native authenticated checkout on the commissioned `nephew-spark` lane; tests run on pushes and pull requests. GitHub is a downstream mirror, not merge authority. |
 | Chronological validation | Implemented for Ridge forecast | No random train/test split for the current forecast. |
 | Research backtest | Research | Past-only signal observation with fee assumption; runnable from CLI and browser. |
 | Full execution simulator | Planned | Needs spread, slippage, liquidity, funding/borrow, partial fills, gaps, venue behavior. |
@@ -106,6 +106,10 @@ A user can:
 9. run the current research backtest from the browser or CLI;
 10. type friendly symbols without provider suffixes and receive provider-aware suggestions;
 11. ask the grounded offline analyst, or a configured Nephew/local/cloud model, for a schema-validated interpretation with a model receipt.
+12. start on BB and choose BB, AAPL, QQQ, or SPCX without replacing an operator-edited watchlist;
+13. open Omo, Prince, Wuda, or Brown's Barometers as an Actor space and inspect its comp card;
+14. inspect Wuda trend/notable categories and Brown metrics, technical-analysis instruments, and view-governance categories;
+15. read intelTHAT proof health and canonical runtime-source receipts without enabling score influence or trading.
 
 ### Does not work yet
 

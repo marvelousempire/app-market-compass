@@ -23,6 +23,22 @@ supersedes the earlier interpretation.
 
 ---
 
+## 2026-11-03 — Commission the research desk around named Actors
+
+**Founder direction:** Start on BB; provide Apple/AAPL, QQQ, and SPCX as starter choices; treat Omo, Prince, Wuda, and Brown as Actors with their own spaces and comp cards; put trading psychology in each Actor's space; consolidate market metrics and technical-analysis instruments under Brown's Barometers; put trends, hottest pointers, and notable RSI crossings under Wuda; remove Marvin; then merge and ship through the canonical forge.
+
+**Intention:** Make the desk feel like an inspectable team of research Actors without inventing personal traits, market evidence, signal authority, or trading permission. Preserve the distinction between visible presentation categories and bound analytical sources.
+
+**Features/IP nodes:** GitThat operator controls, intelTHAT Proof Health, Default Watch Choices, Actor Spaces, Actor Comp Card, Wuda Trends / Hottest Pointers / Notables, Brown's Barometers, Runtime Source Authority.
+
+**User-visible requirement:** Market Compass opens on BB with BB/AAPL/QQQ/SPCX choices. Omo, Prince, Wuda, and Brown are selectable Actor spaces. Every Actor shows identity, role, individual trading-psychology configuration state, and authority. Wuda shows trend and RSI-threshold examples; Brown shows Breadth, Momentum, Volatility, Volume, RSI, MACD, moving averages, ATR, Bollinger Bands, and view-governance categories. Marvin is absent.
+
+**Implementation:** Added the Actor rail and centered Stage, per-Actor comp cards, Wuda and Brown groupings, starter-list migration, read-only intelTHAT bridge, six safe runtime controls, canonical-source environment receipts, and a native `nephew-spark` Gitea Actions workflow.
+
+**Evidence:** Canonical Gitea PR #1 merged at `394ecdd0dd79e9c004448df5b567536ea898d281`; authority follow-up PR #2 merged at `29b2c263467bc7257e746872550f8b079486b2dd`; both exact-head checks passed; merged FiveMac suite passed 40 tests; live health returned HTTP 200 with 115 nodes; runtime reported canonical Gitea authority while trading and score influence remained disabled. Commissioning journal: `marvelousempire/nephew#540`.
+
+**Still open:** Bind approved source data and owner receipts to Actor categories; define each Actor's psychology preferences and process rules; replace example threshold labels with versioned event calculations; retain broker connection and order execution as separately approved future work.
+
 ## 2026-08-30 — Dead desk after restyle (launcher opened the wrong door)
 
 **Founder direction:** “not working - 2hrs and nothing”

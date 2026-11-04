@@ -6,6 +6,12 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 ## Unreleased
 
 - Pack #2 — Relative Strength Desk + Market Tape. Seven stdlib micro-slices under `slices/pack-002/`. Scoring weights and the 8001 evidence sequence stay untouched. Offline fixture only. Live Yahoo feed is a later engine load.
+- Canonical Gitea release — merged PRs #1 and #2 at `394ecdd` and `29b2c26`; repaired the repository's Gitea Actions lane and commissioned the FiveMac research runtime from exact canonical source.
+- Added read-only intelTHAT proof health with explicit missing/held/excluded evidence and no score or trading influence.
+- Added safe GitThat runtime controls for plan, status, launch, open, receipts, and stop.
+- Changed the untouched starter watch choices to BB, AAPL, QQQ, and SPCX while preserving operator-edited lists.
+- Added FlowThat-shaped Actor spaces and comp cards for Omo, Prince, Wuda, and Brown's Barometers. Wuda owns trends and notable RSI thresholds; Brown owns metrics, technical-analysis instruments, and view governance. Removed Marvin's Metrics and consolidated its metrics under Brown.
+- Bound commissioned runtime authority and exact source revision through environment receipts while keeping `research_only`, `trade_execution=false`, and `score_influence=false` invariant.
 
 ## [0.5.1] — Sunday, August 30, 2026 at 5:34:50 PM Eastern · *Reuse the live desk instead of starting a second one*
 **Signed:** Grok > grok-4.6
