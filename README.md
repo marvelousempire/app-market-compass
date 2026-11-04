@@ -12,7 +12,7 @@ It is intentionally **not** a black-box trading bot. It does not turn a 56/44 ev
 
 ## Product status at a glance
 
-**Current release:** trading workbench plus the stubTHAT Market Module Foundry, `v0.6`
+**Current release:** trading workbench plus the ACT v1 Market Exchange, `v0.6`
 **Primary use case:** swing-trade research over days to several weeks  
 **Current interfaces:** browser app, CLI, FastAPI, CSV input  
 **Current default market-data source:** Yahoo public search/chart endpoints  
