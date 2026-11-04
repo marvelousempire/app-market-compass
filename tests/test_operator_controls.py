@@ -39,6 +39,37 @@ def test_default_assets_and_flowthat_cassettes_are_visible():
     assert "Trading psychology', items" not in cassette_script
 
 
+def test_stubthat_foundry_inventories_exchange_admin_and_bankthat_without_authority():
+    client = TestClient(app)
+    page = client.get("/")
+    assert 'id="stubthat-title"' in page.text
+    assert 'data-stub-family="exchange"' in page.text
+    assert 'data-stub-family="bankthat"' in page.text
+    assert "ADMINISTRATIVE CONTROL TOWER · ACT V1" in page.text
+    for room in ("dashboard", "catalog", "products", "installed", "apis", "observatory"):
+        assert f'data-act-room="{room}"' in page.text
+    for asset in ("/static/stubthat.js", "/static/stubthat.css"):
+        assert asset in page.text
+        assert client.get(asset).status_code == 200
+
+    script = client.get("/static/stubthat.js").text
+    assert "Ready Player" not in page.text
+    assert "Ready Player" not in script
+    for surface in ("Exchange Dashboard", "Catalog", "All Products", "Product Editor", "Installed Tools", "API Observatory"):
+        assert f"'{surface}'" in script
+    for module in ("Bishop Cluster", "GitHub Control", "Server Operator", "Dockyard", "n8n", "Portainer", "Home Assistant"):
+        assert f"'{module}'" in script
+    for working_control in ("exchange-search", "data-exchange-filter", "data-product-panel", "General", "API & auth", "Install"):
+        assert working_control in script
+    assert "openActRoom" in script
+    assert "58 candidate roles" in page.text
+    assert script.count("'Bank & Accounts Console'") >= 1
+    for module in ("bank-import", "ledger-journal", "balance-reconcile", "trading-portfolio", "storage-setup"):
+        assert module in script
+    for boundary in ("0 owner engines connected", "no trading", "no money movement", "auto-generate POST is excluded"):
+        assert boundary in script
+
+
 def test_operator_plan_status_launch_and_receipts_are_safe(monkeypatch):
     monkeypatch.delenv("MARKET_COMPASS_INTELTHAT_DIR", raising=False)
     monkeypatch.delenv("MARKET_COMPASS_AUTHORITY", raising=False)
@@ -78,6 +109,12 @@ def test_operator_status_can_report_canonical_source_without_enabling_trading(mo
     assert status["preview_only"] is False
     assert status["source_revision"] == "394ecdd"
     assert status["trade_execution"] is False
+
+
+def test_operator_status_reports_the_actual_configured_bind(monkeypatch):
+    monkeypatch.setenv("MARKET_COMPASS_BIND", "127.0.0.1:8001")
+    status = TestClient(app).get("/api/operator/status").json()
+    assert status["bind"] == "127.0.0.1:8001"
 
 
 def test_stop_route_is_post_only_and_source_keeps_relaunch_truth():

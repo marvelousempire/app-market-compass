@@ -5,6 +5,11 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Presented the Market Exchange through the ACT v1 Administrative Control Tower room pattern while preserving its working read-only search, filters, product inspector, 14 exchange modules and 58 Bank Reader candidate roles across seven bankTHAT consoles.
+- Kept every imported module read-only and owner-bound. No exchange or Bank Reader engine, credential, account payload, persistence, score influence, trading or money-movement authority is copied into Market Compass. The legacy Ledger empty-state auto-generate POST is explicitly held outside the projection.
+- Advanced the application contract to 0.6.0.
+- Runtime receipts now read the configured bind address instead of falsely reporting port 8000 for separately bound review previews.
+- The Exchange projection now carries working read-only admin tools: dashboard totals, catalog search and filters, product state/metadata/auth cards, and General/UI/API/SSO/Install contract panels. Mutating enable, save, install and SSO/API actions remain owner-gated stubs.
 - Pack #2 — Relative Strength Desk + Market Tape. Seven stdlib micro-slices under `slices/pack-002/`. Scoring weights and the 8001 evidence sequence stay untouched. Offline fixture only. Live Yahoo feed is a later engine load.
 - Canonical Gitea release — merged PRs #1 and #2 at `394ecdd` and `29b2c26`; repaired the repository's Gitea Actions lane and commissioned the FiveMac research runtime from exact canonical source.
 - Added read-only intelTHAT proof health with explicit missing/held/excluded evidence and no score or trading influence.

@@ -22,7 +22,7 @@ from .pack002 import desk_from_bars
 from .intelthat_bridge import read_snapshot
 from .registry import NODE_REGISTRY, node_output
 
-app = FastAPI(title="Market Compass", version="0.5.2")
+app = FastAPI(title="Market Compass", version="0.6.0")
 analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
 PREVIEW_STARTED_AT = datetime.now(UTC).isoformat()
@@ -49,7 +49,8 @@ def operator_status():
     commissioned = os.getenv("MARKET_COMPASS_COMMISSIONED", "false").lower() == "true"
     return {
         "state": "live", "host": socket.gethostname(), "pid": os.getpid(),
-        "started_at": PREVIEW_STARTED_AT, "bind": "127.0.0.1:8000",
+        "started_at": PREVIEW_STARTED_AT,
+        "bind": os.getenv("MARKET_COMPASS_BIND", "127.0.0.1:8000"),
         "mode": "research_only", "preview_only": not commissioned, "commissioned": commissioned,
         "trade_execution": False, "score_influence": False,
         "authority": os.getenv("MARKET_COMPASS_AUTHORITY", "github-preview-unverified"),

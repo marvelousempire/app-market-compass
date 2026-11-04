@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/static/intelthat.css">
   <link rel="stylesheet" href="/static/operator-controls.css">
   <link rel="stylesheet" href="/static/research-cassettes.css">
+  <link rel="stylesheet" href="/static/stubthat.css">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
@@ -75,6 +76,37 @@
         <button type="button" role="tab" class="cassette-tab" data-cassette="wuda" aria-selected="false"><span aria-hidden="true">W</span><strong>Wuda</strong></button>
         <button type="button" role="tab" class="cassette-tab" data-cassette="browns-barometers" aria-selected="false"><span aria-hidden="true">B</span><strong>Brown’s Barometers</strong></button>
       </div>
+    </section>
+
+    <section class="stubthat-stage act-v1-admin panel" aria-labelledby="stubthat-title">
+      <div class="stubthat-heading">
+        <div>
+          <p class="eyebrow">ADMINISTRATIVE CONTROL TOWER · ACT V1</p>
+          <h2 id="stubthat-title">Market Exchange</h2>
+          <p>Dashboard rooms for Exchange tools and bankTHAT contracts, with owner boundaries visible before any engine is connected.</p>
+        </div>
+        <span class="trust-chip">Read-only contracts · no money movement</span>
+      </div>
+      <nav class="act-v1-room-nav" aria-label="Market Exchange admin rooms">
+        <button type="button" class="active" data-act-room="dashboard">Dashboard</button><button type="button" data-act-room="catalog">Catalog</button><button type="button" data-act-room="products">All products</button><button type="button" data-act-room="installed">Installed</button><button type="button" data-act-room="apis">APIs &amp; MCPs</button><button type="button" data-act-room="observatory">API Observatory</button>
+        <code>read-only projection</code>
+      </nav>
+      <div class="stubthat-pipeline" aria-label="stubTHAT intake pipeline">
+        <span><b>1</b> parseTHAT</span><i aria-hidden="true">→</i>
+        <span><b>2</b> decantTHAT</span><i aria-hidden="true">→</i>
+        <span><b>3</b> htmlTHAT</span><i aria-hidden="true">+</i>
+        <span><b>4</b> cssTHAT</span><i aria-hidden="true">+</i>
+        <span><b>5</b> jsTHAT</span><i aria-hidden="true">→</i>
+        <span><b>6</b> stubTHAT</span>
+      </div>
+      <div class="stubthat-tabs" role="tablist" aria-label="Stub source families">
+        <button type="button" role="tab" class="stubthat-tab active" data-stub-family="exchange" aria-selected="true">Market Exchange <small>6 admin surfaces · 14 tool modules</small></button>
+        <button type="button" role="tab" class="stubthat-tab" data-stub-family="bankthat" aria-selected="false">bankTHAT <small>58 candidate roles · 7 consoles</small></button>
+      </div>
+      <div class="stubthat-summary" id="stubthat-summary" role="status"></div>
+      <section class="exchange-console" id="exchange-console" aria-label="Market Exchange tools"></section>
+      <div class="stubthat-grid" id="stubthat-grid"></div>
+      <section class="stubthat-inspector" id="stubthat-inspector" aria-live="polite" aria-label="Selected stub contract"></section>
     </section>
 
     <section class="watch-row panel compact-panel">
@@ -241,5 +273,6 @@
   <script src="/static/intelthat.js" defer></script>
   <script src="/static/operator-controls.js" defer></script>
   <script src="/static/research-cassettes.js" defer></script>
+  <script src="/static/stubthat.js" defer></script>
 </body>
 </html>

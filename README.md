@@ -12,7 +12,7 @@ It is intentionally **not** a black-box trading bot. It does not turn a 56/44 ev
 
 ## Product status at a glance
 
-**Current release:** trading workbench with 8001 information sequence folded into the v0.4 desk, `v0.5`
+**Current release:** trading workbench plus the stubTHAT Market Module Foundry, `v0.6`
 **Primary use case:** swing-trade research over days to several weeks  
 **Current interfaces:** browser app, CLI, FastAPI, CSV input  
 **Current default market-data source:** Yahoo public search/chart endpoints  
@@ -93,7 +93,15 @@ That distinction is a core product rule, not legal decoration.
 
 # What works today
 
-The current `v0.5` implementation includes the following real, runnable capabilities.
+The current `v0.6` implementation includes the following real, runnable capabilities.
+
+## ACT v1 Market Exchange
+
+**Status: Implemented presentation and contract inventory; owner adapters not connected**
+
+The browser presents the governed `parseTHAT → decantTHAT → htmlTHAT + cssTHAT + jsTHAT → stubTHAT` intake through the ACT v1 Administrative Control Tower room pattern. It exposes Dashboard, Catalog, All Products, Installed, APIs & MCPs and API Observatory; 14 exchange tool modules; and 58 Bank Reader candidate roles grouped into seven bankTHAT consoles. Selecting a stub shows its source owner, console, classification, presentation layers and authority boundary.
+
+The Exchange projection includes working local dashboard totals, product search and filters, product metadata/auth/install state, and General/UI/API/SSO/Install contract panels. These remain read-only adapters, not copied owner engines: enable, save, install and authenticated API/SSO effects are unavailable. The modules do not contain bank credentials or account payloads, persist financial records, influence Market Compass scores, place trades or move money. The Bank Reader Ledger empty-state auto-generation path is explicitly excluded until an approved, repeat-safe adapter has its own receipt.
 
 ## 0. Asset reality / quality gate
 

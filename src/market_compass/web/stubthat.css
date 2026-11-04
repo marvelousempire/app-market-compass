@@ -1,0 +1,71 @@
+.stubthat-stage { margin-block-start: 14px; }
+.act-v1-admin { --act1-accent: #7dd3fc; --act1-group: #111923; --act1-separator: #2a394b; border-radius: 10px; background: #0b1119; box-shadow: none; }
+.act-v1-admin .stubthat-heading { padding-block-end: 14px; border-block-end: 1px solid var(--act1-separator); }
+.act-v1-admin .stubthat-heading h2 { font-size: 24px; letter-spacing: -.025em; }
+.act-v1-admin .stubthat-heading .eyebrow { color: var(--act1-accent); }
+.act-v1-room-nav { display: flex; align-items: center; gap: 4px; margin-block: 14px 8px; padding-block-end: 9px; overflow-x: auto; border-block-end: 1px solid var(--act1-separator); }
+.act-v1-room-nav button { flex: 0 0 auto; padding: 7px 10px; border: 0; border-radius: 6px; background: transparent; color: #9aabba; font-size: 11px; font-weight: 700; }
+.act-v1-room-nav button:hover { background: #162331; color: #e7f4ff; }
+.act-v1-room-nav button.active { background: rgb(125 211 252 / .14); color: var(--act1-accent); }
+.act-v1-room-nav code { margin-inline-start: auto; color: #718092; font-size: 9px; white-space: nowrap; }
+.act-v1-admin .stubthat-pipeline { margin-block-start: 12px; }
+.act-v1-admin .stubthat-pipeline span,.act-v1-admin .stubthat-summary > * { border-radius: 6px; background: var(--act1-group); }
+.act-v1-admin .stubthat-tab,.act-v1-admin .exchange-console,.act-v1-admin .stub-card,.act-v1-admin .stubthat-inspector { border-radius: 8px; background: var(--act1-group); }
+.act-v1-admin .stubthat-tab.active,.act-v1-admin .exchange-toolbar button.active,.act-v1-admin .exchange-inspector-tabs button.active { border-color: var(--act1-accent); background: rgb(125 211 252 / .14); color: var(--act1-accent); }
+.act-v1-admin .exchange-dashboard > div { border-radius: 8px; background: #0d151f; }
+.act-v1-admin .exchange-dashboard strong { color: #f5f8fb; font-variant-numeric: tabular-nums; }
+.act-v1-admin .stub-card:hover,.act-v1-admin .stub-card.selected { border-color: var(--act1-accent); background: #122131; }
+.stubthat-heading { display: flex; justify-content: space-between; align-items: start; gap: 18px; }
+.stubthat-heading h2 { margin: 4px 0 7px; font-size: 20px; }
+.stubthat-heading p:not(.eyebrow) { margin: 0; max-inline-size: 720px; color: var(--muted); line-height: 1.5; }
+.stubthat-pipeline { display: flex; align-items: center; gap: 8px; margin-block: 18px 14px; overflow-x: auto; padding-block-end: 4px; }
+.stubthat-pipeline span { display: flex; align-items: center; gap: 7px; min-inline-size: max-content; padding: 8px 10px; border: 1px solid var(--line); border-radius: 999px; color: #c5d0df; background: #09131f; font-size: 11px; font-weight: 750; }
+.stubthat-pipeline b { display: grid; place-items: center; inline-size: 20px; block-size: 20px; border-radius: 50%; background: #2b3850; color: #fff; font-size: 9px; }
+.stubthat-pipeline i { color: #5d6c82; font-style: normal; }
+.stubthat-tabs { display: flex; gap: 8px; margin-block: 8px 14px; }
+.stubthat-tab { min-block-size: 48px; padding: 8px 13px; border: 1px solid var(--line); border-radius: 11px; background: #09131f; color: var(--muted); text-align: start; }
+.stubthat-tab small { display: block; margin-block-start: 2px; color: #738197; font-size: 9px; }
+.stubthat-tab.active { border-color: #88a6c9; background: #dfe9f5; color: #101722; }
+.stubthat-tab.active small { color: #4f6074; }
+.stubthat-summary { display: flex; gap: 7px; flex-wrap: wrap; margin-block-end: 12px; color: #92a1b6; font-size: 10px; }
+.stubthat-summary > * { padding: 6px 8px; border: 1px solid #26364b; border-radius: 999px; background: #09131e; }
+.stubthat-summary b { color: #e0e8f2; }
+.exchange-console { margin-block-end: 12px; padding: 14px; border: 1px solid #293c54; border-radius: 13px; background: #08111c; }
+.exchange-dashboard { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.exchange-dashboard > div { padding: 11px; border: 1px solid #26364a; border-radius: 10px; background: #0d1724; }
+.exchange-dashboard span, .exchange-product-panel span { display: block; color: #75859b; font-size: 9px; text-transform: uppercase; }
+.exchange-dashboard strong { display: block; margin-block-start: 4px; font-size: 22px; }
+.exchange-toolbar { display: flex; gap: 9px; margin-block-start: 10px; }
+.exchange-toolbar input { flex: 1; min-inline-size: 180px; padding: 9px 11px; border: 1px solid var(--line); border-radius: 9px; background: #09131e; color: var(--text); }
+.exchange-toolbar [role="group"] { display: flex; gap: 4px; flex-wrap: wrap; }
+.exchange-toolbar button, .exchange-inspector-tabs button { padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; background: #0d1724; color: var(--muted); font-size: 10px; text-transform: capitalize; }
+.exchange-toolbar button.active, .exchange-inspector-tabs button.active { border-color: #88a6c9; background: #dfe9f5; color: #101722; }
+.exchange-inspector-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin-block-start: 12px; }
+.exchange-product-panel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-block-start: 7px; overflow: hidden; border: 1px solid #27384e; border-radius: 9px; background: #27384e; }
+.exchange-product-panel > div { padding: 10px; background: #101b29; }
+.exchange-product-panel strong { display: block; margin-block-start: 4px; color: #d7e0eb; font-size: 11px; }
+.stubthat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; max-block-size: 470px; overflow: auto; padding: 2px; }
+.stub-card { display: grid; gap: 7px; min-block-size: 150px; padding: 13px; border: 1px solid #26364a; border-radius: 12px; background: #09131e; color: #e1e8f2; text-align: start; }
+.stub-card:hover, .stub-card.selected { border-color: #779ac4; background: #102035; }
+.stub-card.critical { border-color: #725334; }
+.stub-card .stub-family { color: #82b7ff; font-size: 9px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+.stub-card strong { font-size: 14px; }
+.stub-card small { color: #8796aa; line-height: 1.4; }
+.stub-layers { display: flex; gap: 4px; flex-wrap: wrap; margin-block-start: auto; }
+.stub-layers i { padding: 3px 5px; border-radius: 5px; background: #1b293b; color: #aebdd0; font-size: 8px; font-style: normal; font-weight: 850; }
+.stub-foot { color: #6f8199; font-size: 9px; }
+.critical .stub-foot { color: #e0b370; }
+.stubthat-inspector { margin-block-start: 12px; padding: 16px; border: 1px solid #2d4058; border-radius: 13px; background: #08111c; }
+.stubthat-inspector-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+.stubthat-inspector h3 { margin: 4px 0 8px; font-size: 21px; }
+.stubthat-inspector > p { color: #9dacbf; line-height: 1.5; }
+.stub-state { padding: 5px 8px; border: 1px solid #655328; border-radius: 999px; color: #f1d178; font-size: 9px; }
+.stubthat-contract { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; overflow: hidden; border: 1px solid #27384e; border-radius: 11px; background: #27384e; }
+.stubthat-contract > div { display: grid; gap: 5px; padding: 10px; background: #0d1724; }
+.stubthat-contract span { color: #75859b; font-size: 9px; text-transform: uppercase; }
+.stubthat-contract strong { color: #d7e0eb; font-size: 11px; line-height: 1.35; }
+.stub-warning { padding: 10px; border: 1px solid #725334; border-radius: 9px; background: #291e13; color: #e5bd82 !important; font-size: 11px; }
+@media (max-width: 1050px) { .stubthat-grid { grid-template-columns: repeat(3, 1fr); } .stubthat-contract { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) { .stubthat-heading { flex-direction: column; } .stubthat-tabs { flex-direction: column; } .stubthat-grid { grid-template-columns: 1fr 1fr; } .exchange-dashboard,.exchange-product-panel { grid-template-columns: repeat(2,1fr); } .exchange-toolbar { flex-direction: column; } .act-v1-room-nav code { display: none; } }
+@media (max-width: 460px) { .stubthat-grid, .stubthat-contract { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .stub-card { transition: none; } }
