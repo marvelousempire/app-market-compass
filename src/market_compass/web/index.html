@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/static/research-cassettes.css">
   <link rel="stylesheet" href="/static/stubthat.css">
   <link rel="stylesheet" href="/static/act-v1-shell.css">
+  <link rel="stylesheet" href="/static/decision-gates.css">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
@@ -33,6 +34,7 @@
           <a href="#market-exchange" data-act-shell-room="exchange"><span aria-hidden="true">◇</span><b>Market Exchange</b></a>
           <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Trading Desk</b></a>
           <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">◉</span><b>intelTHAT</b></a>
+          <a href="#decision-gates" data-act-shell-room="gates"><span aria-hidden="true">⊘</span><b>Decision Gates</b></a>
         </div>
       </section>
       <section class="act-nav-group" data-nav-group="Evidence">
@@ -264,6 +266,15 @@
         <div id="catalyst-timeline" class="timeline"></div>
       </section>
 
+      <section class="panel decision-gates calculate-that" id="decision-gates" aria-label="Decision gates and calculateTHAT">
+        <div class="gate-summary"><div><p class="eyebrow">CALCULATETHAT · MICRO-SLICED READINESS</p><h2>When to Go / When Not to Go</h2><p>Transparent calculations, hard stops, psychology restraint, and approval readiness. No order authority.</p></div><span class="gate-state review" id="decision-gate-state">CALCULATING</span></div>
+        <div class="trigger-strip" aria-label="Trigger vocabulary"><span>notable</span><span>watch</span><span>setup ready</span><span>invalidate</span><span>approval expired</span></div>
+        <div class="gate-grid" id="decision-gate-grid"></div>
+        <div><p class="eyebrow">CALCULATETHAT INSTRUMENT</p><pre class="calculate-formula" id="calculate-that-formula">Waiting for an exact research receipt.</pre></div>
+        <p class="decision-boundary" id="decision-gate-next">Triggers are observations, not orders.</p>
+        <button type="button" class="secondary" id="calculate-that-run">Recalculate gates</button>
+      </section>
+
       <section class="research-only">
         <section class="panel" id="intelthat-panel" aria-label="intelTHAT research receipts">
           <div class="section-head">
@@ -334,5 +345,6 @@
   <script src="/static/research-cassettes.js" defer></script>
   <script src="/static/stubthat.js" defer></script>
   <script src="/static/act-v1-shell.js" defer></script>
+  <script src="/static/decision-gates.js" defer></script>
 </body>
 </html>

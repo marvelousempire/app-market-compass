@@ -5,6 +5,10 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Added a design-first, micro-sliced readiness contract for triggers, hard stops, Actor psychology, approval and execution boundaries.
+- Added calculateTHAT as a transparent research instrument and `/api/decision-readiness` as a read-only explanation endpoint.
+- Added an ACT v1 Decision Gates surface. Trading and score influence remain off; approval remains externally owned.
+
 - Completed the READYPLAY ACT v1 receiving shell after the founder identified the first implementation as partial: added grouped collapsible navigation, Appearance, Rail/Focus/Wide modes and recovery, supporting right rail, footer quick launch, mobile tabs, Menu search, compact rail persistence and real-section bindings.
 - Removed the invented one-rail approximation as the completion boundary. Market Compass keeps its own identity, data and read-only authority while adopting the pinned READYPLAY shell anatomy.
 

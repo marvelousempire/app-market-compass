@@ -52,6 +52,7 @@ The most important distinction in this repository is:
 - **Planned** means the PRD defines the feature, but production code does not yet exist.
 
 See [`docs/STATUS.md`](docs/STATUS.md) for the complete capability matrix.
+The design-first trigger, approval, psychology and calculateTHAT contract is in [`docs/DECISION-GATES-DESIGN.md`](docs/DECISION-GATES-DESIGN.md).
 
 ---
 

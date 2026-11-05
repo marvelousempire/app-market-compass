@@ -17,6 +17,7 @@ from .ai import AnalystRequest, AnalystRouter
 from .ai.providers import ProviderError
 from .backtest import backtest_frame
 from .data import get_market_data, search_symbols
+from .decision_readiness import calculate_readiness
 from .engine import analyze
 from .pack002 import desk_from_bars
 from .intelthat_bridge import read_snapshot
@@ -131,6 +132,14 @@ def analyst(request: AnalystRequest):
 def analyze_api(symbol: str = Query(min_length=1), horizon: int = Query(20, ge=1, le=120)):
     try:
         return analyze(symbol, horizon).model_dump(mode="json")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@app.get("/api/decision-readiness")
+def decision_readiness_api(symbol: str = Query(min_length=1), horizon: int = Query(20, ge=1, le=120)):
+    try:
+        return calculate_readiness(analyze(symbol, horizon))
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
 

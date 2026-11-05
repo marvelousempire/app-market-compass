@@ -4,6 +4,10 @@ This directory separates **product vision**, **current implementation**, **curre
 
 ## Read in this order
 
+### Design contract: [`DECISION-GATES-DESIGN.md`](DECISION-GATES-DESIGN.md)
+
+Defines the micro-sliced calculateTHAT, trigger, psychology, approval and no-execution boundary.
+
 ### 0. [`PRODUCT-INTENTION.md`](PRODUCT-INTENTION.md)
 
 **Canonical founder intention and feature-purpose registry.**

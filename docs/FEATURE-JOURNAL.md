@@ -5,6 +5,14 @@ reason important features changed. It complements the factual release log in
 [`../CHANGELOG.md`](../CHANGELOG.md). It must not be replaced by short-lived chat history, a pull
 request description, or an issue comment.
 
+## 2026-11-05 — Design triggers, restraint, approvals and calculateTHAT
+
+**Founder direction:** Make “when to go” and “when not to go” explicit, keep every concern in a micro-slice, and add calculateTHAT.
+
+**Implementation:** Separated trigger observation, transparent calculation, Actor psychology, approval ownership and execution into independent contracts. Hard stops outrank positive triggers. The app may explain approval readiness but cannot grant approval or execute a trade.
+
+**Authority boundary:** Trading and score influence remain off. An approval is exact, external, expiring and separately owned; it cannot be manufactured by a positive calculation.
+
 ## 2026-11-04 — Make ACT v1 the real Market Compass shell
 
 **Founder correction:** ACT v1 means the original READYPLAY Administrative Control Tower dashboard system, not an ACT v1 label placed inside the existing dark page.
