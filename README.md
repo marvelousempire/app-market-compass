@@ -8,6 +8,14 @@ The project combines technical analysis, price memory, historical analogs, news 
 
 It is intentionally **not** a black-box trading bot. It does not turn a 56/44 evidence split into a fake 56% chance of profit. Humans have already invented enough precise-looking numbers with questionable ancestry.
 
+## Permanent product boundary
+
+Market Compass is a compass, not a trading venue. It permanently exists to **measure, calculate, compare, warn, and point** so a person can make a prudent decision elsewhere.
+
+Its measuring tools, technical-analysis instruments, calculators, evidence layers, Actor preferences, psychology rules, and counter-cases produce active research signals such as **Go**, **Watch**, **Do Not Go**, **Invalidated**, and notable threshold events. Every signal must show what supports it, what contradicts it, what is missing, and what would change it.
+
+Market Compass will not connect to a broker, submit an order, execute a trade, manage a real-money position, or move money. Those are not unfinished Market Compass features and are not roadmap goals. Signal generation requires no trade-approval receipt: the product points; the human decides and acts elsewhere.
+
 ---
 
 ## Product status at a glance
@@ -18,7 +26,8 @@ It is intentionally **not** a black-box trading bot. It does not turn a 56/44 ev
 **Current default market-data source:** Yahoo public search/chart endpoints  
 **Runtime model:** 115 stable IP node IDs routed through compact shared Python implementations  
 **AI interpretation:** Nephew/local/cloud provider mesh with explicit privacy consent and model receipts
-**Trading execution:** not implemented  
+**Signal generation:** active research output
+**Trading execution:** permanently outside the product
 **Production-grade institutional data:** not implemented
 
 ### Commissioned installation
@@ -32,7 +41,7 @@ Market Compass is commissioned as a loopback-only research service on **FiveMac*
 | User service | `ai.market-compass` |
 | Address | `http://127.0.0.1:8000` on FiveMac |
 | Runtime mode | `research_only` |
-| Trading and score authority | `trade_execution:false`, `score_influence:false` |
+| Signal and execution boundary | active research signals; `trade_execution:false` permanently |
 | Mirror | GitHub `marvelousempire/app-market-compass` follows accepted Gitea main |
 
 The exact running revision, PID and authority receipt are available from:
@@ -43,7 +52,7 @@ curl -fsS http://127.0.0.1:8000/health
 launchctl print gui/$(id -u)/ai.market-compass
 ```
 
-Commissioned means the accepted Gitea revision is installed behind a named, restartable user service. It does **not** enable order placement, brokerage access, Exchange mutations, bank writes, score influence or money movement.
+Commissioned means the accepted Gitea revision is installed behind a named, restartable user service. It enables active research signals, not order placement, brokerage access, Exchange mutations, bank writes or money movement.
 
 The most important distinction in this repository is:
 
@@ -257,12 +266,12 @@ The long-term forecasting stack may include state-space, regime, volatility, boo
 
 ---
 
-# What is not built yet
+# What is not built yet—and what is intentionally excluded
 
 The current repository should **not** be described as containing these capabilities yet:
 
-- brokerage connectivity or automatic execution;
-- position management for a real account;
+- brokerage connectivity or automatic execution — permanently excluded;
+- position management for a real account — permanently excluded;
 - options-chain modeling;
 - institutional real-time market data;
 - a licensed premium news/event feed;
@@ -274,7 +283,7 @@ The current repository should **not** be described as containing these capabilit
 - persistent user accounts, saved portfolios, alerting, or cloud deployment;
 - execution-quality simulation suitable for real-money claims.
 
-Those are product directions, not hidden features.
+The research and data items are possible product directions. Broker connectivity, order execution, real-account position management, and money movement are permanent exclusions, not missing roadmap features.
 
 See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the staged build plan.
 
@@ -406,9 +415,9 @@ The browser opens with six ready controls for the local research runtime:
 - **View receipts** reads runtime health and the selected symbol's intelTHAT proof state.
 - **Stop safely** asks for confirmation, then terminates only the current loopback process. GitThat relaunches a development preview; the commissioned `ai.market-compass` service restarts automatically.
 
-These controls do not merge code, push branches, change Gitea authority, connect a broker, influence scores, or enable trading. Both preview and commissioned runtimes remain `research_only`, `trade_execution:false`, and localhost-only.
+These controls do not merge code, push branches, change Gitea authority, connect a broker, mutate evidence scores, or place trades. Both preview and commissioned runtimes generate research signals while remaining `research_only`, `trade_execution:false`, and localhost-only.
 
-The commissioned service binds `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMISSIONED=true`, and `MARKET_COMPASS_SOURCE_REVISION` at launch. Those values make the installed source auditable; research mode, `trade_execution:false`, and `score_influence:false` remain invariant.
+The commissioned service binds `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMISSIONED=true`, and `MARKET_COMPASS_SOURCE_REVISION` at launch. Those values make the installed source auditable. Research-signal generation is active; broker execution remains permanently absent, and calculateTHAT reads rather than mutates the evidence score.
 
 The browser starts on **BB** with **BB**, **AAPL**, **QQQ**, and the operator-requested literal **SPCX** in the default watch choices. An untouched legacy default list is migrated once; a personally edited watchlist is preserved.
 
@@ -610,7 +619,7 @@ Production readiness will require, at minimum:
 - data licensing review;
 - documented incident/failure behavior;
 - stronger backtesting and execution-cost modeling;
-- explicit regulatory/legal review before automated execution or personalized recommendations.
+- explicit regulatory/legal review before personalized recommendations.
 
 Until then, this repository is best understood as a **working research platform with a larger product architecture behind it**.
 
@@ -618,4 +627,4 @@ Until then, this repository is best understood as a **working research platform 
 
 # Disclaimer
 
-Market Compass is research and decision-support software. It is not investment advice, does not guarantee outcomes, and does not place trades in the current release. Historical behavior may not repeat, market data may be incomplete, news can be wrong, and models can fail when regimes change.
+Market Compass is research and decision-support software. It is not investment advice, does not guarantee outcomes, and will never place trades. Historical behavior may not repeat, market data may be incomplete, news can be wrong, and models can fail when regimes change.

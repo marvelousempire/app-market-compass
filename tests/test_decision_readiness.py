@@ -15,13 +15,16 @@ def report(**overrides):
     return Report(**values)
 
 
-def test_calculatethat_never_grants_execution_or_score_influence():
+def test_calculatethat_generates_signal_without_execution_or_score_mutation():
     result = calculate_readiness(report())
     assert result["instrument"] == "calculateTHAT"
-    assert result["state"] == "APPROVAL_READY"
+    assert result["state"] == "GO_SIGNAL"
+    assert result["signal_generation"] is True
+    assert result["signal"]["active"] is True
+    assert result["signal"]["direction"] == "BULLISH"
     assert result["trade_execution"] is False
     assert result["score_influence"] is False
-    assert result["approval_bound"] is False
+    assert result["approval_required_for_signal"] is False
 
 
 def test_hard_stop_outranks_positive_triggers():
@@ -29,7 +32,7 @@ def test_hard_stop_outranks_positive_triggers():
     confidence = next(gate for gate in result["gates"] if gate["key"] == "confidence")
     assert confidence["hard_stop"] is True
     assert confidence["passed"] is False
-    assert result["state"] == "DO_NOT_GO"
+    assert result["state"] == "DO_NOT_GO_SIGNAL"
 
 
 def test_surface_names_calculatethat_and_trigger_boundary():
@@ -38,5 +41,5 @@ def test_surface_names_calculatethat_and_trigger_boundary():
     html = (web / "index.html").read_text()
     assert 'id="decision-gates"' in html
     assert "calculateTHAT" in html
-    assert "Triggers are observations, not orders" in html
+    assert "Signals are active research outputs, not orders" in html
     assert "/static/decision-gates.js" in html

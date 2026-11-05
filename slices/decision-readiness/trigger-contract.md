@@ -1,3 +1,3 @@
 # trigger-contract
 
-Owns notable, watch, setup-ready, invalidate and approval-expired events. A trigger is an observation, never an order.
+Owns notable, watch-signal, go-signal, do-not-go-signal and invalidate events. Signals are active research outputs, never orders.

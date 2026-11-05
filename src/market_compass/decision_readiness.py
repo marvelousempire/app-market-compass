@@ -17,7 +17,7 @@ def _gate(key: str, label: str, passed: bool, actual: Any, requirement: str, har
 
 
 def calculate_readiness(report: Report) -> dict[str, Any]:
-    """Explain readiness without changing scores or authorizing execution."""
+    """Produce an active research signal without changing scores or placing orders."""
     foundation = report.layers.get("foundation")
     missing = [f"{layer.label}: {item}" for layer in report.layers.values() for item in layer.missing]
     consensus = report.timeframes.get("consensus", {})
@@ -33,24 +33,33 @@ def calculate_readiness(report: Report) -> dict[str, Any]:
         _gate("route_bound", "Route and invalidation", route_bound, {"direction": report.route.direction, "invalidation": report.route.invalidation}, "known direction and explicit invalidation", True),
         _gate("reward_risk", "Reward / risk", reward_risk is not None and reward_risk >= 2.0, reward_risk, ">= 2.0"),
         _gate("evidence_gaps", "Evidence gaps", not missing, missing, "none", True),
-        _gate("approval", "External approval receipt", False, "not bound", "exact, current, independently owned approval", True),
     ]
-    failed_hard = [gate for gate in gates if gate["key"] != "approval" and gate["hard_stop"] and not gate["passed"]]
-    evidence_ready = all(gate["passed"] for gate in gates if gate["key"] != "approval")
-    state = "DO_NOT_GO" if failed_hard else "APPROVAL_READY" if evidence_ready else "REVIEW_ONLY"
+    failed_hard = [gate for gate in gates if gate["hard_stop"] and not gate["passed"]]
+    evidence_ready = all(gate["passed"] for gate in gates)
+    direction = "BULLISH" if report.bull_evidence > report.bear_evidence else "BEARISH" if report.bear_evidence > report.bull_evidence else "NEUTRAL"
+    state = "DO_NOT_GO_SIGNAL" if failed_hard else "GO_SIGNAL" if evidence_ready else "WATCH_SIGNAL"
     return {
         "instrument": "calculateTHAT",
         "state": state,
         "symbol": report.symbol,
+        "signal_generation": True,
+        "signal": {
+            "active": True,
+            "direction": direction,
+            "bull_evidence": report.bull_evidence,
+            "bear_evidence": report.bear_evidence,
+            "confidence": report.confidence,
+            "action": state,
+        },
         "score_influence": False,
         "trade_execution": False,
-        "approval_bound": False,
+        "approval_required_for_signal": False,
         "formula": {
             "evidence_edge": "abs(bull_evidence - bear_evidence)",
             "evidence_edge_value": evidence_edge,
-            "readiness": "all non-authority gates pass",
+            "readiness": "all research gates pass",
         },
         "gates": gates,
-        "next_action": "Repair hard stops." if failed_hard else "Request an external approval receipt." if evidence_ready else "Review incomplete readiness gates.",
-        "boundary": "A trigger is an observation, not an order. Market Compass cannot execute trades.",
+        "next_action": "Do not go; repair hard stops." if failed_hard else "Go signal is active for research review." if evidence_ready else "Watch signal is active; review incomplete gates.",
+        "boundary": "Signals are active research outputs, not orders. Market Compass does not execute trades.",
     }

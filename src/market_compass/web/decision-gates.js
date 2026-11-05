@@ -6,10 +6,10 @@
     const formula=document.getElementById('calculate-that-formula');
     const next=document.getElementById('decision-gate-next');
     if(!state||!grid||!formula||!next)return;
-    const tone=data.state==='DO_NOT_GO'?'stop':data.state==='APPROVAL_READY'?'ready':'review';
+    const tone=data.state==='DO_NOT_GO_SIGNAL'?'stop':data.state==='GO_SIGNAL'?'ready':'review';
     state.className=`gate-state ${tone}`;state.textContent=data.state.replaceAll('_',' ');
     grid.innerHTML=(data.gates||[]).map(g=>`<article class="gate-card ${g.passed?'pass':'fail'}"><strong>${esc(g.label)}</strong><i>${g.passed?'PASS':'HOLD'}</i><small>Actual: ${esc(typeof g.actual==='object'?JSON.stringify(g.actual):g.actual)}</small><small>Rule: ${esc(g.requirement)}${g.hard_stop?' · hard stop':''}</small></article>`).join('');
-    formula.textContent=`evidence edge = ${data.formula?.evidence_edge_value ?? '—'}\nreadiness = ${data.formula?.readiness || '—'}\nscore influence = off\ntrade execution = off`;
+    formula.textContent=`signal generation = ACTIVE\ndirection = ${data.signal?.direction || '—'}\nbull / bear = ${data.signal?.bull_evidence ?? '—'} / ${data.signal?.bear_evidence ?? '—'}\nconfidence = ${data.signal?.confidence ?? '—'}\nevidence edge = ${data.formula?.evidence_edge_value ?? '—'}\nreadiness = ${data.formula?.readiness || '—'}\nscore mutation = off\nbroker execution = unavailable`;
     next.textContent=data.next_action||'Review the gates.';
   };
   const load=async()=>{

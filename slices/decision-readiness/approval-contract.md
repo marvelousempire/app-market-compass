@@ -1,3 +1,3 @@
 # approval-contract
 
-Owns exact symbol, setup revision, approver, scope, issue time and expiry. Missing, stale or mismatched approval is a hard stop.
+Owns any future trade-action approval. Approval is not required to generate or display a research signal; it becomes relevant only outside Market Compass if a separate execution owner acts.

@@ -53,7 +53,7 @@ def operator_status():
         "started_at": PREVIEW_STARTED_AT,
         "bind": os.getenv("MARKET_COMPASS_BIND", "127.0.0.1:8000"),
         "mode": "research_only", "preview_only": not commissioned, "commissioned": commissioned,
-        "trade_execution": False, "score_influence": False,
+        "trade_execution": False, "signal_generation": True, "score_influence": False,
         "authority": os.getenv("MARKET_COMPASS_AUTHORITY", "github-preview-unverified"),
         "source_revision": os.getenv("MARKET_COMPASS_SOURCE_REVISION", "unverified"),
     }

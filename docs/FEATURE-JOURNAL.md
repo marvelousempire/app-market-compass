@@ -13,6 +13,14 @@ request description, or an issue comment.
 
 **Authority boundary:** Trading and score influence remain off. An approval is exact, external, expiring and separately owned; it cannot be manufactured by a positive calculation.
 
+## 2026-11-05 — Make the compass boundary permanent and signals active
+
+**Founder correction:** Market Compass will never trade. It comprises measuring tools, calculators, indicators, Actor preferences and psychology rules that help a person make prudent decisions.
+
+**Implementation:** Go, Watch and Do Not Go are active research signals. Signal generation no longer waits for a trade-approval receipt. calculateTHAT reads the evidence score without mutating it, shows the direction and evidence balance, and keeps broker execution permanently outside the product.
+
+**Product boundary:** Market Compass measures, calculates, compares, warns and points. The human decides and acts elsewhere.
+
 ## 2026-11-04 — Make ACT v1 the real Market Compass shell
 
 **Founder correction:** ACT v1 means the original READYPLAY Administrative Control Tower dashboard system, not an ACT v1 label placed inside the existing dark page.

@@ -1,6 +1,6 @@
 # Decision-readiness micro-slices
 
-Each file is a single-owner contract. These slices may explain readiness but cannot place orders, move money, change Market Compass scores, or manufacture approval.
+Each file is a single-owner contract. These slices generate active research signals but cannot place orders, move money, mutate Market Compass scores, or manufacture trade approval.
 
 - `observe-contract.md`
 - `trigger-contract.md`

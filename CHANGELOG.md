@@ -5,6 +5,9 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Corrected the permanent product boundary: Market Compass generates active research signals but will never connect to a broker, place trades, manage real-money positions or move money.
+- Replaced approval-blocked readiness states with active `GO_SIGNAL`, `WATCH_SIGNAL` and `DO_NOT_GO_SIGNAL` outputs. calculateTHAT reads the existing evidence score without mutating it.
+
 - Added a design-first, micro-sliced readiness contract for triggers, hard stops, Actor psychology, approval and execution boundaries.
 - Added calculateTHAT as a transparent research instrument and `/api/decision-readiness` as a read-only explanation endpoint.
 - Added an ACT v1 Decision Gates surface. Trading and score influence remain off; approval remains externally owned.
