@@ -40,6 +40,8 @@ Market Compass is commissioned as a loopback-only research service on **FiveMac*
 | Stable checkout | `~/Developer/market-compass-live` |
 | User service | `ai.market-compass` |
 | Address | `http://127.0.0.1:8000` on FiveMac |
+| Operator Door | `http://market-compass.localhost/` through Make Doors on the operator Mac |
+| Door transport | Named, restartable `Market Compass FiveMac Door`; loopback-only, not LAN/WAN published |
 | Runtime mode | `research_only` |
 | Signal and execution boundary | active research signals; `trade_execution:false` permanently |
 | Mirror | GitHub `marvelousempire/app-market-compass` follows accepted Gitea main |
@@ -53,6 +55,8 @@ launchctl print gui/$(id -u)/ai.market-compass
 ```
 
 Commissioned means the accepted Gitea revision is installed behind a named, restartable user service. It enables active research signals, not order placement, brokerage access, Exchange mutations, bank writes or money movement.
+
+The operator Door is owned by Nephew's canonical Door registry and projected by Make Doors. The raw `127.0.0.1:18003` transport is an implementation detail and is not the client-facing address.
 
 The most important distinction in this repository is:
 

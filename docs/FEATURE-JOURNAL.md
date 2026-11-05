@@ -99,7 +99,7 @@ supersedes the earlier interpretation.
 
 **Implementation:** Added working local search, filters, selection and General/UI/API/SSO/Install contract inspection; moved the surface to the ACT v1 Administrative Control Tower room pattern; installed `ai.market-compass` from `~/Developer/market-compass-live`; bound exact Gitea runtime receipts; routed Gitea Actions to the registered `macos-briefcase` runner; and kept GitHub as a downstream mirror.
 
-**Evidence:** Gitea PRs #4, #5 and #6 merged through exact-head green checks. FiveMac passed 42 tests. The commissioned door returned HTTP health with 115 nodes and reported `commissioned:true`, `preview_only:false`, `research_only`, `trade_execution:false`, and `score_influence:false`. The localhost forward at `127.0.0.1:18003` read the same commissioned surface.
+**Evidence:** Gitea PRs #4, #5 and #6 merged through exact-head green checks. FiveMac passed 42 tests. The commissioned door returned HTTP health with 115 nodes and reported `commissioned:true`, `preview_only:false`, `research_only`, `trade_execution:false`, and `score_influence:false`. The later Make Doors commission registers the client-facing `http://market-compass.localhost/` Door while retaining the raw loopback forward only as transport.
 
 **Still open:** Owner-reviewed adapters and data contracts; real Actor psychology preferences; authenticated Exchange enable/save/install/API/SSO actions; bank persistence; broker integration; order execution and money movement. None is implied by this commissioning.
 
