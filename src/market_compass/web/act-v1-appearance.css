@@ -1,0 +1,198 @@
+/* ACT v1 appearance bridge: legacy workbench modules inherit one semantic palette. */
+:root {
+  --act-fill: #ffffff;
+  --act-fill-subtle: #fafafa;
+  --act-fill-recessed: #f5f5f5;
+  --act-fill-selected: #fef2f2;
+  --act-text-secondary: #525252;
+  --act-text-tertiary: #737373;
+  --act-good: #067647;
+  --act-good-fill: #ecfdf3;
+  --act-warn: #8a4b08;
+  --act-warn-fill: #fff7e6;
+  --act-danger: #b42318;
+  --act-danger-fill: #fff0ed;
+  --act-blue: #175cd3;
+  --act-blue-fill: #eff8ff;
+  color-scheme: light;
+}
+
+html[data-act-color="dark"] {
+  --act-fill: #171717;
+  --act-fill-subtle: #111827;
+  --act-fill-recessed: #0a0a0a;
+  --act-fill-selected: #450a0a;
+  --act-text-secondary: #d4d4d4;
+  --act-text-tertiary: #a3a3a3;
+  --act-good: #7de0ba;
+  --act-good-fill: #102f27;
+  --act-warn: #f1d178;
+  --act-warn-fill: #302817;
+  --act-danger: #ff9ea5;
+  --act-danger-fill: #361820;
+  --act-blue: #82b7ff;
+  --act-blue-fill: #122131;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-act-color="system"] {
+    --act-fill: #171717;
+    --act-fill-subtle: #111827;
+    --act-fill-recessed: #0a0a0a;
+    --act-fill-selected: #450a0a;
+    --act-text-secondary: #d4d4d4;
+    --act-text-tertiary: #a3a3a3;
+    --act-good: #7de0ba;
+    --act-good-fill: #102f27;
+    --act-warn: #f1d178;
+    --act-warn-fill: #302817;
+    --act-danger: #ff9ea5;
+    --act-danger-fill: #361820;
+    --act-blue: #82b7ff;
+    --act-blue-fill: #122131;
+    color-scheme: dark;
+  }
+}
+
+.operator-deck { background: var(--act-fill); }
+.operator-action,
+.operator-result,
+.cassette-canvas,
+.cassette-tool-group,
+.actor-comp-card > div,
+.act-v1-admin,
+.act-v1-admin .stubthat-pipeline span,
+.act-v1-admin .stubthat-summary > *,
+.act-v1-admin .stubthat-tab,
+.act-v1-admin .exchange-console,
+.act-v1-admin .stub-card,
+.act-v1-admin .stubthat-inspector,
+.act-v1-admin .exchange-dashboard > div,
+.exchange-product-panel > div,
+.stubthat-contract > div,
+.analyst-result,
+.intelthat-card,
+.stat,
+.tf-card,
+.metric,
+.stop,
+.calibration-hero,
+.evidence-item,
+.explorer pre,
+.node-grid > div,
+.board,
+.heat-track,
+.contrib-track {
+  background: var(--act-fill-subtle);
+  color: var(--act-ink);
+  border-color: var(--act-line);
+}
+
+.operator-result,
+.stubthat-inspector,
+.exchange-console,
+.board,
+.explorer pre { background: var(--act-fill-recessed); }
+
+.operator-action:hover,
+.stub-card:hover,
+.stub-card.selected,
+.act-v1-room-nav button:hover {
+  background: var(--act-blue-fill);
+  color: var(--act-ink);
+}
+
+.operator-action > span,
+.stub-card .stub-family,
+.act-v1-admin .stubthat-heading .eyebrow { color: var(--act-blue); }
+
+.operator-result pre,
+.cassette-tool-group h4,
+.actor-comp-card strong,
+.stubthat-summary b,
+.exchange-dashboard strong,
+.exchange-product-panel strong,
+.stub-card,
+.stubthat-contract strong { color: var(--act-ink); }
+
+.cassette-canvas small,
+.cassette-tools span,
+.actor-comp-card span,
+.stubthat-pipeline span,
+.stubthat-tab small,
+.stubthat-summary,
+.exchange-dashboard span,
+.exchange-product-panel span,
+.stub-card small,
+.stub-foot,
+.stubthat-inspector > p,
+.stubthat-contract span,
+.intelthat-card small,
+.intelthat-card dt { color: var(--act-text-tertiary); }
+
+.cassette-tools span,
+.actor-comp-card,
+.stubthat-summary > *,
+.exchange-dashboard > div,
+.exchange-product-panel,
+.stub-card,
+.stubthat-contract,
+.stubthat-inspector,
+.intelthat-card { border-color: var(--act-line); }
+
+.cassette-mark,
+.stub-layers i,
+.stubthat-pipeline b {
+  background: var(--act-blue-fill);
+  color: var(--act-blue);
+  border-color: color-mix(in srgb, var(--act-blue) 45%, var(--act-line));
+}
+
+.operator-state[data-state="live"],
+.badge.good { color: var(--act-good); border-color: color-mix(in srgb, var(--act-good) 45%, var(--act-line)); background: var(--act-good-fill); }
+.operator-state[data-state="busy"],
+.operator-state[data-state="stopping"],
+.badge.warn,
+.stub-state { color: var(--act-warn); border-color: color-mix(in srgb, var(--act-warn) 45%, var(--act-line)); background: var(--act-warn-fill); }
+.operator-state[data-state="error"],
+.badge.bad,
+.missing-chip,
+.stub-warning { color: var(--act-danger) !important; border-color: color-mix(in srgb, var(--act-danger) 45%, var(--act-line)); background: var(--act-danger-fill); }
+
+.act-v1-room-nav button,
+.exchange-toolbar button,
+.exchange-inspector-tabs button { color: var(--act-text-secondary); }
+.act-v1-room-nav button.active,
+.exchange-toolbar button.active,
+.exchange-inspector-tabs button.active,
+.stubthat-tab.active,
+.cassette-tab.active,
+.tf-card.active,
+.mini-tf.active,
+.explorer-tab.active {
+  background: var(--act-fill-selected);
+  color: var(--act-brand);
+  border-color: color-mix(in srgb, var(--act-brand) 40%, var(--act-line));
+}
+
+.exchange-toolbar input,
+.analyst-controls select,
+.analyst-question-row textarea {
+  background: var(--act-fill);
+  color: var(--act-ink);
+  border-color: var(--act-line);
+}
+
+.board-node text { fill: var(--act-ink); }
+.board-node circle { fill: var(--act-fill-subtle); stroke: var(--act-text-tertiary); }
+.board-node.asset circle { fill: var(--act-blue-fill); stroke: var(--act-blue); }
+.board-edge { stroke: var(--act-text-tertiary); }
+
+@media (forced-colors: active) {
+  .panel,
+  .operator-action,
+  .cassette-canvas,
+  .stub-card,
+  .intelthat-card { background: Canvas; color: CanvasText; border-color: CanvasText; }
+}

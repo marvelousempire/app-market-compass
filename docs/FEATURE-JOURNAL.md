@@ -21,6 +21,12 @@ request description, or an issue comment.
 
 **Product boundary:** Market Compass measures, calculates, compares, warns and points. The human decides and acts elsewhere.
 
+## 2026-11-05 — Repair dark modules inside the Light Stage
+
+**Founder correction:** The design color was not correct: legacy dark workbench modules remained dark inside the ACT v1 Light appearance.
+
+**Implementation:** Added one ACT-owned semantic appearance bridge for the complete workbench and made charts re-render when Light, Dark or System changes. Light uses opaque white and neutral layers with dark readable text; Dark retains its intended dark materials. Status meaning remains redundant in text and borders rather than relying on hue alone.
+
 ## 2026-11-04 — Make ACT v1 the real Market Compass shell
 
 **Founder correction:** ACT v1 means the original READYPLAY Administrative Control Tower dashboard system, not an ACT v1 label placed inside the existing dark page.

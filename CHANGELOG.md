@@ -5,6 +5,8 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Repaired ACT v1 appearance inheritance so Light mode no longer contains hard-coded dark workbench islands. Operator controls, Actors, Market Exchange, intelTHAT, analysis cards, Evidence Board and charts now follow the selected Light, Dark or System palette.
+
 - Corrected the permanent product boundary: Market Compass generates active research signals but will never connect to a broker, place trades, manage real-money positions or move money.
 - Replaced approval-blocked readiness states with active `GO_SIGNAL`, `WATCH_SIGNAL` and `DO_NOT_GO_SIGNAL` outputs. calculateTHAT reads the existing evidence score without mutating it.
 

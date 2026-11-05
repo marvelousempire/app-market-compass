@@ -39,6 +39,7 @@
     root.dataset.actColor = color;
     safeStore.set('act-v1-color', color);
     document.querySelectorAll('[data-act-color]').forEach((button) => button.setAttribute('aria-checked', String(button.dataset.actColor === color)));
+    window.dispatchEvent(new CustomEvent('actappearancechange', { detail: { color } }));
   };
   const setLayout = (layout) => {
     body.dataset.actLayout = layout;
