@@ -5,7 +5,7 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
-- Added a contextual right-rail submenu for every primary room. Items navigate to real in-page sections or invoke existing Actor, Market Exchange, and calculateTHAT controls without creating new execution authority.
+- Added a contextual right-rail submenu for every primary room. Items navigate to real in-page sections or invoke existing Actor, Market Exchange, and calculateTHAT controls without creating new execution authority. The shell assets now carry a revision binding so commissioned browsers receive the matching submenu behavior and presentation together.
 
 - Removed remaining dark-only color ownership from Market Exchange, Runtime Controls, Actor cassettes, intelTHAT and Nephew Analyst source styles. Dashboard metrics, filter buttons, product cards and inspectors now consume the ACT semantic palette directly instead of depending on lower-specificity repair overrides.
 
