@@ -14,6 +14,8 @@
   --act-danger-fill: #fff0ed;
   --act-blue: #175cd3;
   --act-blue-fill: #eff8ff;
+  --border: var(--act-line);
+  --canvas: var(--act-canvas);
   color-scheme: light;
 }
 
@@ -34,6 +36,46 @@ html[data-act-color="dark"] {
   --act-blue-fill: #122131;
   color-scheme: dark;
 }
+
+/* The shell itself also resolves through tokens so System-dark is a real theme. */
+.act-shell-rail,
+.act-supporting-rail,
+.act-shell-footer,
+.act-command-dialog,
+.act-dialog-head,
+.act-mobile-tabs {
+  background: var(--act-surface);
+  color: var(--act-ink);
+}
+body { background: var(--act-canvas); color: var(--act-ink); }
+.panel { background: var(--act-fill); color: var(--act-ink); }
+.act-nav-items a,
+.act-shell-footer a,
+.act-shell-footer button,
+.act-settings-actions button,
+.act-appearance button,
+.act-supporting-rail p,
+.act-rail-stats p,
+.act-command-results a { color: var(--act-text-secondary); }
+.act-nav-items a:hover,
+.act-nav-items a:focus-visible,
+.act-settings-actions button:hover { background: var(--act-fill-recessed); color: var(--act-ink); }
+.act-nav-items a.active,
+.act-shell-footer a:hover,
+.act-shell-footer button:hover,
+.act-shell-footer [aria-pressed="true"] { background: var(--act-fill-selected); color: var(--act-brand); }
+.act-appearance,
+.act-rail-stats,
+.act-quick-watch button,
+.act-dialog-head button { background: var(--act-fill-recessed); color: var(--act-text-secondary); }
+.act-appearance button[aria-checked="true"],
+.mode-switch .view-btn.active,
+.mode-switch .mode.active { background: var(--act-fill); color: var(--act-ink); }
+.act-rail-stats b { color: var(--act-ink); }
+.act-right-boundary { background: var(--act-danger-fill); }
+.act-right-boundary strong { color: var(--act-danger); }
+.act-command-dialog input,
+.control-bar input { background: var(--act-fill); color: var(--act-ink); border-color: var(--act-line); }
 
 @media (prefers-color-scheme: dark) {
   html[data-act-color="system"] {
@@ -101,6 +143,16 @@ html[data-act-color="dark"] {
 .act-v1-room-nav button:hover {
   background: var(--act-blue-fill);
   color: var(--act-ink);
+}
+
+.view-btn,
+.mode,
+.mini-tf,
+.explorer-tab,
+.badge {
+  background: var(--act-fill-subtle);
+  color: var(--act-text-secondary);
+  border-color: var(--act-line);
 }
 
 .operator-action > span,
@@ -216,6 +268,40 @@ html[data-act-color="dark"] {
 
 .identity-main span:last-child { color: var(--act-blue); }
 .decision-line { color: var(--act-text-secondary); }
+.tf-card small,
+.calibration-hero span { color: var(--act-text-secondary); }
+.confluence-list > div,
+.timeline-item { border-color: var(--act-line); }
+.stop.current {
+  border-color: color-mix(in srgb, var(--act-blue) 55%, var(--act-line));
+  background: var(--act-blue-fill);
+  color: var(--act-blue);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--act-blue) 20%, transparent);
+}
+.stop.current span,
+.stop.current strong { color: inherit; }
+.stop.invalidation { border-color: color-mix(in srgb, var(--act-danger) 65%, var(--act-line)); }
+.tf-card.active { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--act-brand) 25%, transparent); }
+.gate-state.stop { color: var(--act-danger); background: var(--act-danger-fill); }
+.gate-state.review { color: var(--act-warn); background: var(--act-warn-fill); }
+.gate-state.ready { color: var(--act-good); background: var(--act-good-fill); }
+
+/* The provider selector keeps the consent sentence readable at demo widths. */
+.analyst-controls {
+  grid-template-columns: minmax(0, 2fr) minmax(140px, 1fr);
+}
+.analyst-controls > label { min-width: 0; }
+.analyst-controls select { width: 100%; min-width: 0; }
+.analyst-controls .cloud-consent {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+  min-height: 34px;
+  color: var(--act-text-secondary);
+}
+.analyst-controls .cloud-consent input { flex: 0 0 auto; }
 
 .exchange-toolbar input,
 .analyst-controls select,
@@ -240,4 +326,6 @@ html[data-act-color="dark"] {
 
 @media (max-width: 560px) {
   .act-v1-admin .exchange-inspector-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .analyst-controls { grid-template-columns: 1fr; }
+  .analyst-controls .cloud-consent { grid-column: 1; }
 }

@@ -27,6 +27,12 @@ request description, or an issue comment.
 
 **Implementation:** Added one ACT-owned semantic appearance bridge for the complete workbench and made charts re-render when Light, Dark or System changes. Light uses opaque white and neutral layers with dark readable text; Dark retains its intended dark materials. Status meaning remains redundant in text and borders rather than relying on hue alone.
 
+## 2026-11-05 — Close the full-app appearance census
+
+**Founder correction:** A second demo-blocking dark-on-light state remained in the Current Route card after the first appearance repair; the whole application needed inspection instead of another local selector fix.
+
+**Implementation:** Audited every loaded stylesheet and the visible desktop demo route for high-specificity legacy colors. The shared ACT appearance bridge now owns ordinary and selected surfaces, route/timeframe states, badges, gates, calibration, timelines, evidence and analyst controls across explicit Light, explicit Dark and System-dark. Added a source census that names every known legacy island and the non-collapsing demo-width layouts.
+
 ## 2026-11-04 — Make ACT v1 the real Market Compass shell
 
 **Founder correction:** ACT v1 means the original READYPLAY Administrative Control Tower dashboard system, not an ACT v1 label placed inside the existing dark page.

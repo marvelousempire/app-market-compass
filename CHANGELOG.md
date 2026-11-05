@@ -5,6 +5,8 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Completed a full-app ACT appearance census after a second client-demo contrast report. Repaired Current Route, active timeframe, neutral badge, gate-state, calibration, timeline, provider-consent and System-dark conflicts through the shared semantic appearance layer rather than isolated paint patches.
+
 - Repaired the client-demo Market Exchange contract tabs: Light mode now uses one readable segmented control with an unmistakable selected state, keyboard focus and ARIA selection. Also corrected the washed-out live price and replaced execution-suggestive shell language with Compass Desk and Signals active.
 
 - Repaired ACT v1 appearance inheritance so Light mode no longer contains hard-coded dark workbench islands. Operator controls, Actors, Market Exchange, intelTHAT, analysis cards, Evidence Board and charts now follow the selected Light, Dark or System palette.
