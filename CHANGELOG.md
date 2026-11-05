@@ -5,6 +5,8 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Removed remaining dark-only color ownership from Market Exchange, Runtime Controls, Actor cassettes, intelTHAT and Nephew Analyst source styles. Dashboard metrics, filter buttons, product cards and inspectors now consume the ACT semantic palette directly instead of depending on lower-specificity repair overrides.
+
 - Completed a full-app ACT appearance census after a second client-demo contrast report. Repaired Current Route, active timeframe, neutral badge, gate-state, calibration, timeline, provider-consent and System-dark conflicts through the shared semantic appearance layer rather than isolated paint patches.
 
 - Repaired the client-demo Market Exchange contract tabs: Light mode now uses one readable segmented control with an unmistakable selected state, keyboard focus and ARIA selection. Also corrected the washed-out live price and replaced execution-suggestive shell language with Compass Desk and Signals active.

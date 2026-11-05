@@ -15,6 +15,9 @@ def test_appearance_bridge_covers_every_known_legacy_dark_island():
         ".stub-card",
         ".intelthat-card",
         ".analyst-result",
+        ".exchange-console",
+        ".exchange-toolbar button",
+        ".exchange-dashboard strong",
         ".stop.current",
         ".stop.invalidation",
         ".tf-card.active",
@@ -23,6 +26,8 @@ def test_appearance_bridge_covers_every_known_legacy_dark_island():
         ".calibration-hero span",
         ".timeline-item",
         ".board-node text",
+        ".action-pill.good",
+        ".error",
     ):
         assert selector in css
 

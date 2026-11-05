@@ -16,6 +16,10 @@
   --act-blue-fill: #eff8ff;
   --border: var(--act-line);
   --canvas: var(--act-canvas);
+  --green: var(--act-good);
+  --red: var(--act-danger);
+  --amber: var(--act-warn);
+  --blue: var(--act-blue);
   color-scheme: light;
 }
 
@@ -49,6 +53,20 @@ html[data-act-color="dark"] {
 }
 body { background: var(--act-canvas); color: var(--act-ink); }
 .panel { background: var(--act-fill); color: var(--act-ink); }
+.subhead,
+.muted,
+.trust-note { color: var(--act-text-tertiary); }
+.mode-switch { background: var(--act-fill-recessed); border-color: var(--act-line); }
+.primary { background: var(--act-ink); color: var(--act-fill); border-color: var(--act-ink); }
+.secondary,
+.chip,
+.trust-chip { background: var(--act-fill-subtle); color: var(--act-text-secondary); border-color: var(--act-line); }
+.chip:hover { background: var(--act-blue-fill); color: var(--act-blue); border-color: var(--act-blue); }
+.error { background: var(--act-danger-fill); color: var(--act-danger); border-color: color-mix(in srgb, var(--act-danger) 45%, var(--act-line)); }
+.action-pill { background: var(--act-fill-recessed); color: var(--act-text-secondary); }
+.action-pill.good { background: var(--act-good-fill); color: var(--act-good); }
+.action-pill.bad { background: var(--act-danger-fill); color: var(--act-danger); }
+.evidence-meter { background: var(--act-fill-recessed); }
 .act-nav-items a,
 .act-shell-footer a,
 .act-shell-footer button,

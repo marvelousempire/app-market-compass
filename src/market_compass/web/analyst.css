@@ -15,9 +15,9 @@
 }
 .analyst-controls select,
 .analyst-question-row textarea {
-  background: #09121d;
-  color: var(--text);
-  border: 1px solid var(--line);
+  background: var(--act-fill);
+  color: var(--act-ink);
+  border: 1px solid var(--act-line);
   border-radius: 9px;
   padding: 10px;
 }
@@ -36,9 +36,10 @@
 .analyst-question-row .primary { height: auto; }
 .analyst-result {
   margin-top: 12px;
-  border: 1px solid #1f2d40;
+  border: 1px solid var(--act-line);
   border-radius: 12px;
-  background: #08111c;
+  background: var(--act-fill-recessed);
+  color: var(--act-ink);
   padding: 14px;
 }
 .analyst-result h3 { margin: 0 0 7px; }

@@ -33,6 +33,8 @@ request description, or an issue comment.
 
 **Implementation:** Audited every loaded stylesheet and the visible desktop demo route for high-specificity legacy colors. The shared ACT appearance bridge now owns ordinary and selected surfaces, route/timeframe states, badges, gates, calibration, timelines, evidence and analyst controls across explicit Light, explicit Dark and System-dark. Added a source census that names every known legacy island and the non-collapsing demo-width layouts.
 
+**Follow-up correction:** Browser review found that Market Exchange still owned dark-only dashboard, filter and inspector colors at higher specificity. Those component styles, plus Runtime Controls, Actor cassettes, intelTHAT and Nephew Analyst, now consume the semantic ACT palette directly. The bridge is a compatibility floor rather than the primary owner of those modules.
+
 ## 2026-11-04 — Make ACT v1 the real Market Compass shell
 
 **Founder correction:** ACT v1 means the original READYPLAY Administrative Control Tower dashboard system, not an ACT v1 label placed inside the existing dark page.
