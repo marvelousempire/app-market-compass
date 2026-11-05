@@ -21,6 +21,30 @@ It is intentionally **not** a black-box trading bot. It does not turn a 56/44 ev
 **Trading execution:** not implemented  
 **Production-grade institutional data:** not implemented
 
+### Commissioned installation
+
+Market Compass is commissioned as a loopback-only research service on **FiveMac**.
+
+| Item | Current state |
+| --- | --- |
+| Canonical source | Gitea `averygoodman/app-market-compass` on `main` |
+| Stable checkout | `~/Developer/market-compass-live` |
+| User service | `ai.market-compass` |
+| Address | `http://127.0.0.1:8000` on FiveMac |
+| Runtime mode | `research_only` |
+| Trading and score authority | `trade_execution:false`, `score_influence:false` |
+| Mirror | GitHub `marvelousempire/app-market-compass` follows accepted Gitea main |
+
+The exact running revision, PID and authority receipt are available from:
+
+```bash
+curl -fsS http://127.0.0.1:8000/api/operator/status
+curl -fsS http://127.0.0.1:8000/health
+launchctl print gui/$(id -u)/ai.market-compass
+```
+
+Commissioned means the accepted Gitea revision is installed behind a named, restartable user service. It does **not** enable order placement, brokerage access, Exchange mutations, bank writes, score influence or money movement.
+
 The most important distinction in this repository is:
 
 - **Implemented** means code exists and is runnable today.
@@ -348,10 +372,10 @@ make test
 
 `make setup` creates a local `.venv`, so the project does not need to pollute system Python like an overconfident shell script from 2009.
 
-## Analyze HYPE
+## Analyze BB
 
 ```bash
-make analyze ASSET=HYPE HORIZON=20
+make analyze ASSET=BB HORIZON=20
 ```
 
 ## Launch the browser application
@@ -368,20 +392,20 @@ Default address:
 http://127.0.0.1:8000
 ```
 
-### GitThat preview controls
+### Runtime controls
 
-The browser opens with six ready controls for the local research preview:
+The browser opens with six ready controls for the local research runtime:
 
 - **Preview plan** reads the bounded work order and its prohibited effects.
 - **Check status** reads the current host, process, mode, authority and safety state.
-- **Launch preview** confirms that the in-app runtime is already live. A stopped server cannot launch itself; GitThat owns cold launch and relaunch.
-- **Open live preview** opens another local browser view.
+- **Launch preview** confirms that the in-app runtime is already live. A stopped development preview cannot launch itself; the commissioned FiveMac service is relaunched by `launchd`.
+- **Open live preview** opens another local browser view of the same loopback runtime.
 - **View receipts** reads runtime health and the selected symbol's intelTHAT proof state.
-- **Stop safely** asks for confirmation, then stops only this loopback preview process. Run GitThat again to relaunch it.
+- **Stop safely** asks for confirmation, then terminates only the current loopback process. GitThat relaunches a development preview; the commissioned `ai.market-compass` service restarts automatically.
 
-These controls do not merge code, push branches, change Gitea authority, connect a broker, influence scores, or enable trading. The preview remains `research_only`, `trade_execution:false`, and localhost-only.
+These controls do not merge code, push branches, change Gitea authority, connect a broker, influence scores, or enable trading. Both preview and commissioned runtimes remain `research_only`, `trade_execution:false`, and localhost-only.
 
-An accepted installation can bind `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMISSIONED=true`, and `MARKET_COMPASS_SOURCE_REVISION` at launch. That changes only the runtime source receipt: research mode and `trade_execution:false` remain invariant.
+The commissioned service binds `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMISSIONED=true`, and `MARKET_COMPASS_SOURCE_REVISION` at launch. Those values make the installed source auditable; research mode, `trade_execution:false`, and `score_influence:false` remain invariant.
 
 The browser starts on **BB** with **BB**, **AAPL**, **QQQ**, and the operator-requested literal **SPCX** in the default watch choices. An untouched legacy default list is migrated once; a personally edited watchlist is preserved.
 

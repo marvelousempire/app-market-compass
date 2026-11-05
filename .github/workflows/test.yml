@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   test:
-    runs-on: nephew-spark
+    runs-on: macos-briefcase
     timeout-minutes: 15
     steps:
       - name: Checkout exact revision
