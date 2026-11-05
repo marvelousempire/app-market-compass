@@ -5,6 +5,24 @@ reason important features changed. It complements the factual release log in
 [`../CHANGELOG.md`](../CHANGELOG.md). It must not be replaced by short-lived chat history, a pull
 request description, or an issue comment.
 
+## 2026-11-05 — Refine outside repositories into owned research lenses
+
+**Founder direction:** Repeatedly accept repositories, text, URLs, and files as
+raw source material; sort and fit useful ideas into Market Compass as isolated
+ways to see an asset, while preserving existing product owners.
+
+**Implementation:** The first source lens pins `marvelousempire/day-trader-skill`
+revision `3d0f4ef6986f4984b7c6bd46f7ff4f87744c3abd` and clean-room adapts daily
+setup conditions plus RSI crossings into independently testable Brown and Wuda
+MicroSlices. Market Exchange owns provenance; Compass Desk and the contextual
+right rail expose the lens. Existing Historical Analogs and Backtest own
+scenario evidence instead of copying another simulation owner.
+
+**Authority boundary:** The donor is evidence, not authority. Broker, order,
+credential, account mutation, and money movement are rejected. Intraday claims
+remain held until the app has matching intraday bars. A setup remains a chart
+condition, not a recommendation or prediction.
+
 ## 2026-11-05 — Design triggers, restraint, approvals and calculateTHAT
 
 **Founder direction:** Make “when to go” and “when not to go” explicit, keep every concern in a micro-slice, and add calculateTHAT.

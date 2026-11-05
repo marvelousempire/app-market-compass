@@ -478,6 +478,7 @@ GET /health
 GET /api/analyze?symbol=HYPE&horizon=20
 GET /api/nodes
 GET /api/nodes/L2-001?symbol=HYPE&horizon=20
+GET /api/research-lenses/day-trader/QQQ
 ```
 
 The API currently serves a local research application. Authentication, quotas, persistence, tenancy, and production deployment controls are future work.
