@@ -197,6 +197,18 @@ make api
 
 `make api` starts Uvicorn without the browser-launch behavior.
 
+### Commissioned FiveMac runtime
+
+The accepted Gitea `main` tree is installed at `~/Developer/market-compass-live` and served by the named user LaunchAgent `ai.market-compass` on `127.0.0.1:8000`. The service environment binds `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMISSIONED=true`, `MARKET_COMPASS_SOURCE_REVISION`, and `MARKET_COMPASS_BIND` so runtime proof names its exact source.
+
+```bash
+curl -fsS http://127.0.0.1:8000/api/operator/status
+curl -fsS http://127.0.0.1:8000/health
+launchctl print gui/$(id -u)/ai.market-compass
+```
+
+Commissioning changes installation and source authority only. The runtime remains `research_only`; trade execution, score influence, Exchange mutations, bank writes and money movement remain unavailable.
+
 ## Tests
 
 The test suite currently covers core contracts such as:
@@ -212,7 +224,7 @@ The test suite currently covers core contracts such as:
 - SSL trust context;
 - browser auto-open behavior.
 
-GitHub Actions runs tests on pushes and pull requests.
+Gitea Actions runs required tests on pushes and pull requests through the registered `macos-briefcase` runner. Gitea is merge authority; GitHub is a downstream mirror.
 
 Passing tests establish that the implemented code satisfies its current software contracts. Passing tests do **not** establish trading profitability or predictive calibration.
 

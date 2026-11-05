@@ -5,6 +5,7 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Reconciled the handoff, status, implementation, troubleshooting, feature journal and README with the commissioned ACT v1 FiveMac runtime, registered `macos-briefcase` CI lane, canonical Gitea authority and downstream GitHub mirror.
 - Presented the Market Exchange through the ACT v1 Administrative Control Tower room pattern while preserving its working read-only search, filters, product inspector, 14 exchange modules and 58 Bank Reader candidate roles across seven bankTHAT consoles.
 - Kept every imported module read-only and owner-bound. No exchange or Bank Reader engine, credential, account payload, persistence, score influence, trading or money-movement authority is copied into Market Compass. The legacy Ledger empty-state auto-generate POST is explicitly held outside the projection.
 - Advanced the application contract to 0.6.0.

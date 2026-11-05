@@ -23,6 +23,22 @@ supersedes the earlier interpretation.
 
 ---
 
+## 2026-11-04 — Commission ACT v1 Market Exchange and its stable main door
+
+**Founder direction:** Bring the Admin Market Exchange tools and bankTHAT contracts into Market Compass, present them through ACT v1, merge and commission the result, update the original and mirror, and keep the localhost main door on final main.
+
+**Intention:** Make the actual read-only admin inventory usable from the research desk without copying owner engines, donor identity, credentials, trading authority or financial writes. Keep one canonical Gitea truth line and make the installed revision independently readable.
+
+**User-visible requirement:** Market Compass starts on BB; includes Omo, Prince, Wuda and Brown’s Barometers; exposes ACT v1 Dashboard, Catalog, All Products, Installed, APIs & MCPs and API Observatory rooms; and keeps the 14 Exchange modules plus 58 bankTHAT candidates inspectable.
+
+**Implementation:** Added working local search, filters, selection and General/UI/API/SSO/Install contract inspection; moved the surface to the ACT v1 Administrative Control Tower room pattern; installed `ai.market-compass` from `~/Developer/market-compass-live`; bound exact Gitea runtime receipts; routed Gitea Actions to the registered `macos-briefcase` runner; and kept GitHub as a downstream mirror.
+
+**Evidence:** Gitea PRs #4, #5 and #6 merged through exact-head green checks. FiveMac passed 42 tests. The commissioned door returned HTTP health with 115 nodes and reported `commissioned:true`, `preview_only:false`, `research_only`, `trade_execution:false`, and `score_influence:false`. The localhost forward at `127.0.0.1:18003` read the same commissioned surface.
+
+**Still open:** Owner-reviewed adapters and data contracts; real Actor psychology preferences; authenticated Exchange enable/save/install/API/SSO actions; bank persistence; broker integration; order execution and money movement. None is implied by this commissioning.
+
+---
+
 ## 2026-11-03 — Commission the research desk around named Actors
 
 **Founder direction:** Start on BB; provide Apple/AAPL, QQQ, and SPCX as starter choices; treat Omo, Prince, Wuda, and Brown as Actors with their own spaces and comp cards; put trading psychology in each Actor's space; consolidate market metrics and technical-analysis instruments under Brown's Barometers; put trends, hottest pointers, and notable RSI crossings under Wuda; remove Marvin; then merge and ship through the canonical forge.
@@ -33,7 +49,7 @@ supersedes the earlier interpretation.
 
 **User-visible requirement:** Market Compass opens on BB with BB/AAPL/QQQ/SPCX choices. Omo, Prince, Wuda, and Brown are selectable Actor spaces. Every Actor shows identity, role, individual trading-psychology configuration state, and authority. Wuda shows trend and RSI-threshold examples; Brown shows Breadth, Momentum, Volatility, Volume, RSI, MACD, moving averages, ATR, Bollinger Bands, and view-governance categories. Marvin is absent.
 
-**Implementation:** Added the Actor rail and centered Stage, per-Actor comp cards, Wuda and Brown groupings, starter-list migration, read-only intelTHAT bridge, six safe runtime controls, canonical-source environment receipts, and a native `nephew-spark` Gitea Actions workflow.
+**Implementation:** Added the Actor rail and centered Stage, per-Actor comp cards, Wuda and Brown groupings, starter-list migration, read-only intelTHAT bridge, six safe runtime controls, canonical-source environment receipts, and a native Gitea Actions workflow. The November 4 entry records the later runner-label correction.
 
 **Evidence:** Canonical Gitea PR #1 merged at `394ecdd0dd79e9c004448df5b567536ea898d281`; authority follow-up PR #2 merged at `29b2c263467bc7257e746872550f8b079486b2dd`; both exact-head checks passed; merged FiveMac suite passed 40 tests; live health returned HTTP 200 with 115 nodes; runtime reported canonical Gitea authority while trading and score influence remained disabled. Commissioning journal: `marvelousempire/nephew#540`.
 

@@ -1,9 +1,28 @@
-# Market Compass handoff — remaining user-visible gaps
+# Market Compass handoff — commissioned ACT v1 research runtime
 
-This handoff reflects the v0.5 application, not the old developer-demo surface. The first
+This handoff reflects the commissioned v0.6 application, not the old developer-demo surface. The first
 screen follows the 8001 information sequence (header, identity, four summary cards, then the
 desk). The trading workbench, indicators, multi-timeframe analysis, watchlist, catalysts,
-Evidence Board, node inspector, research backtest, and Nephew analyst panel remain visible.
+Evidence Board, node inspector, research backtest, Nephew analyst panel, Actor spaces and ACT v1
+Market Exchange remain visible.
+
+## Installed target
+
+| Target | Current state |
+| --- | --- |
+| Canonical forge | Gitea `averygoodman/app-market-compass`; accepted `main` owns releases |
+| Downstream mirror | GitHub `marvelousempire/app-market-compass` follows accepted Gitea main |
+| Stable FiveMac checkout | `~/Developer/market-compass-live` |
+| Service and door | `ai.market-compass` at FiveMac `127.0.0.1:8000`; operator localhost forward `127.0.0.1:18003` while its SSH tunnel is active |
+| Authority boundary | Commissioned research only; no trading, score influence, bank writes or money movement |
+
+Read the exact live revision rather than copying a dated SHA from this handoff:
+
+```bash
+curl -fsS http://127.0.0.1:8000/api/operator/status
+curl -fsS http://127.0.0.1:8000/health
+launchctl print gui/$(id -u)/ai.market-compass
+```
 
 ## What is now visible
 
@@ -14,6 +33,8 @@ Evidence Board, node inspector, research backtest, and Nephew analyst panel rema
 | Evidence Board | Interactive inferred relationship graph with relationship/source inspection and explicit inferred-versus-verified labeling. |
 | Research tools | Simple/technical/source views, 115-node inspector, snapshots/watchlist, and research backtest. |
 | AI interpretation | Nephew panel with automatic or explicit local/cloud provider selection, depth, per-request cloud consent, grounded response schema, and model receipt. |
+| Actor spaces | Omo, Prince, Wuda and Brown’s Barometers have comp cards and explicit unconfigured psychology/authority state. |
+| ACT v1 Market Exchange | Dashboard, Catalog, All Products, Installed, APIs & MCPs and API Observatory rooms inspect 14 Exchange modules and 58 bankTHAT candidates without owner-side mutations. |
 
 ## Remaining gaps only
 

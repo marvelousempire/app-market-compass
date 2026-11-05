@@ -195,7 +195,29 @@ make api
 
 ---
 
-# 7. Port 8000 is already in use
+# 7. Commissioned FiveMac service is unavailable
+
+The installed research runtime is owned by the user LaunchAgent `ai.market-compass`, not an anonymous shell process.
+
+Read its state and exact source receipt:
+
+```bash
+launchctl print gui/$(id -u)/ai.market-compass
+curl -fsS http://127.0.0.1:8000/api/operator/status
+curl -fsS http://127.0.0.1:8000/health
+```
+
+The expected receipt is `commissioned:true`, `preview_only:false`, `mode:research_only`, `trade_execution:false`, and `score_influence:false`. If the service is loaded but unhealthy, restart only this named job:
+
+```bash
+launchctl kickstart -k gui/$(id -u)/ai.market-compass
+```
+
+Do not replace the recorded Gitea source revision, enable trading, or connect financial writes as part of a health repair.
+
+---
+
+# 8. Port 8000 is already in use
 
 Symptom:
 
@@ -207,7 +229,7 @@ Check which process owns the port:
 lsof -nP -iTCP:8000 -sTCP:LISTEN
 ```
 
-Stop the old local Market Compass/Uvicorn process and rerun:
+If `ai.market-compass` owns the port, use the commissioned door rather than starting a second process. Otherwise stop only the verified old Market Compass/Uvicorn process and rerun:
 
 ```bash
 make app
@@ -215,7 +237,7 @@ make app
 
 ---
 
-# 8. Live symbol cannot be found
+# 9. Live symbol cannot be found
 
 Market Compass first searches the requested symbol because providers sometimes use internal names for crypto instruments.
 
@@ -236,7 +258,7 @@ If a symbol still cannot be resolved, verify the provider supports it or use CSV
 
 ---
 
-# 9. Live provider is down or unreliable
+# 10. Live provider is down or unreliable
 
 The current live provider is a public research source, not an SLA-backed institutional feed.
 
@@ -260,7 +282,7 @@ Provider abstraction, caching, and failover are Phase 1 roadmap priorities.
 
 ---
 
-# 10. Tests pass but analysis fails
+# 11. Tests pass but analysis fails
 
 This is possible.
 
@@ -292,7 +314,7 @@ If the last command fails, inspect the bottom of the traceback for the first Mar
 
 ---
 
-# 11. Reset the local environment
+# 12. Reset the local environment
 
 If dependencies become inconsistent:
 
@@ -306,7 +328,7 @@ make test
 
 ---
 
-# 12. Verify repository version
+# 13. Verify repository version
 
 Check your current commit:
 
@@ -332,7 +354,7 @@ If you have local edits, Git may require you to commit/stash them before pulling
 
 ---
 
-# 13. What to include in a useful bug report
+# 14. What to include in a useful bug report
 
 Include:
 
@@ -354,7 +376,7 @@ Do not paste API keys or credentials. Market Compass does not require broker cre
 
 ---
 
-# 14. Expected healthy local sequence
+# 15. Expected healthy local sequence
 
 ```bash
 git pull

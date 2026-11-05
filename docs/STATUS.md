@@ -61,11 +61,11 @@ This document is the repository's expectation contract. If another document soun
 
 | Capability | Status | Notes |
 | --- | --- | --- |
-| Unit tests | Implemented | Covers core calculations/contracts, browser application/static surface, and the six GitThat preview controls with explicit no-trading and no-promotion boundaries. |
+| Unit tests | Implemented | Covers core calculations/contracts, browser application/static surface, and the six runtime controls with explicit no-trading and no-promotion boundaries. |
 | Actor spaces | Presentation-only | Omo, Prince, Wuda and Brown’s Barometers are Actors with individual comp cards, including an unconfigured trading-psychology field. Wuda groups trends and notable RSI thresholds; Brown’s groups metrics, instruments and view governance. No source data, score influence, broker action or approval authority is inferred. |
 | ACT v1 Market Exchange | Read-only working projection | ACT v1 Administrative Control Tower rooms present the parseTHAT/decantTHAT inventory for six Market Exchange admin surfaces, 14 exchange tools and 58 Bank Reader candidate roles. Dashboard totals, catalog search/filtering and product General/UI/API/SSO/Install inspection run locally; every module exposes htmlTHAT, cssTHAT and jsTHAT contract state and authority boundary. | Owner-reviewed adapters and data contracts; enable, save, install, SSO and API mutations remain unavailable and no owner engine is connected by this release. |
-| Runtime source authority | Environment-bound | Canonical installs bind authority, commissioned state and exact source revision at launch; preview remains the default and trading stays disabled in both states. |
-| Canonical Gitea Actions CI | Implemented | Native authenticated checkout on the commissioned `nephew-spark` lane; tests run on pushes and pull requests. GitHub is a downstream mirror, not merge authority. |
+| Runtime source authority | Commissioned on FiveMac | `ai.market-compass` binds Gitea authority, commissioned state and exact source revision at launch from `~/Developer/market-compass-live`. Development launch remains available; trading and score influence stay disabled in both states. |
+| Canonical Gitea Actions CI | Implemented | Native authenticated checkout on the registered `macos-briefcase` runner; required tests run on pushes and pull requests. GitHub is a downstream mirror, not merge authority. |
 | Chronological validation | Implemented for Ridge forecast | No random train/test split for the current forecast. |
 | Research backtest | Research | Past-only signal observation with fee assumption; runnable from CLI and browser. |
 | Full execution simulator | Planned | Needs spread, slippage, liquidity, funding/borrow, partial fills, gaps, venue behavior. |
@@ -111,6 +111,8 @@ A user can:
 13. open Omo, Prince, Wuda, or Brown's Barometers as an Actor space and inspect its comp card;
 14. inspect Wuda trend/notable categories and Brown metrics, technical-analysis instruments, and view-governance categories;
 15. read intelTHAT proof health and canonical runtime-source receipts without enabling score influence or trading.
+16. inspect the ACT v1 Market Exchange dashboard, catalog filters, product contracts and API/auth state without invoking owner mutations;
+17. use the commissioned FiveMac door as a restartable loopback service and read its exact source receipt.
 
 ### Does not work yet
 

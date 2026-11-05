@@ -40,7 +40,7 @@ If the long-term PRD and STATUS appear to disagree about whether something exist
 
 ### 3. [`IMPLEMENTATION.md`](IMPLEMENTATION.md)
 
-Explains the current v0.1 code:
+Explains the current v0.6 code and commissioned runtime:
 
 - runtime flow;
 - module responsibilities;
@@ -113,6 +113,7 @@ Covers:
 - SSL certificate failures;
 - PATH warnings;
 - browser auto-open;
+- commissioned FiveMac service health and restart;
 - port conflicts;
 - provider/symbol failures;
 - CSV fallback;
