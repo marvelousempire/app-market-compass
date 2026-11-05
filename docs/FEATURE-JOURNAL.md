@@ -13,6 +13,14 @@ request description, or an issue comment.
 
 **Authority boundary:** The presentation grammar is adapted from the accepted READYPLAY calm-presentation package pinned to READYPLAY source `e0d9f9fddb80d6ea66d7576c4709fc19b58176f0`. READYPLAY identity, private data and engine authority were not copied. Market Compass remains research-only with trading off.
 
+## 2026-11-05 — Correct the partial shell transfer
+
+**Founder correction:** The shell is already present in READYPLAY. The first Market Compass transfer copied only the idea of a left rail and therefore was not the complete ACT v1 shell.
+
+**Implementation:** Returned to pinned READYPLAY source `e0d9f9fddb80d6ea66d7576c4709fc19b58176f0` and carried the full `DashboardShell` anatomy into the no-build Market Compass receiver: grouped/collapsible primary rail, Appearance, compact rail, Rail/Focus/Wide modes, layout recovery, supporting rail, desktop footer rail, mobile tab bar, Menu search and saved preferences. READYPLAY destinations were mapped to real Market Compass anchors rather than copied as fake routes.
+
+**Lesson:** A visually similar sidebar is not shell parity. Future transfers start with the owner shell composition and enumerate every persistent shell component before styling the receiver.
+
 ## Journal rules
 
 Every material feature decision records:

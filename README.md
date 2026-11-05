@@ -121,7 +121,7 @@ The current `v0.6` implementation includes the following real, runnable capabili
 
 ## ACT v1 Market Exchange
 
-ACT v1 is the browser's outer administrative shell, not a label on the Exchange module. Its persistent room rail opens the real Overview, Actor spaces, Market Exchange, Desk and intelTHAT sections. The calm light workspace, quiet support labels, raised working surfaces and compact responsive rail follow the accepted READYPLAY Administrative Control Tower presentation grammar without importing READYPLAY identity, data or engine authority.
+ACT v1 is the browser's complete outer administrative shell, not a label on the Exchange module or a single invented rail. It carries the accepted READYPLAY shell anatomy: grouped and collapsible primary navigation, System/Light/Dark Appearance controls, Rail/Focus/Wide layouts with recovery, a contextual supporting rail, desktop footer quick launch, a separate mobile tab bar, and a searchable Menu door. Every destination opens a real Market Compass section. READYPLAY identity, data, routes and engine authority remain outside the receiving app.
 
 **Status: Implemented presentation and contract inventory; owner adapters not connected**
 

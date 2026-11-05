@@ -16,16 +16,44 @@
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
-  <aside class="act-shell-rail" aria-label="Market Compass rooms">
-    <a class="act-shell-brand" href="#market-overview" aria-label="Market Compass home"><span>MC</span><strong>Market<br>Compass</strong></a>
-    <nav class="act-shell-nav">
-      <a class="active" href="#market-overview" data-act-shell-room="overview"><span aria-hidden="true">⌂</span><b>Overview</b></a>
-      <a href="#actor-spaces" data-act-shell-room="actors"><span aria-hidden="true">◎</span><b>Actors</b></a>
-      <a href="#market-exchange" data-act-shell-room="exchange"><span aria-hidden="true">◇</span><b>Exchange</b></a>
-      <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Desk</b></a>
-      <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">◉</span><b>intelTHAT</b></a>
+  <aside class="act-shell-rail" aria-label="Market Compass rooms" data-shell-node="primary-rail">
+    <a class="act-shell-brand" href="#market-overview" aria-label="Market Compass home"><span aria-hidden="true"></span><strong>MARKET COMPASS</strong><small>Admin Control Tower</small></a>
+    <nav class="act-shell-nav" aria-label="Admin studios">
+      <section class="act-nav-group" data-nav-group="Overview">
+        <button type="button" class="act-nav-group-toggle" aria-expanded="true"><span>Overview</span><i aria-hidden="true">⌄</i></button>
+        <div class="act-nav-items">
+          <a class="active" href="#market-overview" data-act-shell-room="overview"><span aria-hidden="true">◈</span><b>Overview</b></a>
+          <a href="#operator-deck" data-act-shell-room="runtime"><span aria-hidden="true">⬢</span><b>Runtime Status</b></a>
+        </div>
+      </section>
+      <section class="act-nav-group" data-nav-group="Studios">
+        <button type="button" class="act-nav-group-toggle" aria-expanded="true"><span>Studios</span><i aria-hidden="true">⌄</i></button>
+        <div class="act-nav-items">
+          <a href="#actor-spaces" data-act-shell-room="actors"><span aria-hidden="true">◎</span><b>Actor Studio</b></a>
+          <a href="#market-exchange" data-act-shell-room="exchange"><span aria-hidden="true">◇</span><b>Market Exchange</b></a>
+          <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Trading Desk</b></a>
+          <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">◉</span><b>intelTHAT</b></a>
+        </div>
+      </section>
+      <section class="act-nav-group" data-nav-group="Evidence">
+        <button type="button" class="act-nav-group-toggle" aria-expanded="true"><span>Evidence</span><i aria-hidden="true">⌄</i></button>
+        <div class="act-nav-items">
+          <a href="#route-panel" data-act-shell-room="route"><span aria-hidden="true">↝</span><b>Price Route</b></a>
+          <a href="#timeframe-panel" data-act-shell-room="timeframes"><span aria-hidden="true">▦</span><b>Timeframes</b></a>
+          <a href="#evidence-panel" data-act-shell-room="evidence"><span aria-hidden="true">✓</span><b>Evidence</b></a>
+          <a href="#catalyst-panel" data-act-shell-room="catalysts"><span aria-hidden="true">⚑</span><b>Catalysts</b></a>
+        </div>
+      </section>
     </nav>
-    <div class="act-shell-boundary"><span></span><b>Research only</b><small>Trading off</small></div>
+    <div class="act-rail-footer">
+      <section class="act-appearance" aria-label="Appearance">
+        <p>Appearance</p>
+        <div role="radiogroup" aria-label="Color mode"><button type="button" role="radio" data-act-color="system" aria-checked="true">System</button><button type="button" role="radio" data-act-color="light" aria-checked="false">Light</button><button type="button" role="radio" data-act-color="dark" aria-checked="false">Dark</button></div>
+        <div role="radiogroup" aria-label="Layout theme"><button type="button" role="radio" data-act-layout="control-room" aria-checked="true">Rail</button><button type="button" role="radio" data-act-layout="focus" aria-checked="false">Focus</button><button type="button" role="radio" data-act-layout="wide-canvas" aria-checked="false">Wide</button></div>
+      </section>
+      <div class="act-settings-actions"><button type="button" data-act-command="settings">⚙<span>Settings</span></button><button type="button" data-act-command="search">⌕<span>Search</span></button><button type="button" data-act-command="receipts">≣<span>Receipts</span></button></div>
+      <div class="act-shell-boundary"><span></span><b>MARKET COMPASS ACT</b><small>Research only · Trading off</small><button type="button" id="act-rail-collapse" aria-label="Collapse sidebar" title="Collapse sidebar">«</button></div>
+    </div>
   </aside>
   <header class="app-header">
     <div>
@@ -46,7 +74,7 @@
   </header>
 
   <main class="shell" id="market-overview">
-    <section class="operator-deck panel" aria-labelledby="operator-deck-title">
+    <section class="operator-deck panel" id="operator-deck" aria-labelledby="operator-deck-title">
       <div class="operator-deck-heading">
         <div>
           <p class="eyebrow">GITTHAT PREVIEW CONTROLS</p>
@@ -148,7 +176,7 @@
         <section class="four-col signal-overview" id="signal-grid"></section>
       </section>
 
-      <section class="panel route-panel">
+      <section class="panel route-panel" id="route-panel">
         <div class="section-head"><div><p class="eyebrow">PRICE PATH</p><h2>Bus Stop Route</h2></div><div id="route-badge"></div></div>
         <div id="route"></div>
       </section>
@@ -170,7 +198,7 @@
         <div id="analyst-result" class="analyst-result"><p class="muted">Market Compass calculates the evidence. Nephew interprets it without changing the score.</p></div>
       </section>
 
-      <section class="panel timeframe-panel">
+      <section class="panel timeframe-panel" id="timeframe-panel">
         <div class="section-head">
           <div><p class="eyebrow">MULTI-TIMEFRAME</p><h2>4H / 1D / 1W Alignment</h2></div>
           <div id="timeframe-consensus"></div>
@@ -206,7 +234,7 @@
         </article>
       </section>
 
-      <section class="two-col">
+      <section class="two-col" id="evidence-panel">
         <article class="panel">
           <div class="section-head"><div><p class="eyebrow">WHY THE SCORE MOVED</p><h2>Evidence Contributions</h2></div></div>
           <div id="contributions"></div>
@@ -228,7 +256,7 @@
         </article>
       </section>
 
-      <section class="panel">
+      <section class="panel" id="catalyst-panel">
         <div class="section-head">
           <div><p class="eyebrow">HUMAN FACTOR</p><h2>Catalyst Timeline</h2></div>
           <span class="trust-chip">Recent news events, not a complete scheduled macro calendar</span>
@@ -279,6 +307,24 @@
       </section>
     </section>
   </main>
+
+  <aside class="act-supporting-rail" aria-label="Dashboard supporting rail" data-shell-node="supporting-rail">
+    <section><p class="act-rail-eyebrow">MARKET PULSE</p><h2>Research Health</h2><div class="act-rail-stats"><p><span class="good"></span>Runtime <b>Live</b></p><p><span class="good"></span>Authority <b>Gitea</b></p><p><span class="warn"></span>Trading <b>Off</b></p></div></section>
+    <section><p class="act-rail-eyebrow">QUICK WATCH</p><div class="act-quick-watch"><button type="button" data-act-symbol="BB">BB</button><button type="button" data-act-symbol="AAPL">AAPL</button><button type="button" data-act-symbol="QQQ">QQQ</button><button type="button" data-act-symbol="SPCX">SPCX</button></div></section>
+    <section><p class="act-rail-eyebrow">CURRENT ROOM</p><h3 id="act-current-room">Overview</h3><p id="act-room-help">Top-line runtime, controls, Actors, and research status.</p></section>
+    <section class="act-right-boundary"><strong>Authority boundary</strong><p>Market Compass can research and explain. It cannot place orders, move money, or change scores.</p></section>
+  </aside>
+
+  <button type="button" class="act-layout-recovery hidden" id="act-layout-recovery">▣ Open rails</button>
+
+  <footer class="act-shell-footer" data-shell-node="bottom-rail" aria-label="Admin shell controls">
+    <nav aria-label="Quick launch"><a href="#market-overview" data-act-footer-room="overview">⌂ Home</a><a href="#actor-spaces" data-act-footer-room="actors">◎ Actors</a><a href="#market-exchange" data-act-footer-room="exchange">◇ Exchange</a><a href="#market-workspace" data-act-footer-room="desk">⌁ Desk</a></nav>
+    <div role="group" aria-label="Canvas layout"><button type="button" data-act-layout="control-room">▣ Rail</button><button type="button" data-act-layout="focus">⊙ Focus</button><button type="button" data-act-layout="wide-canvas">▥ Wide</button><button type="button" data-act-command="menu">☰ Menu</button></div>
+  </footer>
+
+  <nav class="act-mobile-tabs" aria-label="Primary"><a href="#market-overview">◈<span>Overview</span></a><a href="#actor-spaces">◎<span>Actors</span></a><a href="#market-exchange">◇<span>Exchange</span></a><a href="#market-workspace">⌁<span>Desk</span></a><button type="button" data-act-command="menu">•••<span>More</span></button></nav>
+
+  <dialog class="act-command-dialog" id="act-command-dialog" aria-labelledby="act-command-title"><div class="act-dialog-head"><div><p>MARKET COMPASS ACT</p><h2 id="act-command-title">Go to a room</h2></div><button type="button" data-act-dialog-close aria-label="Close menu">×</button></div><label><span>Search rooms</span><input id="act-command-search" type="search" placeholder="Search Overview, Actors, Exchange…"></label><div class="act-command-results" id="act-command-results"></div></dialog>
 
   <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
   <script src="/static/app.js" defer></script>

@@ -5,6 +5,9 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Completed the READYPLAY ACT v1 receiving shell after the founder identified the first implementation as partial: added grouped collapsible navigation, Appearance, Rail/Focus/Wide modes and recovery, supporting right rail, footer quick launch, mobile tabs, Menu search, compact rail persistence and real-section bindings.
+- Removed the invented one-rail approximation as the completion boundary. Market Compass keeps its own identity, data and read-only authority while adopting the pinned READYPLAY shell anatomy.
+
 - Replaced the label-only ACT v1 treatment with a genuine full-page administrative shell: persistent room navigation, calm light workspace materials, responsive compact/mobile rails, active-room readback and direct links to real Market Compass sections.
 - Preserved Market Compass identity, analysis behavior, operator controls and the research-only/trading-off boundary; no READYPLAY data, identity or engine authority was imported.
 
