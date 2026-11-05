@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/static/overview.css">
   <link rel="stylesheet" href="/static/analyst.css">
   <link rel="stylesheet" href="/static/intelthat.css">
+  <link rel="stylesheet" href="/static/research-lenses.css">
   <link rel="stylesheet" href="/static/operator-controls.css">
   <link rel="stylesheet" href="/static/research-cassettes.css">
   <link rel="stylesheet" href="/static/stubthat.css">
@@ -277,6 +278,14 @@
       </section>
 
       <section class="research-only">
+        <section class="panel research-lens" id="day-trader-lens" aria-label="Day Trader source research lens">
+          <div class="section-head">
+            <div><p class="eyebrow">IMPORTED LENS · BROWN + WUDA</p><h2>Day Trader Research Lens</h2></div>
+            <button type="button" class="secondary" id="day-trader-lens-load">Read Lens</button>
+          </div>
+          <p class="trust-note">Daily setup measurements and notable RSI crossings refined from a provenance-bound outside source. No score influence, broker, order, credential, or money movement.</p>
+          <div id="day-trader-lens-output" role="status" aria-live="polite"><p class="muted">Run an asset analysis to read this lens.</p></div>
+        </section>
         <section class="panel" id="intelthat-panel" aria-label="intelTHAT research receipts">
           <div class="section-head">
             <div><p class="eyebrow">INDEPENDENT SOURCE</p><h2>intelTHAT Research / Proof Health</h2></div>
@@ -343,6 +352,7 @@
   <script src="/static/app.js" defer></script>
   <script src="/static/analyst.js" defer></script>
   <script src="/static/intelthat.js" defer></script>
+  <script src="/static/research-lenses.js" defer></script>
   <script src="/static/operator-controls.js" defer></script>
   <script src="/static/research-cassettes.js" defer></script>
   <script src="/static/stubthat.js" defer></script>

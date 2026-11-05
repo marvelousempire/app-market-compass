@@ -5,6 +5,8 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Added the first provenance-bound imported research lens from `marvelousempire/day-trader-skill` at immutable revision `3d0f4ef6986f4984b7c6bd46f7ff4f87744c3abd`. Five daily setup detectors and RSI 35/50/65 crossings are isolated Brown/Wuda MicroSlices with a read-only API and ACT panel. Intraday claims are held without intraday bars; broker, order, credential, account, and money-movement paths are rejected.
+
 - Added a contextual right-rail submenu for every primary room. Items navigate to real in-page sections or invoke existing Actor, Market Exchange, and calculateTHAT controls without creating new execution authority. The shell assets now carry a revision binding so commissioned browsers receive the matching submenu behavior and presentation together.
 
 - Removed remaining dark-only color ownership from Market Exchange, Runtime Controls, Actor cassettes, intelTHAT and Nephew Analyst source styles. Dashboard metrics, filter buttons, product cards and inspectors now consume the ACT semantic palette directly instead of depending on lower-specificity repair overrides.

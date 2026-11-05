@@ -19,9 +19,10 @@ from .backtest import backtest_frame
 from .data import get_market_data, search_symbols
 from .decision_readiness import calculate_readiness
 from .engine import analyze
-from .pack002 import desk_from_bars
 from .intelthat_bridge import read_snapshot
+from .pack002 import desk_from_bars
 from .registry import NODE_REGISTRY, node_output
+from .research_lenses import build_day_trader_lens
 
 app = FastAPI(title="Market Compass", version="0.6.0")
 analyst_router = AnalystRouter()
@@ -187,4 +188,14 @@ def intelthat_api(symbol: str):
     try:
         return read_snapshot(symbol)
     except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.get("/api/research-lenses/day-trader/{symbol}")
+def day_trader_lens_api(symbol: str):
+    """Read one source-bound lens; never execute donor or brokerage code."""
+    try:
+        data = get_market_data(symbol)
+        return build_day_trader_lens(symbol, data.bars)
+    except Exception as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
