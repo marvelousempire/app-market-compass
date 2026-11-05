@@ -5,12 +5,26 @@
   const targets = links.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
   const roomLabel = document.querySelector('#act-current-room');
   const roomHelp = document.querySelector('#act-room-help');
+  const roomSubmenu = document.querySelector('#act-room-submenu');
   const dialog = document.querySelector('#act-command-dialog');
   const dialogSearch = document.querySelector('#act-command-search');
   const dialogResults = document.querySelector('#act-command-results');
   const recovery = document.querySelector('#act-layout-recovery');
   const roomDescriptions = {
-    overview: 'Top-line runtime, controls, Actors, and research status.', runtime: 'Commissioned source, host, safety mode, and runtime receipts.', actors: 'Omo, Prince, Wuda, and Brown’s governed Actor spaces.', exchange: 'Read-only Market Exchange and bankTHAT contract inventory.', desk: 'Market analysis, price memory, momentum, and evidence.', intel: 'Independent local research and proof-health receipts.', route: 'Price path, bus stops, invalidation, and confluence.', timeframes: '4H, daily, and weekly alignment.', evidence: 'Score contributions and historical calibration.', catalysts: 'Recent human-factor and market-news evidence.'
+    overview: 'Top-line runtime, controls, Actors, and research status.', runtime: 'Commissioned source, host, safety mode, and runtime receipts.', actors: 'Omo, Prince, Wuda, and Brown’s governed Actor spaces.', exchange: 'Read-only Market Exchange and bankTHAT contract inventory.', desk: 'Market analysis, price memory, momentum, and evidence.', intel: 'Independent local research and proof-health receipts.', gates: 'Transparent go, watch, do-not-go, and invalidation research signals.', route: 'Price path, bus stops, invalidation, and confluence.', timeframes: '4H, daily, and weekly alignment.', evidence: 'Score contributions and historical calibration.', catalysts: 'Recent human-factor and market-news evidence.'
+  };
+  const roomSubmenus = {
+    overview: [['Runtime status', '#operator-deck'], ['Asset controls', '#market-overview'], ['Actor Studio', '#actor-spaces'], ['Market Exchange', '#market-exchange']],
+    runtime: [['Preview controls', '#operator-deck'], ['Asset controls', '#market-overview'], ['Watchlist', '.watch-row']],
+    actors: [['Omo', 'cassette:omo'], ['Prince', 'cassette:prince'], ['Wuda', 'cassette:wuda'], ['Brown’s Barometers', 'cassette:browns-barometers']],
+    exchange: [['Dashboard', 'exchange:dashboard'], ['Catalog', 'exchange:catalog'], ['All products', 'exchange:products'], ['Installed', 'exchange:installed'], ['APIs & MCPs', 'exchange:apis'], ['API Observatory', 'exchange:observatory']],
+    desk: [['Intelligence overview', '#market-workspace'], ['Price route', '#route-panel'], ['Timeframes', '#timeframe-panel'], ['Evidence', '#evidence-panel'], ['Catalysts', '#catalyst-panel']],
+    intel: [['Local receipts', '#intelthat-panel'], ['Historical analogs', '#history-panel'], ['Forecast', '#forecast-panel'], ['Evidence board', '#evidence-board']],
+    gates: [['Decision gates', '#decision-gates'], ['calculateTHAT', '#calculate-that-formula'], ['Refresh signal', 'click:#calculate-that-run']],
+    route: [['Bus Stop route', '#route-panel'], ['Nephew analyst', '.analyst-panel'], ['Timeframe alignment', '#timeframe-panel']],
+    timeframes: [['4H / 1D / 1W', '#timeframe-panel'], ['Price workbench', '.chart-memory'], ['Evidence contributions', '#evidence-panel']],
+    evidence: [['Contributions', '#contributions'], ['Historical calibration', '#calibration'], ['Bull and bear cases', '.contrast'], ['Evidence board', '#evidence-board']],
+    catalysts: [['Catalyst timeline', '#catalyst-panel'], ['Decision gates', '#decision-gates'], ['intelTHAT receipts', '#intelthat-panel']]
   };
 
   const safeStore = { get(key) { try { return localStorage.getItem(key); } catch { return null; } }, set(key, value) { try { localStorage.setItem(key, value); } catch {} } };
@@ -23,7 +37,33 @@
     const active = links.find((link) => link.dataset.actShellRoom === id);
     if (active && roomLabel) roomLabel.textContent = active.querySelector('b')?.textContent || id;
     if (roomHelp) roomHelp.textContent = roomDescriptions[id] || '';
+    if (roomSubmenu) {
+      roomSubmenu.replaceChildren(...(roomSubmenus[id] || []).map(([label, target]) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.actSubmenuTarget = target;
+        button.innerHTML = `<span>${label}</span><i aria-hidden="true">→</i>`;
+        return button;
+      }));
+    }
   };
+
+  roomSubmenu?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-act-submenu-target]');
+    if (!button) return;
+    const target = button.dataset.actSubmenuTarget;
+    if (target.startsWith('cassette:')) {
+      document.querySelector(`[data-cassette="${target.slice(9)}"]`)?.click();
+      document.querySelector('#actor-spaces')?.scrollIntoView({ block: 'start' });
+    } else if (target.startsWith('exchange:')) {
+      document.querySelector(`[data-act-room="${target.slice(9)}"]`)?.click();
+      document.querySelector('#market-exchange')?.scrollIntoView({ block: 'start' });
+    } else if (target.startsWith('click:')) {
+      document.querySelector(target.slice(6))?.click();
+    } else {
+      document.querySelector(target)?.scrollIntoView({ block: 'start' });
+    }
+  });
 
   document.querySelectorAll('.act-nav-group-toggle').forEach((button) => button.addEventListener('click', () => {
     const expanded = button.getAttribute('aria-expanded') !== 'false';
@@ -82,6 +122,7 @@
   document.querySelectorAll('[data-act-command="receipts"]').forEach((button) => button.addEventListener('click', () => document.querySelector('[data-operator-action="receipts"]')?.click()));
   document.querySelectorAll('[data-act-symbol]').forEach((button) => button.addEventListener('click', () => { const input = document.querySelector('#symbol'); if (!input) return; input.value = button.dataset.actSymbol; input.dispatchEvent(new Event('change', { bubbles: true })); document.querySelector('#analyze')?.click(); }));
   links.forEach((link) => link.addEventListener('click', () => selectRoom(link.dataset.actShellRoom)));
+  selectRoom('overview');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => { const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]; if (visible) { const link = links.find((item) => item.getAttribute('href') === `#${visible.target.id}`); if (link) selectRoom(link.dataset.actShellRoom); } }, { rootMargin: '-15% 0px -70%', threshold: [0, .2, .6] });
     targets.forEach((target) => observer.observe(target));

@@ -35,6 +35,8 @@ request description, or an issue comment.
 
 **Follow-up correction:** Browser review found that Market Exchange still owned dark-only dashboard, filter and inspector colors at higher specificity. Those component styles, plus Runtime Controls, Actor cassettes, intelTHAT and Nephew Analyst, now consume the semantic ACT palette directly. The bridge is a compatibility floor rather than the primary owner of those modules.
 
+**Right-rail completion:** The supporting rail now renders an “In This Room” submenu for every primary destination. Each item routes to an existing section or delegates to an existing Actor, Exchange room, or calculateTHAT control; it does not fabricate a new owner action.
+
 ## 2026-11-04 — Make ACT v1 the real Market Compass shell
 
 **Founder correction:** ACT v1 means the original READYPLAY Administrative Control Tower dashboard system, not an ACT v1 label placed inside the existing dark page.

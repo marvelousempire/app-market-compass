@@ -78,3 +78,16 @@ def test_shell_rooms_resolve_to_real_sections_and_not_fake_routes():
     assert targets
     for target in targets:
         assert f'id="{target}"' in html
+
+
+def test_supporting_rail_exposes_real_contextual_submenus():
+    html = (WEB / "index.html").read_text()
+    script = (WEB / "act-v1-shell.js").read_text()
+    css = (WEB / "act-v1-shell.css").read_text()
+    assert 'id="act-room-submenu"' in html
+    assert 'aria-label="Current room sections"' in html
+    for room in ("overview", "runtime", "actors", "exchange", "desk", "intel", "gates", "route", "timeframes", "evidence", "catalysts"):
+        assert f"{room}: [" in script
+    for owned_action in ("cassette:", "exchange:", "click:"):
+        assert f"target.startsWith('{owned_action}')" in script
+    assert ".act-room-submenu" in css
