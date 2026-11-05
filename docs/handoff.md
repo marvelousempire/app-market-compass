@@ -13,7 +13,8 @@ Market Exchange remain visible.
 | Canonical forge | Gitea `averygoodman/app-market-compass`; accepted `main` owns releases |
 | Downstream mirror | GitHub `marvelousempire/app-market-compass` follows accepted Gitea main |
 | Stable FiveMac checkout | `~/Developer/market-compass-live` |
-| Service and door | `ai.market-compass` at FiveMac `127.0.0.1:8000`; operator localhost forward `127.0.0.1:18003` while its SSH tunnel is active |
+| Service and door | `ai.market-compass` at FiveMac `127.0.0.1:8000`; Make Doors operator URL `http://market-compass.localhost/` |
+| Door ownership | Nephew owns the canonical registry and named, restartable FiveMac transport; Make Doors projects it. The raw `127.0.0.1:18003` forward is not the user-facing Door. |
 | Authority boundary | Commissioned research only; no trading, score influence, bank writes or money movement |
 
 Read the exact live revision rather than copying a dated SHA from this handoff:
