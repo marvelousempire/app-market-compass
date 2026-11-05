@@ -33,7 +33,7 @@
         <div class="act-nav-items">
           <a href="#actor-spaces" data-act-shell-room="actors"><span aria-hidden="true">◎</span><b>Actor Studio</b></a>
           <a href="#market-exchange" data-act-shell-room="exchange"><span aria-hidden="true">◇</span><b>Market Exchange</b></a>
-          <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Trading Desk</b></a>
+          <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Compass Desk</b></a>
           <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">◉</span><b>intelTHAT</b></a>
           <a href="#decision-gates" data-act-shell-room="gates"><span aria-hidden="true">⊘</span><b>Decision Gates</b></a>
         </div>
@@ -55,7 +55,7 @@
         <div role="radiogroup" aria-label="Layout theme"><button type="button" role="radio" data-act-layout="control-room" aria-checked="true">Rail</button><button type="button" role="radio" data-act-layout="focus" aria-checked="false">Focus</button><button type="button" role="radio" data-act-layout="wide-canvas" aria-checked="false">Wide</button></div>
       </section>
       <div class="act-settings-actions"><button type="button" data-act-command="settings">⚙<span>Settings</span></button><button type="button" data-act-command="search">⌕<span>Search</span></button><button type="button" data-act-command="receipts">≣<span>Receipts</span></button></div>
-      <div class="act-shell-boundary"><span></span><b>MARKET COMPASS ACT</b><small>Research only · Trading off</small><button type="button" id="act-rail-collapse" aria-label="Collapse sidebar" title="Collapse sidebar">«</button></div>
+      <div class="act-shell-boundary"><span></span><b>MARKET COMPASS ACT</b><small>Signals active · No order execution</small><button type="button" id="act-rail-collapse" aria-label="Collapse sidebar" title="Collapse sidebar">«</button></div>
     </div>
   </aside>
   <header class="app-header">
@@ -95,7 +95,7 @@
         <button type="button" class="operator-action danger" data-operator-action="stop"><span aria-hidden="true">■</span><strong>Stop safely</strong><small>End only this local preview</small></button>
       </div>
       <div class="operator-result" id="operator-result" tabindex="-1" aria-live="polite">
-        <p>Trading stays off. Gitea promotion and broker actions are not available here.</p>
+        <p>Signals are active. Broker connection and order execution are not part of Market Compass.</p>
       </div>
     </section>
     <section class="control-bar panel">
@@ -321,7 +321,7 @@
   </main>
 
   <aside class="act-supporting-rail" aria-label="Dashboard supporting rail" data-shell-node="supporting-rail">
-    <section><p class="act-rail-eyebrow">MARKET PULSE</p><h2>Research Health</h2><div class="act-rail-stats"><p><span class="good"></span>Runtime <b>Live</b></p><p><span class="good"></span>Authority <b>Gitea</b></p><p><span class="warn"></span>Trading <b>Off</b></p></div></section>
+    <section><p class="act-rail-eyebrow">MARKET PULSE</p><h2>Research Health</h2><div class="act-rail-stats"><p><span class="good"></span>Runtime <b>Live</b></p><p><span class="good"></span>Authority <b>Gitea</b></p><p><span class="good"></span>Signals <b>Active</b></p></div></section>
     <section><p class="act-rail-eyebrow">QUICK WATCH</p><div class="act-quick-watch"><button type="button" data-act-symbol="BB">BB</button><button type="button" data-act-symbol="AAPL">AAPL</button><button type="button" data-act-symbol="QQQ">QQQ</button><button type="button" data-act-symbol="SPCX">SPCX</button></div></section>
     <section><p class="act-rail-eyebrow">CURRENT ROOM</p><h3 id="act-current-room">Overview</h3><p id="act-room-help">Top-line runtime, controls, Actors, and research status.</p></section>
     <section class="act-right-boundary"><strong>Authority boundary</strong><p>Market Compass can research and explain. It cannot place orders, move money, or change scores.</p></section>

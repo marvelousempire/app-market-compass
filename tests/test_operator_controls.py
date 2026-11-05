@@ -62,12 +62,14 @@ def test_stubthat_foundry_inventories_exchange_admin_and_bankthat_without_author
         assert f"'{module}'" in script
     for working_control in ("exchange-search", "data-exchange-filter", "data-product-panel", "General", "API & auth", "Install"):
         assert working_control in script
+    assert 'role="tab"' in script
+    assert 'aria-selected' in script
     assert "openActRoom" in script
     assert "58 candidate roles" in page.text
     assert script.count("'Bank & Accounts Console'") >= 1
     for module in ("bank-import", "ledger-journal", "balance-reconcile", "trading-portfolio", "storage-setup"):
         assert module in script
-    for boundary in ("0 owner engines connected", "no trading", "no money movement", "auto-generate POST is excluded"):
+    for boundary in ("0 owner engines connected", "no broker execution", "no money movement", "auto-generate POST is excluded"):
         assert boundary in script
 
 

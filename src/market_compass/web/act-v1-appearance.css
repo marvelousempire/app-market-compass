@@ -176,6 +176,47 @@ html[data-act-color="dark"] {
   border-color: color-mix(in srgb, var(--act-brand) 40%, var(--act-line));
 }
 
+/* Client-demo contract inspector: one coherent segmented control, never dark pills on Light. */
+.act-v1-admin .exchange-inspector-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--act-line);
+  border-radius: 10px;
+  background: var(--act-fill-recessed);
+}
+.act-v1-admin .exchange-inspector-tabs button {
+  min-width: 0;
+  min-height: 36px;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--act-text-secondary);
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.15;
+}
+.act-v1-admin .exchange-inspector-tabs button:hover {
+  background: var(--act-fill);
+  color: var(--act-ink);
+}
+.act-v1-admin .exchange-inspector-tabs button.active,
+.act-v1-admin .exchange-inspector-tabs button[aria-selected="true"] {
+  border-color: color-mix(in srgb, var(--act-brand) 35%, var(--act-line));
+  background: var(--act-fill);
+  color: var(--act-brand);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, .09);
+}
+.act-v1-admin .exchange-inspector-tabs button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--act-brand) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.identity-main span:last-child { color: var(--act-blue); }
+.decision-line { color: var(--act-text-secondary); }
+
 .exchange-toolbar input,
 .analyst-controls select,
 .analyst-question-row textarea {
@@ -195,4 +236,8 @@ html[data-act-color="dark"] {
   .cassette-canvas,
   .stub-card,
   .intelthat-card { background: Canvas; color: CanvasText; border-color: CanvasText; }
+}
+
+@media (max-width: 560px) {
+  .act-v1-admin .exchange-inspector-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

@@ -5,6 +5,8 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Repaired the client-demo Market Exchange contract tabs: Light mode now uses one readable segmented control with an unmistakable selected state, keyboard focus and ARIA selection. Also corrected the washed-out live price and replaced execution-suggestive shell language with Compass Desk and Signals active.
+
 - Repaired ACT v1 appearance inheritance so Light mode no longer contains hard-coded dark workbench islands. Operator controls, Actors, Market Exchange, intelTHAT, analysis cards, Evidence Board and charts now follow the selected Light, Dark or System palette.
 
 - Corrected the permanent product boundary: Market Compass generates active research signals but will never connect to a broker, place trades, manage real-money positions or move money.

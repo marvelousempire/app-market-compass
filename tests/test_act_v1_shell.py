@@ -27,8 +27,10 @@ def test_shell_rooms_target_real_market_compass_work():
 
 def test_shell_preserves_research_boundary_and_product_identity():
     html = (WEB / "index.html").read_text()
-    assert "Research only" in html
-    assert "Trading off" in html
+    assert "Signals active" in html
+    assert "No order execution" in html
+    assert "Compass Desk" in html
+    assert "Trading Desk" not in html
     assert "Market Compass" in html
     assert "READYPLAY" not in html
 

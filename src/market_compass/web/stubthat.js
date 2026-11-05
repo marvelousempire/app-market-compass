@@ -66,13 +66,13 @@
 
   const layer = (name, text) => `<div><span>${name}</span><strong>${text}</strong></div>`;
   function renderInspector(item) {
-    const productTabs = item.kind ? `<div class="exchange-inspector-tabs" role="tablist" aria-label="Product contract sections">${['General','UI','API & auth','SSO','Install'].map((name, index) => `<button type="button" class="${index === 0 ? 'active' : ''}" data-product-panel="${name}">${name}</button>`).join('')}</div><div class="exchange-product-panel" id="exchange-product-panel"></div>` : '';
+    const productTabs = item.kind ? `<div class="exchange-inspector-tabs" role="tablist" aria-label="Product contract sections">${['General','UI','API & auth','SSO','Install'].map((name, index) => `<button type="button" role="tab" class="${index === 0 ? 'active' : ''}" aria-selected="${index === 0}" data-product-panel="${name}">${name}</button>`).join('')}</div><div class="exchange-product-panel" id="exchange-product-panel" role="tabpanel"></div>` : '';
     inspector.innerHTML = `
       <div class="stubthat-inspector-head"><div><p class="eyebrow">SELECTED STUB CONTRACT</p><h3>${item.name}</h3></div><span class="stub-state">needs owner binding</span></div>
       <p>${item.purpose}. This stub proves discoverability and contract shape only; it does not claim the owner engine, live data, credentials, persistence or execution authority.</p>
       <div class="stubthat-contract">
         ${layer('Owner', item.owner)}${layer('Console', item.console)}${layer('Source', item.source)}${layer('Classification', item.classification)}
-        ${layer('htmlTHAT', 'semantic shell ready')}${layer('cssTHAT', 'ACT v1 admin presentation ready')}${layer('jsTHAT', 'local inspect/select behavior only')}${layer('Authority', 'read-only · no trading · no money movement')}
+        ${layer('htmlTHAT', 'semantic shell ready')}${layer('cssTHAT', 'ACT v1 admin presentation ready')}${layer('jsTHAT', 'local inspect/select behavior only')}${layer('Authority', 'read-only · no broker execution · no money movement')}
       </div>
       ${productTabs}
       ${item.critical ? '<p class="stub-warning"><b>Write hazard held:</b> the legacy Ledger empty-state auto-generate POST is excluded. An explicit, approved, repeat-safe adapter and receipt are required.</p>' : ''}`;
@@ -89,7 +89,11 @@
         panel.innerHTML = content.map(([label, value]) => `<div><span>${label}</span><strong>${value}</strong></div>`).join('');
       };
       inspector.querySelectorAll('[data-product-panel]').forEach(button => button.addEventListener('click', () => {
-        inspector.querySelectorAll('[data-product-panel]').forEach(other => other.classList.toggle('active', other === button));
+        inspector.querySelectorAll('[data-product-panel]').forEach(other => {
+          const selected = other === button;
+          other.classList.toggle('active', selected);
+          other.setAttribute('aria-selected', String(selected));
+        });
         drawPanel(button.dataset.productPanel);
       }));
       drawPanel('General');
