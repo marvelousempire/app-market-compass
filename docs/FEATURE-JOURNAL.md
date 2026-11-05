@@ -5,6 +5,14 @@ reason important features changed. It complements the factual release log in
 [`../CHANGELOG.md`](../CHANGELOG.md). It must not be replaced by short-lived chat history, a pull
 request description, or an issue comment.
 
+## 2026-11-04 — Make ACT v1 the real Market Compass shell
+
+**Founder correction:** ACT v1 means the original READYPLAY Administrative Control Tower dashboard system, not an ACT v1 label placed inside the existing dark page.
+
+**Implementation:** Reframed the entire browser surface with a persistent ACT v1 room rail, calm light workspace, governed surface hierarchy, responsive compact/mobile navigation and active-room feedback. The rail targets real Market Compass sections—Overview, Actors, Market Exchange, Desk and intelTHAT—while the existing analysis, operator and Market Exchange behavior remains in place.
+
+**Authority boundary:** The presentation grammar is adapted from the accepted READYPLAY calm-presentation package pinned to READYPLAY source `e0d9f9fddb80d6ea66d7576c4709fc19b58176f0`. READYPLAY identity, private data and engine authority were not copied. Market Compass remains research-only with trading off.
+
 ## Journal rules
 
 Every material feature decision records:

@@ -45,7 +45,8 @@ def test_stubthat_foundry_inventories_exchange_admin_and_bankthat_without_author
     assert 'id="stubthat-title"' in page.text
     assert 'data-stub-family="exchange"' in page.text
     assert 'data-stub-family="bankthat"' in page.text
-    assert "ADMINISTRATIVE CONTROL TOWER · ACT V1" in page.text
+    assert 'class="act-shell-rail"' in page.text
+    assert 'id="market-exchange"' in page.text
     for room in ("dashboard", "catalog", "products", "installed", "apis", "observatory"):
         assert f'data-act-room="{room}"' in page.text
     for asset in ("/static/stubthat.js", "/static/stubthat.css"):

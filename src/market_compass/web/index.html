@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="light dark">
   <title>Market Compass</title>
   <link rel="stylesheet" href="/static/styles.css">
   <link rel="stylesheet" href="/static/overview.css">
@@ -12,14 +12,26 @@
   <link rel="stylesheet" href="/static/operator-controls.css">
   <link rel="stylesheet" href="/static/research-cassettes.css">
   <link rel="stylesheet" href="/static/stubthat.css">
+  <link rel="stylesheet" href="/static/act-v1-shell.css">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
+  <aside class="act-shell-rail" aria-label="Market Compass rooms">
+    <a class="act-shell-brand" href="#market-overview" aria-label="Market Compass home"><span>MC</span><strong>Market<br>Compass</strong></a>
+    <nav class="act-shell-nav">
+      <a class="active" href="#market-overview" data-act-shell-room="overview"><span aria-hidden="true">⌂</span><b>Overview</b></a>
+      <a href="#actor-spaces" data-act-shell-room="actors"><span aria-hidden="true">◎</span><b>Actors</b></a>
+      <a href="#market-exchange" data-act-shell-room="exchange"><span aria-hidden="true">◇</span><b>Exchange</b></a>
+      <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Desk</b></a>
+      <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">◉</span><b>intelTHAT</b></a>
+    </nav>
+    <div class="act-shell-boundary"><span></span><b>Research only</b><small>Trading off</small></div>
+  </aside>
   <header class="app-header">
     <div>
-      <p class="eyebrow">MARKET DECISION INTELLIGENCE</p>
-      <h1>Market Compass</h1>
-      <p class="subhead">Evidence, counter-evidence, route, memory, history, relationships and narrative — then the trading desk.</p>
+      <p class="eyebrow">MARKET COMPASS / OVERVIEW</p>
+      <h1>Decision Intelligence</h1>
+      <p class="subhead">Evidence, counter-evidence, route, memory and narrative in one governed workspace.</p>
     </div>
     <div class="header-controls" aria-label="View and explanation mode">
       <div class="mode-switch">
@@ -33,7 +45,7 @@
     </div>
   </header>
 
-  <main class="shell">
+  <main class="shell" id="market-overview">
     <section class="operator-deck panel" aria-labelledby="operator-deck-title">
       <div class="operator-deck-heading">
         <div>
@@ -64,7 +76,7 @@
       <div id="run-status" class="run-status" role="status"></div>
     </section>
 
-    <section class="cassette-stage panel" aria-labelledby="cassette-title">
+    <section class="cassette-stage panel" id="actor-spaces" aria-labelledby="cassette-title">
       <div class="cassette-heading">
         <div><p class="eyebrow">FLOWTHAT · ACTOR SPACES</p><h2 id="cassette-title">Choose an Actor</h2></div>
         <span class="trust-chip">Local presentation · no execution authority</span>
@@ -78,10 +90,10 @@
       </div>
     </section>
 
-    <section class="stubthat-stage act-v1-admin panel" aria-labelledby="stubthat-title">
+    <section class="stubthat-stage act-v1-admin panel" id="market-exchange" aria-labelledby="stubthat-title">
       <div class="stubthat-heading">
         <div>
-          <p class="eyebrow">ADMINISTRATIVE CONTROL TOWER · ACT V1</p>
+          <p class="eyebrow">MARKET EXCHANGE</p>
           <h2 id="stubthat-title">Market Exchange</h2>
           <p>Dashboard rooms for Exchange tools and bankTHAT contracts, with owner boundaries visible before any engine is connected.</p>
         </div>
@@ -116,7 +128,8 @@
 
     <section id="error" class="panel error hidden"></section>
 
-    <section id="workspace" class="hidden">
+    <section id="workspace" class="hidden" data-act-shell-anchor="market-workspace">
+      <span id="market-workspace" class="act-shell-anchor" aria-hidden="true"></span>
       <div id="identity-strip" class="identity-strip panel"></div>
 
       <section class="decision-line panel compact-panel">
@@ -274,5 +287,6 @@
   <script src="/static/operator-controls.js" defer></script>
   <script src="/static/research-cassettes.js" defer></script>
   <script src="/static/stubthat.js" defer></script>
+  <script src="/static/act-v1-shell.js" defer></script>
 </body>
 </html>
