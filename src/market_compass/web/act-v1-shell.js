@@ -48,6 +48,18 @@
     }
   };
 
+  const revealTarget = (selector) => {
+    const target = document.querySelector(selector);
+    if (target?.closest('.research-only')) document.querySelector('.view-btn[data-view="research"]')?.click();
+    return target;
+  };
+  const scrollTarget = (target) => {
+    if (!target) return;
+    const scroll = () => requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+    if (target.getClientRects().length) scroll();
+    else window.addEventListener('marketcompassreport', scroll, { once: true });
+  };
+
   roomSubmenu?.addEventListener('click', (event) => {
     const button = event.target.closest('[data-act-submenu-target]');
     if (!button) return;
@@ -61,7 +73,7 @@
     } else if (target.startsWith('click:')) {
       document.querySelector(target.slice(6))?.click();
     } else {
-      document.querySelector(target)?.scrollIntoView({ block: 'start' });
+      scrollTarget(revealTarget(target));
     }
   });
 
@@ -121,7 +133,16 @@
 
   document.querySelectorAll('[data-act-command="receipts"]').forEach((button) => button.addEventListener('click', () => document.querySelector('[data-operator-action="receipts"]')?.click()));
   document.querySelectorAll('[data-act-symbol]').forEach((button) => button.addEventListener('click', () => { const input = document.querySelector('#symbol'); if (!input) return; input.value = button.dataset.actSymbol; input.dispatchEvent(new Event('change', { bubbles: true })); document.querySelector('#analyze')?.click(); }));
-  links.forEach((link) => link.addEventListener('click', () => selectRoom(link.dataset.actShellRoom)));
+  links.forEach((link) => link.addEventListener('click', (event) => {
+    const selector = link.getAttribute('href');
+    const target = selector && revealTarget(selector);
+    selectRoom(link.dataset.actShellRoom);
+    if (target?.closest('.research-only')) {
+      event.preventDefault();
+      history.replaceState(null, '', selector);
+      scrollTarget(target);
+    }
+  }));
   selectRoom('overview');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => { const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]; if (visible) { const link = links.find((item) => item.getAttribute('href') === `#${visible.target.id}`); if (link) selectRoom(link.dataset.actShellRoom); } }, { rootMargin: '-15% 0px -70%', threshold: [0, .2, .6] });

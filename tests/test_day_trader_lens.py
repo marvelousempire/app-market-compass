@@ -28,6 +28,20 @@ def test_lens_holds_intraday_claim_without_intraday_bars():
     assert lens["micro_slices"]["historical_scenario"]["state"] == "reference"
 
 
+def test_each_signal_carries_an_exportable_calculation_receipt():
+    lens = build_day_trader_lens("test", bars(np.linspace(100, 110, 40)))
+    events = lens["micro_slices"]["setup_scanner"] + lens["micro_slices"]["notable_thresholds"]
+    assert lens["receipt"]["exportable"] is True
+    assert len(lens["receipt"]["sha256"]) == 64
+    for event in events:
+        assert event["inputs"]
+        assert event["formula"]
+        assert event["timeframe"] == "1D"
+        assert event["timestamp"]
+        assert event["provenance"]["revision"] == SOURCE["revision"]
+        assert event["confidence"]["meaning"].startswith("deterministic formula")
+
+
 def test_lens_refuses_short_history():
     try:
         build_day_trader_lens("test", bars(np.linspace(100, 105, 20)))

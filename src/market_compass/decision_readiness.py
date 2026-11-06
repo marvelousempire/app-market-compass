@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+import json
 from typing import Any
 
 from .models import Report
@@ -38,7 +40,8 @@ def calculate_readiness(report: Report) -> dict[str, Any]:
     evidence_ready = all(gate["passed"] for gate in gates)
     direction = "BULLISH" if report.bull_evidence > report.bear_evidence else "BEARISH" if report.bear_evidence > report.bull_evidence else "NEUTRAL"
     state = "DO_NOT_GO_SIGNAL" if failed_hard else "GO_SIGNAL" if evidence_ready else "WATCH_SIGNAL"
-    return {
+    timestamp = report.as_of.isoformat()
+    result = {
         "instrument": "calculateTHAT",
         "state": state,
         "symbol": report.symbol,
@@ -50,6 +53,12 @@ def calculate_readiness(report: Report) -> dict[str, Any]:
             "bear_evidence": report.bear_evidence,
             "confidence": report.confidence,
             "action": state,
+            "inputs": {"bull_evidence": report.bull_evidence, "bear_evidence": report.bear_evidence, "confidence": report.confidence, "timeframe_agreement": agreement, "reward_risk": reward_risk},
+            "formula": "hard_stop ? DO_NOT_GO : all_gates_pass ? GO : WATCH",
+            "timeframe": f"{report.horizon_days}D with 4H/1D/1W agreement",
+            "timestamp": timestamp,
+            "provenance": {"provider": report.data_meta.get("provider"), "requested_symbol": report.data_meta.get("requested_symbol", report.symbol), "resolved_symbol": report.data_meta.get("resolved_symbol", report.symbol)},
+            "confidence_receipt": {"value": report.confidence, "meaning": "evidence confidence; not outcome probability"},
         },
         "score_influence": False,
         "trade_execution": False,
@@ -63,3 +72,11 @@ def calculate_readiness(report: Report) -> dict[str, Any]:
         "next_action": "Do not go; repair hard stops." if failed_hard else "Go signal is active for research review." if evidence_ready else "Watch signal is active; review incomplete gates.",
         "boundary": "Signals are active research outputs, not orders. Market Compass does not execute trades.",
     }
+    receipt_payload = {key: result[key] for key in ("instrument", "state", "symbol", "signal", "formula", "gates", "score_influence", "trade_execution")}
+    result["receipt"] = {
+        "schema": "market-compass.calculate-that-receipt.v1",
+        "issued_at": timestamp,
+        "sha256": hashlib.sha256(json.dumps(receipt_payload, sort_keys=True, default=str, separators=(",", ":")).encode()).hexdigest(),
+        "exportable": True,
+    }
+    return result

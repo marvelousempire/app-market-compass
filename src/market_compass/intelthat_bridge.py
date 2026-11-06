@@ -1,5 +1,7 @@
-"""Read-only research receipts from intelTHAT, using READYPLAY-style proof states."""
+"""Read-only research receipts from intelTHAT, using explicit proof states."""
+
 from __future__ import annotations
+
 import hashlib
 import json
 import os
@@ -34,7 +36,7 @@ def _timestamp(payload: dict) -> datetime | None:
             if isinstance(value, (int, float)):
                 return datetime.fromtimestamp(value, tz=UTC)
             if isinstance(value, str):
-                result = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                result = datetime.fromisoformat(value)
                 if result.tzinfo is not None:
                     return result.astimezone(UTC)
         except (ValueError, OverflowError, OSError):
@@ -67,8 +69,8 @@ def _one(root: Path, symbol: str, kind: str, now: datetime) -> dict:
             return _empty(kind, "excluded", "Snapshot too large.")
         data = json.loads(raw.decode("utf-8"))
         if not isinstance(data, dict):
-            raise ValueError("Expected object")
-    except (OSError, ValueError, UnicodeError):
+            raise TypeError("Expected object")
+    except (OSError, TypeError, ValueError, UnicodeError):
         return _empty(kind, "excluded", "Invalid source JSON.")
     metrics = {}
     for parent, keys in FIELDS[kind].items():
@@ -77,7 +79,7 @@ def _one(root: Path, symbol: str, kind: str, now: datetime) -> dict:
             continue
         for key in keys:
             value = group.get(key)
-            if type(value) in (str, bool, int, float):
+            if isinstance(value, str | bool | int | float):
                 metrics[key] = value[:160] if isinstance(value, str) else value
     stamp = _timestamp(data)
     item = {"kind": kind, "sha256": hashlib.sha256(raw).hexdigest(),

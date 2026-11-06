@@ -1,8 +1,8 @@
 # Market Compass handoff — commissioned ACT v1 research runtime
 
-This handoff reflects the commissioned v0.6 application, not the old developer-demo surface. The first
+This handoff reflects the commissioned v0.7 application, not the old developer-demo surface. The first
 screen follows the 8001 information sequence (header, identity, four summary cards, then the
-desk). The trading workbench, indicators, multi-timeframe analysis, watchlist, catalysts,
+desk). The research workbench, indicators, multi-timeframe analysis, watchlist, catalysts,
 Evidence Board, node inspector, research backtest, Nephew analyst panel, Actor spaces and ACT v1
 Market Exchange remain visible.
 
@@ -34,8 +34,8 @@ launchctl print gui/$(id -u)/ai.market-compass
 | Evidence Board | Interactive inferred relationship graph with relationship/source inspection and explicit inferred-versus-verified labeling. |
 | Research tools | Simple/technical/source views, 115-node inspector, snapshots/watchlist, and research backtest. |
 | AI interpretation | Nephew panel with automatic or explicit local/cloud provider selection, depth, per-request cloud consent, grounded response schema, and model receipt. |
-| Actor spaces | Omo, Prince, Wuda and Brown’s Barometers have comp cards and explicit unconfigured psychology/authority state. |
-| ACT v1 Market Exchange | Dashboard, Catalog, All Products, Installed, APIs & MCPs and API Observatory rooms inspect 14 Exchange modules and 58 bankTHAT candidates without owner-side mutations. |
+| Actor spaces | Omo, Prince, Wuda and Brown’s Barometers bind current report evidence to explicit psychology, comp cards, and exportable research-only receipts. |
+| ACT v1 Market Exchange | Six admin rooms inspect 15 modules and 58 reviewed private bankTHAT contracts. All six pipeline stages act, and Market Source Refinery exports intake receipts for repositories, URLs, files, and pasted text without donor execution. |
 
 ## Remaining gaps only
 

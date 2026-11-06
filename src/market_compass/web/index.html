@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="/static/intelthat.css">
   <link rel="stylesheet" href="/static/research-lenses.css">
   <link rel="stylesheet" href="/static/operator-controls.css">
-  <link rel="stylesheet" href="/static/research-cassettes.css">
-  <link rel="stylesheet" href="/static/stubthat.css">
-  <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261105.2">
+  <link rel="stylesheet" href="/static/research-cassettes.css?v=20261106.1">
+  <link rel="stylesheet" href="/static/stubthat.css?v=20261106.1">
+  <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261106.1">
   <link rel="stylesheet" href="/static/decision-gates.css">
-  <link rel="stylesheet" href="/static/act-v1-appearance.css">
+  <link rel="stylesheet" href="/static/act-v1-appearance.css?v=20261106.1">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
@@ -136,16 +136,16 @@
         <code>read-only projection</code>
       </nav>
       <div class="stubthat-pipeline" aria-label="stubTHAT intake pipeline">
-        <span><b>1</b> parseTHAT</span><i aria-hidden="true">→</i>
-        <span><b>2</b> decantTHAT</span><i aria-hidden="true">→</i>
-        <span><b>3</b> htmlTHAT</span><i aria-hidden="true">+</i>
-        <span><b>4</b> cssTHAT</span><i aria-hidden="true">+</i>
-        <span><b>5</b> jsTHAT</span><i aria-hidden="true">→</i>
-        <span><b>6</b> stubTHAT</span>
+        <button type="button" data-pipeline-stage="parseTHAT"><b>1</b> parseTHAT</button><i aria-hidden="true">→</i>
+        <button type="button" data-pipeline-stage="decantTHAT"><b>2</b> decantTHAT</button><i aria-hidden="true">→</i>
+        <button type="button" data-pipeline-stage="htmlTHAT"><b>3</b> htmlTHAT</button><i aria-hidden="true">+</i>
+        <button type="button" data-pipeline-stage="cssTHAT"><b>4</b> cssTHAT</button><i aria-hidden="true">+</i>
+        <button type="button" data-pipeline-stage="jsTHAT"><b>5</b> jsTHAT</button><i aria-hidden="true">→</i>
+        <button type="button" data-pipeline-stage="stubTHAT"><b>6</b> stubTHAT</button>
       </div>
       <div class="stubthat-tabs" role="tablist" aria-label="Stub source families">
-        <button type="button" role="tab" class="stubthat-tab active" data-stub-family="exchange" aria-selected="true">Market Exchange <small>6 admin surfaces · 14 tool modules</small></button>
-        <button type="button" role="tab" class="stubthat-tab" data-stub-family="bankthat" aria-selected="false">bankTHAT <small>58 candidate roles · 7 consoles</small></button>
+        <button type="button" role="tab" class="stubthat-tab active" data-stub-family="exchange" aria-selected="true">Market Exchange <small>6 admin surfaces · 15 tool modules</small></button>
+        <button type="button" role="tab" class="stubthat-tab" data-stub-family="bankthat" aria-selected="false">bankTHAT <small>58 reviewed private modules · 7 consoles</small></button>
       </div>
       <div class="stubthat-summary" id="stubthat-summary" role="status"></div>
       <section class="exchange-console" id="exchange-console" aria-label="Market Exchange tools"></section>
@@ -213,7 +213,7 @@
       <section class="two-col chart-memory">
         <article class="panel chart-panel">
           <div class="section-head">
-            <div><p class="eyebrow">TRADING WORKBENCH</p><h2>Price, EMA, Fibonacci, Memory &amp; Bus Stops</h2></div>
+            <div><p class="eyebrow">RESEARCH WORKBENCH</p><h2>Price, EMA, Fibonacci, Memory &amp; Bus Stops</h2></div>
             <div class="chart-controls" id="chart-timeframes"></div>
           </div>
           <div id="price-chart" class="pro-chart"></div>
@@ -274,7 +274,7 @@
         <div class="gate-grid" id="decision-gate-grid"></div>
         <div><p class="eyebrow">CALCULATETHAT INSTRUMENT</p><pre class="calculate-formula" id="calculate-that-formula">Waiting for an exact research receipt.</pre></div>
         <p class="decision-boundary" id="decision-gate-next">Signals are active research outputs, not orders.</p>
-        <button type="button" class="secondary" id="calculate-that-run">Refresh signal</button>
+        <div class="actor-actions"><button type="button" class="secondary" id="calculate-that-run">Refresh signal</button><button type="button" class="secondary" id="calculate-that-export" disabled>Export signal receipt</button></div>
       </section>
 
       <section class="research-only">
@@ -349,14 +349,14 @@
   <dialog class="act-command-dialog" id="act-command-dialog" aria-labelledby="act-command-title"><div class="act-dialog-head"><div><p>MARKET COMPASS ACT</p><h2 id="act-command-title">Go to a room</h2></div><button type="button" data-act-dialog-close aria-label="Close menu">×</button></div><label><span>Search rooms</span><input id="act-command-search" type="search" placeholder="Search Overview, Actors, Exchange…"></label><div class="act-command-results" id="act-command-results"></div></dialog>
 
   <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
-  <script src="/static/app.js" defer></script>
+  <script src="/static/app.js?v=20261106.2" defer></script>
   <script src="/static/analyst.js" defer></script>
   <script src="/static/intelthat.js" defer></script>
   <script src="/static/research-lenses.js" defer></script>
-  <script src="/static/operator-controls.js" defer></script>
-  <script src="/static/research-cassettes.js" defer></script>
-  <script src="/static/stubthat.js" defer></script>
-  <script src="/static/act-v1-shell.js?v=20261105.2" defer></script>
-  <script src="/static/decision-gates.js" defer></script>
+  <script src="/static/operator-controls.js?v=20261106.1" defer></script>
+  <script src="/static/research-cassettes.js?v=20261106.1" defer></script>
+  <script src="/static/stubthat.js?v=20261106.1" defer></script>
+  <script src="/static/act-v1-shell.js?v=20261106.3" defer></script>
+  <script src="/static/decision-gates.js?v=20261106.1" defer></script>
 </body>
 </html>

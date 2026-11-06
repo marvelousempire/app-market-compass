@@ -9,7 +9,7 @@
 .act-v1-room-nav button.active { background: var(--act-fill-selected); color: var(--act-brand); }
 .act-v1-room-nav code { margin-inline-start: auto; color: var(--act-text-tertiary); font-size: 9px; white-space: nowrap; }
 .act-v1-admin .stubthat-pipeline { margin-block-start: 12px; }
-.act-v1-admin .stubthat-pipeline span,.act-v1-admin .stubthat-summary > * { border-radius: 6px; background: var(--act1-group); }
+.act-v1-admin .stubthat-pipeline button,.act-v1-admin .stubthat-summary > * { border-radius: 6px; background: var(--act1-group); }
 .act-v1-admin .stubthat-tab,.act-v1-admin .exchange-console,.act-v1-admin .stub-card,.act-v1-admin .stubthat-inspector { border-radius: 8px; background: var(--act1-group); }
 .act-v1-admin .stubthat-tab.active,.act-v1-admin .exchange-toolbar button.active,.act-v1-admin .exchange-inspector-tabs button.active { border-color: color-mix(in srgb, var(--act-brand) 35%, var(--act-line)); background: var(--act-fill-selected); color: var(--act-brand); }
 .act-v1-admin .exchange-dashboard > div { border-radius: 8px; background: var(--act-fill-subtle); }
@@ -19,7 +19,8 @@
 .stubthat-heading h2 { margin: 4px 0 7px; font-size: 20px; }
 .stubthat-heading p:not(.eyebrow) { margin: 0; max-inline-size: 720px; color: var(--muted); line-height: 1.5; }
 .stubthat-pipeline { display: flex; align-items: center; gap: 8px; margin-block: 18px 14px; overflow-x: auto; padding-block-end: 4px; }
-.stubthat-pipeline span { display: flex; align-items: center; gap: 7px; min-inline-size: max-content; padding: 8px 10px; border: 1px solid var(--act-line); border-radius: 999px; color: var(--act-ink); background: var(--act-fill-subtle); font-size: 11px; font-weight: 750; }
+.stubthat-pipeline button { display: flex; align-items: center; gap: 7px; min-inline-size: max-content; padding: 8px 10px; border: 1px solid var(--act-line); border-radius: 999px; color: var(--act-ink); background: var(--act-fill-subtle); font-size: 11px; font-weight: 750; }
+.stubthat-pipeline button:hover,.stubthat-pipeline button.active { border-color: var(--act-blue); background: var(--act-blue-fill); }
 .stubthat-pipeline b { display: grid; place-items: center; inline-size: 20px; block-size: 20px; border-radius: 50%; background: var(--act-blue-fill); color: var(--act-blue); font-size: 9px; }
 .stubthat-pipeline i { color: var(--act-text-tertiary); font-style: normal; }
 .stubthat-tabs { display: flex; gap: 8px; margin-block: 8px 14px; }
@@ -66,6 +67,12 @@
 .stubthat-contract span { color: var(--act-text-tertiary); font-size: 9px; text-transform: uppercase; }
 .stubthat-contract strong { color: var(--act-ink); font-size: 11px; line-height: 1.35; }
 .stub-warning { padding: 10px; border: 1px solid color-mix(in srgb, var(--act-danger) 45%, var(--act-line)); border-radius: 9px; background: var(--act-danger-fill); color: var(--act-danger) !important; font-size: 11px; }
+.source-intake { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; margin-block-start: 12px; padding: 12px; border: 1px solid var(--act-line); border-radius: 10px; background: var(--act-fill); }
+.source-intake label { display: grid; gap: 5px; color: var(--act-text-tertiary); font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.source-intake input,.source-intake select,.source-intake textarea { width: 100%; min-width: 0; padding: 8px; border: 1px solid var(--act-line); border-radius: 7px; background: var(--act-fill-subtle); color: var(--act-ink); font: inherit; text-transform: none; }
+.source-intake .source-wide,.source-intake-actions,.source-intake-output { grid-column: 1/-1; }
+.source-intake-actions { display: flex; gap: 7px; }
+.source-intake-output { margin: 0; max-block-size: 260px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
 @media (max-width: 1050px) { .stubthat-grid { grid-template-columns: repeat(3, 1fr); } .stubthat-contract { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 700px) { .stubthat-heading { flex-direction: column; } .stubthat-tabs { flex-direction: column; } .stubthat-grid { grid-template-columns: 1fr 1fr; } .exchange-dashboard,.exchange-product-panel { grid-template-columns: repeat(2,1fr); } .exchange-toolbar { flex-direction: column; } .act-v1-room-nav code { display: none; } }
 @media (max-width: 460px) { .stubthat-grid, .stubthat-contract { grid-template-columns: 1fr; } }

@@ -28,15 +28,17 @@ def test_default_assets_and_flowthat_cassettes_are_visible():
     app_script = client.get("/static/app.js").text
     for symbol in ("BB", "AAPL", "QQQ", "SPCX"):
         assert f"'{symbol}'" in app_script
+    assert "WATCH_DEFAULTS=['BB','AAPL','QQQ','SPCX']" in app_script
+    assert app_script.count("key===WATCH_KEY?normalizeWatchlist(value):value") == 2
     assert "['HYPE','BTC','NVDA']" in app_script  # one-time migration of the old untouched default
 
     cassette_script = client.get("/static/research-cassettes.js").text
-    assert "No bound market data" in cassette_script
-    assert "broker action" in cassette_script
-    for label in ("Brown’s Barometers", "Breadth", "Momentum", "Volatility", "Volume", "RSI crosses above 65", "RSI crosses above 50", "RSI crosses below 35", "Trading psychology", "actor-comp-card", "Preferences and rules not configured"):
+    for label in ("Evidence Scout", "Scenario Steward", "Brown’s Barometers", "Breadth", "Momentum", "Volume", "Trading psychology", "actor-comp-card", "Export receipt", "market-compass.actor-receipt.v1"):
         assert label in cassette_script
+    assert "research_only: true" in cassette_script
+    assert "score_influence: false" in cassette_script
+    assert "trade_execution: false" in cassette_script
     assert "Marvin’s Metrics" not in cassette_script
-    assert "Trading psychology', items" not in cassette_script
 
 
 def test_stubthat_foundry_inventories_exchange_admin_and_bankthat_without_authority():
@@ -65,11 +67,17 @@ def test_stubthat_foundry_inventories_exchange_admin_and_bankthat_without_author
     assert 'role="tab"' in script
     assert 'aria-selected' in script
     assert "openActRoom" in script
-    assert "58 candidate roles" in page.text
+    assert "58 reviewed private modules" in page.text
+    assert "Market Source Refinery" in script
+    for source_kind in ("repository", "url", "file", "text"):
+        assert f'value="{source_kind}"' in script
+    assert "market-source-refinery-intake.v1" in script
+    for stage in ("parseTHAT", "decantTHAT", "htmlTHAT", "cssTHAT", "jsTHAT", "stubTHAT"):
+        assert f'data-pipeline-stage="{stage}"' in page.text
     assert script.count("'Bank & Accounts Console'") >= 1
     for module in ("bank-import", "ledger-journal", "balance-reconcile", "trading-portfolio", "storage-setup"):
         assert module in script
-    for boundary in ("0 owner engines connected", "no broker execution", "no money movement", "auto-generate POST is excluded"):
+    for boundary in ("owner authority preserved", "no broker execution", "no money movement", "auto-generate POST is excluded"):
         assert boundary in script
 
 

@@ -24,7 +24,7 @@ from .pack002 import desk_from_bars
 from .registry import NODE_REGISTRY, node_output
 from .research_lenses import build_day_trader_lens
 
-app = FastAPI(title="Market Compass", version="0.6.0")
+app = FastAPI(title="Market Compass", version="0.7.0")
 analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
 PREVIEW_STARTED_AT = datetime.now(UTC).isoformat()
@@ -196,6 +196,6 @@ def day_trader_lens_api(symbol: str):
     """Read one source-bound lens; never execute donor or brokerage code."""
     try:
         data = get_market_data(symbol)
-        return build_day_trader_lens(symbol, data.bars)
+        return build_day_trader_lens(symbol, data.bars, data_meta=data.meta)
     except Exception as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc

@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 WEB = Path(__file__).parents[1] / "src" / "market_compass" / "web"
 
 
@@ -9,9 +8,9 @@ def test_act_v1_is_the_outer_shell_not_an_inner_label():
     assert '<aside class="act-shell-rail"' in html
     assert 'aria-label="Market Compass rooms"' in html
     assert 'ADMINISTRATIVE CONTROL TOWER · ACT V1' not in html
-    assert '/static/act-v1-shell.css?v=20261105.2' in html
+    assert '/static/act-v1-shell.css?v=20261106.1' in html
     assert '/static/act-v1-appearance.css' in html
-    assert '/static/act-v1-shell.js?v=20261105.2' in html
+    assert '/static/act-v1-shell.js?v=20261106.3' in html
     for node in ('primary-rail', 'supporting-rail', 'bottom-rail'):
         assert f'data-shell-node="{node}"' in html
     assert 'class="act-mobile-tabs"' in html
@@ -90,4 +89,10 @@ def test_supporting_rail_exposes_real_contextual_submenus():
         assert f"{room}: [" in script
     for owned_action in ("cassette:", "exchange:", "click:"):
         assert f"target.startsWith('{owned_action}')" in script
+    assert "const revealTarget" in script
+    assert "const scrollTarget" in script
+    assert ".view-btn[data-view=\"research\"]" in script
+    assert "target?.closest('.research-only')" in script
+    assert "marketcompassreport" in script
+    assert "target.getClientRects().length" in script
     assert ".act-room-submenu" in css

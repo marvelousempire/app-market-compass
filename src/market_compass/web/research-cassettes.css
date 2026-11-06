@@ -11,6 +11,15 @@
 .cassette-tool-group h4 { margin: 0 0 9px; color: var(--act-ink); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
 .cassette-tools { display: flex; flex-wrap: wrap; gap: 6px; }
 .cassette-tools span { padding: 5px 8px; border: 1px solid var(--act-line); border-radius: 999px; color: var(--act-text-secondary); font-size: 12px; }
+.actor-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.actor-evidence-list { display: grid; gap: 8px; inline-size: min(100%, 720px); margin-block-start: 14px; text-align: start; }
+.actor-evidence-list[hidden] { display: none; }
+.actor-evidence { padding: 11px 12px; border: 1px solid var(--act-line); border-radius: 11px; background: var(--act-fill); }
+.actor-evidence > div { display: flex; justify-content: space-between; gap: 12px; }
+.actor-evidence b { color: var(--act-ink); font-size: 12px; }
+.actor-evidence span { color: var(--act-blue); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.actor-evidence p { margin: 6px 0 !important; color: var(--act-text-secondary) !important; font-size: 11px; }
+.actor-evidence small { display: block; margin: 0; overflow-wrap: anywhere; }
 .actor-comp-card { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; inline-size: min(100%, 720px); margin-block: 2px 14px; overflow: hidden; border: 1px solid var(--act-line); border-radius: 12px; background: var(--act-line); text-align: start; }
 .actor-comp-card > div { display: grid; gap: 4px; padding: 11px 12px; background: var(--act-fill); }
 .actor-comp-card span { color: var(--act-text-tertiary); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }

@@ -1,0 +1,92 @@
+{
+  "schema": "whole-job-truth/v1",
+  "objective": "Bring the commissioned Market Compass app to client-demo quality without changing its permanent research-only authority boundary.",
+  "accepted_start": {
+    "market_compass": "a3a075e2ad088a14e4695fd19693795eeeb5f209",
+    "nephew": "a14f75209b1d468d41978a62c76a40b8c227e2ef",
+    "make_doors": "aab58500e23ed6ff4a2f248df0871dafb94d1344",
+    "door": "http://market-compass.localhost/"
+  },
+  "workstreams": [
+    {
+      "id": "browser-audit",
+      "outcome": "Audit every page and interactive state through the real Door in System, Light, and Dark modes.",
+      "state": "complete",
+      "target": "live",
+      "evidence": "The named Door served candidate proof revision 278172022dcbaf2f4baf1fc3bb61ac45f34f0c1c. System, Light, and Dark screenshots were captured at 1280px; document width stayed 1265px, the footer stayed inside the 208px/1041px rails, and no horizontal overflow remained. Actor, Exchange, research, analyst, layout, search, snapshot, and contextual-rail states were exercised through the real Door.",
+      "remaining": ""
+    },
+    {
+      "id": "appearance-and-rail",
+      "outcome": "Finish ACT v1 presentation and a contextual right rail with section-owned actions across all appearance modes.",
+      "state": "complete",
+      "target": "live",
+      "evidence": "Live proof revision 2781720 rendered System and Light as dark-on-light and Dark as light-on-dark. The contextual rail exposed section-owned actions; intelTHAT switched to Research, waited for the asynchronous report, then scrolled to a rendered 157px target at the top of the viewport. Rail, Focus, Wide, compact rail, recovery, and command-menu states all changed real shell state.",
+      "remaining": ""
+    },
+    {
+      "id": "control-truth",
+      "outcome": "Make every visible control perform a real bounded action or present an honest unavailable state.",
+      "state": "complete",
+      "target": "live",
+      "evidence": "Safe visible controls were exercised live: preview plan/status/launch/receipts, watch, snapshot, Actors, Exchange rooms/stages/families/filters/contracts, views, explorer, timeframes, calculateTHAT, local analyst, layouts, recovery, and room navigation. Stop remained intentionally uninvoked during availability proof and is covered by API safety tests. Independently owned mutations remain honestly unavailable rather than decorative.",
+      "remaining": ""
+    },
+    {
+      "id": "actors-and-signals",
+      "outcome": "Complete Omo, Prince, Wuda, and Brown spaces, comp cards, psychology placement, Brown barometers, and Wuda notable RSI signals.",
+      "state": "complete",
+      "target": "live",
+      "evidence": "All four live Actor tabs rendered complete comp cards and per-actor psychology. Omo exposed timestamped catalysts, Prince route/invalidation, Wuda 35/50/65 direction/timeframe/freshness/provenance evidence, and Brown measuring tools. Each evidence toggle worked and each export control was enabled by a completed report; receipt payload contracts pass exact-head tests.",
+      "remaining": ""
+    },
+    {
+      "id": "search-defaults",
+      "outcome": "Resolve company names to symbols while preserving BB, AAPL, QQQ, and SPCX defaults.",
+      "state": "complete",
+      "target": "live",
+      "evidence": "The real Door resolved an entered company name: Requested Apple, Resolved AAPL, with Apple Inc. first in suggestions. A live inherited one-symbol browser state normalized back to BB, AAPL, QQQ, and SPCX; + Watch preserved all four and Save Snapshot created BB 55/45.",
+      "remaining": ""
+    },
+    {
+      "id": "exchange-and-bank-evidence",
+      "outcome": "Complete the six Market Exchange refinery modules, remove READYPLAY identity, and expose reviewed bankTHAT/bank-reader capabilities as private read-only evidence.",
+      "state": "complete",
+      "target": "live",
+      "evidence": "All six pipeline stages returned distinct live contracts. Market Source Refinery search returned one exact module; Connector returned four modules; General, UI, API & auth, SSO, and Install panels changed content. bankTHAT returned 58 reviewed private read-only modules across seven consoles. Current product-facing source and browser copy contain no READYPLAY marketing identity.",
+      "remaining": ""
+    },
+    {
+      "id": "source-refinery",
+      "outcome": "Finish the provenance-bound day-trader lens and reusable Market Source Refinery/SkillTHAT intake workflow.",
+      "state": "complete",
+      "target": "commissioned",
+      "evidence": "SkillTHAT child0046 remains merged on canonical AI Skills Library main at 75378d8d (source be7bf77d). Repository, URL, and pasted-text intake produced live provenance receipts; file intake, local SHA-256, refusal boundaries, and export are bound in exact-head source/tests without donor fetch or execution. The browser file-chooser proof surface stalled before selection and made no external transmission.",
+      "remaining": ""
+    },
+    {
+      "id": "calculation-receipts",
+      "outcome": "Give every signal and calculation inputs, formula, timeframe, timestamp, provenance, confidence, and exportable receipt.",
+      "state": "complete",
+      "target": "live",
+      "evidence": "Live Wuda and Brown evidence showed inputs, formulas, daily timeframe, timestamps, immutable day-trader provenance, and observed/not-observed confidence meaning. calculateTHAT refreshed a live receipt with signal generation active, confidence 0.628, score mutation off, and broker execution unavailable; its export enabled. Snapshot and source receipt contracts pass exact-head tests.",
+      "remaining": ""
+    },
+    {
+      "id": "door-governance",
+      "outcome": "Govern the recovered Make Doors launchd definition with install, restart, and recovery tests while preserving the real Door.",
+      "state": "active",
+      "target": "commissioned",
+      "evidence": "FiveMac mDNS resolved to 192.168.5.181; strict host-key SSH proved accepted app a3a075e and the research-only boundary. Nephew candidate resolves DHCP only at install, pins IPv4, and restores the real Door. The recovered Make Doors LaunchAgent is now sourced, named, installed, restarted, and health-checked at Make Doors aab585e.",
+      "remaining": "Merge the Nephew candidate after exact-head required checks and confirm the installed source revision."
+    },
+    {
+      "id": "documentation-and-release",
+      "outcome": "Update affected docs and receipts, pass exact-head tests/review, merge through protected Gitea, install, prove the live Door, and verify mirror equality.",
+      "state": "active",
+      "target": "commissioned",
+      "evidence": "README, CHANGELOG, STATUS, handoff, Feature Journal, operator Door guide, documentation review, and outcome ledger are reconciled. App Node syntax, Ruff, and 60 tests pass on OneMac and FiveMac. Candidate proof revision 2781720 is live and commissioned. Nephew focused shell/static/door checks pass; unrelated full-suite environmental reds remain recorded separately.",
+      "remaining": "Owner passkey must admit the Avery author identity so both protected Gitea PRs can be opened. Then required checks and forge mergeability must pass, an independent reviewer must approve, merged heads must be installed, and Gitea/GitHub mirror equality must be confirmed."
+    }
+  ]
+}

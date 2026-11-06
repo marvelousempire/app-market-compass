@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 WEB = Path(__file__).parents[1] / "src" / "market_compass" / "web"
 
 
@@ -38,6 +37,8 @@ def test_light_dark_and_system_share_semantic_surface_tokens():
     assert 'html[data-act-color="dark"]' in css
     assert 'html[data-act-color="system"]' in css
     assert "@media (prefers-color-scheme: dark)" in css
+    assert "--act-canvas: #0a0a0a" in css
+    assert "--act-surface: #171717" in css
     assert "background: var(--act-blue-fill)" in css
     assert "color: var(--act-blue)" in css
 

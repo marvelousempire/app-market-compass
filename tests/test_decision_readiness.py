@@ -3,14 +3,14 @@ from market_compass.models import LayerResult, Report, Route
 
 
 def report(**overrides):
-    values = dict(
-        symbol="BB", horizon_days=20, price=8.0, action="wait",
-        bull_evidence=70, bear_evidence=30, confidence=0.8,
-        summary="", technical_summary="",
-        route=Route(direction="up", invalidation=7.0, reward_risk=2.5),
-        layers={"foundation": LayerResult(key="foundation", label="Asset Reality", state="acceptable", score=0.5, confidence=0.8)},
-        timeframes={"consensus": {"agreement": 0.75}},
-    )
+    values = {
+        "symbol": "BB", "horizon_days": 20, "price": 8.0, "action": "wait",
+        "bull_evidence": 70, "bear_evidence": 30, "confidence": 0.8,
+        "summary": "", "technical_summary": "",
+        "route": Route(direction="up", invalidation=7.0, reward_risk=2.5),
+        "layers": {"foundation": LayerResult(key="foundation", label="Asset Reality", state="acceptable", score=0.5, confidence=0.8)},
+        "timeframes": {"consensus": {"agreement": 0.75}},
+    }
     values.update(overrides)
     return Report(**values)
 
@@ -25,6 +25,13 @@ def test_calculatethat_generates_signal_without_execution_or_score_mutation():
     assert result["trade_execution"] is False
     assert result["score_influence"] is False
     assert result["approval_required_for_signal"] is False
+    assert result["signal"]["inputs"]["bull_evidence"] == 70
+    assert result["signal"]["formula"]
+    assert result["signal"]["timeframe"].startswith("20D")
+    assert result["signal"]["timestamp"]
+    assert result["signal"]["confidence_receipt"]["meaning"].endswith("not outcome probability")
+    assert result["receipt"]["exportable"] is True
+    assert len(result["receipt"]["sha256"]) == 64
 
 
 def test_hard_stop_outranks_positive_triggers():

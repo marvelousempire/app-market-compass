@@ -43,7 +43,7 @@ def attach(report_meta: dict, symbol: str, bars: pd.DataFrame) -> dict:
     """Hang Pack #2 on data_meta. Scoring already finished."""
     try:
         desk = desk_from_bars(symbol, bars)
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001 - optional pack failures must not break the report
         return report_meta | {"pack_002": {"available": False, "reason": str(exc)}}
     return report_meta | {
         "pack_002": {
