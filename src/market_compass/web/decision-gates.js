@@ -1,4 +1,5 @@
 (()=>{
+  let latest=null;
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const render=data=>{
     const state=document.getElementById('decision-gate-state');
@@ -11,6 +12,7 @@
     grid.innerHTML=(data.gates||[]).map(g=>`<article class="gate-card ${g.passed?'pass':'fail'}"><strong>${esc(g.label)}</strong><i>${g.passed?'PASS':'HOLD'}</i><small>Actual: ${esc(typeof g.actual==='object'?JSON.stringify(g.actual):g.actual)}</small><small>Rule: ${esc(g.requirement)}${g.hard_stop?' · hard stop':''}</small></article>`).join('');
     formula.textContent=`signal generation = ACTIVE\ndirection = ${data.signal?.direction || '—'}\nbull / bear = ${data.signal?.bull_evidence ?? '—'} / ${data.signal?.bear_evidence ?? '—'}\nconfidence = ${data.signal?.confidence ?? '—'}\nevidence edge = ${data.formula?.evidence_edge_value ?? '—'}\nreadiness = ${data.formula?.readiness || '—'}\nscore mutation = off\nbroker execution = unavailable`;
     next.textContent=data.next_action||'Review the gates.';
+    latest=data;const exportButton=document.getElementById('calculate-that-export');if(exportButton)exportButton.disabled=!data.receipt?.exportable;
   };
   const load=async()=>{
     const root=document.getElementById('decision-gates');if(!root)return;
@@ -19,5 +21,6 @@
     root.setAttribute('aria-busy','true');
     try{const response=await fetch(`/api/decision-readiness?symbol=${encodeURIComponent(symbol)}&horizon=${encodeURIComponent(horizon)}`);const data=await response.json();if(!response.ok)throw new Error(data.detail||'Readiness calculation failed');render(data);}catch(error){document.getElementById('decision-gate-next').textContent=error.message;}finally{root.setAttribute('aria-busy','false');}
   };
-  document.addEventListener('DOMContentLoaded',()=>{document.getElementById('calculate-that-run')?.addEventListener('click',load);document.getElementById('analyze')?.addEventListener('click',()=>setTimeout(load,0));load();});
+  const exportReceipt=()=>{if(!latest)return;const url=URL.createObjectURL(new Blob([JSON.stringify(latest,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download=`market-compass-${latest.symbol}-signal-receipt.json`;document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);};
+  document.addEventListener('DOMContentLoaded',()=>{document.getElementById('calculate-that-run')?.addEventListener('click',load);document.getElementById('calculate-that-export')?.addEventListener('click',exportReceipt);document.getElementById('analyze')?.addEventListener('click',()=>setTimeout(load,0));load();});
 })();

@@ -24,7 +24,7 @@
     try {
       if (action === 'open') {
         window.open('/', '_blank', 'noopener');
-        show('Live preview', { state: 'opened', address: 'http://127.0.0.1:8000', local_only: true });
+        show('Live preview', { state: 'opened', address: 'http://market-compass.localhost/', local_only: true });
       } else if (action === 'stop') {
         if (!window.confirm('Stop this local preview? Trading is already off. GitThat can relaunch it later.')) {
           setState('Live · research only', 'live');

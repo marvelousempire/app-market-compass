@@ -1,11 +1,12 @@
-name: test
+name: Verify
 on:
   push:
   pull_request:
     types: [opened, reopened, synchronize]
   workflow_dispatch:
 jobs:
-  test:
+  nephew-verify:
+    name: nephew-verify ship gate
     runs-on: macos-briefcase
     timeout-minutes: 15
     steps:

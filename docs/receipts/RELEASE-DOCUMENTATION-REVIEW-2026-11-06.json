@@ -1,0 +1,31 @@
+{
+  "schema": "release-documentation-freshness/v1",
+  "reviewed_at": "2026-11-06T11:12:19-05:00",
+  "accepted_source": "a3a075e2ad088a14e4695fd19693795eeeb5f209",
+  "candidate_branch": "feat/client-demo-completion-20261106",
+  "areas": {
+    "product_docs": {
+      "state": "current",
+      "files": ["README.md", "docs/STATUS.md", "docs/handoff.md", "docs/FEATURE-JOURNAL.md", "docs/INTELTHAT-BRIDGE.md"],
+      "reason": "v0.7 Actor, appearance, Market Exchange, source-intake, receipt, named-Door, and permanent authority behavior is described without claiming live proof before installation."
+    },
+    "wiring_guides": {
+      "state": "current",
+      "files": ["docs/handoff.md", "README.md"],
+      "reason": "The real market-compass.localhost Door is the operator path; the FiveMac loopback service and forwarded port remain labeled implementation details."
+    },
+    "white_papers": {
+      "state": "not_applicable",
+      "files": [],
+      "reason": "This release changes UI contracts and research receipts, not a separate white-paper claim."
+    },
+    "building_skills": {
+      "state": "current_external_owner",
+      "files": [],
+      "reason": "Market Source Refinery/SkillTHAT child0046 is already merged in AI Skills Library main at 75378d8d from source be7bf77d; this app consumes its contract without rewriting library-owned teaching."
+    }
+  },
+  "semantic_review": "pass",
+  "source_binding_review": "pass",
+  "live_proof": "candidate proof revision 278172022dcbaf2f4baf1fc3bb61ac45f34f0c1c is installed and browser-proven through http://market-compass.localhost/; protected merge, merged-head installation, and mirror equality remain pending the owner passkey and required forge gates"
+}

@@ -5,6 +5,27 @@ reason important features changed. It complements the factual release log in
 [`../CHANGELOG.md`](../CHANGELOG.md). It must not be replaced by short-lived chat history, a pull
 request description, or an issue comment.
 
+## 2026-11-06 — Complete the client-demo research instrument
+
+**Founder direction:** Audit the entire named Door, finish every appearance and
+interaction state, make all four Actors useful, complete Market Exchange and
+source intake, and retain the permanent no-trading boundary.
+
+**Implementation:** Removed the initial-load jump and footer overflow; completed
+the contextual rail and semantic System/Light/Dark presentation; bound Omo,
+Prince, Wuda, and Brown to report evidence; added formula-bound Wuda RSI
+35/50/65 notables and Brown's consolidated instrument bench; completed all six
+Market Exchange pipeline actions; added browser-local SkillTHAT child0046
+intake receipts; promoted reviewed bankTHAT modules to private read-only
+evidence contracts; and added exported receipts for Actors, calculateTHAT, and
+the isolated source lens.
+
+**Identity and authority correction:** Current product-facing copy no longer
+carries donor marketing identity. Historical provenance remains in this journal
+and release history. Market Compass can research, measure, calculate,
+interpret, and signal; it cannot hold credentials, score through donor output,
+place an order, execute a trade, or move money.
+
 ## 2026-11-05 — Refine outside repositories into owned research lenses
 
 **Founder direction:** Repeatedly accept repositories, text, URLs, and files as

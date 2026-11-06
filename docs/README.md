@@ -44,7 +44,7 @@ If the long-term PRD and STATUS appear to disagree about whether something exist
 
 ### 3. [`IMPLEMENTATION.md`](IMPLEMENTATION.md)
 
-Explains the current v0.6 code and commissioned runtime:
+Explains the current v0.7 code and commissioned runtime:
 
 - runtime flow;
 - module responsibilities;

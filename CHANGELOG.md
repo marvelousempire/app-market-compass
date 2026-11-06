@@ -5,6 +5,13 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Completed the v0.7 client-demo pass: the initial page no longer jumps to Market Exchange, desktop footer controls stay inside the viewport, System/Light/Dark share semantic materials, and the client-facing preview action uses `http://market-compass.localhost/`.
+- Bound Omo, Prince, Wuda, and Brown's Barometers to the current report. Each Actor now has an explicit psychology, evidence rows, and an exportable research-only receipt. Wuda shows directional RSI 35/50/65 crossings with timeframe, freshness, formula, timestamp, provenance, and confidence; Brown owns the consolidated measuring bench. Marvin remains absent.
+- Completed the six Market Exchange pipeline modules as inspectable actions and added a browser-local Market Source Refinery intake for repositories, URLs, files, and pasted text. It hashes local content, exports the SkillTHAT child0046 receipt shape, and never fetches or executes donor code.
+- Promoted the 58 reviewed bankTHAT responsibilities to private, read-only evidence contracts while continuing to exclude the legacy Ledger write path, account payloads, credentials, persistence, score influence, orders, and money movement.
+- Added exportable calculation receipts to calculateTHAT and the source-bound Day Trader lens. Every emitted signal now carries inputs, formula, timeframe, timestamp, provenance, and an explicit confidence meaning.
+- Removed remaining donor marketing identity from the current product-facing shell and operator copy while retaining the adapted ACT behavior and historical provenance records.
+
 - Added the first provenance-bound imported research lens from `marvelousempire/day-trader-skill` at immutable revision `3d0f4ef6986f4984b7c6bd46f7ff4f87744c3abd`. Five daily setup detectors and RSI 35/50/65 crossings are isolated Brown/Wuda MicroSlices with a read-only API and ACT panel. Intraday claims are held without intraday bars; broker, order, credential, account, and money-movement paths are rejected.
 
 - Added a contextual right-rail submenu for every primary room. Items navigate to real in-page sections or invoke existing Actor, Market Exchange, and calculateTHAT controls without creating new execution authority. The shell assets now carry a revision binding so commissioned browsers receive the matching submenu behavior and presentation together.

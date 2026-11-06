@@ -97,6 +97,17 @@ body { background: var(--act-canvas); color: var(--act-ink); }
 
 @media (prefers-color-scheme: dark) {
   html[data-act-color="system"] {
+    --act-canvas: #0a0a0a;
+    --act-surface: #171717;
+    --act-line: #2b2b2b;
+    --act-muted: #a3a3a3;
+    --act-ink: #f5f5f5;
+    --bg: var(--act-canvas);
+    --panel: var(--act-surface);
+    --line: #404040;
+    --line2: var(--act-line);
+    --text: var(--act-ink);
+    --muted: var(--act-muted);
     --act-fill: #171717;
     --act-fill-subtle: #111827;
     --act-fill-recessed: #0a0a0a;
@@ -122,7 +133,7 @@ body { background: var(--act-canvas); color: var(--act-ink); }
 .cassette-tool-group,
 .actor-comp-card > div,
 .act-v1-admin,
-.act-v1-admin .stubthat-pipeline span,
+.act-v1-admin .stubthat-pipeline button,
 .act-v1-admin .stubthat-summary > *,
 .act-v1-admin .stubthat-tab,
 .act-v1-admin .exchange-console,
@@ -189,7 +200,7 @@ body { background: var(--act-canvas); color: var(--act-ink); }
 .cassette-canvas small,
 .cassette-tools span,
 .actor-comp-card span,
-.stubthat-pipeline span,
+.stubthat-pipeline button,
 .stubthat-tab small,
 .stubthat-summary,
 .exchange-dashboard span,

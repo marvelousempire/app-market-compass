@@ -51,7 +51,7 @@ def test_v05_workbench_surface_is_served():
     page = client.get("/")
     assert page.status_code == 200
     for text in [
-        "MARKET COMPASS / OVERVIEW", "INTELLIGENCE OVERVIEW", "TRADING WORKBENCH",
+        "MARKET COMPASS / OVERVIEW", "INTELLIGENCE OVERVIEW", "RESEARCH WORKBENCH",
         "PRICE MEMORY", "RSI 14", "MACD", "Historical Analogs", "Evidence Contributions",
         "Catalyst Timeline", "Evidence Board", "NEPHEW ANALYST", "summary-grid",
         "signal-grid", "identity-strip", "decision-line",

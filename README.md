@@ -20,7 +20,7 @@ Market Compass will not connect to a broker, submit an order, execute a trade, m
 
 ## Product status at a glance
 
-**Current release:** ACT v1 administrative shell plus the Market Compass trading workbench and Market Exchange, `v0.6`
+**Current release:** ACT v1 administrative shell plus the Market Compass research workbench and Market Exchange, `v0.7`
 **Primary use case:** swing-trade research over days to several weeks  
 **Current interfaces:** browser app, CLI, FastAPI, CSV input  
 **Current default market-data source:** Yahoo public search/chart endpoints  
@@ -131,15 +131,15 @@ That distinction is a core product rule, not legal decoration.
 
 # What works today
 
-The current `v0.6` implementation includes the following real, runnable capabilities.
+The current `v0.7` implementation includes the following real, runnable capabilities.
 
 ## ACT v1 Market Exchange
 
-ACT v1 is the browser's complete outer administrative shell, not a label on the Exchange module or a single invented rail. It carries the accepted READYPLAY shell anatomy: grouped and collapsible primary navigation, System/Light/Dark Appearance controls, Rail/Focus/Wide layouts with recovery, a contextual supporting rail, desktop footer quick launch, a separate mobile tab bar, and a searchable Menu door. Every destination opens a real Market Compass section. READYPLAY identity, data, routes and engine authority remain outside the receiving app.
+ACT v1 is the browser's complete outer administrative shell, not a label on the Exchange module or a single invented rail. It carries grouped and collapsible primary navigation, System/Light/Dark Appearance controls, Rail/Focus/Wide layouts with recovery, a contextual supporting rail, desktop footer quick launch, a separate mobile tab bar, and a searchable Menu door. Every destination opens a real Market Compass section. No donor identity, data, routes, or engine authority appear in the product-facing shell.
 
 **Status: Implemented presentation and contract inventory; owner adapters not connected**
 
-Inside that shell, the browser presents the governed `parseTHAT → decantTHAT → htmlTHAT + cssTHAT + jsTHAT → stubTHAT` intake through the Market Exchange room pattern. It exposes Dashboard, Catalog, All Products, Installed, APIs & MCPs and API Observatory; 14 exchange tool modules; and 58 Bank Reader candidate roles grouped into seven bankTHAT consoles. Selecting a stub shows its source owner, console, classification, presentation layers and authority boundary.
+Inside that shell, the browser presents the governed `parseTHAT → decantTHAT → htmlTHAT + cssTHAT + jsTHAT → stubTHAT` intake through the Market Exchange room pattern. Every pipeline stage is inspectable. The six admin rooms expose 15 exchange modules and 58 reviewed private bankTHAT evidence contracts across seven consoles. Market Source Refinery accepts repository, URL, file, or pasted-text intake and exports a provenance receipt without running donor code.
 
 The Exchange projection includes working local dashboard totals, product search and filters, product metadata/auth/install state, and General/UI/API/SSO/Install contract panels. These remain read-only adapters, not copied owner engines: enable, save, install and authenticated API/SSO effects are unavailable. The modules do not contain bank credentials or account payloads, persist financial records, influence Market Compass scores, place trades or move money. The Bank Reader Ledger empty-state auto-generation path is explicitly excluded until an approved, repeat-safe adapter has its own receipt.
 
@@ -425,7 +425,7 @@ The commissioned service binds `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMI
 
 The browser starts on **BB** with **BB**, **AAPL**, **QQQ**, and the operator-requested literal **SPCX** in the default watch choices. An untouched legacy default list is migrated once; a personally edited watchlist is preserved.
 
-The local runtime shows **Omo**, **Prince**, **Wuda**, and **Brown’s Barometers** as Actors in FlowThat-shaped spaces: one centered stage, a compact Actor rail, and one active space at a time. Every Actor has a comp card for identity, role, individual trading-psychology preferences/rules, and authority. Wuda presents trends, hottest pointers, and notable RSI threshold events. Brown’s Barometers groups measured market/process metrics, technical-analysis instruments, and view governance. These names and groupings are operator-owned presentation labels. Until owner data and receipts are bound, every Actor clearly reports that psychology is unconfigured and that it has no market-data, score, broker, or approval authority.
+The local runtime shows **Omo**, **Prince**, **Wuda**, and **Brown’s Barometers** as report-bound Actors. Omo scouts current named evidence; Prince frames horizon, route, and invalidation; Wuda presents trend plus directional RSI crossings around 35, 50, and 65; Brown owns the consolidated metrics and technical-instrument bench. Every Actor keeps its trading psychology inside its own comp card and can export a receipt with inputs, formula context, timeframe, timestamp, provenance, confidence, and the permanent research-only authority boundary. Marvin’s Metrics is absent.
 
 ## Headless API mode
 
