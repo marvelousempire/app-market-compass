@@ -22,4 +22,6 @@
 .intelthat-empty{display:grid;place-items:start;min-height:110px;margin-top:12px;padding:20px;border:1px dashed var(--act-line);border-radius:12px;background:var(--act-fill-subtle)}
 .intelthat-empty p{max-width:680px;margin:5px 0;color:var(--act-text-secondary);line-height:1.5}
 .intelthat-error{margin-top:12px;border:1px solid var(--act-negative,#c65d65);border-radius:12px;padding:14px;background:color-mix(in srgb,var(--act-negative,#c65d65) 8%,var(--act-surface));color:var(--act-ink)}
+.button-link{display:inline-flex;align-items:center;min-height:38px;border:1px solid var(--act-line);border-radius:9px;background:var(--act-surface);color:var(--act-ink);padding:0 12px;text-decoration:none;font-size:12px;font-weight:750}
+.button-link:hover{border-color:var(--act-accent,#2f6fed);color:var(--act-accent,#2f6fed)}
 @media(max-width:760px){.intelthat-grid{grid-template-columns:1fr}.intelthat-summary{grid-template-columns:1fr}.intelthat-proof{justify-content:flex-start}.intelthat-toolbar>*{flex:1 1 150px}.intelthat-toolbar button,.intelthat-toolbar select{width:100%}}

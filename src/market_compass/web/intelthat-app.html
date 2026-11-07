@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>intelTHAT · Market Compass</title>
+  <link rel="stylesheet" href="/static/intelthat-app.css">
+</head>
+<body>
+  <aside class="app-rail" aria-label="intelTHAT application rooms">
+    <a class="app-brand" href="/intelthat/" aria-label="intelTHAT home"><span>iT</span><strong>intelTHAT</strong><small>Research Application</small></a>
+    <nav aria-label="intelTHAT rooms">
+      <button type="button" class="active" data-intel-view="cockpit"><span>◈</span><b>Cockpit</b></button>
+      <button type="button" data-intel-view="pack"><span>◫</span><b>Market Pack</b></button>
+      <button type="button" data-intel-view="macro"><span>∿</span><b>Macro Conditions</b></button>
+      <button type="button" data-intel-view="rss"><span>◎</span><b>News Intelligence</b></button>
+      <button type="button" data-intel-view="edgar"><span>▤</span><b>SEC Monitor</b></button>
+      <button type="button" data-intel-view="receipts"><span>≣</span><b>Run History</b></button>
+    </nav>
+    <section class="appearance" aria-label="Appearance">
+      <p>Appearance</p>
+      <div role="radiogroup" aria-label="Color mode">
+        <button type="button" role="radio" data-color="system" aria-checked="true">System</button>
+        <button type="button" role="radio" data-color="light" aria-checked="false">Light</button>
+        <button type="button" role="radio" data-color="dark" aria-checked="false">Dark</button>
+      </div>
+    </section>
+    <div class="rail-boundary"><strong>RESEARCH ONLY</strong><span>Signals active</span><span>Trading disabled</span></div>
+    <a class="back-link" href="/">← Market Compass</a>
+  </aside>
+
+  <header class="app-header">
+    <div><p class="eyebrow">MARKET COMPASS / INTELTHAT</p><h1 id="view-title">Research Cockpit</h1><p id="view-description">Run and inspect provenance-bound market research.</p></div>
+    <div class="header-state"><span id="runtime-state">Ready</span><strong id="active-symbol">QQQ</strong></div>
+  </header>
+
+  <main>
+    <section class="run-console" aria-labelledby="run-title">
+      <div><p class="eyebrow">NEW RESEARCH RUN</p><h2 id="run-title">Build an evidence pack</h2></div>
+      <form id="intel-run-form">
+        <label><span>Company or symbol</span><input id="intel-symbol" value="QQQ" list="intel-symbols" autocomplete="off" spellcheck="false"><datalist id="intel-symbols"><option value="BB"><option value="AAPL"><option value="QQQ"><option value="SPCX"></datalist></label>
+        <button type="submit" id="intel-run">Run all research</button>
+        <button type="button" class="secondary" id="intel-owner">Read owner receipts</button>
+      </form>
+      <div class="run-actions" aria-label="Current run actions">
+        <button type="button" class="secondary" id="intel-save" disabled>Save run</button>
+        <button type="button" class="secondary" id="intel-export" disabled>Export receipt</button>
+      </div>
+      <div class="run-progress" id="intel-progress" role="status" aria-live="polite"><span></span><p>Ready for a research run. Company names resolve to symbols before the run starts.</p><time></time></div>
+    </section>
+
+    <section class="authority-strip" aria-label="intelTHAT authority boundary">
+      <span>signal_generation=true</span><span>trade_execution=false</span><span>broker_credentials=false</span><span>money_movement=false</span><span>score_influence=false</span>
+    </section>
+
+    <section class="app-stage" aria-live="polite">
+      <div class="stage-toolbar">
+        <div><p class="eyebrow" id="stage-kicker">APPLICATION HOME</p><h2 id="stage-title">intelTHAT is ready</h2><p id="stage-copy">Use one research run to populate each application room.</p></div>
+        <div class="proof-health" id="proof-health" aria-label="Proof health"></div>
+      </div>
+      <div id="intel-output" class="empty-state">
+        <strong>A complete research application, not a receipt card.</strong>
+        <p>Run a symbol to build the Market Pack, Macro Conditions, News Intelligence, and SEC Monitor rooms together. Each room keeps its own timeframe, freshness, formula, inputs, provenance, confidence, and export receipt.</p>
+      </div>
+    </section>
+  </main>
+
+  <aside class="context-rail" aria-label="intelTHAT context">
+    <section><p class="eyebrow">CURRENT RUN</p><dl id="run-facts"><dt>Symbol</dt><dd>QQQ</dd><dt>Source</dt><dd>Not run</dd><dt>Receipt</dt><dd>—</dd><dt>Saved</dt><dd>No</dd></dl></section>
+    <section><p class="eyebrow">APPLICATION MODULES</p><ol><li>Market Pack</li><li>Macro Conditions</li><li>News Intelligence</li><li>SEC Monitor</li></ol></section>
+    <section><p class="eyebrow">PERMANENT REFUSALS</p><p>Broker OAuth, account data, orders, trade execution, position management, trade recording, money movement, and performance promises remain outside this app.</p></section>
+  </aside>
+
+  <script src="/static/intelthat-app.js" defer></script>
+</body>
+</html>

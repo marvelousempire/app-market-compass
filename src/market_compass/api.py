@@ -25,7 +25,7 @@ from .pack002 import desk_from_bars
 from .registry import NODE_REGISTRY, node_output
 from .research_lenses import build_day_trader_lens
 
-app = FastAPI(title="Market Compass", version="0.8.0")
+app = FastAPI(title="Market Compass", version="0.8.1")
 analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
 PREVIEW_STARTED_AT = datetime.now(UTC).isoformat()
@@ -35,6 +35,13 @@ app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
 @app.get("/", response_class=FileResponse)
 def home():
     return WEB_DIR / "index.html"
+
+
+@app.get("/intelthat", response_class=FileResponse)
+@app.get("/intelthat/", response_class=FileResponse)
+def intelthat_app():
+    """Serve the native intelTHAT application; its APIs remain research-only."""
+    return WEB_DIR / "intelthat-app.html"
 
 
 @app.get("/health")

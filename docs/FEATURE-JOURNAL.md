@@ -5,6 +5,26 @@ reason important features changed. It complements the factual release log in
 [`../CHANGELOG.md`](../CHANGELOG.md). It must not be replaced by short-lived chat history, a pull
 request description, or an issue comment.
 
+## 2026-11-07 — Treat intelTHAT as the application it is
+
+**Founder correction:** intelTHAT is an actual app and must perform as one. A
+renamed panel with fetch buttons and receipt cards is not the product.
+
+**Implementation:** Added a dedicated `/intelthat/` application with its own
+Research Cockpit, Market Pack, Macro Conditions, News Intelligence, SEC
+Monitor, and Run History rooms. A research run resolves supported company names
+to symbols, shows measured elapsed time, settles the four source readers
+independently, and keeps formula, inputs, timeframe, timestamp, provenance,
+freshness, confidence, and whole-receipt export attached to every result.
+Browser-local saved runs restore the exact captured receipt. The former Market
+Compass room is now honestly labeled as a bridge into the app.
+
+**Authority boundary:** Application status does not grant trading authority.
+intelTHAT generates research evidence and signals only. Broker OAuth,
+credentials, account data, orders, execution readiness as authority, position
+management, trade recording, money movement, performance promises, and Market
+Compass score influence remain permanently refused.
+
 ## 2026-11-06 — Complete the client-demo research instrument
 
 **Founder direction:** Audit the entire named Door, finish every appearance and

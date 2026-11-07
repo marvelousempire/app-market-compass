@@ -427,14 +427,18 @@ The browser starts on **BB** with **BB**, **AAPL**, **QQQ**, and the operator-re
 
 The local runtime shows **Omo**, **Prince**, **Wuda**, and **Brown’s Barometers** as report-bound Actors. Omo scouts current named evidence; Prince frames horizon, route, and invalidation; Wuda presents trend plus directional RSI crossings around 35, 50, and 65; Brown owns the consolidated metrics and technical-instrument bench. Every Actor keeps its trading psychology inside its own comp card and can export a receipt with inputs, formula context, timeframe, timestamp, provenance, confidence, and the permanent research-only authority boundary. Marvin’s Metrics is absent.
 
-### Native intelTHAT research workspace
+### Native intelTHAT research application
 
-The intelTHAT room has two deliberately separate readers:
+Open the full application at **`http://market-compass.localhost/intelthat/`**. The compact Market Compass section is a bridge into the product; it is not presented as the whole app. intelTHAT now owns six application rooms: Research Cockpit, Market Pack, Macro Conditions, News Intelligence, SEC Monitor, and Run History. A run resolves supported company names such as `Apple` to `AAPL`, reads the four research modules in parallel, reports measured elapsed time without inventing a percentage, and keeps module failures visible instead of failing the whole app.
+
+The app has two deliberately separate readers:
 
 - **Refresh Live Evidence** builds a `market-compass.intelthat-evidence/v1` receipt from Market Compass-owned source adapters: daily/weekly price and technical context, bounded aggregate public options-chain context, four public macro proxies, current provider headlines, and SEC company submissions when a fair-access contact is configured.
 - **Read Owner Receipts** preserves the original bounded local-file bridge for externally published `pack`, `macro`, `rss`, and `edgar` JSON evidence.
 
 Every native evidence card exposes its inputs, formula, timeframe, evidence timestamp, retrieval timestamp, provenance, freshness, confidence, source URLs, input SHA-256, and exportable whole-receipt SHA-256. A source failure produces a held receipt instead of invented data. Configure `MARKET_COMPASS_SEC_CONTACT` with a real contact email to admit SEC requests under the SEC fair-access policy; the contact is used only in the request User-Agent and is never returned in the receipt.
+
+**Save run** preserves up to five exact receipts in browser-local intelTHAT history; **Export receipt** produces a portable JSON receipt. Selecting a saved run restores its original module evidence and source label. The app changes no Market Compass score and owns no background scheduler, account state, broker authentication, order action, position management, trade ledger, or money movement.
 
 The outside research source is pinned as `marvelousempire/intelTHAT@483f86e5aec2d800811c52863dd0765c20c9d441`. No license file was observed at that revision, so Market Compass does not copy or execute its code. It independently adapts the safe research categories and permanently rejects E*TRADE OAuth, broker credentials, orders, execution readiness as authority, position management, trade recording, money movement, and unsupported performance claims. `trade_execution=false`, `broker_credentials=false`, `money_movement=false`, and `score_influence=false` are contract fields, tests, UI copy, and runtime invariants.
 

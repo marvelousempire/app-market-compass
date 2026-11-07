@@ -5,6 +5,10 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Corrected intelTHAT's product shape: it is now a real application at `/intelthat/`, not a receipt panel presented as an app. The dedicated ACT-matched surface has a Research Cockpit, Market Pack, Macro Conditions, News Intelligence, SEC Monitor, and browser-local Run History.
+- Added company-name-to-symbol resolution, measured run progress, independently settled module rooms, saved-session restoration, per-module formula/input/provenance inspection, owner-receipt mode, whole-receipt export, and explicit permanent authority refusals. The compact Market Compass section is now labeled as the bridge it actually is.
+- Advanced the application contract to 0.8.1.
+
 - Rebuilt the admitted intelTHAT research scope as a native Market Compass v1 evidence contract. The workspace now measures price/technical context, bounded public options-chain aggregates, four macro proxies, provider headlines, and policy-gated SEC EDGAR filings without running donor code.
 - Added real Refresh Live Evidence, Read Owner Receipts, evidence filtering, formula/input/provenance inspection, and export actions. Each response carries timeframe, timestamps, freshness, confidence, source URLs, input fingerprints, the pinned outside-source revision, and one whole-receipt SHA-256.
 - Permanently rejected the pinned donor's E*TRADE OAuth, broker credentials, execution-ready authority, orders, position/spread management, trade recording, money movement, and unsupported performance claims. intelTHAT remains unable to influence Market Compass scores.
