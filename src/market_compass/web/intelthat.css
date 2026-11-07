@@ -1,5 +1,25 @@
-.intelthat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:12px}
-.intelthat-card{border:1px solid var(--act-line);border-radius:12px;padding:12px;background:var(--act-fill-subtle);color:var(--act-ink);min-width:0}
-.intelthat-card h3{font-size:13px;margin:0 0 8px}.intelthat-card p,.intelthat-card small{font-size:11px;line-height:1.5;display:block;overflow-wrap:anywhere}
-.intelthat-card small{color:var(--act-text-secondary)}.intelthat-card dl{display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:11px}
-.intelthat-card dt{color:var(--act-text-tertiary);overflow-wrap:anywhere}.intelthat-card dd{margin:0;overflow-wrap:anywhere}
+.intelthat-toolbar{display:flex;align-items:end;flex-wrap:wrap;gap:10px;margin:16px 0 10px}
+.intelthat-toolbar label{display:grid;gap:5px;color:var(--act-text-secondary);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.intelthat-toolbar select{min-width:160px;min-height:38px;border:1px solid var(--act-line);border-radius:9px;background:var(--act-surface);color:var(--act-ink);padding:0 30px 0 10px}
+.intelthat-boundary{display:flex;flex-wrap:wrap;gap:7px;padding:10px 0;border-block:1px solid var(--act-line)}
+.intelthat-boundary span{border-radius:999px;background:var(--act-fill-subtle);color:var(--act-text-secondary);padding:5px 9px;font-size:10px;font-weight:750;letter-spacing:.035em;text-transform:uppercase}
+.intelthat-summary{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:16px;margin-top:14px;padding:14px;border:1px solid var(--act-line);border-radius:12px;background:var(--act-fill-subtle)}
+.intelthat-summary strong{display:block;font-size:15px}.intelthat-summary p{margin:5px 0 0;color:var(--act-text-secondary);font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.intelthat-proof{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}
+.intelthat-proof span,.intelthat-state{border:1px solid var(--act-line);border-radius:999px;background:var(--act-surface);padding:5px 8px;font-size:10px;font-weight:750;text-transform:uppercase}
+.intelthat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.intelthat-card{border:1px solid var(--act-line);border-radius:14px;padding:14px;background:var(--act-surface);color:var(--act-ink);min-width:0;box-shadow:0 1px 0 color-mix(in srgb,var(--act-ink) 5%,transparent)}
+.intelthat-card[data-state="observed"]{border-top:3px solid var(--act-positive,#1f9d73)}
+.intelthat-card[data-state="held"],.intelthat-card[data-state="missing"]{border-top:3px solid var(--act-warning,#b27814)}
+.intelthat-card[data-state="excluded"]{border-top:3px solid var(--act-negative,#c65d65)}
+.intelthat-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.intelthat-card h3{font-size:13px;margin:0}.intelthat-card p,.intelthat-card small{font-size:11px;line-height:1.5;display:block;overflow-wrap:anywhere}
+.intelthat-card small{color:var(--act-text-secondary)}.intelthat-card dl{display:grid;grid-template-columns:minmax(90px,.8fr) minmax(0,1.2fr);gap:6px 9px;margin:12px 0;font-size:11px}
+.intelthat-card dt{color:var(--act-text-tertiary);overflow-wrap:anywhere}.intelthat-card dd{margin:0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.intelthat-card details{border-top:1px solid var(--act-line);padding-top:9px;margin-top:9px}
+.intelthat-card summary{cursor:pointer;color:var(--act-text-secondary);font-size:11px;font-weight:700}
+.intelthat-card pre{max-height:190px;overflow:auto;margin:9px 0 0;border-radius:8px;background:var(--act-fill-subtle);color:var(--act-ink);padding:9px;font:10px/1.5 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.intelthat-empty{display:grid;place-items:start;min-height:110px;margin-top:12px;padding:20px;border:1px dashed var(--act-line);border-radius:12px;background:var(--act-fill-subtle)}
+.intelthat-empty p{max-width:680px;margin:5px 0;color:var(--act-text-secondary);line-height:1.5}
+.intelthat-error{margin-top:12px;border:1px solid var(--act-negative,#c65d65);border-radius:12px;padding:14px;background:color-mix(in srgb,var(--act-negative,#c65d65) 8%,var(--act-surface));color:var(--act-ink)}
+@media(max-width:760px){.intelthat-grid{grid-template-columns:1fr}.intelthat-summary{grid-template-columns:1fr}.intelthat-proof{justify-content:flex-start}.intelthat-toolbar>*{flex:1 1 150px}.intelthat-toolbar button,.intelthat-toolbar select{width:100%}}

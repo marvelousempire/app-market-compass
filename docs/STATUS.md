@@ -18,11 +18,12 @@ This document is the repository's expectation contract. If another document soun
 
 | Capability | Status | What exists now | What is still expected |
 | --- | --- | --- | --- |
-| Browser app | Implemented | v0.7 no-build FastAPI workbench launched by `make app`. ACT v1 provides real navigation, a contextual right rail, System/Light/Dark appearance, report-bound Actors, 15 Exchange modules, and 58 reviewed private bankTHAT evidence contracts. Friendly company-name search and the BB/AAPL/QQQ/SPCX defaults remain available. | Persistent workspaces, richer verified graph/data, manual Fibonacci controls, authentication, and cross-model comparison. |
+| Browser app | Implemented | v0.8 no-build FastAPI workbench launched by `make app`. ACT v1 provides real navigation, a contextual right rail, System/Light/Dark appearance, report-bound Actors, 15 Exchange modules, 58 reviewed private bankTHAT evidence contracts, and the native intelTHAT research workspace. Friendly company-name search and the BB/AAPL/QQQ/SPCX defaults remain available. | Persistent workspaces, richer verified graph/data, manual Fibonacci controls, authentication, and cross-model comparison. |
 | CLI | Implemented | Analyze, node, registry, and backtest commands. | Batch jobs, richer export controls, job persistence. |
 | FastAPI | Implemented | Health, analysis, symbol search, analyst provider/health/interpretation, node listing/output, browser surface, and research backtest endpoints. | Auth, server-side cloud approval, versioned production contracts, quotas, async jobs, persistence. |
 | Decision gates + calculateTHAT | Research | The read-only `/api/decision-readiness` endpoint and ACT v1 surface generate active Go, Watch, Do Not Go and Invalidated research signals from asset reality, confidence, evidence edge, timeframe agreement, route, reward/risk and missing evidence. calculateTHAT shows its arithmetic and reads without mutating scores. | Bind versioned Actor preferences and refine signal calibration. Broker connectivity and execution are permanently outside Market Compass. |
 | Imported research lenses | Research | The provenance-bound Day Trader lens refines daily setup detection and RSI 35/50/65 crossings into Brown/Wuda MicroSlices. Its API and UI declare no score influence, trading, credentials, or money movement. | Admit further sources through the same license, provenance, placement, refusal, test, and live-readback gates. |
+| Native intelTHAT refinery | Research | A Market Compass-owned v1 contract measures price/technical and bounded options-chain context, macro proxies, provider headlines, and policy-gated EDGAR evidence. The UI filters, inspects and exports receipts; failures remain held. Donor execution/credential paths are rejected and score influence remains false. | Add licensed provider redundancy, caching and a scheduled macro calendar; authenticate only if the Door leaves its trusted private boundary. |
 | CSV mode | Implemented | Reproducible OHLCV input independent of live provider. | Browser upload workflow, broader schemas and dataset manifests. |
 | Live market data | Partial | Yahoo public search/chart endpoints with TLS trust bundle and symbol resolution. | Licensed provider(s), retries, caching, provider failover, SLA monitoring, intraday/multi-timeframe provider contract. |
 
@@ -83,11 +84,11 @@ This document is the repository's expectation contract. If another document soun
 | --- | --- | --- |
 | OHLCV | Live public provider + CSV | Licensed provider, redundancy, intraday/multi-timeframe support. |
 | News | Related public-provider news | Licensed source, source tiers, full text/event metadata where permitted. |
-| Macro calendar | Not implemented | Fed, inflation, employment, government, geopolitical scheduled risk. |
+| Macro context | Research public-proxy lens | VIX, 10-year yield, UUP and TLT five-session changes with a disclosed context formula. | Scheduled Fed, inflation, employment, government and geopolitical event calendar. |
 | Corporate fundamentals | Not implemented | Revenue, earnings, balance sheet, cash flow, share count, dilution, customers/suppliers. |
 | Crypto fundamentals | Not implemented | Supply, unlocks, emissions, fees/revenue, staking, treasury, holder concentration, chain activity. |
 | Verified relationship graph | Not implemented | Sourced dated edges: supplier, customer, owner, regulator, partner, technology dependency. |
-| Options | Not implemented | Chain, IV, Greeks, OI, skew, term structure, event pricing. |
+| Options | Research aggregate context | Bounded public chain contract counts and put/call open-interest and volume ratios; no candidate, order, broker or execution authority. | Licensed chain, IV, Greeks, skew, term structure and event pricing with provider redundancy. |
 | Social attention | Not implemented | Source-controlled attention/velocity signals with spam/bot handling. |
 
 ---
@@ -112,7 +113,7 @@ A user can:
 12. start on BB and choose BB, AAPL, QQQ, or SPCX without replacing an operator-edited watchlist;
 13. open Omo, Prince, Wuda, or Brown's Barometers as an Actor space and inspect its comp card;
 14. inspect Wuda trend/notable categories and Brown metrics, technical-analysis instruments, and view-governance categories;
-15. read intelTHAT proof health and canonical runtime-source receipts without enabling score influence or trading.
+15. refresh the native intelTHAT research workspace, inspect formula/input/provenance details, filter proof states, export its receipt, and separately read canonical owner-published receipts without enabling score influence or trading.
 16. inspect the ACT v1 Market Exchange dashboard, catalog filters, product contracts and API/auth state without invoking owner mutations;
 17. use the commissioned FiveMac door as a restartable loopback service and read its exact source receipt.
 

@@ -20,11 +20,12 @@ from .data import get_market_data, search_symbols
 from .decision_readiness import calculate_readiness
 from .engine import analyze
 from .intelthat_bridge import read_snapshot
+from .intelthat_native import build_native_workspace
 from .pack002 import desk_from_bars
 from .registry import NODE_REGISTRY, node_output
 from .research_lenses import build_day_trader_lens
 
-app = FastAPI(title="Market Compass", version="0.7.0")
+app = FastAPI(title="Market Compass", version="0.8.0")
 analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
 PREVIEW_STARTED_AT = datetime.now(UTC).isoformat()
@@ -189,6 +190,17 @@ def intelthat_api(symbol: str):
         return read_snapshot(symbol)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.get("/api/intelthat-workspace/{symbol}")
+def intelthat_workspace_api(symbol: str):
+    """Build the native research workspace; never authenticate a broker or place an order."""
+    try:
+        return build_native_workspace(symbol)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail=f"Research sources unavailable: {type(exc).__name__}.") from exc
 
 
 @app.get("/api/research-lenses/day-trader/{symbol}")

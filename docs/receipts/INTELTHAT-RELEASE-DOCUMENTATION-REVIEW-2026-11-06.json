@@ -1,0 +1,31 @@
+{
+  "schema": "release-documentation-freshness/v1",
+  "reviewed_at": "2026-11-06T21:20:04-05:00",
+  "accepted_source": "26cf6acfcc2cbdac813b44c5f86a638bd4b84a59",
+  "candidate_branch": "feat/intelthat-native-integration-20261106",
+  "areas": {
+    "product_docs": {
+      "state": "current-candidate",
+      "files": ["README.md", "CHANGELOG.md", "docs/STATUS.md", "docs/INTELTHAT-BRIDGE.md", "docs/handoff.md"],
+      "reason": "v0.8 native intelTHAT contract, source classes, actions, provenance fields, source failures and permanent authority refusals are described without claiming protected acceptance or live installation."
+    },
+    "wiring_guides": {
+      "state": "current-candidate",
+      "files": ["README.md", "docs/handoff.md"],
+      "reason": "The real market-compass.localhost Door remains the operator path. MARKET_COMPASS_SEC_CONTACT and MARKET_COMPASS_INTELTHAT_DIR have distinct bounded purposes."
+    },
+    "white_papers": {
+      "state": "not_applicable",
+      "files": [],
+      "reason": "No separate white-paper truth changed."
+    },
+    "building_skills": {
+      "state": "current-external-owner",
+      "files": [],
+      "reason": "The existing Market Source Refinery skill governed source admission; product-specific behavior remains in Market Compass and Studio grounding records."
+    }
+  },
+  "semantic_review": "pass-candidate",
+  "source_binding_review": "pass-candidate",
+  "live_proof": "pending accepted-source installation and browser proof through http://market-compass.localhost/"
+}

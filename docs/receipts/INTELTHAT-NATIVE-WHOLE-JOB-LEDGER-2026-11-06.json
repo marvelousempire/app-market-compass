@@ -1,0 +1,69 @@
+{
+  "schema": "whole-job-truth/v1",
+  "objective": "Fully integrate the admitted intelTHAT research capability into Market Compass as native, research-only product behavior; prove and release it; then admit Market Compass Studio as a governed projection.",
+  "updated_at": "2026-11-06T21:20:04-05:00",
+  "accepted_start": {
+    "market_compass": "26cf6acfcc2cbdac813b44c5f86a638bd4b84a59",
+    "intelthat_source": "marvelousempire/intelTHAT@483f86e5aec2d800811c52863dd0765c20c9d441",
+    "studio_audit": "4ebe1db4109c3b75946b57fcc4c966400e31de1d",
+    "door": "http://market-compass.localhost/"
+  },
+  "authority_boundary": {
+    "trade_execution": false,
+    "broker_credentials": false,
+    "money_movement": false,
+    "signal_generation": true,
+    "score_influence": false
+  },
+  "workstreams": [
+    {
+      "id": "studio-grounding",
+      "state": "source-complete",
+      "target": "That App Studio source",
+      "evidence": "Repository routes, Room topology, Feature Control, raw words, semantic nodes, Bootstrap English, engine manifest, Sample Council approval and Conceptual Notion are present; the grounding planner now resolves Market Compass.",
+      "remaining": "Update gates with exact accepted owner, runtime and release evidence after those proofs exist."
+    },
+    {
+      "id": "source-refinery",
+      "state": "complete",
+      "target": "pinned donor inventory",
+      "evidence": "Pinned intelTHAT revision inspected. Safe research categories and proof-health semantics were admitted; E*TRADE OAuth, credentials, execution readiness as authority, orders, position/spread management, trade recording, money movement and unsupported performance claims were rejected. No donor license file was observed; no donor code is copied or executed.",
+      "remaining": ""
+    },
+    {
+      "id": "native-contract-and-engine",
+      "state": "source-complete",
+      "target": "Market Compass candidate",
+      "evidence": "market-compass.intelthat-evidence/v1 returns independently degradable pack, macro, RSS and EDGAR evidence with inputs, formula, timeframe, timestamps, provenance, freshness, confidence, input fingerprints and a whole-receipt digest. Focused and full tests pass.",
+      "remaining": "Protected exact-head acceptance and installed-source readback."
+    },
+    {
+      "id": "act-workspace",
+      "state": "source-complete",
+      "target": "Market Compass Web candidate",
+      "evidence": "Native ACT workspace provides Refresh Live Evidence, Read Owner Receipts, proof-state filtering, formula/input/provenance disclosure and receipt export with responsive semantic System/Light/Dark styling.",
+      "remaining": "Browser audit and screenshots through the real Door after accepted-source installation."
+    },
+    {
+      "id": "tests-and-documentation",
+      "state": "source-complete",
+      "target": "Market Compass candidate",
+      "evidence": "Ruff passed. Focused suite passed 24 tests, full suite passed 64 tests before the final options seam; final exact-head suite remains required. README, changelog, status, bridge guide and handoff describe v0.8 without live claims.",
+      "remaining": "Rerun full exact-head tests and documentation checks after the final source commit."
+    },
+    {
+      "id": "market-compass-release",
+      "state": "active",
+      "target": "canonical Gitea main, GitHub mirror and FiveMac installed Door",
+      "evidence": "Candidate branch starts at accepted main 26cf6acf. No protected release claim yet.",
+      "remaining": "Commit, publish, open PR, required exact-head checks, independent review, forge mergeability, merge, mirror, install, restart and real-Door proof."
+    },
+    {
+      "id": "market-compass-studio",
+      "state": "held-by-sequence",
+      "target": "That App Studio",
+      "evidence": "Grounding packet exists, but Studio admission deliberately waits for accepted Market Compass owner source and real-Door evidence.",
+      "remaining": "After owner acceptance, create the governed projection, validate it, release it through Studio's protected path and prove its own targets."
+    }
+  ]
+}

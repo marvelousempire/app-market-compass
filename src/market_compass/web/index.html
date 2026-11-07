@@ -288,12 +288,27 @@
         </section>
         <section class="panel" id="intelthat-panel" aria-label="intelTHAT research receipts">
           <div class="section-head">
-            <div><p class="eyebrow">INDEPENDENT SOURCE</p><h2>intelTHAT Research / Proof Health</h2></div>
-            <button type="button" class="secondary" id="intelthat-load">Read Local Receipts</button>
+            <div><p class="eyebrow">MARKET COMPASS NATIVE REFINERY</p><h2>intelTHAT Research Workspace</h2></div>
+            <span class="trust-chip">v1 contract · research only</span>
           </div>
-          <p class="trust-note">Read-only research. These receipts do not change Market Compass scores or place orders. A current file is not independently verified market truth.</p>
+          <p class="trust-note">Options and market context, macro proxies, current headlines, and EDGAR evidence are refined into Market Compass receipts. Every card exposes inputs, formula, timeframe, timestamp, provenance, confidence, and freshness. No broker, order, money movement, or score influence.</p>
+          <div class="intelthat-toolbar" aria-label="intelTHAT workspace actions">
+            <button type="button" id="intelthat-load">Refresh Live Evidence</button>
+            <button type="button" class="secondary" id="intelthat-local">Read Owner Receipts</button>
+            <label>Show
+              <select id="intelthat-filter">
+                <option value="all">All evidence</option>
+                <option value="observed">Observed</option>
+                <option value="attention">Needs attention</option>
+              </select>
+            </label>
+            <button type="button" class="secondary" id="intelthat-export" disabled>Export Receipt</button>
+          </div>
+          <div class="intelthat-boundary" aria-label="intelTHAT authority boundary">
+            <span>Signals on</span><span>Trading off</span><span>Credentials none</span><span>Score influence off</span>
+          </div>
           <div id="intelthat-output" role="status" aria-live="polite">
-            <p class="muted">Select a symbol and open its source receipts. Nothing is fetched until you choose Read Local Receipts.</p>
+            <div class="intelthat-empty"><strong>Evidence is waiting.</strong><p>Select a symbol, then refresh the native research workspace or inspect already-published owner receipts.</p></div>
           </div>
         </section>
         <section class="two-col">

@@ -10,11 +10,16 @@ def test_intelthat_source_panel_and_assets_exist(monkeypatch):
     assert page.status_code == 200
     assert 'id="intelthat-panel"' in page.text
     assert 'id="intelthat-load"' in page.text
+    assert 'id="intelthat-local"' in page.text
+    assert 'id="intelthat-filter"' in page.text
+    assert 'id="intelthat-export"' in page.text
     assert '/static/intelthat.js' in page.text
     assert '/static/intelthat.css' in page.text
     script = client.get("/static/intelthat.js")
     assert script.status_code == 200
     assert "/api/intelthat/" in script.text
+    assert "/api/intelthat-workspace/" in script.text
+    assert "Export Receipt" not in script.text
     assert "textContent" in script.text
     assert client.get("/static/intelthat.css").status_code == 200
     payload = client.get("/api/intelthat/QQQ")
