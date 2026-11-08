@@ -158,7 +158,8 @@ def test_named_sections_share_participant_template_without_impersonation():
     assert cards["Omo's Intel"] == "King of Clubs"
     assert cards["Wuda's Watch"] == "King of Hearts"
     assert cards["Prince's Intel"] is None
-    assert all(p["state"] == "draft-not-certified" for p in instances)
+    assert all(p["state"] in {"draft-not-certified", "awaiting-owner-content"} for p in instances)
+    assert next(p for p in instances if p["name"] == "Marvin\'s Metrics")["research_actor"] is None
 
 
 def test_draft_schedule_json_schema_is_parseable_and_matches_profiles():
