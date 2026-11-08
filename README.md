@@ -1,5 +1,8 @@
 # Market Compass
 
+> **Proposed, not installed (Nov 8, 2026):** [Universal Measurement Studio](docs/UNIFIED-MARKET-STUDIO-WEAVE.md) adds a seventh-domain Hybrid CCK schedule selector, a fictional/authorized subject simulator, portable charts and export **inside the existing v0.7 ACT room structure**. This is PR #12 on a separate GitHub proposal branch. The commissioned FiveMac service and Gitea main have **not** been updated by this proposal; all existing market, Exchange, actor and research functions remain first-class.
+
+
 **Market Compass is an explainable market-research and decision-intelligence application.** It is designed to answer a harder question than “is RSI oversold?” or “did the news sound bullish?”:
 
 > **Given the evidence available right now, what supports the bullish case, what supports the bearish case, where could price go next, and what would prove the current thesis wrong?**
