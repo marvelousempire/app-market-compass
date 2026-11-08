@@ -19,11 +19,13 @@ from .backtest import backtest_frame
 from .data import get_market_data, search_symbols
 from .decision_readiness import calculate_readiness
 from .engine import analyze
+from .hcck_profiles import ProfiledSimulationRequest, profile_directory, run_profiled_simulation
 from .intelthat_bridge import read_snapshot
 from .intelthat_native import build_native_workspace
 from .pack002 import desk_from_bars
 from .registry import NODE_REGISTRY, node_output
 from .research_lenses import build_day_trader_lens
+from .simulation import SimulationRequest, simulate
 
 app = FastAPI(title="Market Compass", version="0.8.1")
 analyst_router = AnalystRouter()
@@ -189,6 +191,22 @@ def backtest_api(
         return {"symbol": symbol.upper(), "provider": data.meta.get("provider"), "resolved_symbol": data.meta.get("resolved_symbol", symbol.upper()), **result}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@app.get("/api/hcck/profiles")
+def hybrid_cck_profiles_api():
+    """Draft domain templates; does not issue CCK authorization."""
+    return profile_directory()
+
+
+@app.post("/api/hcck/simulate")
+def hybrid_cck_simulation_api(request: ProfiledSimulationRequest):
+    return run_profiled_simulation(request)
+
+
+@app.post("/api/simulate")
+def simulate_api(request: SimulationRequest):
+    return simulate(request)
 
 
 @app.get("/api/intelthat/{symbol}")

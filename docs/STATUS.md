@@ -24,6 +24,7 @@ This document is the repository's expectation contract. If another document soun
 | Decision gates + calculateTHAT | Research | The read-only `/api/decision-readiness` endpoint and ACT v1 surface generate active Go, Watch, Do Not Go and Invalidated research signals from asset reality, confidence, evidence edge, timeframe agreement, route, reward/risk and missing evidence. calculateTHAT shows its arithmetic and reads without mutating scores. | Bind versioned Actor preferences and refine signal calibration. Broker connectivity and execution are permanently outside Market Compass. |
 | Imported research lenses | Research | The provenance-bound Day Trader lens refines daily setup detection and RSI 35/50/65 crossings into Brown/Wuda MicroSlices. Its API and UI declare no score influence, trading, credentials, or money movement. | Admit further sources through the same license, provenance, placement, refusal, test, and live-readback gates. |
 | Native intelTHAT application | Research | `/intelthat/` is a dedicated ACT-matched app with Cockpit, Market Pack, Macro Conditions, News Intelligence, SEC Monitor, and browser-local Run History. It resolves company names, runs the Market Compass-owned v1 readers, restores saved receipts, and exposes formulas, inputs, freshness, timestamps, provenance, confidence, and export. The Market Compass panel is only its bridge. Donor execution/credential paths are rejected and score influence remains false. | Add licensed provider redundancy, server-side cache/jobs, and a scheduled macro calendar; authenticate only if the Door leaves its trusted private boundary. |
+| Measurement Studio | Research | One ACT room exposes seven source-owner-neutral Hybrid CCK draft schedules and a transparent hypothetical 0–100 method-relative calculation. Results show inputs, formula, observation timeframe, timestamp, method/source provenance, unrated confidence, refusal holds, authority flags, and exportable input/receipt hashes. Brown's Barometers owns the measuring seat; Marvin's Metrics and donor marketing identity remain absent. | Real CCK/SchemaTHAT registration and witnesses, independently verified evidence, owner-issued methods, and automatic schedules remain outside this source projection. |
 | CSV mode | Implemented | Reproducible OHLCV input independent of live provider. | Browser upload workflow, broader schemas and dataset manifests. |
 | Live market data | Partial | Yahoo public search/chart endpoints with TLS trust bundle and symbol resolution. | Licensed provider(s), retries, caching, provider failover, SLA monitoring, intraday/multi-timeframe provider contract. |
 
@@ -114,8 +115,9 @@ A user can:
 13. open Omo, Prince, Wuda, or Brown's Barometers as an Actor space and inspect its comp card;
 14. inspect Wuda trend/notable categories and Brown metrics, technical-analysis instruments, and view-governance categories;
 15. refresh the native intelTHAT research workspace, inspect formula/input/provenance details, filter proof states, export its receipt, and separately read canonical owner-published receipts without enabling score influence or trading.
-16. inspect the ACT v1 Market Exchange dashboard, catalog filters, product contracts and API/auth state without invoking owner mutations;
-17. use the commissioned FiveMac door as a restartable loopback service and read its exact source receipt.
+16. choose a Measurement Studio profile, load a fictional authorized example, run a held-or-calculated hypothetical study, inspect its complete calculation receipt, and export the result without persistence or owner writeback;
+17. inspect the ACT v1 Market Exchange dashboard, catalog filters, product contracts and API/auth state without invoking owner mutations;
+18. use the commissioned FiveMac door as a restartable loopback service and read its exact source receipt.
 
 ### Does not work yet
 

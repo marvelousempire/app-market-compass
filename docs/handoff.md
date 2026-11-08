@@ -44,6 +44,7 @@ launchctl print gui/$(id -u)/ai.market-compass
 | AI interpretation | Nephew panel with automatic or explicit local/cloud provider selection, depth, per-request cloud consent, grounded response schema, and model receipt. |
 | Actor spaces | Omo, Prince, Wuda and Brown’s Barometers bind current report evidence to explicit psychology, comp cards, and exportable research-only receipts. |
 | ACT v1 Market Exchange | Six admin rooms inspect 15 modules and 58 reviewed private bankTHAT contracts. All six pipeline stages act, and Market Source Refinery exports intake receipts for repositories, URLs, files, and pasted text without donor execution. |
+| Measurement Studio | Seven source-owner-neutral draft schedules load fictional/authorized studies, hold incomplete evidence, calculate a transparent method-relative index, and export inputs, formula, timeframe, timestamp, provenance, unrated confidence, authority flags, and receipt hashes. Brown's Barometers owns the measuring seat; no owner writeback or automatic schedule runs. |
 
 ## Remaining gaps only
 

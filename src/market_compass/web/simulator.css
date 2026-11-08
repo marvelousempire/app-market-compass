@@ -1,0 +1,21 @@
+.universal-simulator{margin-top:16px}
+.universal-json-label{display:block;font-size:13px;font-weight:650;margin:12px 0 8px}
+#universal-input{width:100%;min-height:190px;box-sizing:border-box;resize:vertical;padding:12px;border:1px solid var(--act-line);border-radius:10px;background:var(--act-fill-recessed);color:var(--act-ink);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.5}
+.universal-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+#universal-output{margin-top:12px;overflow-wrap:anywhere}
+.universal-result{border-top:1px solid var(--act-line);padding-top:14px}
+.universal-result h3{margin-top:0;font-size:16px}
+.universal-chart{display:block;width:100%;height:auto;max-height:260px;border:1px solid var(--act-line);border-radius:8px;background:var(--act-fill-recessed);color:var(--act-blue)}
+.universal-records{max-height:175px;overflow:auto}
+.universal-records p{font-size:12px;margin:4px 0}
+.universal-result small{display:block;margin-top:8px;color:var(--act-text-tertiary);font-size:11px}
+
+/* Selectable draft Hybrid CCK schedule details, deliberately distinct from certified CCK. */
+.hcck-profiles{margin-top:16px}
+.hcck-profiles label{display:block;margin:12px 0 6px;font-size:13px;font-weight:650}
+#hcck-profile-select,#hcck-seat-select{width:min(100%,550px);min-height:44px;padding:9px 12px;border:1px solid var(--act-line);border-radius:10px;background:var(--act-fill);color:var(--act-ink);font-size:16px}
+#hcck-profile-detail{margin:12px 0;line-height:1.55;overflow-wrap:anywhere}
+#hcck-profile-detail h3{margin:6px 0;font-size:16px}
+#hcck-profile-detail p{margin:7px 0;font-size:12px}
+#hcck-profile-detail small{display:block;color:var(--act-text-tertiary);font-size:11px}
+.hcck-profiles button:disabled,.universal-actions button:disabled{cursor:not-allowed;opacity:.5}

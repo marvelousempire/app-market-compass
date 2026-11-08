@@ -5,6 +5,28 @@ reason important features changed. It complements the factual release log in
 [`../CHANGELOG.md`](../CHANGELOG.md). It must not be replaced by short-lived chat history, a pull
 request description, or an issue comment.
 
+## 2026-11-08 — Reconcile the GitHub Measurement Studio proposal without regressing product law
+
+**Founder direction:** Check the Market Compass movement on GitHub, reconcile it,
+then commit, merge, mirror, and ship the resulting application.
+
+**Implementation:** Reconciled GitHub draft PR #12 head
+`430d8f0dcc344ac0f277341e6d0aaf790fc4a22d` with native intelTHAT head
+`017b35cc16ed4238772c9d3c395d3a3e1a83b5bd`. Measurement Studio is an additive
+ACT room with bounded Hybrid CCK draft schedules, fictional/authorized examples,
+transparent calculation holds, semantic appearance, contextual rail actions,
+charts, and full export receipts.
+
+**Product correction:** The proposal reintroduced donor marketing identity and a
+Marvin's Metrics placeholder. The reconciled product removes both: athlete data is
+source-owner neutral and Brown's Barometers owns the fourth measuring seat and
+consolidated bench. Every calculation exposes inputs, formula, timeframe,
+timestamp, provenance, explicitly unrated confidence, hashes, and the permanent
+research-only authority flags.
+
+**Still open at source-candidate time:** Protected Gitea checks/review/merge,
+GitHub mirror equality, exact FiveMac installation, and real-Door browser proof.
+
 ## 2026-11-07 — Treat intelTHAT as the application it is
 
 **Founder correction:** intelTHAT is an actual app and must perform as one. A

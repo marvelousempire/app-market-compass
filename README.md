@@ -1,5 +1,8 @@
 # Market Compass
 
+> **Reconciled release (Nov 8, 2026):** [Universal Measurement Studio](docs/UNIFIED-MARKET-STUDIO-WEAVE.md) adds a seven-domain Hybrid CCK schedule selector, a fictional/authorized subject simulator, portable charts and export inside the existing ACT v1 room structure. GitHub draft PR #12 supplied the proposal; this release reconciles it with the native intelTHAT application and permanent Market Compass boundaries. Runtime truth remains `/api/operator/status` and the live Door receipt.
+
+
 **Market Compass is an explainable market-research and decision-intelligence application.** It is designed to answer a harder question than “is RSI oversold?” or “did the news sound bullish?”:
 
 > **Given the evidence available right now, what supports the bullish case, what supports the bearish case, where could price go next, and what would prove the current thesis wrong?**
@@ -20,7 +23,7 @@ Market Compass will not connect to a broker, submit an order, execute a trade, m
 
 ## Product status at a glance
 
-**Current release:** ACT v1 administrative shell plus the Market Compass research workbench and Market Exchange, `v0.7`
+**Current release:** ACT v1 administrative shell plus the Market Compass research workbench, Market Exchange, native intelTHAT application, and Measurement Studio, `v0.8.1`
 **Primary use case:** swing-trade research over days to several weeks  
 **Current interfaces:** browser app, CLI, FastAPI, CSV input  
 **Current default market-data source:** Yahoo public search/chart endpoints  
