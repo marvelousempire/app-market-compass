@@ -17,8 +17,8 @@ permissions:
 
 jobs:
   source-tests:
-    name: Supplemental GitHub-hosted source checks (not commissioning)
-    runs-on: ubuntu-latest
+    name: Supplemental source checks (not commissioning)
+    runs-on: macos-briefcase
     timeout-minutes: 15
     steps:
       - name: Checkout exact revision
