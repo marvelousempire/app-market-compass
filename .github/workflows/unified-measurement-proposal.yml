@@ -21,15 +21,27 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
+      - name: Checkout exact revision
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          cd "${GITHUB_WORKSPACE}"
+          git config --global --add safe.directory "${GITHUB_WORKSPACE}"
+          export GIT_TERMINAL_PROMPT=0
+          test -n "${GITHUB_TOKEN:-}"
+          AUTHED="$(printf '%s' "${GITHUB_SERVER_URL}" | sed -E "s#^(https?)://#\1://oauth2:${GITHUB_TOKEN}@#")/${GITHUB_REPOSITORY}.git"
+          if ! git rev-parse HEAD >/dev/null 2>&1; then
+            git init .
+            git remote add origin "${AUTHED}"
+          fi
+          git fetch --depth=1 origin "${GITHUB_SHA}"
+          git checkout -f FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "${GITHUB_SHA}"
       - name: Install development dependencies
-        run: python -m pip install -e '.[dev]'
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install -e '.[dev]'
       - name: Preserve original and new browser scripts
         run: |
           node --check src/market_compass/web/app.js
@@ -38,10 +50,10 @@ jobs:
           node --check src/market_compass/web/hcck.js
           node --check src/market_compass/web/simulator.js
       - name: Run the entire current-main regression suite, including measurement tests
-        run: python -m pytest -q
+        run: .venv/bin/python -m pytest -q
       - name: Recheck reconciled scope and authority
         run: |
-          python - <<'PY'
+          .venv/bin/python - <<'PY'
           from pathlib import Path
           from market_compass.api import app
           routes = {r.path for r in app.routes}
