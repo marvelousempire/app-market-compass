@@ -19,12 +19,15 @@ from .backtest import backtest_frame
 from .data import get_market_data, search_symbols
 from .decision_readiness import calculate_readiness
 from .engine import analyze
+from .hcck_profiles import ProfiledSimulationRequest, profile_directory, run_profiled_simulation
 from .intelthat_bridge import read_snapshot
+from .intelthat_native import build_native_workspace
 from .pack002 import desk_from_bars
 from .registry import NODE_REGISTRY, node_output
 from .research_lenses import build_day_trader_lens
+from .simulation import SimulationRequest, simulate
 
-app = FastAPI(title="Market Compass", version="0.7.0")
+app = FastAPI(title="Market Compass", version="0.8.1")
 analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
 PREVIEW_STARTED_AT = datetime.now(UTC).isoformat()
@@ -34,6 +37,13 @@ app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
 @app.get("/", response_class=FileResponse)
 def home():
     return WEB_DIR / "index.html"
+
+
+@app.get("/intelthat", response_class=FileResponse)
+@app.get("/intelthat/", response_class=FileResponse)
+def intelthat_app():
+    """Serve the native intelTHAT application; its APIs remain research-only."""
+    return WEB_DIR / "intelthat-app.html"
 
 
 @app.get("/health")
@@ -183,12 +193,39 @@ def backtest_api(
         raise HTTPException(status_code=400, detail=str(e)) from e
 
 
+@app.get("/api/hcck/profiles")
+def hybrid_cck_profiles_api():
+    """Draft domain templates; does not issue CCK authorization."""
+    return profile_directory()
+
+
+@app.post("/api/hcck/simulate")
+def hybrid_cck_simulation_api(request: ProfiledSimulationRequest):
+    return run_profiled_simulation(request)
+
+
+@app.post("/api/simulate")
+def simulate_api(request: SimulationRequest):
+    return simulate(request)
+
+
 @app.get("/api/intelthat/{symbol}")
 def intelthat_api(symbol: str):
     try:
         return read_snapshot(symbol)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.get("/api/intelthat-workspace/{symbol}")
+def intelthat_workspace_api(symbol: str):
+    """Build the native research workspace; never authenticate a broker or place an order."""
+    try:
+        return build_native_workspace(symbol)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail=f"Research sources unavailable: {type(exc).__name__}.") from exc
 
 
 @app.get("/api/research-lenses/day-trader/{symbol}")

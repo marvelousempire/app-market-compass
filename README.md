@@ -1,5 +1,8 @@
 # Market Compass
 
+> **Reconciled release (Nov 8, 2026):** [Universal Measurement Studio](docs/UNIFIED-MARKET-STUDIO-WEAVE.md) adds a seven-domain Hybrid CCK schedule selector, a fictional/authorized subject simulator, portable charts and export inside the existing ACT v1 room structure. GitHub draft PR #12 supplied the proposal; this release reconciles it with the native intelTHAT application and permanent Market Compass boundaries. Runtime truth remains `/api/operator/status` and the live Door receipt.
+
+
 **Market Compass is an explainable market-research and decision-intelligence application.** It is designed to answer a harder question than “is RSI oversold?” or “did the news sound bullish?”:
 
 > **Given the evidence available right now, what supports the bullish case, what supports the bearish case, where could price go next, and what would prove the current thesis wrong?**
@@ -20,7 +23,7 @@ Market Compass will not connect to a broker, submit an order, execute a trade, m
 
 ## Product status at a glance
 
-**Current release:** ACT v1 administrative shell plus the Market Compass research workbench and Market Exchange, `v0.7`
+**Current release:** ACT v1 administrative shell plus the Market Compass research workbench, Market Exchange, native intelTHAT application, and Measurement Studio, `v0.8.1`
 **Primary use case:** swing-trade research over days to several weeks  
 **Current interfaces:** browser app, CLI, FastAPI, CSV input  
 **Current default market-data source:** Yahoo public search/chart endpoints  
@@ -416,7 +419,7 @@ The browser opens with six ready controls for the local research runtime:
 - **Check status** reads the current host, process, mode, authority and safety state.
 - **Launch preview** confirms that the in-app runtime is already live. A stopped development preview cannot launch itself; the commissioned FiveMac service is relaunched by `launchd`.
 - **Open live preview** opens another local browser view of the same loopback runtime.
-- **View receipts** reads runtime health and the selected symbol's intelTHAT proof state.
+- **View receipts** reads runtime health and the selected symbol's owner-published intelTHAT proof state.
 - **Stop safely** asks for confirmation, then terminates only the current loopback process. GitThat relaunches a development preview; the commissioned `ai.market-compass` service restarts automatically.
 
 These controls do not merge code, push branches, change Gitea authority, connect a broker, mutate evidence scores, or place trades. Both preview and commissioned runtimes generate research signals while remaining `research_only`, `trade_execution:false`, and localhost-only.
@@ -426,6 +429,21 @@ The commissioned service binds `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMI
 The browser starts on **BB** with **BB**, **AAPL**, **QQQ**, and the operator-requested literal **SPCX** in the default watch choices. An untouched legacy default list is migrated once; a personally edited watchlist is preserved.
 
 The local runtime shows **Omo**, **Prince**, **Wuda**, and **Brown’s Barometers** as report-bound Actors. Omo scouts current named evidence; Prince frames horizon, route, and invalidation; Wuda presents trend plus directional RSI crossings around 35, 50, and 65; Brown owns the consolidated metrics and technical-instrument bench. Every Actor keeps its trading psychology inside its own comp card and can export a receipt with inputs, formula context, timeframe, timestamp, provenance, confidence, and the permanent research-only authority boundary. Marvin’s Metrics is absent.
+
+### Native intelTHAT research application
+
+Open the full application at **`http://market-compass.localhost/intelthat/`**. The compact Market Compass section is a bridge into the product; it is not presented as the whole app. intelTHAT now owns six application rooms: Research Cockpit, Market Pack, Macro Conditions, News Intelligence, SEC Monitor, and Run History. A run resolves supported company names such as `Apple` to `AAPL`, reads the four research modules in parallel, reports measured elapsed time without inventing a percentage, and keeps module failures visible instead of failing the whole app.
+
+The app has two deliberately separate readers:
+
+- **Refresh Live Evidence** builds a `market-compass.intelthat-evidence/v1` receipt from Market Compass-owned source adapters: daily/weekly price and technical context, bounded aggregate public options-chain context, four public macro proxies, current provider headlines, and SEC company submissions when a fair-access contact is configured.
+- **Read Owner Receipts** preserves the original bounded local-file bridge for externally published `pack`, `macro`, `rss`, and `edgar` JSON evidence.
+
+Every native evidence card exposes its inputs, formula, timeframe, evidence timestamp, retrieval timestamp, provenance, freshness, confidence, source URLs, input SHA-256, and exportable whole-receipt SHA-256. A source failure produces a held receipt instead of invented data. Configure `MARKET_COMPASS_SEC_CONTACT` with a real contact email to admit SEC requests under the SEC fair-access policy; the contact is used only in the request User-Agent and is never returned in the receipt.
+
+**Save run** preserves up to five exact receipts in browser-local intelTHAT history; **Export receipt** produces a portable JSON receipt. Selecting a saved run restores its original module evidence and source label. The app changes no Market Compass score and owns no background scheduler, account state, broker authentication, order action, position management, trade ledger, or money movement.
+
+The outside research source is pinned as `marvelousempire/intelTHAT@483f86e5aec2d800811c52863dd0765c20c9d441`. No license file was observed at that revision, so Market Compass does not copy or execute its code. It independently adapts the safe research categories and permanently rejects E*TRADE OAuth, broker credentials, orders, execution readiness as authority, position management, trade recording, money movement, and unsupported performance claims. `trade_execution=false`, `broker_credentials=false`, `money_movement=false`, and `score_influence=false` are contract fields, tests, UI copy, and runtime invariants.
 
 ## Headless API mode
 

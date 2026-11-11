@@ -1,0 +1,73 @@
+{
+  "schema": "market-compass.source-reconciliation/v1",
+  "reviewed_at": "2026-11-08T05:30:00-05:00",
+  "candidate_branch": "feat/reconcile-unified-market-studio-20261108",
+  "inputs": [
+    {
+      "owner": "GitHub draft PR #12",
+      "revision": "430d8f0dcc344ac0f277341e6d0aaf790fc4a22d",
+      "disposition": "adapt",
+      "reason": "Measurement Studio, bounded Hybrid CCK draft schedules, simulation, tests, and UI were useful but required reconciliation with later canonical product rules."
+    },
+    {
+      "owner": "native intelTHAT correction candidate",
+      "revision": "017b35cc16ed4238772c9d3c395d3a3e1a83b5bd",
+      "disposition": "preserve",
+      "reason": "The dedicated intelTHAT application, company-name resolution, research-only evidence contract, and v0.8.1 documentation remain first-class."
+    }
+  ],
+  "refusals": [
+    "READYPLAY product identity",
+    "Marvin's Metrics placeholder",
+    "broker credentials",
+    "orders or trade execution",
+    "money movement",
+    "score influence",
+    "automatic schedules",
+    "unverified CCK or source authority claims"
+  ],
+  "placements": {
+    "measurement_room": "ACT v1 Market Compass shell",
+    "measuring_actor": "Brown's Barometers",
+    "source_contract": "market-compass.hybrid-cck-profile-schedule/v1",
+    "calculation_contract": "market-compass.simulation/v1"
+  },
+  "authority": {
+    "research_only": true,
+    "trade_execution": false,
+    "signal_generation": true,
+    "score_influence": false,
+    "broker_credentials": false,
+    "money_movement": false
+  },
+  "candidate_proof": {
+    "pytest": "83 passed",
+    "ruff_changed_files": "passed",
+    "javascript_syntax": "passed",
+    "git_diff_check": "passed",
+    "candidate_browser": "System, Light, and Dark modes; load example; simulate; export JSON; no console errors",
+    "live_proof": "pending protected merge and exact FiveMac installation"
+  },
+  "documentation_review": {
+    "product_docs": {
+      "state": "updated",
+      "files": ["README.md", "CHANGELOG.md", "docs/STATUS.md", "docs/FEATURE-JOURNAL.md", "docs/UNIFIED-MARKET-STUDIO-WEAVE.md"],
+      "reason": "Current capabilities, donor corrections, source provenance, authority flags, and pre-live proof boundary now match the reconciled candidate."
+    },
+    "wiring_guides": {
+      "state": "updated",
+      "files": ["docs/handoff.md"],
+      "reason": "The real Door and existing service ownership remain unchanged; the new room, endpoints, controls, and receipt behavior are documented."
+    },
+    "white_papers": {
+      "state": "not_applicable",
+      "files": [],
+      "reason": "No independent architecture white paper owns this additive room."
+    },
+    "building_skills": {
+      "state": "current_external_owner",
+      "files": [],
+      "reason": "Market Source Refinery governed reconciliation; no shared skill source changed."
+    }
+  }
+}

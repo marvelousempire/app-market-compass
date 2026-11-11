@@ -1,0 +1,49 @@
+{
+  "schema": "market-compass.whole-job-ledger/v1",
+  "recorded_at": "2026-11-07",
+  "objective": "Correct intelTHAT from a panel-shaped integration into a real, native Market Compass research application without importing donor execution authority.",
+  "source": {
+    "repository": "marvelousempire/intelTHAT",
+    "revision": "483f86e5aec2d800811c52863dd0765c20c9d441",
+    "license_observation": "No license file was observed at the pinned revision; donor code is not copied or executed."
+  },
+  "boundary": {
+    "trade_execution": false,
+    "signal_generation": true,
+    "score_influence": false,
+    "broker_credentials": false,
+    "money_movement": false
+  },
+  "outcomes": [
+    {
+      "id": "diagnose",
+      "state": "verified",
+      "evidence": "The former intelTHAT surface was a workspace panel with two readers, a proof-state filter, evidence cards, and export; it did not provide an application shell or application-owned workflow state."
+    },
+    {
+      "id": "app-surface",
+      "state": "verified",
+      "evidence": "The dedicated /intelthat/ route provides Cockpit, Market Pack, Macro Conditions, News Intelligence, SEC Monitor, and Run History rooms with System, Light, and Dark presentation."
+    },
+    {
+      "id": "real-actions",
+      "state": "verified",
+      "evidence": "Run all research and Read owner receipts call separate bounded APIs; company-name resolution, measured elapsed time, save/restore, room navigation, evidence inspection, and JSON export change real application state."
+    },
+    {
+      "id": "refinery-boundary",
+      "state": "verified",
+      "evidence": "The app runs only Market Compass-owned readers. It does not install or run donor code and permanently refuses broker OAuth, credentials, account data, orders, execution, position management, trade recording, money movement, and performance promises."
+    },
+    {
+      "id": "source-proof",
+      "state": "verified",
+      "evidence": "66 pytest cases passed; Ruff passed; node --check passed for intelthat-app.js; git diff --check passed."
+    },
+    {
+      "id": "protected-release",
+      "state": "active",
+      "evidence": "Candidate must still be committed, pass exact-head forge checks, receive independent review, merge to canonical main, mirror, install on FiveMac, and pass browser proof through http://market-compass.localhost/intelthat/."
+    }
+  ]
+}

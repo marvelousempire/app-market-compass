@@ -5,6 +5,19 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Reconciled GitHub draft PR #12 at `430d8f0dcc344ac0f277341e6d0aaf790fc4a22d` with the native intelTHAT candidate at `017b35cc16ed4238772c9d3c395d3a3e1a83b5bd` instead of replacing either line. Added Measurement Studio, seven bounded Hybrid CCK draft schedules, transparent hypothetical simulation, charting, contextual right-rail actions, and exportable receipts.
+- Removed the proposal's reintroduced READYPLAY identity and Marvin's Metrics placeholder. Authorized athlete evidence is source-owner neutral; Brown's Barometers owns the King of Spades measuring seat and the consolidated metrics bench.
+- Added calculation inputs, formula, timeframe, timestamp, provenance, explicitly unrated confidence, input/receipt hashes, and exact `trade_execution=false`, `signal_generation=true`, and `score_influence=false` receipts to every Measurement Studio result. New controls use the semantic System/Light/Dark palette.
+
+- Corrected intelTHAT's product shape: it is now a real application at `/intelthat/`, not a receipt panel presented as an app. The dedicated ACT-matched surface has a Research Cockpit, Market Pack, Macro Conditions, News Intelligence, SEC Monitor, and browser-local Run History.
+- Added company-name-to-symbol resolution, measured run progress, independently settled module rooms, saved-session restoration, per-module formula/input/provenance inspection, owner-receipt mode, whole-receipt export, and explicit permanent authority refusals. The compact Market Compass section is now labeled as the bridge it actually is.
+- Advanced the application contract to 0.8.1.
+
+- Rebuilt the admitted intelTHAT research scope as a native Market Compass v1 evidence contract. The workspace now measures price/technical context, bounded public options-chain aggregates, four macro proxies, provider headlines, and policy-gated SEC EDGAR filings without running donor code.
+- Added real Refresh Live Evidence, Read Owner Receipts, evidence filtering, formula/input/provenance inspection, and export actions. Each response carries timeframe, timestamps, freshness, confidence, source URLs, input fingerprints, the pinned outside-source revision, and one whole-receipt SHA-256.
+- Permanently rejected the pinned donor's E*TRADE OAuth, broker credentials, execution-ready authority, orders, position/spread management, trade recording, money movement, and unsupported performance claims. intelTHAT remains unable to influence Market Compass scores.
+- Advanced the application contract to 0.8.0.
+
 - Completed the v0.7 client-demo pass: the initial page no longer jumps to Market Exchange, desktop footer controls stay inside the viewport, System/Light/Dark share semantic materials, and the client-facing preview action uses `http://market-compass.localhost/`.
 - Bound Omo, Prince, Wuda, and Brown's Barometers to the current report. Each Actor now has an explicit psychology, evidence rows, and an exportable research-only receipt. Wuda shows directional RSI 35/50/65 crossings with timeframe, freshness, formula, timestamp, provenance, and confidence; Brown owns the consolidated measuring bench. Marvin remains absent.
 - Completed the six Market Exchange pipeline modules as inspectable actions and added a browser-local Market Source Refinery intake for repositories, URLs, files, and pasted text. It hashes local content, exports the SkillTHAT child0046 receipt shape, and never fetches or executes donor code.

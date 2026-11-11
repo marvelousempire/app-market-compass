@@ -1,6 +1,6 @@
 # Market Compass handoff — commissioned ACT v1 research runtime
 
-This handoff reflects the commissioned v0.7 application, not the old developer-demo surface. The first
+This handoff reflects the commissioned v0.8 source candidate, not the old developer-demo surface. The first
 screen follows the 8001 information sequence (header, identity, four summary cards, then the
 desk). The research workbench, indicators, multi-timeframe analysis, watchlist, catalysts,
 Evidence Board, node inspector, research backtest, Nephew analyst panel, Actor spaces and ACT v1
@@ -16,6 +16,14 @@ Market Exchange remain visible.
 | Service and door | `ai.market-compass` at FiveMac `127.0.0.1:8000`; Make Doors operator URL `http://market-compass.localhost/` |
 | Door ownership | Nephew owns the canonical registry and named, restartable FiveMac transport; Make Doors projects it. The raw `127.0.0.1:18003` forward is not the user-facing Door. |
 | Authority boundary | Commissioned research only; no trading, score influence, bank writes or money movement |
+
+## intelTHAT operating notes
+
+- Use **Refresh Live Evidence** for the native `market-compass.intelthat-evidence/v1` workspace.
+- Use **Read Owner Receipts** for bounded files under `MARKET_COMPASS_INTELTHAT_DIR`.
+- Set `MARKET_COMPASS_SEC_CONTACT` only to a real SEC fair-access contact. It is sent solely in the SEC request User-Agent and is not included in response receipts.
+- A held source is a valid proof state, not a reason to fabricate a metric or retry indefinitely.
+- Receipt export is browser-local. It does not publish, score, authenticate, trade, or move money.
 
 Read the exact live revision rather than copying a dated SHA from this handoff:
 
@@ -36,6 +44,7 @@ launchctl print gui/$(id -u)/ai.market-compass
 | AI interpretation | Nephew panel with automatic or explicit local/cloud provider selection, depth, per-request cloud consent, grounded response schema, and model receipt. |
 | Actor spaces | Omo, Prince, Wuda and Brown’s Barometers bind current report evidence to explicit psychology, comp cards, and exportable research-only receipts. |
 | ACT v1 Market Exchange | Six admin rooms inspect 15 modules and 58 reviewed private bankTHAT contracts. All six pipeline stages act, and Market Source Refinery exports intake receipts for repositories, URLs, files, and pasted text without donor execution. |
+| Measurement Studio | Seven source-owner-neutral draft schedules load fictional/authorized studies, hold incomplete evidence, calculate a transparent method-relative index, and export inputs, formula, timeframe, timestamp, provenance, unrated confidence, authority flags, and receipt hashes. Brown's Barometers owns the measuring seat; no owner writeback or automatic schedule runs. |
 
 ## Remaining gaps only
 

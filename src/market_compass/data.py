@@ -24,8 +24,8 @@ class MarketData:
     meta: dict
 
 
-def _get_json(url: str, timeout: int = 12) -> dict:
-    req = Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
+def _get_json(url: str, timeout: int = 12, user_agent: str = UA) -> dict:
+    req = Request(url, headers={"User-Agent": user_agent, "Accept": "application/json"})
     with urlopen(req, timeout=timeout, context=SSL_CONTEXT) as r:
         return json.loads(r.read().decode("utf-8"))
 
@@ -139,6 +139,15 @@ def yahoo_market_data(symbol: str, range_: str = "5y", interval: str = "1d") -> 
         "quote": selected, "bars": len(df),
     }
     return MarketData(df, selected, news, meta)
+
+
+def direct_market_data(symbol: str, range_: str = "1mo", interval: str = "1d") -> MarketData:
+    """Read an exact Yahoo chart symbol without the slower name/news search step."""
+    df, meta = _chart_bars(symbol, range_, interval)
+    return MarketData(df, {"symbol": symbol}, [], meta | {
+        "provider": "yahoo", "requested_symbol": symbol, "resolved_symbol": symbol,
+        "retrieved_at": datetime.now(UTC).isoformat(), "interval": interval, "bars": len(df),
+    })
 
 
 def get_market_data(symbol: str, csv_path: str | None = None) -> MarketData:

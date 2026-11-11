@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/static/stubthat.css?v=20261106.1">
   <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261106.1">
   <link rel="stylesheet" href="/static/decision-gates.css">
+  <link rel="stylesheet" href="/static/simulator.css?v=20261108.1">
   <link rel="stylesheet" href="/static/act-v1-appearance.css?v=20261106.1">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
@@ -34,8 +35,10 @@
         <div class="act-nav-items">
           <a href="#actor-spaces" data-act-shell-room="actors"><span aria-hidden="true">◎</span><b>Actor Studio</b></a>
           <a href="#market-exchange" data-act-shell-room="exchange"><span aria-hidden="true">◇</span><b>Market Exchange</b></a>
+          <a href="#measurement-studio" data-act-shell-room="measurement"><span aria-hidden="true">◫</span><b>Measurement Studio</b></a>
           <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Compass Desk</b></a>
-          <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">◉</span><b>intelTHAT</b></a>
+          <a href="/intelthat/" data-intelthat-app><span aria-hidden="true">◉</span><b>intelTHAT App</b></a>
+          <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">≣</span><b>intelTHAT Receipts</b></a>
           <a href="#decision-gates" data-act-shell-room="gates"><span aria-hidden="true">⊘</span><b>Decision Gates</b></a>
         </div>
       </section>
@@ -119,6 +122,30 @@
         <button type="button" role="tab" class="cassette-tab" data-cassette="prince" aria-selected="false"><span aria-hidden="true">P</span><strong>Prince</strong></button>
         <button type="button" role="tab" class="cassette-tab" data-cassette="wuda" aria-selected="false"><span aria-hidden="true">W</span><strong>Wuda</strong></button>
         <button type="button" role="tab" class="cassette-tab" data-cassette="browns-barometers" aria-selected="false"><span aria-hidden="true">B</span><strong>Brown’s Barometers</strong></button>
+      </div>
+    </section>
+
+    <section class="panel hcck-profiles" id="measurement-studio" aria-label="Universal Measurement Studio">
+      <div class="section-head"><div><p class="eyebrow">MARKET COMPASS · UNIVERSAL MEASUREMENT</p><h2>Measurement Studio</h2></div><span class="trust-chip">Simulation only · no source writeback</span></div>
+      <p class="trust-note">Measure a fictional player, computer, egg batch, stock observation, option observation, or any authorized subject using a clearly named method. This adds to the existing live market workbench, Actors, Exchange and research rooms. No real trades or person valuation.</p>
+      <div class="hcck-profiles" id="hcck-profiles" aria-label="Draft Hybrid CCK profile schedules">
+        <label for="hcck-profile-select">Choose a subject profile</label>
+        <select id="hcck-profile-select" disabled><option>Loading templates…</option></select>
+        <div id="hcck-seat-wrapper" hidden><label for="hcck-seat-select">Named participant perspective</label><select id="hcck-seat-select"></select></div>
+        <div id="hcck-profile-detail" role="status" aria-live="polite">Loading schedules…</div>
+        <button type="button" id="hcck-load-example" class="secondary" disabled>Load fictional example</button>
+      </div>
+      <div class="universal-simulator" id="universal-simulator" aria-label="Subject simulation lab">
+        <h3>Measurement Lab</h3>
+        <p class="trust-note">This is the transparent input used by the simulator. It can be edited, but its values and methodology are not independently verified or issued by ELSE.</p>
+        <label class="universal-json-label" for="universal-input">Measurements and method</label>
+        <textarea id="universal-input" rows="9" spellcheck="false"></textarea>
+        <div class="universal-actions">
+          <button type="button" id="universal-example" class="secondary">Load old-computer example</button>
+          <button type="button" id="universal-run" class="primary">Simulate</button>
+          <button type="button" id="universal-export" class="secondary" disabled>Export JSON</button>
+        </div>
+        <div id="universal-output" role="status" aria-live="polite">Select a fictional example, then simulate.</div>
       </div>
     </section>
 
@@ -288,12 +315,27 @@
         </section>
         <section class="panel" id="intelthat-panel" aria-label="intelTHAT research receipts">
           <div class="section-head">
-            <div><p class="eyebrow">INDEPENDENT SOURCE</p><h2>intelTHAT Research / Proof Health</h2></div>
-            <button type="button" class="secondary" id="intelthat-load">Read Local Receipts</button>
+            <div><p class="eyebrow">INTELTHAT APP BRIDGE</p><h2>intelTHAT Receipts</h2></div>
+            <a class="button-link" href="/intelthat/">Open intelTHAT App ↗</a>
           </div>
-          <p class="trust-note">Read-only research. These receipts do not change Market Compass scores or place orders. A current file is not independently verified market truth.</p>
+          <p class="trust-note">This compact bridge reads intelTHAT output inside the Compass. The full intelTHAT application owns research runs, module navigation, saved sessions, evidence inspection, and exports. No broker, order, money movement, or score influence.</p>
+          <div class="intelthat-toolbar" aria-label="intelTHAT workspace actions">
+            <button type="button" id="intelthat-load">Refresh Live Evidence</button>
+            <button type="button" class="secondary" id="intelthat-local">Read Owner Receipts</button>
+            <label>Show
+              <select id="intelthat-filter">
+                <option value="all">All evidence</option>
+                <option value="observed">Observed</option>
+                <option value="attention">Needs attention</option>
+              </select>
+            </label>
+            <button type="button" class="secondary" id="intelthat-export" disabled>Export Receipt</button>
+          </div>
+          <div class="intelthat-boundary" aria-label="intelTHAT authority boundary">
+            <span>Signals on</span><span>Trading off</span><span>Credentials none</span><span>Score influence off</span>
+          </div>
           <div id="intelthat-output" role="status" aria-live="polite">
-            <p class="muted">Select a symbol and open its source receipts. Nothing is fetched until you choose Read Local Receipts.</p>
+            <div class="intelthat-empty"><strong>Evidence is waiting.</strong><p>Select a symbol, then refresh the native research workspace or inspect already-published owner receipts.</p></div>
           </div>
         </section>
         <section class="two-col">
@@ -358,5 +400,7 @@
   <script src="/static/stubthat.js?v=20261106.1" defer></script>
   <script src="/static/act-v1-shell.js?v=20261106.3" defer></script>
   <script src="/static/decision-gates.js?v=20261106.1" defer></script>
+  <script src="/static/simulator.js?v=20261108.1" defer></script>
+  <script src="/static/hcck.js?v=20261108.1" defer></script>
 </body>
 </html>
