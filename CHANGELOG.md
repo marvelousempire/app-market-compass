@@ -5,6 +5,8 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Added the November 12 commissioning closeout report and machine-readable review receipt. The report records sixteen fully evidenced client-demo outcomes, four remaining proof or cross-owner governance debts, the live accepted revision, permanent authority refusals, and roadmap work without relabeling partial work as complete.
+
 - Reconciled GitHub draft PR #12 at `430d8f0dcc344ac0f277341e6d0aaf790fc4a22d` with the native intelTHAT candidate at `017b35cc16ed4238772c9d3c395d3a3e1a83b5bd` instead of replacing either line. Added Measurement Studio, seven bounded Hybrid CCK draft schedules, transparent hypothetical simulation, charting, contextual right-rail actions, and exportable receipts.
 - Removed the proposal's reintroduced READYPLAY identity and Marvin's Metrics placeholder. Authorized athlete evidence is source-owner neutral; Brown's Barometers owns the King of Spades measuring seat and the consolidated metrics bench.
 - Added calculation inputs, formula, timeframe, timestamp, provenance, explicitly unrated confidence, input/receipt hashes, and exact `trade_execution=false`, `signal_generation=true`, and `score_influence=false` receipts to every Measurement Studio result. New controls use the semantic System/Light/Dark palette.

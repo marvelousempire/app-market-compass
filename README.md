@@ -1,5 +1,12 @@
 # Market Compass
 
+> **Commissioning closeout (Nov 12, 2026):** The accepted owner application is
+> merged, mirrored, commissioned, and live at revision
+> `e15e6334e1965e125f3aa180e73000ad4cb1ae41`. Sixteen of the twenty client-demo
+> outcomes have complete working evidence; four retain explicit proof or
+> cross-owner governance debt. See
+> [the dated closeout report](docs/CLOSEOUT-REPORT-2026-11-12.md).
+
 > **Reconciled release (Nov 8, 2026):** [Universal Measurement Studio](docs/UNIFIED-MARKET-STUDIO-WEAVE.md) adds a seven-domain Hybrid CCK schedule selector, a fictional/authorized subject simulator, portable charts and export inside the existing ACT v1 room structure. GitHub draft PR #12 supplied the proposal; this release reconciles it with the native intelTHAT application and permanent Market Compass boundaries. Runtime truth remains `/api/operator/status` and the live Door receipt.
 
 
