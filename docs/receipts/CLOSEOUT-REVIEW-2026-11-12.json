@@ -1,0 +1,92 @@
+{
+  "schema": "market-compass.closeout-review/v1",
+  "observed_at": "2026-11-12T21:07:51-05:00",
+  "owner_repository": "averygoodman/app-market-compass",
+  "accepted_owner_revision": "e15e6334e1965e125f3aa180e73000ad4cb1ae41",
+  "door": "http://market-compass.localhost/",
+  "status": "partial",
+  "outcome_count": {
+    "total": 20,
+    "complete": 16,
+    "partial": 4,
+    "blocked": 0
+  },
+  "live_readback": {
+    "health": "ok",
+    "nodes": 115,
+    "host": "fivemac.local",
+    "state": "live",
+    "commissioned": true,
+    "preview_only": false,
+    "mode": "research_only",
+    "signal_generation": true,
+    "trade_execution": false,
+    "score_influence": false,
+    "source_revision": "e15e6334e1965e125f3aa180e73000ad4cb1ae41"
+  },
+  "open_outcomes": [
+    {
+      "number": 4,
+      "state": "partial",
+      "remaining": "Exercise Stop safely on an isolated disposable runtime and prove bounded restart and named-Door recovery."
+    },
+    {
+      "number": 15,
+      "state": "partial",
+      "remaining": "Complete a real named-Door browser file-picker intake and retain its local no-upload provenance receipt."
+    },
+    {
+      "number": 16,
+      "state": "partial",
+      "remaining": "Add a deterministic census proving the required receipt fields across every signal and calculation producer."
+    },
+    {
+      "number": 18,
+      "state": "partial",
+      "remaining": "Correct and commission the cross-owner ThatApp! Studio catalog, CCK, generated guide, runtime census, and mirror state."
+    }
+  ],
+  "documentation_review": {
+    "docs": {
+      "state": "updated",
+      "files": [
+        "README.md",
+        "CHANGELOG.md",
+        "docs/STATUS.md",
+        "docs/CLOSEOUT-REPORT-2026-11-12.md",
+        "docs/receipts/CLOSEOUT-REVIEW-2026-11-12.json"
+      ],
+      "reason": "The repository now has one current pointer and one dated report separating live truth, proof debt, permanent refusals, and roadmap work."
+    },
+    "wiring_guides": {
+      "state": "current",
+      "files": [
+        "docs/IMPLEMENTATION.md",
+        "docs/INTELTHAT-BRIDGE.md",
+        "docs/handoff.md"
+      ],
+      "reason": "No runtime, adapter, Door, provider, or installation wiring changed in this documentation-only closeout."
+    },
+    "white_papers": {
+      "state": "current",
+      "files": [
+        "docs/PRODUCT-INTENTION.md",
+        "docs/PRODUCT-REQUIREMENTS.md"
+      ],
+      "reason": "The product intention and permanent research-only boundary are unchanged."
+    },
+    "building_skills": {
+      "state": "not_applicable",
+      "files": [],
+      "reason": "This closeout changes no shared or product-local building skill."
+    }
+  },
+  "checks": {
+    "release_control": "full selected because all changed documentation and receipt paths were unclassified by policy 1.0.0",
+    "json_parse": "passed",
+    "git_diff_check": "passed",
+    "ruff": "passed",
+    "pytest": "83 passed with one upstream Starlette/httpx deprecation warning"
+  },
+  "proof_boundary": "This receipt records a read-only closeout review and documentation release. It does not close the four named debts, change runtime bytes, or broaden Market Compass authority."
+}

@@ -2,6 +2,12 @@
 
 **Purpose:** separate what is implemented from what is partial, planned, or intentionally out of scope.
 
+**Commissioning closeout:** The November 12, 2026
+[closeout report](CLOSEOUT-REPORT-2026-11-12.md) records the accepted live
+revision, sixteen completely evidenced outcomes, four remaining proof or
+cross-owner governance debts, permanent refusals, and longer-term roadmap work.
+The four open debts do not disable the commissioned research application.
+
 This document is the repository's expectation contract. If another document sounds more ambitious than this one, this document wins for current implementation status.
 
 ## Status labels
