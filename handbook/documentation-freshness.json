@@ -38,7 +38,8 @@
     "tree_page_caps_relative_links_source_bindings_status_sections": "passed",
     "ruff_owner_scope": "passed",
     "pytest": "83 passed",
-    "named_door_health_and_operator_status": "passed"
+    "named_door_health_and_operator_status": "passed",
+    "independent_review_correction": "Documented external Nephew generator, explicit checkout roots, check and missing-owner recovery; handbook index links maintenance instructions."
   },
   "door_status": {
     "state": "live",

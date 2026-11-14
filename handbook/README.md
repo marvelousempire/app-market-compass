@@ -26,3 +26,18 @@ Research v1 is an approved build contract. Runtime proof is required before any 
 7. [Alerts and Receipts](chapter-07-alerts-and-receipts/page-01-governed-delivery/PAGE.md)
 8. [Operations and Recovery](chapter-08-operations-and-recovery/page-01-five-mac-service/PAGE.md)
 9. [Research v1 Delivery](chapter-09-research-v1-delivery/page-01-acceptance-and-release/PAGE.md)
+
+## Maintain the handbook
+
+Edit the numbered leaf Markdown files. Nephew owns the generator; the `node scripts/handbook-sync.mjs` banner in generated `PAGE.md` files refers to that owner's checkout, not this Market Compass repository. Market Compass does not contain a local copy of that program.
+
+Set these variables to your actual accepted checkouts, then run the existing [Nephew generator](https://gitmore.app/averygoodman/nephew/src/branch/main/scripts/handbook-sync.mjs):
+
+```sh
+NEPHEW_ROOT=/absolute/path/to/nephew
+MARKET_COMPASS_ROOT=/absolute/path/to/app-market-compass
+node "$NEPHEW_ROOT/scripts/handbook-sync.mjs" --root "$MARKET_COMPASS_ROOT"
+node "$NEPHEW_ROOT/scripts/handbook-sync.mjs" --root "$MARKET_COMPASS_ROOT" --check
+```
+
+The first command updates the composite pages and lead sheets; the second verifies there is no generated drift. Review those changes and refresh the generated digests in `truth-manifest.json` before shipment. If the accepted Nephew checkout or generator is unavailable, stop and restore that dependency. Keep the editable leaves and last accepted generated files; do not copy the engine or hand-edit generated pages to mask the missing owner.

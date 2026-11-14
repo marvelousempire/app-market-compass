@@ -26,3 +26,5 @@ Research v1 is an approved build contract. Runtime proof is required before any 
 7. [Alerts and Receipts](chapter-07-alerts-and-receipts/page-01-governed-delivery/PAGE.md)
 8. [Operations and Recovery](chapter-08-operations-and-recovery/page-01-five-mac-service/PAGE.md)
 9. [Research v1 Delivery](chapter-09-research-v1-delivery/page-01-acceptance-and-release/PAGE.md)
+
+[Maintain and regenerate this handbook](README.md#maintain-the-handbook) through the existing Nephew owner.
