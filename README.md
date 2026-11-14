@@ -1,5 +1,7 @@
 # Market Compass
 
+See the [Market Compass Handbook](handbook/README.md) for operator guidance and the approved Research v1 delivery contract.
+
 > **Commissioning closeout (Nov 12, 2026):** The accepted owner application is
 > merged, mirrored, commissioned, and live at revision
 > `e15e6334e1965e125f3aa180e73000ad4cb1ae41`. Sixteen of the twenty client-demo

@@ -1,0 +1,11 @@
+{
+  "ID": "market-compass-handbook",
+  "post_title": "Market Compass Handbook",
+  "post_name": "market-compass-handbook",
+  "post_type": "handbook",
+  "post_status": "publish",
+  "meta": {
+    "entity_id": "app-market-compass",
+    "source_of_truth": "handbook"
+  }
+}

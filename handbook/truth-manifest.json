@@ -1,0 +1,98 @@
+{
+  "schema": "market-compass.handbook-truth.v1",
+  "source_revision": "1a93344317b8facd22e58c79268f594a315b7c15",
+  "runtime_version": "0.8.1",
+  "runtime_observed_on": "2026-11-14",
+  "approved_plan_date": "2026-11-14",
+  "commissioning": {
+    "complete": 16,
+    "total": 20,
+    "historical_receipt": "docs/receipts/CLOSEOUT-REVIEW-2026-11-12.json"
+  },
+  "capability_sources": {
+    "docs/STATUS.md": "5122c8f71455b9ed87b1dc05b2d6906a61bb236aac1c95b1db20b5bd05015ff4",
+    "docs/CLOSEOUT-REPORT-2026-11-12.md": "2a60db9935e074d2e43514e71601f004f39be8b40b9431b32e86a747fba41de6",
+    "docs/receipts/CLOSEOUT-REVIEW-2026-11-12.json": "48d1a07da19a3c04685c36d910da9dc507af14ea5ea9ae185efbb3cf4517c5f6",
+    "docs/TROUBLESHOOTING.md": "0207259be78eb8f232d32789b5c344e6ef9a0cf710cd03e51b3dcf2439e5ba6b",
+    "docs/DECISION-GATES-DESIGN.md": "c3aae1293f761c2250385c75fba45fb1153d0af83aa06db705117f5792318ae5",
+    "src/market_compass/api.py": "75d2651e674189f510371b7646803b882d7d5bcd1d244afeaf80da1d5092d34c",
+    "pyproject.toml": "d7fba3a5fb56fc2f2603a14f511e5fd945f52faa4e6ca5dfdb8d5ce5dedd6d77"
+  },
+  "source_urls": [
+    {
+      "url": "http://market-compass.localhost/",
+      "retrieved_on": "2026-11-14"
+    },
+    {
+      "url": "http://market-compass.localhost/api/decision-readiness?symbol=AAPL",
+      "retrieved_on": "2026-11-14"
+    },
+    {
+      "url": "http://market-compass.localhost/api/operator/plan",
+      "retrieved_on": "2026-11-14"
+    },
+    {
+      "url": "http://market-compass.localhost/api/operator/status",
+      "retrieved_on": "2026-11-14"
+    },
+    {
+      "url": "http://market-compass.localhost/health",
+      "retrieved_on": "2026-11-14"
+    },
+    {
+      "url": "http://market-compass.localhost/intelthat/",
+      "retrieved_on": "2026-11-14"
+    },
+    {
+      "url": "https://docs.alpaca.markets/us/docs/about-market-data-api",
+      "retrieved_on": "2026-11-14"
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm",
+      "retrieved_on": "2026-11-14"
+    }
+  ],
+  "editable_leaf_sha256": {
+    "handbook/chapter-01-start/page-01-research-workbench/01-research-workbench.md": "140f13a37e9b6f864f7ed224d3cd45391827882c281dc188d2628936b9ec407e",
+    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/01-daily-workflow.md": "b272c896de355061c5020e09698733437ede58c1bb1639cff26a2db03265ee3f",
+    "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/01-read-a-research-signal.md": "ad61b646f9df213a3c50b82925a9021af5abe5ede794c5f365a3dc9951a6d508",
+    "handbook/chapter-04-actors-and-instruments/page-01-actor-owned-evidence/01-actor-owned-evidence.md": "c50b8480cd61ffb2c328cd30fcc2b85e175b2599cc8dbe513d407677f8123844",
+    "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/01-provider-lanes.md": "8608035d6357cf781a83012de953344182d0df2e38add71be159a5129bed0ef1",
+    "handbook/chapter-06-event-watch/page-01-one-evolving-incident/01-one-evolving-incident.md": "412a168f9b316bc663255c4552a81182182ba32115ac1d379336af18d8b3bbe7",
+    "handbook/chapter-07-alerts-and-receipts/page-01-governed-delivery/01-governed-delivery.md": "50c9f5b20468466cc38b33cf1745139e66127428cf890647193f61dc87f0eea7",
+    "handbook/chapter-08-operations-and-recovery/page-01-five-mac-service/01-five-mac-service.md": "7f2e038beb9470012dad7b4cb41af6391ee6037640dfe64e00a91889b266532e",
+    "handbook/chapter-09-research-v1-delivery/page-01-acceptance-and-release/01-acceptance-and-release.md": "9ee1fd861ee2498edfb4c49f7d085104586a70f53e4d8b0a3c5398fa434cbc7a"
+  },
+  "generated_file_sha256": {
+    "handbook/LEAD-SHEET.md": "2e00297c093ccc9aa941f9aa46f3830c8e853ba2c702bb00513bf2cd474f3049",
+    "handbook/chapter-01-start/LEAD-SHEET.md": "0327ad5ce25cae1b1b602834a53bc3eac0b2bfbcb5c3c7fa2d0ff70e37564992",
+    "handbook/chapter-01-start/page-01-research-workbench/LEAD-SHEET.md": "c16ab4e4f0794c6e0f093b38e7fa0091cca5f45c3b762d9362f62b6e5ed3a7eb",
+    "handbook/chapter-01-start/page-01-research-workbench/PAGE.md": "2809b91c152bd1c95cb6c95b8a8d990e9d841ad65f0fbac4053769c898b0a4b2",
+    "handbook/chapter-02-use-market-compass/LEAD-SHEET.md": "12a9e4d3d2ee0a6db65d5e3026deac1c8d79a21b2e63819999b1f7687676cc8f",
+    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/LEAD-SHEET.md": "0f51a1585cb8e93bd20d1961b632a932d680cd2575115759ab62e246b537ec86",
+    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/PAGE.md": "d84ad429ba73d11a31cded81d3ae62bbcc1a2af56f566298ba8150de83389f23",
+    "handbook/chapter-03-evidence-and-signals/LEAD-SHEET.md": "b4df7a2ae76d72df773603c5a0c107ec51457f818b79137f64746354fc43bed4",
+    "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/LEAD-SHEET.md": "d85351f9ec027a1b7e541353054d52c0cc6fa24855a8f395d8c48b27796013a4",
+    "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/PAGE.md": "88f65cbb98706156398e2eaa7de0ec495b1b1668a1fab51e94a62df79e24b1ff",
+    "handbook/chapter-04-actors-and-instruments/LEAD-SHEET.md": "8a25b167afa3626a7381e733cba2fdc1a909506c691d6a22b37ec27f5e75a18d",
+    "handbook/chapter-04-actors-and-instruments/page-01-actor-owned-evidence/LEAD-SHEET.md": "a65edee52d43f39537082da328fb9640cd88d2f9db377469e1fbee3f7a894e2a",
+    "handbook/chapter-04-actors-and-instruments/page-01-actor-owned-evidence/PAGE.md": "21da60e87837a0e939ddf6fcba09b8eed02cb54e32255a71bcd0692c649f493d",
+    "handbook/chapter-05-live-and-delayed-market-data/LEAD-SHEET.md": "6172148d0bccdd824ce83c8f353c47af51ada534e52edc8963847482f5731620",
+    "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/LEAD-SHEET.md": "a04a829377069d6519a0bf8de2a9fc413c3c26b7b93cd0023acda9c616d472cd",
+    "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/PAGE.md": "52283a03d51aa7be210eeb053d54ff27b0ec3f486eff3f1092e4a4d75c6c9a7b",
+    "handbook/chapter-06-event-watch/LEAD-SHEET.md": "fcb772385131873f55ee1a4d774ae77642cbb2c30cb4bed7028b74e404a5f5c8",
+    "handbook/chapter-06-event-watch/page-01-one-evolving-incident/LEAD-SHEET.md": "656350493d18033d231bea1d081e431a97346cbeb33b68cb1e1568cbe3aec45d",
+    "handbook/chapter-06-event-watch/page-01-one-evolving-incident/PAGE.md": "93f6c4a13aabc1890518eaa194097baffe259c3bef211e78db94b53a4658aa5b",
+    "handbook/chapter-07-alerts-and-receipts/LEAD-SHEET.md": "55d59a1cf7eedbfcc8d71c0d8b9f65000071fcd980d81b190e65986c7434b413",
+    "handbook/chapter-07-alerts-and-receipts/page-01-governed-delivery/LEAD-SHEET.md": "72ca5be34ef2e500332b7541dc1c4b0b04203ffd1cbb4e7fc459e3e5ec54290b",
+    "handbook/chapter-07-alerts-and-receipts/page-01-governed-delivery/PAGE.md": "91903064e7d2ba5014a67ca224215b718452ca1d1ac9ca554d93ecf771a58471",
+    "handbook/chapter-08-operations-and-recovery/LEAD-SHEET.md": "feeb475763a0280e6c8da61545dea5c9cf36705ab8c2d5f2ecbf7f70e8ef084d",
+    "handbook/chapter-08-operations-and-recovery/page-01-five-mac-service/LEAD-SHEET.md": "0dd2135c8b5b9f5c3f7b2c3ccae07e10777283e43c712f5fb6a337cf7f28c0fc",
+    "handbook/chapter-08-operations-and-recovery/page-01-five-mac-service/PAGE.md": "392d3a348e194553b3d976ab688b9f351a1211d75580caff9d9665e325765480",
+    "handbook/chapter-09-research-v1-delivery/LEAD-SHEET.md": "37f726201f7f3727658e2d6fa10e3b092deb0ddd874ce0c292bb8b190ca4a901",
+    "handbook/chapter-09-research-v1-delivery/page-01-acceptance-and-release/LEAD-SHEET.md": "695def65e3a68311efdd889503ff4f6504cfa5d1bc0b064cd87179465cf36351",
+    "handbook/chapter-09-research-v1-delivery/page-01-acceptance-and-release/PAGE.md": "a9489712fdd4f51c77fe2b278afc03de138e9b2b54597646d9c3c9df24d18654"
+  },
+  "generated_navigation_sha256": "3956e5dcefe2b9724faed64b3180ec17407ce0991a86f289a74f71ab3546dfa3",
+  "freshness_review": "handbook/documentation-freshness.json"
+}

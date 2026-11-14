@@ -1,5 +1,7 @@
 # Market Compass Change Log
 
+See the [Market Compass Handbook](handbook/README.md) for operator guidance and the approved Research v1 delivery contract.
+
 This is the factual, chronological log of shipped repository changes. Product reasoning and
 founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FEATURE-JOURNAL.md).
 

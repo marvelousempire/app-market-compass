@@ -1,0 +1,59 @@
+{
+  "schema": "market-compass.documentation-freshness.v1",
+  "review_date": "2026-11-14",
+  "audited_revision": "1a93344317b8facd22e58c79268f594a315b7c15",
+  "areas": {
+    "docs": {
+      "updated": [
+        "README.md",
+        "CHANGELOG.md",
+        "handbook/"
+      ],
+      "current": [
+        "docs/STATUS.md",
+        "docs/TROUBLESHOOTING.md"
+      ],
+      "reason": "Navigation and approved design added. Current runtime and recovery procedure retained. Dated commissioning history preserved."
+    },
+    "wiring_guides": {
+      "current": [
+        "docs/ARCHITECTURE.md"
+      ],
+      "reason": "Release changes documentation and leaves runtime wiring intact."
+    },
+    "white_papers": {
+      "current": [
+        "docs/PRODUCT-REQUIREMENTS.md",
+        "docs/DECISION-GATES-DESIGN.md"
+      ],
+      "reason": "Existing product and decision definitions remain supporting sources."
+    },
+    "building_skills": {
+      "status": "not applicable",
+      "reason": "No shared teaching, binder or installation contract changed."
+    }
+  },
+  "checks": {
+    "handbook_sync": "passed",
+    "tree_page_caps_relative_links_source_bindings_status_sections": "passed",
+    "ruff_owner_scope": "passed",
+    "pytest": "83 passed",
+    "named_door_health_and_operator_status": "passed",
+    "independent_review_correction": "Documented external Nephew generator, explicit checkout roots, check and missing-owner recovery; handbook index links maintenance instructions."
+  },
+  "door_status": {
+    "state": "live",
+    "host": "fivemac.local",
+    "pid": 22921,
+    "started_at": "2026-11-13T23:12:10.332585+00:00",
+    "bind": "127.0.0.1:8000",
+    "mode": "research_only",
+    "preview_only": false,
+    "commissioned": true,
+    "trade_execution": false,
+    "signal_generation": true,
+    "score_influence": false,
+    "authority": "gitea:averygoodman/app-market-compass@main",
+    "source_revision": "1a93344317b8facd22e58c79268f594a315b7c15"
+  }
+}
