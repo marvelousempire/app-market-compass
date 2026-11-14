@@ -12,7 +12,7 @@
 
 ## Continuous Event Watch — APPROVED TARGET
 
-Collect SEC, company investor relations, regulator, court, government, exchange, and admitted public-news sources continuously. Record published, first-seen, processed, and updated times, source identity, and admissibility. Resolve Jensen Huang to NVIDIA and its listed symbol NVDA through sourced identity relationships. Preserve ambiguity until resolved.
+Collect SEC, company investor relations and press releases, regulator, court, Congress, government, exchange, and admitted public-news sources continuously. Record published, first-seen, processed, and updated times, source identity, and admissibility. Resolve Jensen Huang to NVIDIA and its listed symbol NVDA through sourced identity relationships. Preserve ambiguity until resolved. Compare novelty, source credibility, contradictions, and materiality. Store allegations as attributed claims and keep confirmation tied to the facts the primary source establishes.
 
 | State | Evidence requirement |
 | --- | --- |
@@ -26,6 +26,6 @@ Collect SEC, company investor relations, regulator, court, government, exchange,
 
 Use the NVIDIA CEO transition as the motivating workflow. A credible early report opens a single incident. Investigation and governance escalation attach new evidence to that incident. NVIDIA’s filing confirms the resignation and interim CEO appointment. Company confirmation and later corrections extend the same timeline. The filing establishes the company’s actions. Record separate timestamped evidence before claiming any specific early-report lead time. [NVIDIA Form 8-K](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm)
 
-“Hear first” means shortly after an admitted source becomes available. Paid wires can publish earlier. In the manually governed AI Infrastructure basket, maintain reviewed members and evidence for inclusion. Label NVIDIA `DIRECT SUBJECT` for its own CEO incident. Label connected names `THEMATIC WATCH` with their relationship evidence and change history.
+“Hear first” means shortly after an admitted source becomes available. Paid wires can publish earlier. In the manually governed AI Infrastructure basket, maintain NVDA, AMD, AVGO, ARM, TSM, ASML, MU, MRVL, SMH, SOXX, QQQ, MSFT, GOOGL, AMZN, and META as reviewed members with evidence for inclusion. Thematic membership can trigger observation. A company’s evidence score requires company-specific evidence. Label NVIDIA `DIRECT SUBJECT` for its own CEO incident. Label connected names `THEMATIC WATCH` with their relationship evidence and change history.
 
 

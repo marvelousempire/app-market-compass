@@ -10,4 +10,4 @@ Use the [owner recovery runbook](../../../docs/TROUBLESHOOTING.md) for the launc
 
 ## Feed, event, and storage recovery — APPROVED TARGET
 
-Future feed, Event Watch, and storage services require replay with preserved workspaces, receipts, immutable history, and incident delivery deduplication. Admit Alpaca only with independently proved data-only credentials and negative order, account, and funding probes through the authorized verification path. Hold the lane if the data-only scope cannot be proved.
+Future feed, Event Watch, and storage services require tested backups and restore, followed by replay with preserved workspaces, receipts, immutable history, and incident delivery deduplication. Admit Alpaca only with independently proved data-only credentials and negative order, account, and funding probes through the authorized verification path. Hold the lane if the data-only scope cannot be proved.

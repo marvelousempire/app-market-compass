@@ -16,7 +16,7 @@ The existing Yahoo public search and chart paths resolve symbols and fetch data 
 
 ## Free Alpaca hybrid — APPROVED TARGET
 
-Use consolidated SIP observations for the whole supported U.S. equity and ETF universe at least 15 minutes delayed. Use real-time IEX for a focus list capped at 30 symbols. Reserve BB, AAPL, QQQ, and SPCX and permit up to 26 governed dynamic slots. Record admissions, evictions, and effective subscription counts. Keep consolidated SIP and single-venue IEX separate in storage, display, and receipts.
+Use consolidated SIP observations for the whole supported U.S. equity and ETF universe at least 15 minutes delayed. Use real-time IEX for a focus list capped at 30 symbols. Reserve BB, AAPL, QQQ, and SPCX and permit up to 26 governed dynamic slots. Record admissions, evictions, and effective subscription counts. Keep consolidated SIP and single-venue IEX separate in storage, display, and receipts. Label every relevant surface `LIVE · IEX PARTIAL MARKET` or `CONSOLIDATED · 15M DELAYED` according to the lane. The gateway credential must deny trading, account, funding, position, and order access. Market Compass never carries an Alpaca brokerage credential.
 
 Support `1m`, `5m`, `15m`, `1h`, `4h`, `1D`, and `1W`. Retain timestamps, market session, provider lane, delay, and aggregation provenance. Real-time IEX is partial-market evidence and cannot independently issue final Go. The Basic plan documents a 30-symbol WebSocket ceiling and 200 historical requests per minute. See [Alpaca’s market-data plans](https://docs.alpaca.markets/us/docs/about-market-data-api).
 
