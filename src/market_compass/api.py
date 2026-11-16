@@ -10,7 +10,7 @@ from threading import Timer
 from urllib.error import URLError
 
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from .ai import AnalystRequest, AnalystRouter
@@ -37,6 +37,13 @@ app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
 @app.get("/", response_class=FileResponse)
 def home():
     return WEB_DIR / "index.html"
+
+
+@app.get("/handbook", response_class=RedirectResponse)
+@app.get("/handbook/", response_class=RedirectResponse)
+def handbook():
+    """Open the Market Compass book in its handbookTHAT reader."""
+    return RedirectResponse("http://handbookthat.localhost/?handbook=Market%20Compass")
 
 
 @app.get("/intelthat", response_class=FileResponse)
