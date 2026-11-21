@@ -1,0 +1,2407 @@
+{
+  "schema": "market-compass.micro-slice-inventory.v1",
+  "inventoried_on": "2026-11-21",
+  "based_on": "GitHub proposeTHAT PR #13 branch; Gitea runtime not checked",
+  "source_truth": "source-identification-is-not-functionality-proof",
+  "policy": {
+    "default": "hidden until independent acceptance",
+    "legacy_ui": "archived, not deleted",
+    "market_execution": false,
+    "score_mutation": false,
+    "acceptance_requires": [
+      "deterministic test",
+      "contract test",
+      "browser click-through",
+      "Gitea revision receipt",
+      "FiveMac live readback"
+    ]
+  },
+  "counts": {
+    "registry-node": 115,
+    "exchange-admin-surface": 6,
+    "exchange-catalog-entry": 15,
+    "bankthat-contract": 58,
+    "draft-cck-schedule": 7,
+    "technical-instrument": 11,
+    "intelthat-workspace-section": 6,
+    "navigation-destination": 12,
+    "verified-slice": 1
+  },
+  "notes": [
+    "Categories overlap; do not sum them into a unique-working-feature total.",
+    "115 node IDs share 18 execution groups; a registry entry does not establish an independent widget.",
+    "58 bankTHAT records are read-only contracts; they are not 58 working market calculators.",
+    "15 Market Exchange catalog entries include third-party tool descriptions; those are not installed integrations.",
+    "72 button elements in the former landing HTML are controls, not 72 independent features.",
+    "One isolated arithmetic slice has source-level tests; no FiveMac commissioning claim."
+  ],
+  "entries": [
+    {
+      "id": "node:F0-001",
+      "title": "Asset Resolver",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F0-001",
+      "implementation_group": "foundation",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F0-002",
+      "title": "Instrument Identity",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F0-002",
+      "implementation_group": "foundation",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F0-003",
+      "title": "Utility or Business Model",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F0-003",
+      "implementation_group": "foundation",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F0-004",
+      "title": "Supply, Float, and Capital Structure",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F0-004",
+      "implementation_group": "foundation",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F0-005",
+      "title": "Unlock and Dilution Risk",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F0-005",
+      "implementation_group": "foundation",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F0-006",
+      "title": "Revenue, Fees, or Cash-Flow Evidence",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F0-006",
+      "implementation_group": "foundation",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F0-007",
+      "title": "Liquidity and Concentration",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F0-007",
+      "implementation_group": "foundation",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F0-008",
+      "title": "Legitimacy and Operational Risk Gate",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F0-008",
+      "implementation_group": "foundation",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:D-001",
+      "title": "Price-Bar Loader",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "D-001",
+      "implementation_group": "data",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:D-002",
+      "title": "Volume and Order-Book Loader",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "D-002",
+      "implementation_group": "data",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:D-003",
+      "title": "Options-Chain Loader",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "D-003",
+      "implementation_group": "data",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:D-004",
+      "title": "News and Event Loader",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "D-004",
+      "implementation_group": "data",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:D-005",
+      "title": "Macro Calendar Loader",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "D-005",
+      "implementation_group": "data",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:D-006",
+      "title": "Entity and Relationship Loader",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "D-006",
+      "implementation_group": "data",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:D-007",
+      "title": "Narrative and Attention Loader",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "D-007",
+      "implementation_group": "data",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:D-008",
+      "title": "Data Quality and Freshness",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "D-008",
+      "implementation_group": "data",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L1-001",
+      "title": "EMA Calculator",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L1-001",
+      "implementation_group": "trend",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L1-002",
+      "title": "EMA Alignment",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L1-002",
+      "implementation_group": "trend",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L1-003",
+      "title": "EMA Slope",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L1-003",
+      "implementation_group": "trend",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L1-004",
+      "title": "Crossover State",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L1-004",
+      "implementation_group": "trend",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L1-005",
+      "title": "Multi-Timeframe Trend",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L1-005",
+      "implementation_group": "trend",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L1-006",
+      "title": "Trend Regime Classifier",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L1-006",
+      "implementation_group": "trend",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L2-001",
+      "title": "RSI Calculator and State",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L2-001",
+      "implementation_group": "momentum",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L2-002",
+      "title": "RSI Midpoint and Zone Transitions",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L2-002",
+      "implementation_group": "momentum",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L2-003",
+      "title": "MACD Calculator and State",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L2-003",
+      "implementation_group": "momentum",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L2-004",
+      "title": "Momentum Divergence",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L2-004",
+      "implementation_group": "momentum",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L2-005",
+      "title": "Optional Stochastic",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L2-005",
+      "implementation_group": "momentum",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L2-006",
+      "title": "Momentum Confluence",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L2-006",
+      "implementation_group": "momentum",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L2-007",
+      "title": "Reversal Versus Continuation",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L2-007",
+      "implementation_group": "momentum",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L3-001",
+      "title": "Pivot Detector",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L3-001",
+      "implementation_group": "route",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L3-002",
+      "title": "Swing Ranker",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L3-002",
+      "implementation_group": "route",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L3-003",
+      "title": "Fibonacci Anchor Selector",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L3-003",
+      "implementation_group": "route",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L3-004",
+      "title": "Fibonacci Level Calculator",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L3-004",
+      "implementation_group": "route",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L3-005",
+      "title": "Confluence Detector",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L3-005",
+      "implementation_group": "route",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L3-006",
+      "title": "Last Bus Stop",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L3-006",
+      "implementation_group": "route",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L3-007",
+      "title": "Next Bus Stops",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L3-007",
+      "implementation_group": "route",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L3-008",
+      "title": "Route and Invalidation",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L3-008",
+      "implementation_group": "route",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L4-001",
+      "title": "Headline Deduplicator",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L4-001",
+      "implementation_group": "news",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L4-002",
+      "title": "Entity Linker",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L4-002",
+      "implementation_group": "news",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L4-003",
+      "title": "Event Classifier",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L4-003",
+      "implementation_group": "news",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L4-004",
+      "title": "Source Reliability",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L4-004",
+      "implementation_group": "news",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L4-005",
+      "title": "Sentiment and Emotional Intensity",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L4-005",
+      "implementation_group": "news",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L4-006",
+      "title": "News Relevance and Directness",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L4-006",
+      "implementation_group": "news",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L4-007",
+      "title": "Market Reaction Analyzer",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L4-007",
+      "implementation_group": "news",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L4-008",
+      "title": "Scheduled Event Risk",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L4-008",
+      "implementation_group": "news",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L4-009",
+      "title": "Event Impact Pair",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L4-009",
+      "implementation_group": "news",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L5-001",
+      "title": "Historical Feature Snapshot",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L5-001",
+      "implementation_group": "history",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L5-002",
+      "title": "Same-Asset Analog Search",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L5-002",
+      "implementation_group": "history",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L5-003",
+      "title": "Cross-Asset Analog Search",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L5-003",
+      "implementation_group": "history",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L5-004",
+      "title": "Regime Similarity",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L5-004",
+      "implementation_group": "history",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L5-005",
+      "title": "Outcome Calculator",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L5-005",
+      "implementation_group": "history",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L5-006",
+      "title": "Counterexample Finder",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L5-006",
+      "implementation_group": "history",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L5-007",
+      "title": "Historical Context Summary",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L5-007",
+      "implementation_group": "history",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L6-001",
+      "title": "Price-Level Candidate Generator",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L6-001",
+      "implementation_group": "memory",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L6-002",
+      "title": "Level Clusterer",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L6-002",
+      "implementation_group": "memory",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L6-003",
+      "title": "Touch-Episode Counter",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L6-003",
+      "implementation_group": "memory",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L6-004",
+      "title": "Bounce and Rejection Statistics",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L6-004",
+      "implementation_group": "memory",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L6-005",
+      "title": "Volume-at-Level Confirmation",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L6-005",
+      "implementation_group": "memory",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L6-006",
+      "title": "Multi-Timeframe Level Confluence",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L6-006",
+      "implementation_group": "memory",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L6-007",
+      "title": "Break and Retest Analyzer",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L6-007",
+      "implementation_group": "memory",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L6-008",
+      "title": "Level Erosion",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L6-008",
+      "implementation_group": "memory",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L6-009",
+      "title": "Support Versus Resistance Pair",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L6-009",
+      "implementation_group": "memory",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L7-001",
+      "title": "Entity Graph Builder",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L7-001",
+      "implementation_group": "relationships",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L7-002",
+      "title": "Edge Resolver",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L7-002",
+      "implementation_group": "relationships",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L7-003",
+      "title": "Edge Provenance and Validity",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L7-003",
+      "implementation_group": "relationships",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L7-004",
+      "title": "Direct Path Search",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L7-004",
+      "implementation_group": "relationships",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L7-005",
+      "title": "Indirect Path Search",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L7-005",
+      "implementation_group": "relationships",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L7-006",
+      "title": "Path Decay and Exposure",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L7-006",
+      "implementation_group": "relationships",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L7-007",
+      "title": "Counter-Path Search",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L7-007",
+      "implementation_group": "relationships",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L7-008",
+      "title": "Market Confirmation of Path",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L7-008",
+      "implementation_group": "relationships",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L7-009",
+      "title": "Evidence Board Export",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L7-009",
+      "implementation_group": "relationships",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L8-001",
+      "title": "Topic Clusterer",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L8-001",
+      "implementation_group": "narrative",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L8-002",
+      "title": "Narrative Labeler",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L8-002",
+      "implementation_group": "narrative",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L8-003",
+      "title": "Attention and Velocity",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L8-003",
+      "implementation_group": "narrative",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L8-004",
+      "title": "Narrative Stage",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L8-004",
+      "implementation_group": "narrative",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L8-005",
+      "title": "Asset Alignment",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L8-005",
+      "implementation_group": "narrative",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L8-006",
+      "title": "Price Confirmation and Crowding",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L8-006",
+      "implementation_group": "narrative",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:L8-007",
+      "title": "Counter-Narrative Search",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "L8-007",
+      "implementation_group": "narrative",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:C-001",
+      "title": "Evidence Item Validator",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "C-001",
+      "implementation_group": "scoring",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:C-002",
+      "title": "Pairwise Contrast Engine",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "C-002",
+      "implementation_group": "scoring",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:C-003",
+      "title": "Disconfirming-Evidence Search",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "C-003",
+      "implementation_group": "scoring",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:C-004",
+      "title": "Signal Conflict Detector",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "C-004",
+      "implementation_group": "scoring",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:C-005",
+      "title": "Correlation and Double-Count Penalty",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "C-005",
+      "implementation_group": "scoring",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:C-006",
+      "title": "Evidence Normalizer",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "C-006",
+      "implementation_group": "scoring",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:C-007",
+      "title": "Confidence Calculator",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "C-007",
+      "implementation_group": "scoring",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F-001",
+      "title": "Baseline Forecasts",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F-001",
+      "implementation_group": "forecast",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F-002",
+      "title": "Statistical Forecasts",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F-002",
+      "implementation_group": "forecast",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F-003",
+      "title": "Machine-Learning Forecasts",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F-003",
+      "implementation_group": "forecast",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F-004",
+      "title": "Volatility Forecast",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F-004",
+      "implementation_group": "forecast",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F-005",
+      "title": "Forecast Ensemble",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F-005",
+      "implementation_group": "forecast",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:F-006",
+      "title": "Probability Calibration",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "F-006",
+      "implementation_group": "forecast",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:R-001",
+      "title": "Liquidity Risk",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "R-001",
+      "implementation_group": "risk",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:R-002",
+      "title": "Volatility Risk",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "R-002",
+      "implementation_group": "risk",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:R-003",
+      "title": "Event Risk",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "R-003",
+      "implementation_group": "risk",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:R-004",
+      "title": "Route Reward-to-Risk",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "R-004",
+      "implementation_group": "risk",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:R-005",
+      "title": "Action-State Generator",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "R-005",
+      "implementation_group": "risk",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:E-001",
+      "title": "Plain-Language Explanation",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "E-001",
+      "implementation_group": "explain",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:E-002",
+      "title": "Technical Explanation",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "E-002",
+      "implementation_group": "explain",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:E-003",
+      "title": "Explanation Completeness Validator",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "E-003",
+      "implementation_group": "explain",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:E-004",
+      "title": "Reading-Level Validator",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "E-004",
+      "implementation_group": "explain",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:E-005",
+      "title": "Provenance Formatter",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "E-005",
+      "implementation_group": "explain",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:O-001",
+      "title": "Dependency Graph",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "O-001",
+      "implementation_group": "orchestrator",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:O-002",
+      "title": "Node Runner",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "O-002",
+      "implementation_group": "orchestrator",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:O-003",
+      "title": "Layer Runner",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "O-003",
+      "implementation_group": "orchestrator",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:O-004",
+      "title": "Pipeline Runner",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "O-004",
+      "implementation_group": "orchestrator",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:O-005",
+      "title": "Run Manifest",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "O-005",
+      "implementation_group": "orchestrator",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:B-001",
+      "title": "Walk-Forward Backtest",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "B-001",
+      "implementation_group": "backtest",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:B-002",
+      "title": "Transaction-Cost Model",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "B-002",
+      "implementation_group": "backtest",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:B-003",
+      "title": "Performance Metrics",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "B-003",
+      "implementation_group": "backtest",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:B-004",
+      "title": "Leakage Audit",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "B-004",
+      "implementation_group": "backtest",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:M-001",
+      "title": "Data Drift Monitor",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "M-001",
+      "implementation_group": "monitoring",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:M-002",
+      "title": "Model Drift Monitor",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "M-002",
+      "implementation_group": "monitoring",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:M-003",
+      "title": "Calibration Monitor",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "M-003",
+      "implementation_group": "monitoring",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:IP-001",
+      "title": "IP Node Registry",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "IP-001",
+      "implementation_group": "ip",
+      "shared_implementation": true
+    },
+    {
+      "id": "node:IP-002",
+      "title": "Version and Lineage Recorder",
+      "category": "registry-node",
+      "source": "docs/IP-NODE-REGISTRY.md",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "node_id": "IP-002",
+      "implementation_group": "ip",
+      "shared_implementation": true
+    },
+    {
+      "id": "exchange:surface:dashboard",
+      "title": "Exchange Dashboard",
+      "category": "exchange-admin-surface",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "exchange:surface:catalog",
+      "title": "Catalog",
+      "category": "exchange-admin-surface",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "exchange:surface:products",
+      "title": "All Products",
+      "category": "exchange-admin-surface",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "exchange:surface:product-editor",
+      "title": "Product Editor",
+      "category": "exchange-admin-surface",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "exchange:surface:installed",
+      "title": "Installed Tools",
+      "category": "exchange-admin-surface",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "exchange:surface:api-observatory",
+      "title": "API Observatory",
+      "category": "exchange-admin-surface",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "exchange:catalog:bishop-cluster",
+      "title": "Bishop Cluster",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "agent"
+    },
+    {
+      "id": "exchange:catalog:dustpan",
+      "title": "DustPan",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "agent"
+    },
+    {
+      "id": "exchange:catalog:github-control",
+      "title": "GitHub Control",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "agent"
+    },
+    {
+      "id": "exchange:catalog:server-operator",
+      "title": "Server Operator",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "agent"
+    },
+    {
+      "id": "exchange:catalog:dockyard",
+      "title": "Dockyard",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "agent"
+    },
+    {
+      "id": "exchange:catalog:clinic",
+      "title": "Clinic",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "agent"
+    },
+    {
+      "id": "exchange:catalog:automata-pad",
+      "title": "Automata Pad",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "agent"
+    },
+    {
+      "id": "exchange:catalog:market-source-refinery",
+      "title": "Market Source Refinery",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "agent"
+    },
+    {
+      "id": "exchange:catalog:gitlab",
+      "title": "GitLab CE",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "external"
+    },
+    {
+      "id": "exchange:catalog:n8n",
+      "title": "n8n",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "external"
+    },
+    {
+      "id": "exchange:catalog:portainer",
+      "title": "Portainer",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "external"
+    },
+    {
+      "id": "exchange:catalog:roborock",
+      "title": "Roborock",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "connector"
+    },
+    {
+      "id": "exchange:catalog:smartlife",
+      "title": "Samsung SmartLife",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "connector"
+    },
+    {
+      "id": "exchange:catalog:apple-shortcuts",
+      "title": "Apple Shortcuts",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "connector"
+    },
+    {
+      "id": "exchange:catalog:home-assistant",
+      "title": "Home Assistant",
+      "category": "exchange-catalog-entry",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "kind": "connector"
+    },
+    {
+      "id": "bankthat:bank-import",
+      "title": "Bank Import",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:column-detection",
+      "title": "Column Detection",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:source-folder",
+      "title": "Source Folder",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:institution-profile",
+      "title": "Institution Profile",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:account-cassette",
+      "title": "Account Cassette",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:account-member",
+      "title": "Account Member",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:transaction-normalize",
+      "title": "Transaction Normalize",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:transaction-view",
+      "title": "Transaction View",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:vendor-alias",
+      "title": "Vendor Alias",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:ledger-chart",
+      "title": "Ledger Chart",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:ledger-journal",
+      "title": "Ledger Journal",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:receipt-record",
+      "title": "Receipt Record",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:receipt-intake",
+      "title": "Receipt Intake",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:receipt-link",
+      "title": "Receipt Link",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:balance-reconcile",
+      "title": "Balance Reconcile",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:finance-workflow",
+      "title": "Finance Workflow",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Bank & Accounts Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:income-streams",
+      "title": "Income Streams",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Income Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:deposits",
+      "title": "Deposits",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Income Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:work-logs",
+      "title": "Work Logs",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Income Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:deals",
+      "title": "Deals",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Income Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:pipeline",
+      "title": "Pipeline",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Income Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:payroll",
+      "title": "Payroll",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Income Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:income-recon",
+      "title": "Income Recon",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Income Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:income-tax-summary",
+      "title": "Income Tax Summary",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Income Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:cashflow",
+      "title": "Cashflow",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Forecast & Analysis Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:recurring",
+      "title": "Recurring",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Forecast & Analysis Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:scenario",
+      "title": "Scenario",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Forecast & Analysis Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:goals",
+      "title": "Goals",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Forecast & Analysis Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:accuracy",
+      "title": "Accuracy",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Forecast & Analysis Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:spending",
+      "title": "Spending",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Forecast & Analysis Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:financial-pulse",
+      "title": "Financial Pulse",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Forecast & Analysis Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:irc-reference",
+      "title": "Irc Reference",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Tax Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:tax-document-intake",
+      "title": "Tax Document Intake",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Tax Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:tax-line-classify",
+      "title": "Tax Line Classify",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Tax Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:tax-evidence",
+      "title": "Tax Evidence",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Tax Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:daily-financial-report",
+      "title": "Daily Financial Report",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Tax Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:property-portfolio",
+      "title": "Property Portfolio",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Assets & Inventory Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:property-search",
+      "title": "Property Search",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Assets & Inventory Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:property-liens",
+      "title": "Property Liens",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Assets & Inventory Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:vehicle-registry",
+      "title": "Vehicle Registry",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Assets & Inventory Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:personal-property",
+      "title": "Personal Property",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Assets & Inventory Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:maintenance",
+      "title": "Maintenance",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Assets & Inventory Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:asset-inventory",
+      "title": "Asset Inventory",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Assets & Inventory Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:document-catalog",
+      "title": "Document Catalog",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Assets & Inventory Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:crypto-holdings",
+      "title": "Crypto Holdings",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Investments Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:crypto-transactions",
+      "title": "Crypto Transactions",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Investments Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:defi",
+      "title": "DeFi",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Investments Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:crypto-tax",
+      "title": "Crypto Tax",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Investments Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:trading-portfolio",
+      "title": "Trading Portfolio",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Investments Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:options",
+      "title": "Options",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Investments Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:tax-lots",
+      "title": "Tax Lots",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Investments Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:investment-performance",
+      "title": "Investment Performance",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Investments Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:finance-calendar",
+      "title": "Finance Calendar",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Finance Operations Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:family-entities",
+      "title": "Family Entities",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Finance Operations Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:reports",
+      "title": "Reports",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Finance Operations Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:capture",
+      "title": "Capture",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Finance Operations Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:evaluation",
+      "title": "Evaluation",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Finance Operations Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "bankthat:storage-setup",
+      "title": "Storage Setup",
+      "category": "bankthat-contract",
+      "source": "src/market_compass/web/stubthat.js",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "console": "Finance Operations Console",
+      "source_owner": "bank-reader"
+    },
+    {
+      "id": "cck:athlete-performance-v1",
+      "title": "Authorized athlete performance",
+      "category": "draft-cck-schedule",
+      "source": "src/market_compass/hcck_profiles.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "automatic_job": false
+    },
+    {
+      "id": "cck:equity-v1",
+      "title": "Stock or listed-equity study",
+      "category": "draft-cck-schedule",
+      "source": "src/market_compass/hcck_profiles.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "automatic_job": false
+    },
+    {
+      "id": "cck:option-v1",
+      "title": "Options contract study",
+      "category": "draft-cck-schedule",
+      "source": "src/market_compass/hcck_profiles.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "automatic_job": false
+    },
+    {
+      "id": "cck:device-v1",
+      "title": "Phones, computers and cameras",
+      "category": "draft-cck-schedule",
+      "source": "src/market_compass/hcck_profiles.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "automatic_job": false
+    },
+    {
+      "id": "cck:batch-v1",
+      "title": "Eggs, products and physical batches",
+      "category": "draft-cck-schedule",
+      "source": "src/market_compass/hcck_profiles.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "automatic_job": false
+    },
+    {
+      "id": "cck:participant-v1",
+      "title": "Market Compass named participant",
+      "category": "draft-cck-schedule",
+      "source": "src/market_compass/hcck_profiles.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "automatic_job": false
+    },
+    {
+      "id": "cck:general-v1",
+      "title": "Any authorized measurable subject",
+      "category": "draft-cck-schedule",
+      "source": "src/market_compass/hcck_profiles.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "automatic_job": false
+    },
+    {
+      "id": "instrument:01",
+      "title": "EMA 13",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "instrument:02",
+      "title": "EMA 27",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "instrument:03",
+      "title": "EMA 50",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "instrument:04",
+      "title": "EMA 81",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "instrument:05",
+      "title": "RSI 14",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "instrument:06",
+      "title": "MACD 12/26/9",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "instrument:07",
+      "title": "Stochastic 14",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "instrument:08",
+      "title": "Fibonacci levels",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "instrument:09",
+      "title": "Bus stop route",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "instrument:10",
+      "title": "Price memory support/resistance",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "instrument:11",
+      "title": "20-day volatility",
+      "category": "technical-instrument",
+      "source": "src/market_compass/technical.py",
+      "evidence_status": "source-identified-unverified",
+      "visible": false,
+      "overlaps_node_registry": true
+    },
+    {
+      "id": "intelthat:01",
+      "title": "Research Cockpit",
+      "category": "intelthat-workspace-section",
+      "source": "src/market_compass/web/intelthat-app.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "intelthat:02",
+      "title": "Market Pack",
+      "category": "intelthat-workspace-section",
+      "source": "src/market_compass/web/intelthat-app.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "intelthat:03",
+      "title": "Macro Conditions",
+      "category": "intelthat-workspace-section",
+      "source": "src/market_compass/web/intelthat-app.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "intelthat:04",
+      "title": "News Intelligence",
+      "category": "intelthat-workspace-section",
+      "source": "src/market_compass/web/intelthat-app.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "intelthat:05",
+      "title": "SEC Monitor",
+      "category": "intelthat-workspace-section",
+      "source": "src/market_compass/web/intelthat-app.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "intelthat:06",
+      "title": "Browser-local Run History",
+      "category": "intelthat-workspace-section",
+      "source": "src/market_compass/web/intelthat-app.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:overview",
+      "title": "overview",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:runtime",
+      "title": "runtime",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:actors",
+      "title": "actors",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:exchange",
+      "title": "exchange",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:measurement",
+      "title": "measurement",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:desk",
+      "title": "desk",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:intel",
+      "title": "intel",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:gates",
+      "title": "gates",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:route",
+      "title": "route",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:timeframes",
+      "title": "timeframes",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:evidence",
+      "title": "evidence",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "nav:catalysts",
+      "title": "catalysts",
+      "category": "navigation-destination",
+      "source": "src/market_compass/web/index.html",
+      "evidence_status": "source-identified-unverified",
+      "visible": false
+    },
+    {
+      "id": "slice:long-position-plan",
+      "title": "Long-position plan arithmetic",
+      "category": "verified-slice",
+      "source": "src/market_compass/web/slices/long-position-plan.mjs",
+      "evidence_status": "source-unit-tested-not-live-accepted",
+      "visible": true,
+      "limitations": [
+        "user-supplied hypothetical numbers only",
+        "no live quote",
+        "no gap/slippage/commission estimate",
+        "not a probability of loss",
+        "no brokerage"
+      ],
+      "cck": {
+        "kind": "widget",
+        "canvas": "Grand Canvas",
+        "inputs": [
+          "entry",
+          "stop",
+          "target",
+          "quantity",
+          "accountSize"
+        ],
+        "output": [
+          "riskPerShare",
+          "rewardPerShare",
+          "rewardToRisk",
+          "plannedLoss",
+          "accountRiskPercent"
+        ]
+      }
+    }
+  ]
+}
