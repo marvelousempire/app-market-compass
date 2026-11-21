@@ -52,3 +52,13 @@ These are **different modes**: `owner-improvement` versus `outside-trading-sourc
 Market Compass remains **research-only**. It never accepts broker credentials, orders, copied trades, wallet execution, money movement, third-party scoring changes or implied financial advice from proposeTHAT. `trade_execution=false` and `score_influence=false` remain true. The Market Compass scorer owns its calculations; external models may interpret, not rewrite them. ELSE owns authored perspectives, while Brown's Barometers retains the measurement seat. Market Intel's separate weekly jobs remain with Market Intel. Do not silently put all Market apps inside one repository.
 
 The skill, classifier and handbook are **source deliverables**. A real Hermes-triggered report, owner intake, Gitea reconciliation and FiveMac acceptance must be individually tested and recorded before being called working integration.
+
+## Actual local research intake page (additive source as of November 21)
+
+The source branch includes a new /proposethat/ page and local-only /api/proposethat/ endpoints. Once installed and verified on FiveMac, open http://market-compass.localhost/proposethat/, choose Improve Market Compass or Compare outside market technology, enter the goal and optional source, then Save research intake. The page shows a saved receipt, documented existing capabilities to inspect, numbered candidate research tasks, a history list and Export receipt.
+
+The API stores private JSON in ~/.market-compass/private/proposethat with create-only files and mode 0600 (private directory 0700). The environment variable MARKET_COMPASS_PROPOSAL_DIR can select an approved local folder. Duplicate identical requests reuse an ID. Unapproved remote clients, cross-origin requests, unsafe paths, account credentials placed in source URLs and unauthorized model/execution fields are rejected. No outside URLs are fetched.
+
+From the accepted proposeTHAT checkout, the operator can also submit an explicitly authorized source request by running its tools/submit_market_compass.py helper. It uses the actual classifier, posts to the local owner and reads back the saved record.
+
+This is a working SOURCE FEATURE until the accepted Gitea application is reconciled, tests pass and FiveMac/browser receiving is observed. A saved intake is not an executed research investigation or a validated technology comparison. The nine existing handbook chapters and historical v0.8.1 commissioning evidence remain untouched.
