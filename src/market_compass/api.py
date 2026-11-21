@@ -250,7 +250,7 @@ def _require_local_proposethat(request: Request) -> None:
     if peer not in {"127.0.0.1", "::1", "localhost", "testclient"}:
         raise HTTPException(status_code=403, detail="proposeTHAT intake is local-only.")
     host = request.headers.get("host", "")
-    hostname = host.split(":", 1)[0].lower()
+    hostname = urlsplit("//" + host).hostname
     if hostname not in {"localhost", "127.0.0.1", "market-compass.localhost", "testserver", "[::1]"}:
         raise HTTPException(status_code=403, detail="Unapproved intake host.")
     origin = request.headers.get("origin")
