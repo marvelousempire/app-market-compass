@@ -1,9 +1,6 @@
 """Offline safety/receiving tests for proposeTHAT's Market Compass API."""
-import os
-from pathlib import Path
 from fastapi.testclient import TestClient
 from market_compass.api import app
-from market_compass.proposethat_intake import IntakeRequest, read_intake
 
 def _sample(mode="owner-improvement"):
     return {
