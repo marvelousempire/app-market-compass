@@ -6,7 +6,7 @@ ASSET ?= HYPE
 HORIZON ?= 20
 MARKET_COMPASS_BASE_URL ?= http://127.0.0.1:8000
 
-.PHONY: setup test lint analyze node backtest app api doctor clean accept-proposethat
+.PHONY: setup test test-slices lint analyze node backtest app api doctor clean accept-proposethat
 
 doctor:
 	@$(RUN_PYTHON) -c 'import sys; v=sys.version_info; assert v >= (3, 11), f"Python 3.11+ required, found {v.major}.{v.minor}"'
@@ -47,3 +47,8 @@ clean:
 # This is the accepted source+running-loopback receipt check, NOT a deployment or Git promotion.
 accept-proposethat: test
 	$(RUN_PYTHON) scripts/verify_proposethat_local.py --base-url $(MARKET_COMPASS_BASE_URL)
+
+# Independent arithmetic + inventory source gate. Requires Node 18+; never uses the network.
+test-slices:
+	$(RUN_PYTHON) scripts/verify_slice_manifest.py
+	node --test tests/web/long-position-plan.test.mjs
