@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Market Compass</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/overview.css">
+  <link rel="stylesheet" href="/static/analyst.css">
+  <link rel="stylesheet" href="/static/intelthat.css">
+  <link rel="stylesheet" href="/static/research-lenses.css">
+  <link rel="stylesheet" href="/static/operator-controls.css">
+  <link rel="stylesheet" href="/static/research-cassettes.css?v=20261106.1">
+  <link rel="stylesheet" href="/static/stubthat.css?v=20261106.1">
+  <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261106.1">
+  <link rel="stylesheet" href="/static/decision-gates.css">
+  <link rel="stylesheet" href="/static/simulator.css?v=20261108.1">
+  <link rel="stylesheet" href="/static/act-v1-appearance.css?v=20261106.1">
+  <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+  <aside class="act-shell-rail" aria-label="Market Compass rooms" data-shell-node="primary-rail">
+    <a class="act-shell-brand" href="#market-overview" aria-label="Market Compass home"><span aria-hidden="true"></span><strong>MARKET COMPASS</strong><small>Admin Control Tower</small></a>
+    <nav class="act-shell-nav" aria-label="Admin studios">
+      <section class="act-nav-group" data-nav-group="Overview">
+        <button type="button" class="act-nav-group-toggle" aria-expanded="true"><span>Overview</span><i aria-hidden="true">⌄</i></button>
+        <div class="act-nav-items">
+          <a class="active" href="#market-overview" data-act-shell-room="overview"><span aria-hidden="true">◈</span><b>Overview</b></a>
+          <a href="#operator-deck" data-act-shell-room="runtime"><span aria-hidden="true">⬢</span><b>Runtime Status</b></a>
+        </div>
+      </section>
+      <section class="act-nav-group" data-nav-group="Studios">
+        <button type="button" class="act-nav-group-toggle" aria-expanded="true"><span>Studios</span><i aria-hidden="true">⌄</i></button>
+        <div class="act-nav-items">
+          <a href="#actor-spaces" data-act-shell-room="actors"><span aria-hidden="true">◎</span><b>Actor Studio</b></a>
+          <a href="#market-exchange" data-act-shell-room="exchange"><span aria-hidden="true">◇</span><b>Market Exchange</b></a>
+          <a href="#measurement-studio" data-act-shell-room="measurement"><span aria-hidden="true">◫</span><b>Measurement Studio</b></a>
+          <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Compass Desk</b></a>
+          <a href="/intelthat/" data-intelthat-app><span aria-hidden="true">◉</span><b>intelTHAT App</b></a>
+          <a href="/proposethat/" data-proposethat-app><span aria-hidden="true">✧</span><b>proposeTHAT</b></a>
+          <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">≣</span><b>intelTHAT Receipts</b></a>
+          <a href="#decision-gates" data-act-shell-room="gates"><span aria-hidden="true">⊘</span><b>Decision Gates</b></a>
+        </div>
+      </section>
+      <section class="act-nav-group" data-nav-group="Evidence">
+        <button type="button" class="act-nav-group-toggle" aria-expanded="true"><span>Evidence</span><i aria-hidden="true">⌄</i></button>
+        <div class="act-nav-items">
+          <a href="#route-panel" data-act-shell-room="route"><span aria-hidden="true">↝</span><b>Price Route</b></a>
+          <a href="#timeframe-panel" data-act-shell-room="timeframes"><span aria-hidden="true">▦</span><b>Timeframes</b></a>
+          <a href="#evidence-panel" data-act-shell-room="evidence"><span aria-hidden="true">✓</span><b>Evidence</b></a>
+          <a href="#catalyst-panel" data-act-shell-room="catalysts"><span aria-hidden="true">⚑</span><b>Catalysts</b></a>
+        </div>
+      </section>
+    </nav>
+    <div class="act-rail-footer">
+      <section class="act-appearance" aria-label="Appearance">
+        <p>Appearance</p>
+        <div role="radiogroup" aria-label="Color mode"><button type="button" role="radio" data-act-color="system" aria-checked="true">System</button><button type="button" role="radio" data-act-color="light" aria-checked="false">Light</button><button type="button" role="radio" data-act-color="dark" aria-checked="false">Dark</button></div>
+        <div role="radiogroup" aria-label="Layout theme"><button type="button" role="radio" data-act-layout="control-room" aria-checked="true">Rail</button><button type="button" role="radio" data-act-layout="focus" aria-checked="false">Focus</button><button type="button" role="radio" data-act-layout="wide-canvas" aria-checked="false">Wide</button></div>
+      </section>
+      <div class="act-settings-actions"><button type="button" data-act-command="settings">⚙<span>Settings</span></button><button type="button" data-act-command="search">⌕<span>Search</span></button><button type="button" data-act-command="receipts">≣<span>Receipts</span></button></div>
+      <div class="act-shell-boundary"><span></span><b>MARKET COMPASS ACT</b><small>Signals active · No order execution</small><button type="button" id="act-rail-collapse" aria-label="Collapse sidebar" title="Collapse sidebar">«</button></div>
+    </div>
+  </aside>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">MARKET COMPASS / OVERVIEW</p>
+      <h1>Decision Intelligence</h1>
+      <p class="subhead">Evidence, counter-evidence, route, memory and narrative in one governed workspace.</p>
+    </div>
+    <div class="header-controls" aria-label="View and explanation mode">
+      <div class="mode-switch">
+        <button class="view-btn active" data-view="quick">Quick</button>
+        <button class="view-btn" data-view="research">Research</button>
+      </div>
+      <div class="mode-switch">
+        <button class="mode active" data-mode="simple">Simple</button>
+        <button class="mode" data-mode="technical">Technical</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell" id="market-overview">
+    <section class="operator-deck panel" id="operator-deck" aria-labelledby="operator-deck-title">
+      <div class="operator-deck-heading">
+        <div>
+          <p class="eyebrow">GITTHAT PREVIEW CONTROLS</p>
+          <h2 id="operator-deck-title">Ready on this Mac</h2>
+          <p>Plan, inspect, open, prove, or safely stop this read-only research preview.</p>
+        </div>
+        <span class="operator-state" id="operator-state" data-state="checking" role="status">Checking runtime…</span>
+      </div>
+      <div class="operator-actions" aria-label="GitThat preview actions">
+        <button type="button" class="operator-action" data-operator-action="plan"><span aria-hidden="true">⌖</span><strong>Preview plan</strong><small>See the bounded work order</small></button>
+        <button type="button" class="operator-action" data-operator-action="status"><span aria-hidden="true">✓</span><strong>Check status</strong><small>Verify host, mode, and safety</small></button>
+        <button type="button" class="operator-action" data-operator-action="launch"><span aria-hidden="true">▶</span><strong>Launch preview</strong><small>Confirm the live runtime</small></button>
+        <button type="button" class="operator-action" data-operator-action="open"><span aria-hidden="true">↗</span><strong>Open live preview</strong><small>Open another local view</small></button>
+        <button type="button" class="operator-action" data-operator-action="receipts"><span aria-hidden="true">≣</span><strong>View receipts</strong><small>Read health and proof state</small></button>
+        <button type="button" class="operator-action danger" data-operator-action="stop"><span aria-hidden="true">■</span><strong>Stop safely</strong><small>End only this local preview</small></button>
+      </div>
+      <div class="operator-result" id="operator-result" tabindex="-1" aria-live="polite">
+        <p>Signals are active. Broker connection and order execution are not part of Market Compass.</p>
+      </div>
+    </section>
+    <section class="control-bar panel">
+      <label class="search-field"><span>Asset</span><input id="symbol" value="BB" list="symbol-suggestions" autocomplete="off" spellcheck="false"><datalist id="symbol-suggestions"></datalist></label>
+      <label><span>Horizon</span><input id="horizon" type="number" value="20" min="1" max="120"></label>
+      <button id="analyze" class="primary">Analyze</button>
+      <button id="watch-current" class="secondary">+ Watch</button>
+      <button id="save-snapshot" class="secondary">Save Snapshot</button>
+      <div id="run-status" class="run-status" role="status"></div>
+    </section>
+
+    <section class="cassette-stage panel" id="actor-spaces" aria-labelledby="cassette-title">
+      <div class="cassette-heading">
+        <div><p class="eyebrow">FLOWTHAT · ACTOR SPACES</p><h2 id="cassette-title">Choose an Actor</h2></div>
+        <span class="trust-chip">Local presentation · no execution authority</span>
+      </div>
+      <div class="cassette-canvas" id="cassette-canvas" aria-live="polite"></div>
+      <div class="cassette-rail" role="tablist" aria-label="Actor spaces">
+        <button type="button" role="tab" class="cassette-tab active" data-cassette="omo" aria-selected="true"><span aria-hidden="true">O</span><strong>Omo</strong></button>
+        <button type="button" role="tab" class="cassette-tab" data-cassette="prince" aria-selected="false"><span aria-hidden="true">P</span><strong>Prince</strong></button>
+        <button type="button" role="tab" class="cassette-tab" data-cassette="wuda" aria-selected="false"><span aria-hidden="true">W</span><strong>Wuda</strong></button>
+        <button type="button" role="tab" class="cassette-tab" data-cassette="browns-barometers" aria-selected="false"><span aria-hidden="true">B</span><strong>Brown’s Barometers</strong></button>
+      </div>
+    </section>
+
+    <section class="panel hcck-profiles" id="measurement-studio" aria-label="Universal Measurement Studio">
+      <div class="section-head"><div><p class="eyebrow">MARKET COMPASS · UNIVERSAL MEASUREMENT</p><h2>Measurement Studio</h2></div><span class="trust-chip">Simulation only · no source writeback</span></div>
+      <p class="trust-note">Measure a fictional player, computer, egg batch, stock observation, option observation, or any authorized subject using a clearly named method. This adds to the existing live market workbench, Actors, Exchange and research rooms. No real trades or person valuation.</p>
+      <div class="hcck-profiles" id="hcck-profiles" aria-label="Draft Hybrid CCK profile schedules">
+        <label for="hcck-profile-select">Choose a subject profile</label>
+        <select id="hcck-profile-select" disabled><option>Loading templates…</option></select>
+        <div id="hcck-seat-wrapper" hidden><label for="hcck-seat-select">Named participant perspective</label><select id="hcck-seat-select"></select></div>
+        <div id="hcck-profile-detail" role="status" aria-live="polite">Loading schedules…</div>
+        <button type="button" id="hcck-load-example" class="secondary" disabled>Load fictional example</button>
+      </div>
+      <div class="universal-simulator" id="universal-simulator" aria-label="Subject simulation lab">
+        <h3>Measurement Lab</h3>
+        <p class="trust-note">This is the transparent input used by the simulator. It can be edited, but its values and methodology are not independently verified or issued by ELSE.</p>
+        <label class="universal-json-label" for="universal-input">Measurements and method</label>
+        <textarea id="universal-input" rows="9" spellcheck="false"></textarea>
+        <div class="universal-actions">
+          <button type="button" id="universal-example" class="secondary">Load old-computer example</button>
+          <button type="button" id="universal-run" class="primary">Simulate</button>
+          <button type="button" id="universal-export" class="secondary" disabled>Export JSON</button>
+        </div>
+        <div id="universal-output" role="status" aria-live="polite">Select a fictional example, then simulate.</div>
+      </div>
+    </section>
+
+    <section class="stubthat-stage act-v1-admin panel" id="market-exchange" aria-labelledby="stubthat-title">
+      <div class="stubthat-heading">
+        <div>
+          <p class="eyebrow">MARKET EXCHANGE</p>
+          <h2 id="stubthat-title">Market Exchange</h2>
+          <p>Dashboard rooms for Exchange tools and bankTHAT contracts, with owner boundaries visible before any engine is connected.</p>
+        </div>
+        <span class="trust-chip">Read-only contracts · no money movement</span>
+      </div>
+      <nav class="act-v1-room-nav" aria-label="Market Exchange admin rooms">
+        <button type="button" class="active" data-act-room="dashboard">Dashboard</button><button type="button" data-act-room="catalog">Catalog</button><button type="button" data-act-room="products">All products</button><button type="button" data-act-room="installed">Installed</button><button type="button" data-act-room="apis">APIs &amp; MCPs</button><button type="button" data-act-room="observatory">API Observatory</button>
+        <code>read-only projection</code>
+      </nav>
+      <div class="stubthat-pipeline" aria-label="stubTHAT intake pipeline">
+        <button type="button" data-pipeline-stage="parseTHAT"><b>1</b> parseTHAT</button><i aria-hidden="true">→</i>
+        <button type="button" data-pipeline-stage="decantTHAT"><b>2</b> decantTHAT</button><i aria-hidden="true">→</i>
+        <button type="button" data-pipeline-stage="htmlTHAT"><b>3</b> htmlTHAT</button><i aria-hidden="true">+</i>
+        <button type="button" data-pipeline-stage="cssTHAT"><b>4</b> cssTHAT</button><i aria-hidden="true">+</i>
+        <button type="button" data-pipeline-stage="jsTHAT"><b>5</b> jsTHAT</button><i aria-hidden="true">→</i>
+        <button type="button" data-pipeline-stage="stubTHAT"><b>6</b> stubTHAT</button>
+      </div>
+      <div class="stubthat-tabs" role="tablist" aria-label="Stub source families">
+        <button type="button" role="tab" class="stubthat-tab active" data-stub-family="exchange" aria-selected="true">Market Exchange <small>6 admin surfaces · 15 tool modules</small></button>
+        <button type="button" role="tab" class="stubthat-tab" data-stub-family="bankthat" aria-selected="false">bankTHAT <small>58 reviewed private modules · 7 consoles</small></button>
+      </div>
+      <div class="stubthat-summary" id="stubthat-summary" role="status"></div>
+      <section class="exchange-console" id="exchange-console" aria-label="Market Exchange tools"></section>
+      <div class="stubthat-grid" id="stubthat-grid"></div>
+      <section class="stubthat-inspector" id="stubthat-inspector" aria-live="polite" aria-label="Selected stub contract"></section>
+    </section>
+
+    <section class="watch-row panel compact-panel">
+      <div><p class="eyebrow">WATCHLIST</p><div id="watchlist" class="chips"></div></div>
+      <div class="snapshot-peek"><p class="eyebrow">RECENT SNAPSHOTS</p><div id="snapshot-chips" class="chips"></div></div>
+    </section>
+
+    <section id="error" class="panel error hidden"></section>
+
+    <section id="workspace" class="hidden" data-act-shell-anchor="market-workspace">
+      <span id="market-workspace" class="act-shell-anchor" aria-hidden="true"></span>
+      <div id="identity-strip" class="identity-strip panel"></div>
+
+      <section class="decision-line panel compact-panel">
+        <span id="action-pill" class="action-pill">WAIT</span>
+        <span id="decision-sentence"></span>
+      </section>
+
+      <section class="intelligence-overview">
+        <div class="section-head overview-heading">
+          <div>
+            <p class="eyebrow">INTELLIGENCE OVERVIEW</p>
+            <h2>Asset Reality, State, Evidence &amp; Core Signals</h2>
+          </div>
+        </div>
+        <section class="summary-grid" id="summary-grid"></section>
+        <section class="four-col signal-overview" id="signal-grid"></section>
+      </section>
+
+      <section class="panel route-panel" id="route-panel">
+        <div class="section-head"><div><p class="eyebrow">PRICE PATH</p><h2>Bus Stop Route</h2></div><div id="route-badge"></div></div>
+        <div id="route"></div>
+      </section>
+
+      <section class="panel analyst-panel">
+        <div class="section-head">
+          <div><p class="eyebrow">NEPHEW ANALYST</p><h2>Ask the Local or Cloud Intelligence Panel</h2></div>
+          <div id="analyst-lane" class="trust-chip">Loading providers…</div>
+        </div>
+        <div class="analyst-controls">
+          <label><span>Model lane</span><select id="analyst-provider"><option value="auto">Auto</option></select></label>
+          <label><span>Depth</span><select id="analyst-depth"><option value="fast">Fast</option><option value="deep" selected>Deep</option><option value="super-heavy">Super Heavy</option></select></label>
+          <label class="cloud-consent"><input id="cloud-allowed" type="checkbox"> Allow this report to leave the local network</label>
+        </div>
+        <div class="analyst-question-row">
+          <textarea id="analyst-question" rows="3">Give me a grounded analysis and the strongest case against this setup.</textarea>
+          <button id="ask-nephew" class="primary">Ask Nephew</button>
+        </div>
+        <div id="analyst-result" class="analyst-result"><p class="muted">Market Compass calculates the evidence. Nephew interprets it without changing the score.</p></div>
+      </section>
+
+      <section class="panel timeframe-panel" id="timeframe-panel">
+        <div class="section-head">
+          <div><p class="eyebrow">MULTI-TIMEFRAME</p><h2>4H / 1D / 1W Alignment</h2></div>
+          <div id="timeframe-consensus"></div>
+        </div>
+        <div id="timeframe-grid" class="timeframe-grid"></div>
+      </section>
+
+      <section class="two-col chart-memory">
+        <article class="panel chart-panel">
+          <div class="section-head">
+            <div><p class="eyebrow">RESEARCH WORKBENCH</p><h2>Price, EMA, Fibonacci, Memory &amp; Bus Stops</h2></div>
+            <div class="chart-controls" id="chart-timeframes"></div>
+          </div>
+          <div id="price-chart" class="pro-chart"></div>
+          <div id="chart-legend" class="legend"></div>
+        </article>
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">PRICE MEMORY</p><h2>Support vs Resistance</h2></div></div>
+          <div id="price-memory"></div>
+        </article>
+      </section>
+
+      <section class="indicator-stack">
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">MOMENTUM</p><h2>RSI 14</h2></div><div id="rsi-state"></div></div>
+          <div id="rsi-chart" class="indicator-chart"></div>
+          <div id="rsi-readout" class="indicator-readout"></div>
+        </article>
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">MOMENTUM SHIFT</p><h2>MACD</h2></div><div id="macd-state"></div></div>
+          <div id="macd-chart" class="indicator-chart"></div>
+          <div id="macd-readout" class="indicator-readout"></div>
+        </article>
+      </section>
+
+      <section class="two-col" id="evidence-panel">
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">WHY THE SCORE MOVED</p><h2>Evidence Contributions</h2></div></div>
+          <div id="contributions"></div>
+        </article>
+        <article class="panel">
+          <div class="section-head"><div><p class="eyebrow">HISTORICAL CONTEXT</p><h2>Analog Calibration</h2></div></div>
+          <div id="calibration"></div>
+        </article>
+      </section>
+
+      <section class="two-col contrast">
+        <article class="panel bull-panel">
+          <div class="section-head"><div><p class="eyebrow">MAIN CASE</p><h2>Why Bullish</h2></div></div>
+          <div id="bull-case"></div>
+        </article>
+        <article class="panel bear-panel">
+          <div class="section-head"><div><p class="eyebrow">COUNTER-CASE</p><h2>Why Bearish</h2></div></div>
+          <div id="bear-case"></div>
+        </article>
+      </section>
+
+      <section class="panel" id="catalyst-panel">
+        <div class="section-head">
+          <div><p class="eyebrow">HUMAN FACTOR</p><h2>Catalyst Timeline</h2></div>
+          <span class="trust-chip">Recent news events, not a complete scheduled macro calendar</span>
+        </div>
+        <div id="catalyst-timeline" class="timeline"></div>
+      </section>
+
+      <section class="panel decision-gates calculate-that" id="decision-gates" aria-label="Decision gates and calculateTHAT">
+        <div class="gate-summary"><div><p class="eyebrow">CALCULATETHAT · ACTIVE RESEARCH SIGNALS</p><h2>When to Go / When Not to Go</h2><p>Active go, watch, and do-not-go signals from transparent calculations, hard stops, and psychology restraint. No broker execution.</p></div><span class="gate-state review" id="decision-gate-state">CALCULATING</span></div>
+        <div class="trigger-strip" aria-label="Trigger vocabulary"><span>notable</span><span>watch signal</span><span>go signal</span><span>invalidate</span><span>do not go</span></div>
+        <div class="gate-grid" id="decision-gate-grid"></div>
+        <div><p class="eyebrow">CALCULATETHAT INSTRUMENT</p><pre class="calculate-formula" id="calculate-that-formula">Waiting for an exact research receipt.</pre></div>
+        <p class="decision-boundary" id="decision-gate-next">Signals are active research outputs, not orders.</p>
+        <div class="actor-actions"><button type="button" class="secondary" id="calculate-that-run">Refresh signal</button><button type="button" class="secondary" id="calculate-that-export" disabled>Export signal receipt</button></div>
+      </section>
+
+      <section class="research-only">
+        <section class="panel research-lens" id="day-trader-lens" aria-label="Day Trader source research lens">
+          <div class="section-head">
+            <div><p class="eyebrow">IMPORTED LENS · BROWN + WUDA</p><h2>Day Trader Research Lens</h2></div>
+            <button type="button" class="secondary" id="day-trader-lens-load">Read Lens</button>
+          </div>
+          <p class="trust-note">Daily setup measurements and notable RSI crossings refined from a provenance-bound outside source. No score influence, broker, order, credential, or money movement.</p>
+          <div id="day-trader-lens-output" role="status" aria-live="polite"><p class="muted">Run an asset analysis to read this lens.</p></div>
+        </section>
+        <section class="panel" id="intelthat-panel" aria-label="intelTHAT research receipts">
+          <div class="section-head">
+            <div><p class="eyebrow">INTELTHAT APP BRIDGE</p><h2>intelTHAT Receipts</h2></div>
+            <a class="button-link" href="/intelthat/">Open intelTHAT App ↗</a>
+          </div>
+          <p class="trust-note">This compact bridge reads intelTHAT output inside the Compass. The full intelTHAT application owns research runs, module navigation, saved sessions, evidence inspection, and exports. No broker, order, money movement, or score influence.</p>
+          <div class="intelthat-toolbar" aria-label="intelTHAT workspace actions">
+            <button type="button" id="intelthat-load">Refresh Live Evidence</button>
+            <button type="button" class="secondary" id="intelthat-local">Read Owner Receipts</button>
+            <label>Show
+              <select id="intelthat-filter">
+                <option value="all">All evidence</option>
+                <option value="observed">Observed</option>
+                <option value="attention">Needs attention</option>
+              </select>
+            </label>
+            <button type="button" class="secondary" id="intelthat-export" disabled>Export Receipt</button>
+          </div>
+          <div class="intelthat-boundary" aria-label="intelTHAT authority boundary">
+            <span>Signals on</span><span>Trading off</span><span>Credentials none</span><span>Score influence off</span>
+          </div>
+          <div id="intelthat-output" role="status" aria-live="polite">
+            <div class="intelthat-empty"><strong>Evidence is waiting.</strong><p>Select a symbol, then refresh the native research workspace or inspect already-published owner receipts.</p></div>
+          </div>
+        </section>
+        <section class="two-col">
+          <article class="panel"><div class="section-head"><div><p class="eyebrow">PAST STATES</p><h2>Historical Analogs</h2></div></div><div id="history-panel"></div></article>
+          <article class="panel"><div class="section-head"><div><p class="eyebrow">MODEL CHECK</p><h2>Forecast</h2></div></div><div id="forecast-panel"></div></article>
+        </section>
+
+        <section class="panel">
+          <div class="section-head">
+            <div><p class="eyebrow">RELATIONSHIP INTELLIGENCE</p><h2>Evidence Board</h2></div>
+            <span class="trust-chip">Verified context and inferred links are distinct</span>
+          </div>
+          <div class="board-layout"><div id="evidence-board" class="board"></div><div id="board-detail" class="board-detail"></div></div>
+        </section>
+
+        <section class="two-col">
+          <article class="panel"><div class="section-head"><div><p class="eyebrow">MARKET STORY</p><h2>Narrative</h2></div></div><div id="narrative-panel"></div></article>
+          <article class="panel invalidation-panel"><div class="section-head"><div><p class="eyebrow">DISCONFIRMING EVIDENCE</p><h2>What Changes My Mind?</h2></div></div><div id="invalidation"></div></article>
+        </section>
+
+        <section class="panel explorer">
+          <div class="explorer-tabs" role="tablist">
+            <button class="explorer-tab active" data-tab="simple">Simple Read</button>
+            <button class="explorer-tab" data-tab="technical">Technical</button>
+            <button class="explorer-tab" data-tab="sources">Sources</button>
+            <button class="explorer-tab" data-tab="nodes">115 Nodes</button>
+            <button class="explorer-tab" data-tab="backtest">Backtest</button>
+            <button class="explorer-tab" data-tab="snapshots">Snapshots</button>
+          </div>
+          <div id="explorer-content"></div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <aside class="act-supporting-rail" aria-label="Dashboard supporting rail" data-shell-node="supporting-rail">
+    <section><p class="act-rail-eyebrow">MARKET PULSE</p><h2>Research Health</h2><div class="act-rail-stats"><p><span class="good"></span>Runtime <b>Live</b></p><p><span class="good"></span>Authority <b>Gitea</b></p><p><span class="good"></span>Signals <b>Active</b></p></div></section>
+    <section><p class="act-rail-eyebrow">QUICK WATCH</p><div class="act-quick-watch"><button type="button" data-act-symbol="BB">BB</button><button type="button" data-act-symbol="AAPL">AAPL</button><button type="button" data-act-symbol="QQQ">QQQ</button><button type="button" data-act-symbol="SPCX">SPCX</button></div></section>
+    <section><p class="act-rail-eyebrow">CURRENT ROOM</p><h3 id="act-current-room">Overview</h3><p id="act-room-help">Top-line runtime, controls, Actors, and research status.</p></section>
+    <section><p class="act-rail-eyebrow">IN THIS ROOM</p><nav class="act-room-submenu" id="act-room-submenu" aria-label="Current room sections"></nav></section>
+    <section class="act-right-boundary"><strong>Authority boundary</strong><p>Market Compass can research and explain. It cannot place orders, move money, or change scores.</p></section>
+  </aside>
+
+  <button type="button" class="act-layout-recovery hidden" id="act-layout-recovery">▣ Open rails</button>
+
+  <footer class="act-shell-footer" data-shell-node="bottom-rail" aria-label="Admin shell controls">
+    <nav aria-label="Quick launch"><a href="#market-overview" data-act-footer-room="overview">⌂ Home</a><a href="#actor-spaces" data-act-footer-room="actors">◎ Actors</a><a href="#market-exchange" data-act-footer-room="exchange">◇ Exchange</a><a href="#market-workspace" data-act-footer-room="desk">⌁ Desk</a></nav>
+    <div role="group" aria-label="Canvas layout"><button type="button" data-act-layout="control-room">▣ Rail</button><button type="button" data-act-layout="focus">⊙ Focus</button><button type="button" data-act-layout="wide-canvas">▥ Wide</button><button type="button" data-act-command="menu">☰ Menu</button></div>
+  </footer>
+
+  <nav class="act-mobile-tabs" aria-label="Primary"><a href="#market-overview">◈<span>Overview</span></a><a href="#actor-spaces">◎<span>Actors</span></a><a href="#market-exchange">◇<span>Exchange</span></a><a href="#market-workspace">⌁<span>Desk</span></a><button type="button" data-act-command="menu">•••<span>More</span></button></nav>
+
+  <dialog class="act-command-dialog" id="act-command-dialog" aria-labelledby="act-command-title"><div class="act-dialog-head"><div><p>MARKET COMPASS ACT</p><h2 id="act-command-title">Go to a room</h2></div><button type="button" data-act-dialog-close aria-label="Close menu">×</button></div><label><span>Search rooms</span><input id="act-command-search" type="search" placeholder="Search Overview, Actors, Exchange…"></label><div class="act-command-results" id="act-command-results"></div></dialog>
+
+  <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
+  <script src="/static/app.js?v=20261106.2" defer></script>
+  <script src="/static/analyst.js" defer></script>
+  <script src="/static/intelthat.js" defer></script>
+  <script src="/static/research-lenses.js" defer></script>
+  <script src="/static/operator-controls.js?v=20261106.1" defer></script>
+  <script src="/static/research-cassettes.js?v=20261106.1" defer></script>
+  <script src="/static/stubthat.js?v=20261106.1" defer></script>
+  <script src="/static/act-v1-shell.js?v=20261106.3" defer></script>
+  <script src="/static/decision-gates.js?v=20261106.1" defer></script>
+  <script src="/static/simulator.js?v=20261108.1" defer></script>
+  <script src="/static/hcck.js?v=20261108.1" defer></script>
+</body>
+</html>
