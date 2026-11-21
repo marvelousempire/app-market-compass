@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>proposeTHAT | Market Compass</title>
+<link rel="stylesheet" href="/static/proposethat.css">
+<script src="/static/proposethat.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+<a class="back" href="/">‹ Market Compass</a>
+<div><span class="eyebrow">RESEARCH STUDIO / PROPOSETHAT</span><h1>Research &amp; Improvements</h1></div>
+<span class="flag">Local only · No trading</span>
+</header>
+<main>
+<section class="intro">
+<h2>What should we examine?</h2>
+<p>Improve the Market Compass you already have, or capture an outside trading idea to compare against it. Your request is stored privately as a research intake—not a finished review or a change to market scores.</p>
+<div class="examples">
+<button type="button" id="pt-example-owner">Improve my daily research workflow</button>
+<button type="button" id="pt-example-outside">Compare an outside trading tool</button>
+</div>
+</section>
+<div class="columns">
+<section class="panel" aria-labelledby="pt-form-title">
+<div class="panel-head"><h2 id="pt-form-title">New research intake</h2><span id="pt-connection" role="status">Checking local service…</span></div>
+<form id="pt-form">
+<label for="pt-mode">Research mode</label>
+<select id="pt-mode" name="mode" required><option value="owner-improvement">Improve Market Compass</option><option value="outside-trading-source">Compare outside market technology</option></select>
+<label for="pt-subject">Subject</label>
+<input id="pt-subject" name="subject" maxlength="160" value="Market Compass" required>
+<label for="pt-goal">What do you want to learn or improve?</label>
+<textarea id="pt-goal" name="goal" maxlength="1500" rows="5" required>Inspect the existing app and identify one useful, measurable improvement without removing any current features.</textarea>
+<label for="pt-source">Outside source URL <small>(optional; not automatically fetched)</small></label>
+<input id="pt-source" name="source_url" maxlength="700" type="url" placeholder="https://example.com/project">
+<label for="pt-revision">Source version / commit <small>(optional)</small></label>
+<input id="pt-revision" name="source_revision" maxlength="160" placeholder="Tag or commit, if known">
+<p class="note">Do not paste broker passwords, account secrets or private financial records. This research request stays on the owning Mac and can be exported by you.</p>
+<button class="primary" id="pt-submit" type="submit">Save research intake</button>
+<p id="pt-message" role="status" aria-live="polite">No request submitted yet.</p>
+</form>
+</section>
+<section class="panel" aria-labelledby="pt-result-title">
+<div class="panel-head"><h2 id="pt-result-title">Receiving result</h2><button type="button" id="pt-export" disabled>Export receipt</button></div>
+<div id="pt-result" aria-live="polite"><p class="muted">Submit an idea to see a research plan, existing capabilities and the next proof steps.</p></div>
+</section>
+</div>
+<section class="panel history" aria-labelledby="pt-history-title">
+<div class="panel-head"><h2 id="pt-history-title">Saved on this Mac</h2><button type="button" id="pt-refresh">Refresh list</button></div>
+<div id="pt-history">Checking saved intakes…</div>
+</section>
+<footer>Market Compass owns evidence and calculations. proposeTHAT receives research ideas; Nephew and Niece still need to investigate and independently verify the actual study. No broker trading, model fallback or score changes.</footer>
+</main>
+</body>
+</html>

@@ -1,3 +1,7 @@
+## proposeTHAT local research intake (source; live receiving not yet verified)
+
+Market Compass now has an additive local-only proposeTHAT workspace and private research intake API in its source. It lets you submit internal improvement requests or outside trading source questions, see saved receipts, and export them. No automatic outside research, score changes, broker access or trades. Read [the owner handbook](handbook/PROPOSETHAT.md) and confirm actual FiveMac receiving before describing this as live.
+
 # Market Compass
 
 See the [Market Compass Handbook](handbook/README.md) for operator guidance and the approved Research v1 delivery contract.

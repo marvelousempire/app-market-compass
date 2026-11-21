@@ -39,3 +39,11 @@ Trade bot, crypto copy-trading app, stock screener, technical analysis repo, str
 [Invo two-way comparison](../reviews/2026-11-19-invo-two-way-comparison.md).
 
 **Delivery boundary:** This document records the canonical routing requirement. A tested classifier, owner API, automatic event/handoff, live provider connection, UI, and FiveMac receiving are separate uncompleted implementation steps.
+
+## Owner-improvement mode — proposeTHAT Market Compass (November 21, 2026)
+
+This extends, not replaces, the outside-source comparison above. A request like **"proposeTHAT Market Compass: improve the research workbench"** means research the **existing Market Compass app itself**. It must not be misclassified as a request to compare another bot or as permission to create a separate scoring product. The source-only classifier at `proposeTHAT/routing/trading_intake.py` now identifies `mode=owner-improvement` separately from `mode=outside-trading-source`. **This is not automatic owner intake.**
+
+For owner improvements, verify the latest app source/branch and accepted Gitea authority, product intention, STATUS, existing 115-node registry, Actors, Market Intel and ELSE boundaries, nine-chapter handbook, source tests, earlier proposals and the last *dated* FiveMac commissioning receipt. Produce only non-duplicate proposed FUNCTION/RESULT children, measurable acceptance tests, missing evidence and a reversible owner-approved pilot. Any suggestion to change trading evidence calculations needs independent Market Compass code/tests and owner acceptance; proposeTHAT is never a second scorer.
+
+**Delivery and current proof:** the documented source-only classifier can distinguish two request modes and its unit tests can verify that decision. There is not yet a wired owner intake endpoint, guaranteed SkillTHAT/Hermes receiving, read-only in-app action or independent FiveMac runtime proof. Classifying a request, changing an instruction, and running an owner's actual end-to-end research workflow are different outcomes. See [the handbook's practical guide](../handbook/PROPOSETHAT.md) for the first bounded source-to-owner pilot. Never claim real client delivery from this document alone.

@@ -9,7 +9,7 @@ from pathlib import Path
 from threading import Timer
 from urllib.error import URLError
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -236,3 +236,71 @@ def day_trader_lens_api(symbol: str):
         return build_day_trader_lens(symbol, data.bars, data_meta=data.meta)
     except Exception as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+# proposeTHAT's source-scoped local intake (no model, external provider, trading or score changes).
+from .proposethat_intake import IntakeRequest, list_intakes, read_intake, receive
+
+
+def _require_local_proposethat(request: Request) -> None:
+    """Block remote clients and cross-origin requests to the private intake."""
+    from urllib.parse import urlsplit
+
+    peer = request.client.host if request.client else ""
+    if peer not in {"127.0.0.1", "::1", "localhost", "testclient"}:
+        raise HTTPException(status_code=403, detail="proposeTHAT intake is local-only.")
+    host = request.headers.get("host", "")
+    hostname = urlsplit("//" + host).hostname
+    if hostname not in {"localhost", "127.0.0.1", "market-compass.localhost", "testserver", "[::1]"}:
+        raise HTTPException(status_code=403, detail="Unapproved intake host.")
+    origin = request.headers.get("origin")
+    if origin and urlsplit(origin).netloc.lower() != host.lower():
+        raise HTTPException(status_code=403, detail="Cross-origin intake denied.")
+
+
+@app.get("/proposethat", response_class=FileResponse)
+@app.get("/proposethat/", response_class=FileResponse)
+def proposethat_workspace(request: Request):
+    _require_local_proposethat(request)
+    return WEB_DIR / "proposethat.html"
+
+
+@app.get("/api/proposethat/status")
+def proposethat_status(request: Request):
+    _require_local_proposethat(request)
+    return {
+        "schema": "market-compass.proposethat-intake.v1",
+        "state": "source-intake-ready",
+        "owner": "marvelousempire/app-market-compass",
+        "local_only": True,
+        "research_completed": False,
+        "research_only": True,
+        "trade_execution": False,
+        "score_influence": False,
+        "automatic_research": False,
+        "source_revision": os.getenv("MARKET_COMPASS_SOURCE_REVISION", "unverified"),
+    }
+
+
+@app.post("/api/proposethat/intakes", status_code=201)
+def proposethat_receive_api(payload: IntakeRequest, request: Request):
+    _require_local_proposethat(request)
+    try:
+        return receive(payload, source_revision=os.getenv("MARKET_COMPASS_SOURCE_REVISION", "unverified"))
+    except (ValueError, OSError) as exc:
+        raise HTTPException(status_code=400, detail="Private research intake could not be stored safely.") from exc
+
+
+@app.get("/api/proposethat/intakes")
+def proposethat_list_api(request: Request):
+    _require_local_proposethat(request)
+    return {"intakes": list_intakes(), "local_only": True, "trade_execution": False}
+
+
+@app.get("/api/proposethat/intakes/{record_id}")
+def proposethat_read_api(record_id: str, request: Request):
+    _require_local_proposethat(request)
+    try:
+        return read_intake(record_id)
+    except (ValueError, FileNotFoundError) as exc:
+        raise HTTPException(status_code=404, detail="Research intake not found.") from exc
