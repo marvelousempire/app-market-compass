@@ -4,8 +4,9 @@ VENV_PYTHON := $(VENV)/bin/python
 RUN_PYTHON = $(if $(wildcard $(VENV_PYTHON)),$(VENV_PYTHON),$(PYTHON))
 ASSET ?= HYPE
 HORIZON ?= 20
+MARKET_COMPASS_BASE_URL ?= http://127.0.0.1:8000
 
-.PHONY: setup test lint analyze node backtest app api doctor clean
+.PHONY: setup test lint analyze node backtest app api doctor clean accept-proposethat
 
 doctor:
 	@$(RUN_PYTHON) -c 'import sys; v=sys.version_info; assert v >= (3, 11), f"Python 3.11+ required, found {v.major}.{v.minor}"'
@@ -42,3 +43,7 @@ api: doctor
 
 clean:
 	rm -rf $(VENV) .pytest_cache .ruff_cache
+
+# This is the accepted source+running-loopback receipt check, NOT a deployment or Git promotion.
+accept-proposethat: test
+	$(RUN_PYTHON) scripts/verify_proposethat_local.py --base-url $(MARKET_COMPASS_BASE_URL)
