@@ -1,22 +1,24 @@
 /* Hypothetical European-option projection. Does not use or imply live quotes. */
-(() => {
+(async () => {
   const el = id => document.getElementById(id);
   const fmt = n => new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(n);
-  const normal = x => {
-    const a = Math.abs(x), t = 1 / (1 + .2316419 * a);
-    const pdf = Math.exp(-a*a/2) / Math.sqrt(2*Math.PI);
-    const c = 1 - pdf * (.319381530*t - .356563782*t*t + 1.781477937*t**3 - 1.821255978*t**4 + 1.330274429*t**5);
-    return x < 0 ? 1-c : c;
-  };
-  const pdf = x => Math.exp(-x*x/2)/Math.sqrt(2*Math.PI);
-  const model = (s,k,d,iv,typ) => {
-    if (d <= 0) return Math.max(0, typ === 'call' ? s-k : k-s);
-    const t=d/365, v=iv/100, r=.04, root=Math.sqrt(t);
-    const d1=(Math.log(s/k)+(r+v*v/2)*t)/(v*root), d2=d1-v*root;
-    return typ==='call' ? s*normal(d1)-k*Math.exp(-r*t)*normal(d2) : k*Math.exp(-r*t)*normal(-d2)-s*normal(-d1);
-  };
+  const controls=['asset','expiry','side','quantity','projected-spot','projected-days','projected-iv','axis'];
+  controls.forEach(id => { el(id).disabled=true; });
+  let wasm;
+  try {
+    const response=await fetch('/static/options_engine.wasm',{cache:'no-store'});
+    if(!response.ok) throw new Error('Rust engine asset unavailable');
+    const instance=await WebAssembly.instantiate(await response.arrayBuffer());
+    wasm=instance.instance.exports;
+    if(wasm.market_compass_engine_abi?.()!==1 || typeof wasm.option_price!=='function' || typeof wasm.option_return!=='function') throw new Error('Rust engine contract mismatch');
+  } catch (error) {
+    el('notice').textContent='Options projection unavailable: '+error.message;
+    return;
+  }
+  const flag = typ => typ==='call'?0:1;
+  const model=(s,k,d,iv,typ)=>wasm.option_price(s,k,d,iv,flag(typ));
   const baseDays = () => Math.max(0, Math.ceil((new Date(el('expiry').value+'T16:00:00')-new Date())/86400000));
-  const quote = (s,k,d,iv,typ) => Math.round(model(s,k,d,iv,typ)*100)/100;
+  const quote = (s,k,d,iv,typ) => wasm.option_quote(s,k,d,iv,flag(typ));
   const projected = () => ({s:Number(el('projected-spot').value),d:Number(el('projected-days').value),iv:Number(el('projected-iv').value)});
   const updateLimits = () => {
     const spot=assets[asset], max=baseDays(), slider=el('projected-spot');
@@ -24,11 +26,10 @@
     el('projected-days').max=max;el('projected-days').value=max;
   };
   const oldRender = render;
-  premium = s => Math.max(.01, quote(assets[asset],s,baseDays(),30,kind));
+  premium = s => quote(assets[asset],s,baseDays(),30,kind);
   payoff = x => {
-    const q=Number(el('quantity').value||1), side=el('side').value==='buy'?1:-1;
     const {d,iv}=projected();
-    return (quote(x,strike,d,iv,kind)-premium(strike))*100*q*side;
+    return wasm.option_return(assets[asset],x,strike,baseDays(),d,30,iv,flag(kind),el('side').value==='buy'?1:-1,Number(el('quantity').value||1));
   };
   draw = () => {
     const svg=el('chart');
@@ -37,7 +38,7 @@
     const x0=priceAxis?spot*.5:0, x1=priceAxis?spot*1.5:Math.max(1,maxDays);
     const points=Array.from({length:101},(_,i)=>{
       const x=x0+(x1-x0)*i/100;
-      return {x,y:priceAxis?(quote(x,strike,d,iv,kind)-premium(strike))*100*Number(el('quantity').value||1)*(el('side').value==='buy'?1:-1):(quote(s,strike,x,iv,kind)-premium(strike))*100*Number(el('quantity').value||1)*(el('side').value==='buy'?1:-1)};
+      return {x,y:priceAxis?wasm.option_return(spot,x,strike,maxDays,d,30,iv,flag(kind),el('side').value==='buy'?1:-1,Number(el('quantity').value||1)):wasm.option_return(spot,s,strike,maxDays,x,30,iv,flag(kind),el('side').value==='buy'?1:-1,Number(el('quantity').value||1))};
     });
     const bound=Math.max(100,...points.map(p=>Math.abs(p.y))), px=x=>35+(x-x0)/(x1-x0)*425, py=y=>110-y/bound*88;
     const line=points.map((p,i)=>(i?'L':'M')+px(p.x).toFixed(1)+' '+py(p.y).toFixed(1)).join(' ');
@@ -50,14 +51,15 @@
     if(strike===null){el('projected-value').textContent='—';el('projected-return').textContent='—';el('projected-percent').textContent='—';el('greeks').textContent='Select a contract to see sensitivity.';return;}
     const current=premium(strike), future=quote(s,strike,d,iv,kind), gain=payoff(s), initial=current*100*Number(el('quantity').value||1);
     el('projected-value').textContent=fmt(future);el('projected-return').textContent=fmt(gain);el('projected-return').className=gain<0?'danger':'tag';el('projected-percent').textContent=(gain/initial*100).toFixed(1)+'%';
-    const delta=(model(assets[asset]+.01,strike,baseDays(),30,kind)-model(assets[asset]-.01,strike,baseDays(),30,kind))/.02;
-    const theta=(model(assets[asset],strike,Math.max(0,baseDays()-1),30,kind)-current);
-    const vega=(model(assets[asset],strike,baseDays(),31,kind)-current);
+    const delta=wasm.option_delta(assets[asset],strike,baseDays(),30,flag(kind));
+    const theta=wasm.option_theta_day(assets[asset],strike,baseDays(),30,flag(kind));
+    const vega=wasm.option_vega_point(assets[asset],strike,baseDays(),30,flag(kind));
     el('greeks').textContent=`Approximate sensitivity per share · Δ ${delta.toFixed(3)} · 1 day ${fmt(theta)} · IV +1 point ${fmt(vega)}`;
   };
   updateLimits();
   for(const id of ['projected-spot','projected-days','projected-iv','axis'])el(id).addEventListener('input',render);
   el('asset').addEventListener('change',()=>{updateLimits();render()});
   el('expiry').addEventListener('change',()=>{updateLimits();render()});
+  controls.forEach(id => { el(id).disabled=false; });
   render();
 })();

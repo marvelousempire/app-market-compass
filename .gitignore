@@ -9,3 +9,6 @@ build/
 .env
 runs/
 .DS_Store
+
+# Rust build outputs (the reviewed WebAssembly artifact is copied into web/)
+rust/**/target/

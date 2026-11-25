@@ -24,6 +24,7 @@ This document is the repository's expectation contract. If another document soun
 
 | Capability | Status | What exists now | What is still expected |
 | --- | --- | --- | --- |
+| Rust migration | Partial | The Options scenario model is one Rust crate compiled to native tests and WebAssembly; the browser refuses its projection if the Rust engine is missing or the ABI differs. See [migration contract](RUST-MIGRATION.md). | The rest of the Python engine, service and CLI, plus Pineal and ClusterTHAT receiving, remain to migrate and independently prove. |
 | Browser app | Implemented | v0.8.1 no-build FastAPI workbench launched by `make app`. ACT v1 provides real navigation, a contextual right rail, System/Light/Dark appearance, report-bound Actors, 15 Exchange modules, 58 reviewed private bankTHAT evidence contracts, and a dedicated intelTHAT application. Friendly company-name search and the BB/AAPL/QQQ/SPCX defaults remain available. | Persistent server-side workspaces, richer verified graph/data, manual Fibonacci controls, authentication, and cross-model comparison. |
 | CLI | Implemented | Analyze, node, registry, and backtest commands. | Batch jobs, richer export controls, job persistence. |
 | FastAPI | Implemented | Health, analysis, symbol search, analyst provider/health/interpretation, node listing/output, browser surface, and research backtest endpoints. | Auth, server-side cloud approval, versioned production contracts, quotas, async jobs, persistence. |
