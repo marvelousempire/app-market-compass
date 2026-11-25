@@ -53,6 +53,11 @@ def intelthat_app():
     return WEB_DIR / "intelthat-app.html"
 
 
+@app.get("/options", response_class=FileResponse)
+def options_desk():
+    return WEB_DIR / "options.html"
+
+
 @app.get("/health")
 def health():
     return {
