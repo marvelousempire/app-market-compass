@@ -14,14 +14,14 @@
     overview: 'Top-line runtime, controls, Actors, and research status.', runtime: 'Commissioned source, host, safety mode, and runtime receipts.', actors: 'Omo, Prince, Wuda, and Brown’s governed Actor spaces.', exchange: 'Read-only Market Exchange and bankTHAT contract inventory.', measurement: 'Choose any subject and evaluate its measurements with a named method, using a transparent hypothetical index.', desk: 'Market analysis, price memory, momentum, and evidence.', options: 'Theoretical options, virtual positions, Alpaca context, and SEC filings.', 'intel-app': 'Four source-bound research rooms for the selected desk symbol.', intel: 'Independent local research and proof-health receipts.', gates: 'Transparent go, watch, do-not-go, and invalidation research signals.', route: 'Price path, bus stops, invalidation, and confluence.', timeframes: '4H, daily, and weekly alignment.', evidence: 'Score contributions and historical calibration.', catalysts: 'Recent human-factor and market-news evidence.'
   };
   const roomSubmenus = {
-    overview: [['Runtime status', '#operator-deck'], ['Asset controls', '#market-overview'], ['Actor Studio', '#actor-spaces'], ['Market Exchange', '#market-exchange']],
-    runtime: [['Preview controls', '#operator-deck'], ['Asset controls', '#market-overview'], ['Watchlist', '.watch-row']],
+    overview: [['Runtime status', '#operator-deck'], ['Asset controls', '.control-bar'], ['Actor Studio', '#actor-spaces'], ['Market Exchange', '#market-exchange']],
+    runtime: [['Preview controls', '#operator-deck'], ['Asset controls', '.control-bar'], ['Watchlist', '.watch-row']],
     actors: [['Omo', 'cassette:omo'], ['Prince', 'cassette:prince'], ['Wuda', 'cassette:wuda'], ['Brown’s Barometers', 'cassette:browns-barometers']],
     exchange: [['Dashboard', 'exchange:dashboard'], ['Catalog', 'exchange:catalog'], ['All products', 'exchange:products'], ['Installed', 'exchange:installed'], ['APIs & MCPs', 'exchange:apis'], ['API Observatory', 'exchange:observatory']],
     measurement: [['Subject schedules', '#hcck-profiles'], ['Measure and simulate', '#universal-simulator'], ['Original market desk', '#market-workspace']],
-    options: [['Options Lab', '#options-lab']],
-    'intel-app': [['intelTHAT research', '#intelthat-app'], ['Owner receipts', '#intelthat-panel']],
-    desk: [['Intelligence overview', '#market-workspace'], ['Day Trader lens', '#day-trader-lens'], ['Price route', '#route-panel'], ['Timeframes', '#timeframe-panel'], ['Evidence', '#evidence-panel'], ['Catalysts', '#catalyst-panel']],
+    options: [['Option chain', 'options-view:chain'], ['Trade builder', 'options-view:builder'], ['Returns', 'options-view:returns'], ['Alpaca data', 'options-view:alpaca'], ['SEC filings', 'options-view:edgar'], ['Positions', 'options-view:positions'], ['Journal', 'options-view:journal']],
+    'intel-app': [['Cockpit', 'intel-view:cockpit'], ['Market Pack', 'intel-view:pack'], ['Macro Conditions', 'intel-view:macro'], ['News Intelligence', 'intel-view:rss'], ['SEC Monitor', 'intel-view:edgar'], ['Run History', 'intel-view:receipts']],
+    desk: [['Intelligence overview', '.intelligence-overview'], ['Day Trader lens', '#day-trader-lens'], ['Price route', '#route-panel'], ['Timeframes', '#timeframe-panel'], ['Evidence', '#evidence-panel'], ['Catalysts', '#catalyst-panel']],
     intel: [['Day Trader lens', '#day-trader-lens'], ['Local receipts', '#intelthat-panel'], ['Historical analogs', '#history-panel'], ['Forecast', '#forecast-panel'], ['Evidence board', '#evidence-board']],
     gates: [['Decision gates', '#decision-gates'], ['calculateTHAT', '#calculate-that-formula'], ['Refresh signal', 'click:#calculate-that-run']],
     route: [['Bus Stop route', '#route-panel'], ['Nephew analyst', '.analyst-panel'], ['Timeframe alignment', '#timeframe-panel']],
@@ -29,9 +29,40 @@
     evidence: [['Contributions', '#contributions'], ['Historical calibration', '#calibration'], ['Bull and bear cases', '.contrast'], ['Evidence board', '#evidence-board']],
     catalysts: [['Catalyst timeline', '#catalyst-panel'], ['Decision gates', '#decision-gates'], ['intelTHAT receipts', '#intelthat-panel']]
   };
+  const roomLanding = {overview:'#operator-deck',runtime:'#operator-deck',actors:'#actor-spaces',exchange:'#market-exchange',measurement:'#measurement-studio',desk:'.intelligence-overview',options:'#options-lab','intel-app':'#intelthat-app',intel:'#intelthat-panel',gates:'#decision-gates',route:'#route-panel',timeframes:'#timeframe-panel',evidence:'#evidence-panel',catalysts:'#catalyst-panel'};
+  const main = document.querySelector('main.shell');
+  let focusedSelector = roomLanding.overview;
+  const focusCanvas = selector => {
+    if (!main || !selector) return;
+    focusedSelector = selector;
+    const found = document.querySelector(selector);
+    if (!found || !main.contains(found)) return;
+    const target = found.closest('section,article') || found;
+    main.querySelectorAll('.act-room-hidden').forEach(node => node.classList.remove('act-room-hidden'));
+    let node = target;
+    while (node && node !== main) {
+      for (const sibling of node.parentElement?.children || []) {
+        if (sibling !== node && sibling !== document.querySelector('.control-bar') && sibling !== document.querySelector('#error') && sibling !== document.querySelector('#identity-strip')) sibling.classList.add('act-room-hidden');
+      }
+      node = node.parentElement;
+    }
+    body.classList.add('act-room-mode');
+    main.scrollTop = 0;
+    window.scrollTo(0, 0);
+    window.dispatchEvent(new Event('resize'));
+  };
 
   const safeStore = { get(key) { try { return localStorage.getItem(key); } catch { return null; } }, set(key, value) { try { localStorage.setItem(key, value); } catch {} } };
   const selectRoom = (id) => {
+    body.dataset.actRoom = id;
+    const activeLink = links.find(link => link.dataset.actShellRoom === id);
+    const title = activeLink?.querySelector('b')?.textContent;
+    const heading = document.querySelector('.app-header h1');
+    const eyebrow = document.querySelector('.app-header .eyebrow');
+    const subtitle = document.querySelector('.app-header .subhead');
+    if (heading && title) heading.textContent = title;
+    if (eyebrow) eyebrow.textContent = `MARKET COMPASS / ${title || 'OVERVIEW'}`.toUpperCase();
+    if (subtitle) subtitle.textContent = roomDescriptions[id] || '';
     links.forEach((link) => {
       const active = link.dataset.actShellRoom === id;
       link.classList.toggle('active', active);
@@ -67,17 +98,33 @@
     const button = event.target.closest('[data-act-submenu-target]');
     if (!button) return;
     const target = button.dataset.actSubmenuTarget;
-    if (target.startsWith('cassette:')) {
+    roomSubmenu.querySelectorAll('button').forEach(item => item.removeAttribute('aria-current'));
+    button.setAttribute('aria-current', 'true');
+    if (target.startsWith('intel-view:')) {
+      window.dispatchEvent(new CustomEvent('marketcompassintelview', { detail: { view: target.slice(11) } }));
+      focusCanvas('#intelthat-app');
+    } else if (target.startsWith('options-view:')) {
+      window.dispatchEvent(new CustomEvent('marketcompassoptionsview', { detail: { view: target.slice(13) } }));
+      focusCanvas('#options-lab');
+    } else if (target.startsWith('cassette:')) {
       document.querySelector(`[data-cassette="${target.slice(9)}"]`)?.click();
-      document.querySelector('#actor-spaces')?.scrollIntoView({ block: 'start' });
+      focusCanvas('#actor-spaces');
     } else if (target.startsWith('exchange:')) {
       document.querySelector(`[data-act-room="${target.slice(9)}"]`)?.click();
-      document.querySelector('#market-exchange')?.scrollIntoView({ block: 'start' });
+      focusCanvas('#market-exchange');
     } else if (target.startsWith('click:')) {
       document.querySelector(target.slice(6))?.click();
     } else {
-      scrollTarget(revealTarget(target));
+      const node = revealTarget(target);
+      if (node) focusCanvas(target);
     }
+  });
+  window.addEventListener('message', event => {
+    if (body.dataset.actRoom !== 'intel-app' || event.origin !== location.origin || event.source !== document.querySelector('#intelthat-app-frame')?.contentWindow || event.data?.type !== 'market-compass-intel-view') return;
+    roomSubmenu?.querySelectorAll('button').forEach(item => {
+      if (item.dataset.actSubmenuTarget === `intel-view:${event.data.view}`) item.setAttribute('aria-current', 'true');
+      else item.removeAttribute('aria-current');
+    });
   });
 
   document.querySelectorAll('.act-nav-group-toggle').forEach((button) => button.addEventListener('click', () => {
@@ -125,8 +172,20 @@
   const renderCommands = (query = '') => {
     if (!dialogResults) return;
     const needle = query.trim().toLowerCase();
-    dialogResults.innerHTML = commandRooms.filter((item) => !needle || `${item.label} ${roomDescriptions[item.id] || ''}`.toLowerCase().includes(needle)).map((item) => `<a href="${item.href}" data-command-room="${item.id}"><span aria-hidden="true">${item.icon}</span>${item.label}</a>`).join('');
-    dialogResults.querySelectorAll('[data-command-room]').forEach((link) => link.addEventListener('click', () => { selectRoom(link.dataset.commandRoom); dialog?.close(); }));
+    const subRooms = needle ? commandRooms : commandRooms.filter(item => item.id === body.dataset.actRoom);
+    const subLinks = subRooms.flatMap(item => (roomSubmenus[item.id] || []).filter(([label]) => !needle || `${item.label} ${label}`.toLowerCase().includes(needle)).map(([label,target]) => `<a href="${item.href}" data-command-sub-room="${item.id}" data-command-sub-target="${target}"><span aria-hidden="true">↳</span>${label}</a>`));
+    const roomLinks = commandRooms.filter((item) => !needle || `${item.label} ${roomDescriptions[item.id] || ''}`.toLowerCase().includes(needle)).map((item) => `<a href="${item.href}" data-command-room="${item.id}"><span aria-hidden="true">${item.icon}</span>${item.label}</a>`);
+    dialogResults.innerHTML = [...subLinks,...roomLinks].join('');
+    dialogResults.querySelectorAll('[data-command-room]').forEach((link) => link.addEventListener('click', event => { event.preventDefault(); history.replaceState(null,'',link.getAttribute('href')); selectRoom(link.dataset.commandRoom); focusCanvas(roomLanding[link.dataset.commandRoom]); dialog?.close(); }));
+    dialogResults.querySelectorAll('[data-command-sub-room]').forEach(link => link.addEventListener('click', event => {
+      event.preventDefault();
+      const room = link.dataset.commandSubRoom;
+      history.replaceState(null,'',link.getAttribute('href'));
+      selectRoom(room);
+      focusCanvas(roomLanding[room]);
+      [...roomSubmenu.querySelectorAll('button')].find(button => button.dataset.actSubmenuTarget === link.dataset.commandSubTarget)?.click();
+      dialog?.close();
+    }));
   };
   const openDialog = () => { renderCommands(); dialog?.showModal(); setTimeout(() => dialogSearch?.focus(), 0); };
   document.querySelectorAll('[data-act-command="menu"],[data-act-command="search"],[data-act-command="settings"]').forEach((button) => button.addEventListener('click', openDialog));
@@ -140,15 +199,19 @@
     const selector = link.getAttribute('href');
     const target = selector && revealTarget(selector);
     selectRoom(link.dataset.actShellRoom);
-    if (target?.closest('.research-only')) {
-      event.preventDefault();
-      history.replaceState(null, '', selector);
-      scrollTarget(target);
-    }
+    if (!target) return;
+    event.preventDefault();
+    history.replaceState(null, '', selector);
+    focusCanvas(roomLanding[link.dataset.actShellRoom] || selector);
   }));
-  selectRoom('overview');
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => { const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]; if (visible) { const link = links.find((item) => item.getAttribute('href') === `#${visible.target.id}`); if (link) selectRoom(link.dataset.actShellRoom); } }, { rootMargin: '-15% 0px -70%', threshold: [0, .2, .6] });
-    targets.forEach((target) => observer.observe(target));
-  }
+  const initialLink = links.find(link => link.getAttribute('href') === location.hash);
+  const initialRoom = initialLink?.dataset.actShellRoom || 'overview';
+  selectRoom(initialRoom);
+  focusCanvas(roomLanding[initialRoom]);
+  window.addEventListener('marketcompassreport', () => focusCanvas(focusedSelector));
+  window.addEventListener('hashchange', () => {
+    const link = links.find(item => item.getAttribute('href') === location.hash);
+    if (link) {selectRoom(link.dataset.actShellRoom); focusCanvas(roomLanding[link.dataset.actShellRoom]);}
+  });
+  document.querySelector('.options-link')?.addEventListener('click', event => {event.preventDefault(); history.replaceState(null, '', '#options-lab'); selectRoom('options'); focusCanvas('#options-lab');});
 })();

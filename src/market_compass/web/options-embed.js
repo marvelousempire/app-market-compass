@@ -21,6 +21,7 @@
       provider: meta.provider || 'Market Compass desk'
     }}, location.origin);
   };
+  window.addEventListener('marketcompassoptionsview', event => frame.contentWindow?.postMessage({type:'market-compass-options-select-view',view:event.detail.view},location.origin));
   window.addEventListener('marketcompassreport', event => { latestReport = event.detail.report; sendReport(); });
   frame.addEventListener('load', () => { sendTheme(); sendReport(); });
   window.addEventListener('actappearancechange', sendTheme);

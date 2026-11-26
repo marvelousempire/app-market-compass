@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     viewTitle.textContent = view === 'cockpit' ? 'Research Cockpit' : view === 'receipts' ? 'Run History' : labels[view];
     viewDescription.textContent = descriptions[view];
     if (receipt || view === 'receipts') renderReceipt();
+    if (new URLSearchParams(location.search).get('embedded') === '1') parent.postMessage({type:'market-compass-intel-view',view},location.origin);
   }
 
   async function resolveSymbol(raw) {
@@ -231,6 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!/^[A-Z][A-Z0-9.^=_-]{0,9}$/.test(symbol) || symbol === deskSymbol) return;
       deskSymbol = symbol; symbolInput.value = symbol; activeSymbol.textContent = symbol;
       load('live');
+    });
+    window.addEventListener('message', event => {
+      if (event.origin !== location.origin || event.source !== parent || event.data?.type !== 'market-compass-intel-select-view') return;
+      if (['cockpit','pack','macro','rss','edgar','receipts'].includes(event.data.view)) selectView(event.data.view);
     });
     const reportHeight = () => parent.postMessage({type:'market-compass-intel-height',height:document.documentElement.scrollHeight},location.origin);
     new ResizeObserver(reportHeight).observe(document.body);
