@@ -84,6 +84,8 @@ def _search_symbol(symbol: str, news_count: int = 20) -> tuple[dict, list[dict],
             "publisher": item.get("publisher", ""),
             "url": item.get("link", ""),
             "published": datetime.fromtimestamp(ts, UTC).isoformat() if ts else None,
+            "media_type": item.get("type", "STORY"),
+            "related_symbols": item.get("relatedTickers") or [],
         })
     return selected, news, quotes
 

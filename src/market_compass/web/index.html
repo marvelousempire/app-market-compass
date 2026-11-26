@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/static/stubthat.css?v=20261106.1">
   <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261126.2">
   <link rel="stylesheet" href="/static/decision-gates.css?v=20261126.2">
+  <link rel="stylesheet" href="/static/asset-channel.css?v=20261126.1">
   <link rel="stylesheet" href="/static/simulator.css?v=20261126.1">
   <link rel="stylesheet" href="/static/act-v1-appearance.css?v=20261106.1">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
@@ -29,6 +30,7 @@
           <a class="active" href="#market-overview" data-act-shell-room="overview"><span aria-hidden="true">◈</span><b>Overview</b></a>
           <a href="#operator-deck" data-act-shell-room="runtime"><span aria-hidden="true">⬢</span><b>Runtime Status</b></a>
           <a href="/handbook"><span aria-hidden="true">▤</span><b>Handbook</b></a>
+          <a href="#market-settings" data-act-shell-room="settings"><span aria-hidden="true">⚙</span><b>Settings</b></a>
         </div>
       </section>
       <section class="act-nav-group" data-nav-group="Studios">
@@ -42,6 +44,7 @@
           <a href="#intelthat-app" data-act-shell-room="intel-app"><span aria-hidden="true">◉</span><b>intelTHAT App</b></a>
           <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">≣</span><b>intelTHAT Receipts</b></a>
           <a href="#decision-gates" data-act-shell-room="gates"><span aria-hidden="true">⊘</span><b>Decision Gates</b></a>
+          <a href="#asset-channel" data-act-shell-room="channel"><span aria-hidden="true">◫</span><b>Asset Channel</b></a>
         </div>
       </section>
       <section class="act-nav-group" data-nav-group="Evidence">
@@ -372,6 +375,16 @@
         </section>
       </section>
     </section>
+    <section class="panel asset-channel" id="asset-channel" aria-labelledby="asset-channel-title">
+      <div class="section-head"><div><p class="eyebrow">MARKET COMPASS / ASSET CHANNEL</p><h2 id="asset-channel-title">News for BB</h2><p id="asset-channel-description">Articles linked to the selected asset, with source and publication time.</p></div><button type="button" class="secondary" id="asset-channel-refresh">Refresh channel</button></div>
+      <div class="asset-channel-picker" aria-label="Choose an asset channel"><button type="button" data-channel-symbol="BB">BB</button><button type="button" data-channel-symbol="AAPL">AAPL</button><button type="button" data-channel-symbol="QQQ">QQQ</button><button type="button" data-channel-symbol="SPCX">SPCX</button><span id="asset-channel-current">Selected asset: BB</span></div>
+      <p class="asset-channel-status" id="asset-channel-status" role="status">Loading the selected asset channel…</p>
+      <section class="asset-channel-view" data-channel-panel="articles" aria-label="Asset articles"><h3>Articles and videos</h3><div id="asset-channel-articles" class="asset-channel-list"></div></section>
+      <section class="asset-channel-view" data-channel-panel="filings" aria-label="Asset filings" hidden><h3>SEC filings</h3><div id="asset-channel-filings" class="asset-channel-list"></div></section>
+      <section class="asset-channel-view" data-channel-panel="sources" aria-label="Channel sources" hidden><h3>Where this comes from</h3><div id="asset-channel-sources" class="asset-channel-sources"></div><a class="secondary asset-channel-settings-link" href="#market-settings">Manage publishers in Settings</a></section>
+      <section class="asset-channel-view" data-channel-panel="listen" aria-label="Listen to headlines" hidden><h3>Listen to headlines</h3><p>The app can read available headlines aloud on this Mac. Full article audio depends on its publisher.</p><div class="actor-actions"><button type="button" class="secondary" id="asset-channel-play">Read headlines</button><button type="button" class="secondary" id="asset-channel-stop">Stop reading</button></div><p id="asset-channel-audio-status" role="status"></p></section>
+    </section>
+    <section class="panel asset-channel market-settings" id="market-settings" aria-labelledby="market-settings-title"><div class="section-head"><div><p class="eyebrow">MARKET COMPASS / SETTINGS</p><h2 id="market-settings-title">Settings</h2><p>Choose how research appears. Source receipts and market calculations keep their original values.</p></div></div><section><h3>Upload files</h3><p>Review files in UploadTHAT, the shared intake for your apps. Market Compass does not receive broker holdings from it yet.</p><a class="secondary asset-channel-settings-link" data-node-id="uploadthat.receive" href="https://search.jailynmarvin.com/uploadthat?source=market-compass-studio" target="_blank" rel="noopener">Open UploadTHAT</a></section><section><h3>Asset Channel publishers</h3><p>Choose which publishers appear for the selected asset. This changes your display, not the source request or its exact receipt.</p><p id="market-settings-symbol">Selected asset: BB</p><div id="asset-channel-publishers" class="asset-channel-publishers"></div></section><section><h3>Appearance and layout</h3><p>Use the Appearance controls in the left rail to choose light or dark mode and the canvas layout.</p></section></section>
     <section class="options-embedded panel" id="options-lab" aria-labelledby="options-lab-title">
       <div class="options-embedded-heading"><div><p class="eyebrow">MARKET COMPASS / OPTIONS</p><h2 id="options-lab-title">Options Lab</h2><p>Explore theoretical outcomes, Alpaca market context, and SEC filings in the same workspace.</p></div><span>Virtual orders only</span></div>
       <iframe id="options-lab-frame" title="Market Compass Options Lab" src="/static/options.html?embedded=1&amp;v=20261126.7" loading="lazy"></iframe>
@@ -414,6 +427,7 @@
   <script src="/static/stubthat.js?v=20261126.1" defer></script>
   <script src="/static/act-v1-shell.js?v=20261126.4" defer></script>
   <script src="/static/decision-gates.js?v=20261126.3" defer></script>
+  <script src="/static/asset-channel.js?v=20261126.2" defer></script>
   <script src="/static/simulator.js?v=20261126.4" defer></script>
   <script src="/static/hcck.js?v=20261126.2" defer></script>
 </body>

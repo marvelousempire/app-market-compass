@@ -11,10 +11,11 @@
   const dialogResults = document.querySelector('#act-command-results');
   const recovery = document.querySelector('#act-layout-recovery');
   const roomDescriptions = {
-    overview: 'Top-line runtime, controls, Actors, and research status.', runtime: 'Commissioned source, host, safety mode, and runtime receipts.', actors: 'Omo, Prince, Wuda, and Brown’s governed Actor spaces.', exchange: 'Read-only Market Exchange and bankTHAT contract inventory.', measurement: 'Choose any subject and evaluate its measurements with a named method, using a transparent hypothetical index.', desk: 'Market analysis, price memory, momentum, and evidence.', options: 'Theoretical options, virtual positions, Alpaca context, and SEC filings.', 'intel-app': 'Four source-bound research rooms for the selected desk symbol.', intel: 'Independent local research and proof-health receipts.', gates: 'Transparent go, watch, do-not-go, and invalidation research signals.', route: 'Price path, bus stops, invalidation, and confluence.', timeframes: '4H, daily, and weekly alignment.', evidence: 'Score contributions and historical calibration.', catalysts: 'Recent human-factor and market-news evidence.'
+    overview: 'Top-line runtime, controls, Actors, and research status.', runtime: 'Commissioned source, host, safety mode, and runtime receipts.', settings: 'Publisher display choices and appearance controls.', actors: 'Omo, Prince, Wuda, and Brown’s governed Actor spaces.', exchange: 'Read-only Market Exchange and bankTHAT contract inventory.', measurement: 'Choose any subject and evaluate its measurements with a named method, using a transparent hypothetical index.', desk: 'Market analysis, price memory, momentum, and evidence.', options: 'Theoretical options, virtual positions, Alpaca context, and SEC filings.', 'intel-app': 'Four source-bound research rooms for the selected desk symbol.', intel: 'Independent local research and proof-health receipts.', gates: 'Transparent go, watch, do-not-go, and invalidation research signals.', channel: 'Ticker-linked articles, publisher links, filings, and spoken headlines.', route: 'Price path, bus stops, invalidation, and confluence.', timeframes: '4H, daily, and weekly alignment.', evidence: 'Score contributions and historical calibration.', catalysts: 'Recent human-factor and market-news evidence.'
   };
   const roomSubmenus = {
     overview: [['Runtime status', '#operator-deck'], ['Asset controls', '.control-bar'], ['Actor Studio', '#actor-spaces'], ['Market Exchange', '#market-exchange']],
+    settings: [['Publisher choices', '#asset-channel-publishers']],
     runtime: [['Preview controls', '#operator-deck'], ['Asset controls', '.control-bar'], ['Watchlist', '.watch-row']],
     actors: [['Omo', 'cassette:omo'], ['Prince', 'cassette:prince'], ['Wuda', 'cassette:wuda'], ['Brown’s Barometers', 'cassette:browns-barometers']],
     exchange: [['Dashboard', 'exchange:dashboard'], ['Catalog', 'exchange:catalog'], ['All products', 'exchange:products'], ['Installed', 'exchange:installed'], ['APIs & MCPs', 'exchange:apis'], ['API Observatory', 'exchange:observatory']],
@@ -24,12 +25,13 @@
     desk: [['Intelligence overview', '.intelligence-overview'], ['Day Trader lens', '#day-trader-lens'], ['Price route', '#route-panel'], ['Timeframes', '#timeframe-panel'], ['Evidence', '#evidence-panel'], ['Catalysts', '#catalyst-panel']],
     intel: [['Day Trader lens', '#day-trader-lens'], ['Local receipts', '#intelthat-panel'], ['Historical analogs', '#history-panel'], ['Forecast', '#forecast-panel'], ['Evidence board', '#evidence-board']],
     gates: [['Decision gates', '#decision-gates'], ['calculateTHAT', '#calculate-that-formula'], ['Refresh signal', 'click:#calculate-that-run']],
+    channel: [['Articles and videos', 'channel-view:articles'], ['SEC filings', 'channel-view:filings'], ['Sources and publishers', 'channel-view:sources'], ['Listen to headlines', 'channel-view:listen']],
     route: [['Bus Stop route', '#route-panel'], ['Nephew analyst', '.analyst-panel'], ['Timeframe alignment', '#timeframe-panel']],
     timeframes: [['4H / 1D / 1W', '#timeframe-panel'], ['Price workbench', '.chart-memory'], ['Evidence contributions', '#evidence-panel']],
     evidence: [['Contributions', '#contributions'], ['Historical calibration', '#calibration'], ['Bull and bear cases', '.contrast'], ['Evidence board', '#evidence-board']],
     catalysts: [['Catalyst timeline', '#catalyst-panel'], ['Decision gates', '#decision-gates'], ['intelTHAT receipts', '#intelthat-panel']]
   };
-  const roomLanding = {overview:'#operator-deck',runtime:'#operator-deck',actors:'#actor-spaces',exchange:'#market-exchange',measurement:'#measurement-studio',desk:'.intelligence-overview',options:'#options-lab','intel-app':'#intelthat-app',intel:'#intelthat-panel',gates:'#decision-gates',route:'#route-panel',timeframes:'#timeframe-panel',evidence:'#evidence-panel',catalysts:'#catalyst-panel'};
+  const roomLanding = {overview:'#operator-deck',runtime:'#operator-deck',settings:'#market-settings',actors:'#actor-spaces',exchange:'#market-exchange',measurement:'#measurement-studio',desk:'.intelligence-overview',options:'#options-lab','intel-app':'#intelthat-app',intel:'#intelthat-panel',gates:'#decision-gates',channel:'#asset-channel',route:'#route-panel',timeframes:'#timeframe-panel',evidence:'#evidence-panel',catalysts:'#catalyst-panel'};
   const main = document.querySelector('main.shell');
   let focusedSelector = roomLanding.overview;
   const focusCanvas = selector => {
@@ -123,6 +125,9 @@
       const [, view, focus] = target.split(':');
       window.dispatchEvent(new CustomEvent('marketcompassoptionsview', { detail: { view, focus } }));
       focusCanvas('#options-lab');
+    } else if (target.startsWith('channel-view:')) {
+      window.dispatchEvent(new CustomEvent('marketcompasschannelview', {detail:{view:target.slice(13)}}));
+      focusCanvas('#asset-channel');
     } else if (target.startsWith('cassette:')) {
       document.querySelector(`[data-cassette="${target.slice(9)}"]`)?.click();
       focusCanvas('#actor-spaces');
@@ -216,7 +221,8 @@
     }));
   };
   const openDialog = () => { renderCommands(); dialog?.showModal(); setTimeout(() => dialogSearch?.focus(), 0); };
-  document.querySelectorAll('[data-act-command="menu"],[data-act-command="search"],[data-act-command="settings"]').forEach((button) => button.addEventListener('click', openDialog));
+  document.querySelectorAll('[data-act-command="menu"],[data-act-command="search"]').forEach((button) => button.addEventListener('click', openDialog));
+  document.querySelectorAll('[data-act-command="settings"]').forEach((button) => button.addEventListener('click', () => {history.replaceState(null,'','#market-settings');selectRoom('settings');focusCanvas('#market-settings');}));
   document.querySelectorAll('[data-act-dialog-close]').forEach((button) => button.addEventListener('click', () => dialog?.close()));
   dialogSearch?.addEventListener('input', () => renderCommands(dialogSearch.value));
   window.addEventListener('keydown', (event) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); openDialog(); } });

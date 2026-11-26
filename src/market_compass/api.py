@@ -15,6 +15,7 @@ from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from .ai import AnalystRequest, AnalystRouter
+from .asset_channel import read_asset_channel
 from .ai.providers import ProviderError
 from .backtest import backtest_frame
 from .data import get_market_data, search_symbols
@@ -231,6 +232,14 @@ def options_context_api(symbol: str):
             alpaca_future = pool.submit(alpaca_quote, symbol)
             edgar_future = pool.submit(edgar_filings, symbol)
             return {"alpaca": alpaca_future.result(), "edgar": edgar_future.result()}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.get("/api/asset-channel/{symbol}")
+def asset_channel_api(symbol: str):
+    try:
+        return read_asset_channel(symbol)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
