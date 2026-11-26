@@ -78,10 +78,9 @@
   request('/api/operator/status').then(payload => {
     setState('Live · research only', 'live');
     result.dataset.ready = 'true';
-    const source = payload.commissioned
-      ? `Canonical Gitea source ${payload.source_revision}`
-      : 'Gitea promotion is unavailable here';
-    result.querySelector('p').textContent = `Ready on ${payload.host}. Trading stays off; ${source}.`;
+    result.querySelector('p').textContent = payload.commissioned
+      ? 'Market Compass is ready on this Mac. Research is active; trading is disabled.'
+      : 'Market Compass is ready for local research. Trading is disabled.';
   }).catch(error => {
     setState('Needs attention', 'error');
     show('Runtime check held', { reason: error.message });
