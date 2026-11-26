@@ -7,7 +7,11 @@
     const css = getComputedStyle(document.documentElement);
     const keys = ['canvas', 'surface', 'ink', 'muted', 'line', 'brand', 'fill-recessed', 'fill-selected'];
     const values = Object.fromEntries(keys.map(key => [key, css.getPropertyValue(`--act-${key}`).trim()]));
-    frame.contentWindow.postMessage({type: 'market-compass-options-theme', values}, location.origin);
+    const selected = document.documentElement.dataset.actColor;
+    const colorScheme = selected === 'system'
+      ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : selected;
+    frame.contentWindow.postMessage({type: 'market-compass-options-theme', values, colorScheme}, location.origin);
   };
   const sendReport = () => {
     if (!frame.contentWindow || !latestReport) return;

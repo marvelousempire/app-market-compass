@@ -4,6 +4,7 @@ if (new URLSearchParams(location.search).get('embedded') === '1') {
   window.addEventListener('message', event => {
     if (event.origin !== location.origin || event.source !== parent) return;
     if (event.data?.type === 'market-compass-options-theme') {
+      if (['light', 'dark'].includes(event.data.colorScheme)) document.documentElement.style.colorScheme = event.data.colorScheme;
       Object.entries(event.data.values || {}).forEach(([key, value]) => {
         if (themeNames[key] && /^#[0-9a-fA-F]{3,8}$|^rgb\([\d\s,]+\)$/.test(value)) document.documentElement.style.setProperty(`--mc-${themeNames[key]}`, value);
       });
