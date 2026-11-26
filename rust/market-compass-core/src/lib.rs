@@ -4,7 +4,7 @@
 const RATE: f64 = 0.04;
 
 #[no_mangle]
-pub extern "C" fn market_compass_engine_abi() -> i32 { 1 }
+pub extern "C" fn market_compass_engine_abi() -> i32 { 2 }
 
 fn normal_cdf(x: f64) -> f64 {
     let a = x.abs();
@@ -21,7 +21,7 @@ fn normal_cdf(x: f64) -> f64 {
 #[no_mangle]
 pub extern "C" fn option_price(spot: f64, strike: f64, days: f64, iv_percent: f64, kind: i32) -> f64 {
     if !spot.is_finite() || !strike.is_finite() || !days.is_finite() || !iv_percent.is_finite()
-        || spot <= 0.0 || strike <= 0.0 || days < 0.0 || iv_percent <= 0.0
+        || spot < 0.0 || (spot == 0.0 && days > 0.0) || strike <= 0.0 || days < 0.0 || iv_percent <= 0.0
         || (kind != 0 && kind != 1)
     {
         return f64::NAN;
@@ -64,6 +64,36 @@ pub extern "C" fn option_return(
     (exit - entry) * 100.0 * f64::from(quantity) * f64::from(side)
 }
 
+/// Return for a same-expiration, two-leg hypothetical strategy. Each side is
+/// +1 for long or -1 for short. Quotes remain illustrative, not market fills.
+#[no_mangle]
+pub extern "C" fn option_two_leg_return(
+    current_spot: f64, projected_spot: f64, current_days: f64, projected_days: f64,
+    current_iv: f64, projected_iv: f64,
+    strike_a: f64, kind_a: i32, side_a: i32,
+    strike_b: f64, kind_b: i32, side_b: i32, quantity: i32,
+) -> f64 {
+    let a = option_return(current_spot, projected_spot, strike_a, current_days,
+        projected_days, current_iv, projected_iv, kind_a, side_a, quantity);
+    let b = option_return(current_spot, projected_spot, strike_b, current_days,
+        projected_days, current_iv, projected_iv, kind_b, side_b, quantity);
+    if a.is_finite() && b.is_finite() { a + b } else { f64::NAN }
+}
+
+#[no_mangle]
+pub extern "C" fn option_two_leg_entry(
+    spot: f64, days: f64, iv: f64,
+    strike_a: f64, kind_a: i32, side_a: i32,
+    strike_b: f64, kind_b: i32, side_b: i32,
+) -> f64 {
+    if (side_a != 1 && side_a != -1) || (side_b != 1 && side_b != -1) {
+        return f64::NAN;
+    }
+    let a = option_quote(spot, strike_a, days, iv, kind_a);
+    let b = option_quote(spot, strike_b, days, iv, kind_b);
+    if a.is_finite() && b.is_finite() { a * f64::from(side_a) + b * f64::from(side_b) } else { f64::NAN }
+}
+
 
 #[no_mangle]
 pub extern "C" fn option_delta(spot: f64, strike: f64, days: f64, iv_percent: f64, kind: i32) -> f64 {
@@ -94,6 +124,8 @@ mod tests {
         assert!((c - p - parity).abs() < 0.001);
         assert_eq!(option_price(120.0, 100.0, 0.0, 25.0, 0), 20.0);
         assert_eq!(option_price(120.0, 100.0, 0.0, 25.0, 1), 0.0);
+        assert_eq!(option_price(0.0, 100.0, 0.0, 25.0, 1), 100.0);
+        assert!(option_price(0.0, 100.0, 1.0, 25.0, 1).is_nan());
     }
     #[test]
     fn baseline_zero_and_sensitivity() {
@@ -108,5 +140,19 @@ mod tests {
         assert!(option_price(-1.0, 100.0, 30.0, 20.0, 0).is_nan());
         assert!(option_price(100.0, 100.0, 30.0, 20.0, 2).is_nan());
         assert!(option_return(100.0, 100.0, 100.0, 30.0, 31.0, 20.0, 20.0, 0, 1, 1).is_nan());
+    }
+    #[test]
+    fn two_leg_spread_and_straddle() {
+        let spread = option_two_leg_return(100.0, 120.0, 30.0, 0.0, 25.0, 25.0,
+            100.0, 0, 1, 110.0, 0, -1, 1);
+        assert!(spread > 0.0);
+        let baseline = option_two_leg_return(100.0, 100.0, 30.0, 30.0, 25.0, 25.0,
+            100.0, 0, 1, 110.0, 0, -1, 1);
+        assert_eq!(baseline, 0.0);
+        let straddle = option_two_leg_return(100.0, 125.0, 30.0, 0.0, 25.0, 25.0,
+            100.0, 0, 1, 100.0, 1, 1, 1);
+        assert!(straddle > 0.0);
+        assert!(option_two_leg_return(100.0, 100.0, 30.0, 31.0, 25.0, 25.0,
+            100.0, 0, 1, 100.0, 1, 1, 1).is_nan());
     }
 }

@@ -12,16 +12,18 @@
         "handbook/chapter-01-start/page-01-research-workbench/01-research-workbench.md",
         "handbook/chapter-02-use-market-compass/page-01-daily-workflow/01-daily-workflow.md",
         "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/01-provider-lanes.md",
-        "handbook/chapter-09-research-v1-delivery/page-01-acceptance-and-release/01-acceptance-and-release.md"
+        "handbook/chapter-09-research-v1-delivery/page-01-acceptance-and-release/01-acceptance-and-release.md",
+        "CHANGELOG.md"
       ],
       "current": [
         "docs/TROUBLESHOOTING.md"
       ],
-      "reason": "Aligned operator text with the observed focused rooms, Analyze result, virtual Options Lab, embedded intelTHAT, and readable status. Historical commissioning receipts remain dated evidence."
+      "reason": "Aligned the operator guide with bounded Rust two-leg strategy projections and their research-only boundary; historical commissioning receipts remain dated evidence."
     },
     "wiring_guides": {
       "updated": [
-        "docs/handoff.md"
+        "docs/handoff.md",
+        "docs/RUST-MIGRATION.md"
       ],
       "current": [
         "docs/ARCHITECTURE.md",

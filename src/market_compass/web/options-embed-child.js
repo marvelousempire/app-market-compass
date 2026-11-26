@@ -10,7 +10,9 @@ if (new URLSearchParams(location.search).get('embedded') === '1') {
       });
     }
     if (event.data?.type === 'market-compass-options-select-view') {
-      const views = {chain:'#chain',builder:'#place',returns:'.projection-controls',alpaca:'#alpaca-context',edgar:'#edgar-context',positions:'#positions',journal:'#journal'};
+      if (event.data.view === 'strategies') document.getElementById('mode-strategy')?.click();
+      else if (['chain','builder','returns'].includes(event.data.view)) document.getElementById('mode-single')?.click();
+      const views = {chain:'#chain',builder:'#place',returns:'.projection-controls',strategies:'#strategy-panel',alpaca:'#alpaca-context',edgar:'#edgar-context',positions:'#positions',journal:'#journal'};
       const selector = views[event.data.view];
       const element = selector && document.querySelector(selector);
       const target = ['chain','builder','alpaca','edgar','positions','journal'].includes(event.data.view) ? element?.closest('.card') : element;

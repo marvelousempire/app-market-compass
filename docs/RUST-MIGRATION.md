@@ -32,7 +32,7 @@
 5. Promote one accepted Rust package to the existing `ai.market-compass` service and named Door. Verify exact source revision and live interactions. Retain a tested rollback package and original Python source.
 6. Remove Python from the runtime only after complete route and behavior coverage. Keep historical source and receipts for recovery.
 
-The Rust options model uses a European-style Black-Scholes approximation, a fixed illustrative 4% rate and no dividends. It is not a live option quote or the American-option model used by Robinhood for stocks/ETFs. Market data, actual option chains, multi-leg strategies, assignment and open-position valuation remain separate work.
+The Rust options model uses a European-style Black-Scholes approximation, a fixed illustrative 4% rate and no dividends. It is not a live option quote or the American-option model used by Robinhood for stocks/ETFs. A bounded two-leg projection now composes same-expiration bull call and bear put spreads, long straddles and long strangles in Rust; it displays theoretical entry cost, expiration limits where bounded, and price/time/volatility scenarios without placing even a virtual multi-leg order. Actual option chains, broader multi-leg strategies, assignment and open-position valuation remain separate work.
 
 ## Options context receiving
 

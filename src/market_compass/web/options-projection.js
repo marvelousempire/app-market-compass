@@ -10,12 +10,14 @@
     if(!response.ok) throw new Error('Rust engine asset unavailable');
     const instance=await WebAssembly.instantiate(await response.arrayBuffer());
     wasm=instance.instance.exports;
-    if(wasm.market_compass_engine_abi?.()!==1 || typeof wasm.option_price!=='function' || typeof wasm.option_return!=='function') throw new Error('Rust engine contract mismatch');
+    if(wasm.market_compass_engine_abi?.()!==2 || typeof wasm.option_price!=='function' || typeof wasm.option_return!=='function' || typeof wasm.option_two_leg_return!=='function' || typeof wasm.option_two_leg_entry!=='function') throw new Error('Rust engine contract mismatch');
   } catch (error) {
     el('notice').textContent='Options projection unavailable: '+error.message;
     return;
   }
   const flag = typ => typ==='call'?0:1;
+  window.marketCompassOptionsModel = wasm;
+  window.dispatchEvent(new Event('marketcompassoptionsmodel'));
   const model=(s,k,d,iv,typ)=>wasm.option_price(s,k,d,iv,flag(typ));
   const baseDays = () => Math.max(0, Math.ceil((new Date(el('expiry').value+'T16:00:00')-new Date())/86400000));
   const quote = (s,k,d,iv,typ) => wasm.option_quote(s,k,d,iv,flag(typ));

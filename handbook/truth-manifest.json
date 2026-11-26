@@ -10,7 +10,7 @@
     "historical_receipt": "docs/receipts/CLOSEOUT-REVIEW-2026-11-12.json"
   },
   "capability_sources": {
-    "docs/STATUS.md": "67187eaf3b6b270b8be935f8d9d6d639b3de63d00031a1b77cb2bd25dc4ec238",
+    "docs/STATUS.md": "94b992761b6981199386820f47e71767e977c2b9e895497c4d130312957d5e2c",
     "docs/CLOSEOUT-REPORT-2026-11-12.md": "2a60db9935e074d2e43514e71601f004f39be8b40b9431b32e86a747fba41de6",
     "docs/receipts/CLOSEOUT-REVIEW-2026-11-12.json": "48d1a07da19a3c04685c36d910da9dc507af14ea5ea9ae185efbb3cf4517c5f6",
     "docs/TROUBLESHOOTING.md": "0207259be78eb8f232d32789b5c344e6ef9a0cf710cd03e51b3dcf2439e5ba6b",
@@ -58,7 +58,7 @@
   ],
   "editable_leaf_sha256": {
     "handbook/chapter-01-start/page-01-research-workbench/01-research-workbench.md": "0647bb2c5fc41399a2c08e43b81a56d77deffbb1a131811a50c5c5ae2a5a9ff2",
-    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/01-daily-workflow.md": "0e7442ba56929701ddbf7d98e1f096ddef8c276e7710190661f5188d30e26f0f",
+    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/01-daily-workflow.md": "e5302622af1af0424a4f92957b8f807432159f83f420bfd11c9873b5f0069ccd",
     "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/01-read-a-research-signal.md": "ad61b646f9df213a3c50b82925a9021af5abe5ede794c5f365a3dc9951a6d508",
     "handbook/chapter-04-actors-and-instruments/page-01-actor-owned-evidence/01-actor-owned-evidence.md": "c50b8480cd61ffb2c328cd30fcc2b85e175b2599cc8dbe513d407677f8123844",
     "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/01-provider-lanes.md": "3a4a36de42d0f4dbf1810030274c94eb857943d008103570d4ebe5b1c2540316",
@@ -74,7 +74,7 @@
     "handbook/chapter-01-start/page-01-research-workbench/PAGE.md": "6ec799a4cba666e34fbb9f9258e5eabf8fb301e271e0ab73bb7defa01ec436cb",
     "handbook/chapter-02-use-market-compass/LEAD-SHEET.md": "12a9e4d3d2ee0a6db65d5e3026deac1c8d79a21b2e63819999b1f7687676cc8f",
     "handbook/chapter-02-use-market-compass/page-01-daily-workflow/LEAD-SHEET.md": "0f51a1585cb8e93bd20d1961b632a932d680cd2575115759ab62e246b537ec86",
-    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/PAGE.md": "9274393c8ab260df55be6915aaef1c09e565a5c5187c1f7cbf7cc7c607875134",
+    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/PAGE.md": "c8ad6fd00e728e02e90774c617dd5f4dd0b5ee1b25ae41b6ea90fa61c65d0438",
     "handbook/chapter-03-evidence-and-signals/LEAD-SHEET.md": "b4df7a2ae76d72df773603c5a0c107ec51457f818b79137f64746354fc43bed4",
     "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/LEAD-SHEET.md": "d85351f9ec027a1b7e541353054d52c0cc6fa24855a8f395d8c48b27796013a4",
     "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/PAGE.md": "88f65cbb98706156398e2eaa7de0ec495b1b1668a1fab51e94a62df79e24b1ff",
