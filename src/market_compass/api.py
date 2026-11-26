@@ -5,6 +5,7 @@ import os
 import signal
 import socket
 from datetime import UTC, datetime
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from threading import Timer
 from urllib.error import URLError
@@ -25,6 +26,7 @@ from .intelthat_native import build_native_workspace
 from .pack002 import desk_from_bars
 from .registry import NODE_REGISTRY, node_output
 from .research_lenses import build_day_trader_lens
+from .research_sources import alpaca_quote, edgar_filings
 from .simulation import SimulationRequest, simulate
 
 app = FastAPI(title="Market Compass", version="0.8.1")
@@ -53,9 +55,10 @@ def intelthat_app():
     return WEB_DIR / "intelthat-app.html"
 
 
-@app.get("/options", response_class=FileResponse)
+@app.get("/options", response_class=RedirectResponse)
 def options_desk():
-    return WEB_DIR / "options.html"
+    """Keep existing bookmarks pointed at the integrated main workspace."""
+    return "/#options-lab"
 
 
 @app.get("/health")
@@ -219,6 +222,17 @@ def hybrid_cck_simulation_api(request: ProfiledSimulationRequest):
 @app.post("/api/simulate")
 def simulate_api(request: SimulationRequest):
     return simulate(request)
+
+
+@app.get("/api/options-context/{symbol}")
+def options_context_api(symbol: str):
+    try:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            alpaca_future = pool.submit(alpaca_quote, symbol)
+            edgar_future = pool.submit(edgar_filings, symbol)
+            return {"alpaca": alpaca_future.result(), "edgar": edgar_future.result()}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
 @app.get("/api/intelthat/{symbol}")

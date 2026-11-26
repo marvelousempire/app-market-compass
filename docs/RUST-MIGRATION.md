@@ -33,3 +33,9 @@
 6. Remove Python from the runtime only after complete route and behavior coverage. Keep historical source and receipts for recovery.
 
 The Rust options model uses a European-style Black-Scholes approximation, a fixed illustrative 4% rate and no dividends. It is not a live option quote or the American-option model used by Robinhood for stocks/ETFs. Market data, actual option chains, multi-leg strategies, assignment and open-position valuation remain separate work.
+
+## Options context receiving
+
+The Options page now displays read-only Alpaca stock bid/ask context and existing SEC EDGAR submissions evidence. The commissioned Python service currently transports and parses these sources; they remain on the Rust migration list. Alpaca requires `MARKET_COMPASS_ALPACA_KEY_ID` and `MARKET_COMPASS_ALPACA_SECRET_KEY` in the service environment. EDGAR uses the existing `MARKET_COMPASS_SEC_CONTACT` fair-access identity. Missing configuration or upstream failure is shown as held. Neither source changes the illustrative simulator spot, theoretical option premium, virtual positions, or order capability.
+
+The Options Lab is mounted in the main dashboard at `/#options-lab`; the former `/options` bookmark redirects there. The current HTML/JavaScript simulator runs in a same-origin embedded document to isolate its existing IDs and styles from the larger dashboard while retaining the same local virtual portfolio. A native shared canvas is still part of the broader Rust and UI migration; this source change does not claim that target is complete.

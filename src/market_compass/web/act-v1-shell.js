@@ -11,7 +11,7 @@
   const dialogResults = document.querySelector('#act-command-results');
   const recovery = document.querySelector('#act-layout-recovery');
   const roomDescriptions = {
-    overview: 'Top-line runtime, controls, Actors, and research status.', runtime: 'Commissioned source, host, safety mode, and runtime receipts.', actors: 'Omo, Prince, Wuda, and Brown’s governed Actor spaces.', exchange: 'Read-only Market Exchange and bankTHAT contract inventory.', measurement: 'Choose any subject and evaluate its measurements with a named method, using a transparent hypothetical index.', desk: 'Market analysis, price memory, momentum, and evidence.', intel: 'Independent local research and proof-health receipts.', gates: 'Transparent go, watch, do-not-go, and invalidation research signals.', route: 'Price path, bus stops, invalidation, and confluence.', timeframes: '4H, daily, and weekly alignment.', evidence: 'Score contributions and historical calibration.', catalysts: 'Recent human-factor and market-news evidence.'
+    overview: 'Top-line runtime, controls, Actors, and research status.', runtime: 'Commissioned source, host, safety mode, and runtime receipts.', actors: 'Omo, Prince, Wuda, and Brown’s governed Actor spaces.', exchange: 'Read-only Market Exchange and bankTHAT contract inventory.', measurement: 'Choose any subject and evaluate its measurements with a named method, using a transparent hypothetical index.', desk: 'Market analysis, price memory, momentum, and evidence.', options: 'Theoretical options, virtual positions, Alpaca context, and SEC filings.', intel: 'Independent local research and proof-health receipts.', gates: 'Transparent go, watch, do-not-go, and invalidation research signals.', route: 'Price path, bus stops, invalidation, and confluence.', timeframes: '4H, daily, and weekly alignment.', evidence: 'Score contributions and historical calibration.', catalysts: 'Recent human-factor and market-news evidence.'
   };
   const roomSubmenus = {
     overview: [['Runtime status', '#operator-deck'], ['Asset controls', '#market-overview'], ['Actor Studio', '#actor-spaces'], ['Market Exchange', '#market-exchange']],
@@ -19,6 +19,7 @@
     actors: [['Omo', 'cassette:omo'], ['Prince', 'cassette:prince'], ['Wuda', 'cassette:wuda'], ['Brown’s Barometers', 'cassette:browns-barometers']],
     exchange: [['Dashboard', 'exchange:dashboard'], ['Catalog', 'exchange:catalog'], ['All products', 'exchange:products'], ['Installed', 'exchange:installed'], ['APIs & MCPs', 'exchange:apis'], ['API Observatory', 'exchange:observatory']],
     measurement: [['Subject schedules', '#hcck-profiles'], ['Measure and simulate', '#universal-simulator'], ['Original market desk', '#market-workspace']],
+    options: [['Options Lab', '#options-lab']],
     desk: [['Intelligence overview', '#market-workspace'], ['Day Trader lens', '#day-trader-lens'], ['Price route', '#route-panel'], ['Timeframes', '#timeframe-panel'], ['Evidence', '#evidence-panel'], ['Catalysts', '#catalyst-panel']],
     intel: [['Day Trader lens', '#day-trader-lens'], ['Local receipts', '#intelthat-panel'], ['Historical analogs', '#history-panel'], ['Forecast', '#forecast-panel'], ['Evidence board', '#evidence-board']],
     gates: [['Decision gates', '#decision-gates'], ['calculateTHAT', '#calculate-that-formula'], ['Refresh signal', 'click:#calculate-that-run']],

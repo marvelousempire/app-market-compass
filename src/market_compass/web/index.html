@@ -38,6 +38,7 @@
           <a href="#market-exchange" data-act-shell-room="exchange"><span aria-hidden="true">◇</span><b>Market Exchange</b></a>
           <a href="#measurement-studio" data-act-shell-room="measurement"><span aria-hidden="true">◫</span><b>Measurement Studio</b></a>
           <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Compass Desk</b></a>
+          <a href="#options-lab" data-act-shell-room="options"><span aria-hidden="true">◉</span><b>Options Lab</b></a>
           <a href="/intelthat/" data-intelthat-app><span aria-hidden="true">◉</span><b>intelTHAT App</b></a>
           <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">≣</span><b>intelTHAT Receipts</b></a>
           <a href="#decision-gates" data-act-shell-room="gates"><span aria-hidden="true">⊘</span><b>Decision Gates</b></a>
@@ -70,7 +71,7 @@
       <p class="subhead">Evidence, counter-evidence, route, memory and narrative in one governed workspace.</p>
     </div>
     <div class="header-controls" aria-label="View and explanation mode">
-      <a href="/options" class="options-link">Options projections</a>
+      <a href="#options-lab" class="options-link">Options projections</a>
       <div class="mode-switch">
         <button class="view-btn active" data-view="quick">Quick</button>
         <button class="view-btn" data-view="research">Research</button>
@@ -371,6 +372,10 @@
         </section>
       </section>
     </section>
+    <section class="options-embedded panel" id="options-lab" aria-labelledby="options-lab-title">
+      <div class="options-embedded-heading"><div><p class="eyebrow">MARKET COMPASS / OPTIONS</p><h2 id="options-lab-title">Options Lab</h2><p>Explore theoretical outcomes, Alpaca market context, and SEC filings in the same workspace.</p></div><span>Virtual orders only</span></div>
+      <iframe id="options-lab-frame" title="Market Compass Options Lab" src="/static/options.html?embedded=1" loading="lazy"></iframe>
+    </section>
   </main>
 
   <aside class="act-supporting-rail" aria-label="Dashboard supporting rail" data-shell-node="supporting-rail">
@@ -393,6 +398,7 @@
   <dialog class="act-command-dialog" id="act-command-dialog" aria-labelledby="act-command-title"><div class="act-dialog-head"><div><p>MARKET COMPASS ACT</p><h2 id="act-command-title">Go to a room</h2></div><button type="button" data-act-dialog-close aria-label="Close menu">×</button></div><label><span>Search rooms</span><input id="act-command-search" type="search" placeholder="Search Overview, Actors, Exchange…"></label><div class="act-command-results" id="act-command-results"></div></dialog>
 
   <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
+  <script src="/static/options-embed.js" defer></script>
   <script src="/static/app.js?v=20261106.2" defer></script>
   <script src="/static/analyst.js" defer></script>
   <script src="/static/intelthat.js" defer></script>
