@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const symbolField = document.getElementById('symbol');
   if (!root || !button || !symbolField) return;
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const human = window.MarketCompassHuman;
   const render = data => {
     const events = [...(data.micro_slices?.setup_scanner || []), ...(data.micro_slices?.notable_thresholds || [])];
-    root.innerHTML = `<div class="lens-summary"><strong>${esc(data.state)}</strong><p>${esc(data.summary)}</p></div><div class="lens-grid">${events.map(item => `<article class="lens-event ${item.state}"><span>${esc(item.owner)}</span><b>${esc(item.label)}</b><small>${esc(item.evidence)}</small></article>`).join('')}</div><details><summary>Source and refusal receipt</summary><p>${esc(data.source.url)} @ ${esc(data.source.revision)}</p><p>${esc(data.source.license)} · ${esc(data.source.adaptation)}</p><p>Rejected: ${esc((data.rejected || []).join(' · '))}</p><p>${esc(data.warning)}</p></details>`;
+    root.innerHTML = `<div class="lens-summary"><strong>${esc(human.state(data.state))}</strong><p>${esc(data.summary)}</p></div><div class="lens-grid">${events.map(item => `<article class="lens-event ${item.state}"><span>${esc(item.owner)}</span><b>${esc(item.label)}</b><small>${esc(item.evidence)}</small></article>`).join('')}</div><details><summary>Source details</summary><p>Source: ${esc(data.source.url)}</p><p>${esc(data.source.license)} · ${esc(data.source.adaptation)}</p><p>Items not used: ${esc((data.rejected || []).map(item => human.value(item)).join(' · ') || 'None')}</p><p>${esc(data.warning)}</p></details>`;
   };
   const load = async () => {
     const symbol = symbolField.value.trim();

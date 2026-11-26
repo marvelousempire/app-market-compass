@@ -1,12 +1,14 @@
 /* Local universal simulation workbench, no persistence or broker transport. */
 document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('universal-input');
+  const fields = document.getElementById('universal-fields');
   const output = document.getElementById('universal-output');
   const load = document.getElementById('universal-example');
   const run = document.getElementById('universal-run');
   const exporter = document.getElementById('universal-export');
   let lastExport = null;
-  if (!input || !output || !load || !run || !exporter) return;
+  const human = window.MarketCompassHuman;
+  if (!input || !fields || !output || !load || !run || !exporter) return;
 
   const demo = {
     subject: {id: 'demo-old-laptop', name: 'Illustrative old laptop', kind: 'device',
@@ -30,6 +32,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (className) node.className = className;
     return node;
   };
+  let currentRequest = null;
+  function renderFields() {
+    try { currentRequest = JSON.parse(input.value); }
+    catch { currentRequest = null; fields.replaceChildren(el('p', input.value ? 'The technical data could not be read. Correct it or load an example.' : 'Load a fictional example to edit its measurements.')); return; }
+    const study = currentRequest?.simulation || currentRequest;
+    if (!study?.subject || !Array.isArray(study?.method?.metrics) || !Array.isArray(study?.observations)) {
+      fields.replaceChildren(el('p', 'This study has no editable measurements. Check Technical data.'));
+      return;
+    }
+    const save = () => { input.value = JSON.stringify(currentRequest, null, 2); lastExport = null; exporter.disabled = true; };
+    const labeledInput = (title, value, onChange, type = 'text', metric = null) => {
+      const label = el('label', title);
+      const control = document.createElement('input');
+      control.type = type; control.value = value ?? '';
+      if (type === 'number') {
+        control.step = 'any';
+        if (Number.isFinite(Number(metric?.lower))) control.min = String(metric.lower);
+        if (Number.isFinite(Number(metric?.upper))) control.max = String(metric.upper);
+      }
+      control.addEventListener('input', () => { onChange(control.value); save(); });
+      label.appendChild(control);
+      return label;
+    };
+    fields.replaceChildren(labeledInput('Subject name', study.subject.name, value => { study.subject.name = value; }));
+    study.observations.forEach((observation, index) => {
+      const group = document.createElement('fieldset');
+      group.appendChild(el('legend', `Observation ${index + 1}`));
+      const grid = el('div', '', 'universal-field-grid');
+      grid.appendChild(labeledInput('Date', String(observation.at || '').slice(0, 10), value => { observation.at = value ? `${value}T12:00:00Z` : ''; }, 'date'));
+      study.method.metrics.forEach(metric => {
+        grid.appendChild(labeledInput(metric.label || human.label(metric.id), observation.values?.[metric.id], value => {
+          observation.values ||= {};
+          observation.values[metric.id] = value === '' ? null : Number(value);
+        }, 'number', metric));
+      });
+      group.appendChild(grid); fields.appendChild(group);
+    });
+  }
   function drawChart(records) {
     const rows = records.filter(x => x.state === 'calculated' && typeof x.index_points === 'number');
     if (!rows.length) return el('p', 'No complete observations to chart.');
@@ -53,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dot.setAttribute('r', '5');
       dot.setAttribute('fill', 'currentColor');
       const title = document.createElementNS('http://www.w3.org/2000/svg','title');
-      title.textContent = `${r.at}: ${r.index_points} points`;
+      title.textContent = `${human.date(r.at)}: ${Number(r.index_points.toFixed(1))} points`;
       dot.appendChild(title);
       svg.appendChild(dot);
     });
@@ -62,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   input.addEventListener('input', () => {
     lastExport = null;
     exporter.disabled = true;
+    renderFields();
   });
   exporter.addEventListener('click', () => {
     if (!lastExport) return;
@@ -77,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   load.addEventListener('click', () => {
     input.value = JSON.stringify(demo, null, 2);
+    renderFields();
     lastExport = null;
     exporter.disabled = true;
     output.replaceChildren(el('p', 'Illustrative laptop data loaded. Select Simulate to calculate.'));
@@ -85,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let request;
     try { request = JSON.parse(input.value); }
     catch (err) {
-      output.replaceChildren(el('p', 'Invalid JSON: ' + err.message));
+      output.replaceChildren(el('p', 'The input could not be read. Check its format and try again.'));
       return;
     }
     run.disabled = true;
@@ -124,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const result = profiled ? payload.simulation : payload;
       const panel = el('div', '', 'universal-result');
-      panel.appendChild(el('h3', result.subject.name + ' · ' + result.method.id));
+      panel.appendChild(el('h3', result.subject.name + ' · ' + human.label(result.method.id)));
       if (profiled) {
         panel.appendChild(el('p', 'Hybrid CCK template: ' + payload.profile_id +
           ' · draft shape matched · not certified'));
@@ -133,24 +175,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       panel.appendChild(el('p', result.observed_points + ' calculated · ' + result.held_points + ' held · 0–100 method-relative points'));
       panel.appendChild(drawChart(result.records));
-      panel.appendChild(el('p', 'Formula: ' + result.formula));
-      panel.appendChild(el('p', 'Timeframe: ' + result.timeframe.start + ' → ' +
-        result.timeframe.end + ' · ' + result.timeframe.observations + ' observations'));
-      panel.appendChild(el('p', 'Timestamp: ' + result.timestamp));
-      panel.appendChild(el('p', 'Provenance: ' + result.provenance.method_author + ' · ' +
-        result.provenance.method_id + '@' + result.provenance.method_version + ' · source ' +
-        result.provenance.source_owner));
+      panel.appendChild(el('p', 'How the result was calculated: the method combines each measurement with its stated weight on a 0 to 100 scale.'));
+      panel.appendChild(el('p', 'Study period: ' + human.date(result.timeframe.start) + ' to ' +
+        human.date(result.timeframe.end) + ' · ' + result.timeframe.observations + ' observations'));
+      panel.appendChild(el('p', 'Calculated: ' + human.date(result.timestamp)));
+      panel.appendChild(el('p', 'Method by ' + result.provenance.method_author + '; source provided by ' + result.provenance.source_owner));
       panel.appendChild(el('p', 'Confidence: ' + result.confidence.meaning));
       panel.appendChild(el('p', 'Volatility: ' +
         (result.volatility_points_per_observation == null ? 'not enough observations' : result.volatility_points_per_observation + ' index points per observation')));
       const list = el('div', '', 'universal-records');
       for (const row of result.records) {
-        list.appendChild(el('p', row.at + ' · ' + row.state + ' · ' +
-          (row.index_points == null ? (row.reason + ': ' + row.missing.join(', ')) : row.index_points + ' points')));
+        list.appendChild(el('p', human.date(row.at) + ' · ' + human.state(row.state) + ' · ' +
+          (row.index_points == null ? (human.value(row.reason) + ': ' + row.missing.map(human.label).join(', ')) : Number(row.index_points.toFixed(1)) + ' points')));
       }
       panel.appendChild(list);
-      panel.appendChild(el('small', 'Input SHA-256: ' + result.input_sha256));
-      panel.appendChild(el('small', 'Receipt SHA-256: ' + result.receipt_sha256));
+      const technical = document.createElement('details');
+      technical.appendChild(el('summary', 'Technical receipt details'));
+      technical.appendChild(el('p', 'Exact calculation: ' + result.formula));
+      technical.appendChild(el('p', 'Input fingerprint: ' + result.input_sha256));
+      technical.appendChild(el('p', 'Receipt fingerprint: ' + result.receipt_sha256));
+      panel.appendChild(technical);
       panel.appendChild(el('small', 'Synthetic study only. No money, ownership transfer, real market, live ELSE link, or record storage.'));
       lastExport = {
         schema: 'market-compass.portable-study/v1',

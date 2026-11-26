@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/static/stubthat.css?v=20261106.1">
   <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261126.2">
   <link rel="stylesheet" href="/static/decision-gates.css">
-  <link rel="stylesheet" href="/static/simulator.css?v=20261108.1">
+  <link rel="stylesheet" href="/static/simulator.css?v=20261126.1">
   <link rel="stylesheet" href="/static/act-v1-appearance.css?v=20261106.1">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
@@ -140,13 +140,13 @@
       </div>
       <div class="universal-simulator" id="universal-simulator" aria-label="Subject simulation lab">
         <h3>Measurement Lab</h3>
-        <p class="trust-note">This is the transparent input used by the simulator. It can be edited, but its values and methodology are not independently verified or issued by ELSE.</p>
-        <label class="universal-json-label" for="universal-input">Measurements and method</label>
-        <textarea id="universal-input" rows="9" spellcheck="false"></textarea>
+        <p class="trust-note">Edit the example measurements below, then run a what-if study. These sample values and methods have not been independently verified.</p>
+        <div id="universal-fields" class="universal-fields" aria-live="polite">Load a fictional example to edit its measurements.</div>
+        <details id="universal-technical"><summary>Technical data</summary><p>The exact measurements and method used for this simulation. Editing this data updates the fields above.</p><label class="universal-json-label" for="universal-input">Structured input</label><textarea id="universal-input" rows="9" spellcheck="false"></textarea></details>
         <div class="universal-actions">
           <button type="button" id="universal-example" class="secondary">Load old-computer example</button>
           <button type="button" id="universal-run" class="primary">Simulate</button>
-          <button type="button" id="universal-export" class="secondary" disabled>Export JSON</button>
+          <button type="button" id="universal-export" class="secondary" disabled>Export study details</button>
         </div>
         <div id="universal-output" role="status" aria-live="polite">Select a fictional example, then simulate.</div>
       </div>
@@ -166,12 +166,12 @@
         <code>read-only projection</code>
       </nav>
       <div class="stubthat-pipeline" aria-label="stubTHAT intake pipeline">
-        <button type="button" data-pipeline-stage="parseTHAT"><b>1</b> parseTHAT</button><i aria-hidden="true">→</i>
-        <button type="button" data-pipeline-stage="decantTHAT"><b>2</b> decantTHAT</button><i aria-hidden="true">→</i>
-        <button type="button" data-pipeline-stage="htmlTHAT"><b>3</b> htmlTHAT</button><i aria-hidden="true">+</i>
-        <button type="button" data-pipeline-stage="cssTHAT"><b>4</b> cssTHAT</button><i aria-hidden="true">+</i>
-        <button type="button" data-pipeline-stage="jsTHAT"><b>5</b> jsTHAT</button><i aria-hidden="true">→</i>
-        <button type="button" data-pipeline-stage="stubTHAT"><b>6</b> stubTHAT</button>
+        <button type="button" data-pipeline-stage="parseTHAT"><b>1</b> Inventory</button><i aria-hidden="true">→</i>
+        <button type="button" data-pipeline-stage="decantTHAT"><b>2</b> Review</button><i aria-hidden="true">→</i>
+        <button type="button" data-pipeline-stage="htmlTHAT"><b>3</b> Structure</button><i aria-hidden="true">+</i>
+        <button type="button" data-pipeline-stage="cssTHAT"><b>4</b> Appearance</button><i aria-hidden="true">+</i>
+        <button type="button" data-pipeline-stage="jsTHAT"><b>5</b> Behavior</button><i aria-hidden="true">→</i>
+        <button type="button" data-pipeline-stage="stubTHAT"><b>6</b> Contract</button>
       </div>
       <div class="stubthat-tabs" role="tablist" aria-label="Stub source families">
         <button type="button" role="tab" class="stubthat-tab active" data-stub-family="exchange" aria-selected="true">Market Exchange <small>6 admin surfaces · 15 tool modules</small></button>
@@ -374,7 +374,7 @@
     </section>
     <section class="options-embedded panel" id="options-lab" aria-labelledby="options-lab-title">
       <div class="options-embedded-heading"><div><p class="eyebrow">MARKET COMPASS / OPTIONS</p><h2 id="options-lab-title">Options Lab</h2><p>Explore theoretical outcomes, Alpaca market context, and SEC filings in the same workspace.</p></div><span>Virtual orders only</span></div>
-      <iframe id="options-lab-frame" title="Market Compass Options Lab" src="/static/options.html?embedded=1&amp;v=20261126.5" loading="lazy"></iframe>
+      <iframe id="options-lab-frame" title="Market Compass Options Lab" src="/static/options.html?embedded=1&amp;v=20261126.7" loading="lazy"></iframe>
     </section>
     <section class="options-embedded panel" id="intelthat-app" aria-labelledby="intelthat-app-title">
       <div class="options-embedded-heading"><div><p class="eyebrow">MARKET COMPASS / INTELTHAT</p><h2 id="intelthat-app-title">intelTHAT</h2><p>The desk's selected symbol flows into the four research rooms and their source receipts.</p></div><span>Research only</span></div>
@@ -406,14 +406,15 @@
   <script src="/static/intelthat-embed.js?v=20261125.6" defer></script>
   <script src="/static/app.js?v=20261125.7" defer></script>
   <script src="/static/analyst.js" defer></script>
-  <script src="/static/intelthat.js" defer></script>
-  <script src="/static/research-lenses.js" defer></script>
+  <script src="/static/human-readable.js?v=20261126.2" defer></script>
+  <script src="/static/intelthat.js?v=20261126.1" defer></script>
+  <script src="/static/research-lenses.js?v=20261126.1" defer></script>
   <script src="/static/operator-controls.js?v=20261125.8" defer></script>
-  <script src="/static/research-cassettes.js?v=20261106.1" defer></script>
-  <script src="/static/stubthat.js?v=20261125.7" defer></script>
+  <script src="/static/research-cassettes.js?v=20261126.1" defer></script>
+  <script src="/static/stubthat.js?v=20261126.1" defer></script>
   <script src="/static/act-v1-shell.js?v=20261126.4" defer></script>
-  <script src="/static/decision-gates.js?v=20261106.1" defer></script>
-  <script src="/static/simulator.js?v=20261108.1" defer></script>
-  <script src="/static/hcck.js?v=20261108.1" defer></script>
+  <script src="/static/decision-gates.js?v=20261126.1" defer></script>
+  <script src="/static/simulator.js?v=20261126.3" defer></script>
+  <script src="/static/hcck.js?v=20261126.2" defer></script>
 </body>
 </html>
