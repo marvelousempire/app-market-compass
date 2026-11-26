@@ -1,13 +1,14 @@
 /* Local universal simulation workbench, no persistence or broker transport. */
 document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('universal-input');
+  const fields = document.getElementById('universal-fields');
   const output = document.getElementById('universal-output');
   const load = document.getElementById('universal-example');
   const run = document.getElementById('universal-run');
   const exporter = document.getElementById('universal-export');
   let lastExport = null;
   const human = window.MarketCompassHuman;
-  if (!input || !output || !load || !run || !exporter) return;
+  if (!input || !fields || !output || !load || !run || !exporter) return;
 
   const demo = {
     subject: {id: 'demo-old-laptop', name: 'Illustrative old laptop', kind: 'device',
@@ -31,6 +32,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (className) node.className = className;
     return node;
   };
+  let currentRequest = null;
+  function renderFields() {
+    try { currentRequest = JSON.parse(input.value); }
+    catch { currentRequest = null; fields.replaceChildren(el('p', input.value ? 'The technical data could not be read. Correct it or load an example.' : 'Load a fictional example to edit its measurements.')); return; }
+    const study = currentRequest?.simulation || currentRequest;
+    if (!study?.subject || !Array.isArray(study?.method?.metrics) || !Array.isArray(study?.observations)) {
+      fields.replaceChildren(el('p', 'This study has no editable measurements. Check Technical data.'));
+      return;
+    }
+    const save = () => { input.value = JSON.stringify(currentRequest, null, 2); lastExport = null; exporter.disabled = true; };
+    const labeledInput = (title, value, onChange, type = 'text', metric = null) => {
+      const label = el('label', title);
+      const control = document.createElement('input');
+      control.type = type; control.value = value ?? '';
+      if (type === 'number') {
+        control.step = 'any';
+        if (Number.isFinite(Number(metric?.lower))) control.min = String(metric.lower);
+        if (Number.isFinite(Number(metric?.upper))) control.max = String(metric.upper);
+      }
+      control.addEventListener('input', () => { onChange(control.value); save(); });
+      label.appendChild(control);
+      return label;
+    };
+    fields.replaceChildren(labeledInput('Subject name', study.subject.name, value => { study.subject.name = value; }));
+    study.observations.forEach((observation, index) => {
+      const group = document.createElement('fieldset');
+      group.appendChild(el('legend', `Observation ${index + 1}`));
+      const grid = el('div', '', 'universal-field-grid');
+      grid.appendChild(labeledInput('Date', String(observation.at || '').slice(0, 10), value => { observation.at = value ? `${value}T12:00:00Z` : ''; }, 'date'));
+      study.method.metrics.forEach(metric => {
+        grid.appendChild(labeledInput(metric.label || human.label(metric.id), observation.values?.[metric.id], value => {
+          observation.values ||= {};
+          observation.values[metric.id] = value === '' ? null : Number(value);
+        }, 'number', metric));
+      });
+      group.appendChild(grid); fields.appendChild(group);
+    });
+  }
   function drawChart(records) {
     const rows = records.filter(x => x.state === 'calculated' && typeof x.index_points === 'number');
     if (!rows.length) return el('p', 'No complete observations to chart.');
@@ -63,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   input.addEventListener('input', () => {
     lastExport = null;
     exporter.disabled = true;
+    renderFields();
   });
   exporter.addEventListener('click', () => {
     if (!lastExport) return;
@@ -78,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   load.addEventListener('click', () => {
     input.value = JSON.stringify(demo, null, 2);
+    renderFields();
     lastExport = null;
     exporter.disabled = true;
     output.replaceChildren(el('p', 'Illustrative laptop data loaded. Select Simulate to calculate.'));

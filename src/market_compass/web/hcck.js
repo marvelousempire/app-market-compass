@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const seatSelector = document.getElementById('hcck-seat-select');
   if (!selector || !detail || !load || !target) return;
 
+  const human = window.MarketCompassHuman;
   let profiles = [];
   let seats = [];
   function node(tag, value, className) {
@@ -29,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     detail.appendChild(node('p', 'Domain: ' + profile.domain +
       ' · Subject: ' + (profile.subject_kind || 'any') +
       ' · Source: ' + profile.source_owner));
-    detail.appendChild(node('p', 'Required source fields: ' + profile.fields.join(', ')));
-    detail.appendChild(node('p', 'Schedule: ' + profile.schedule.cadence +
-      ' · ' + profile.schedule.clock + ' clock · ' + profile.schedule.timezone +
+    detail.appendChild(node('p', 'Required source fields: ' + profile.fields.map(field => human.label(field)).join(', ')));
+    detail.appendChild(node('p', 'Schedule: ' + human.value(profile.schedule.cadence) +
+      ' · ' + human.value(profile.schedule.clock) + ' clock · ' + profile.schedule.timezone +
       ' · evidence reference: ' + (profile.schedule.evidence_required ? 'required' : 'optional')));
-    detail.appendChild(node('p', 'Example metric ideas: ' + profile.example_metrics.join(', ')));
+    detail.appendChild(node('p', 'Example metric ideas: ' + profile.example_metrics.map(metric => human.label(metric)).join(', ')));
     detail.appendChild(node('p', profile.notes, 'trust-note'));
     if (profile.id === 'participant-v1') {
       const seat = seats.find(item => item.id === seatSelector?.value);

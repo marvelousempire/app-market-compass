@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/static/stubthat.css?v=20261106.1">
   <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261126.2">
   <link rel="stylesheet" href="/static/decision-gates.css">
-  <link rel="stylesheet" href="/static/simulator.css?v=20261108.1">
+  <link rel="stylesheet" href="/static/simulator.css?v=20261126.1">
   <link rel="stylesheet" href="/static/act-v1-appearance.css?v=20261106.1">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
@@ -140,13 +140,13 @@
       </div>
       <div class="universal-simulator" id="universal-simulator" aria-label="Subject simulation lab">
         <h3>Measurement Lab</h3>
-        <p class="trust-note">This is the transparent input used by the simulator. It can be edited, but its values and methodology are not independently verified or issued by ELSE.</p>
-        <label class="universal-json-label" for="universal-input">Measurements and method</label>
-        <textarea id="universal-input" rows="9" spellcheck="false"></textarea>
+        <p class="trust-note">Edit the example measurements below, then run a what-if study. These sample values and methods have not been independently verified.</p>
+        <div id="universal-fields" class="universal-fields" aria-live="polite">Load a fictional example to edit its measurements.</div>
+        <details id="universal-technical"><summary>Technical data</summary><p>The exact measurements and method used for this simulation. Editing this data updates the fields above.</p><label class="universal-json-label" for="universal-input">Structured input</label><textarea id="universal-input" rows="9" spellcheck="false"></textarea></details>
         <div class="universal-actions">
           <button type="button" id="universal-example" class="secondary">Load old-computer example</button>
           <button type="button" id="universal-run" class="primary">Simulate</button>
-          <button type="button" id="universal-export" class="secondary" disabled>Export JSON</button>
+          <button type="button" id="universal-export" class="secondary" disabled>Export study details</button>
         </div>
         <div id="universal-output" role="status" aria-live="polite">Select a fictional example, then simulate.</div>
       </div>
@@ -414,7 +414,7 @@
   <script src="/static/stubthat.js?v=20261125.7" defer></script>
   <script src="/static/act-v1-shell.js?v=20261126.4" defer></script>
   <script src="/static/decision-gates.js?v=20261126.1" defer></script>
-  <script src="/static/simulator.js?v=20261126.1" defer></script>
-  <script src="/static/hcck.js?v=20261108.1" defer></script>
+  <script src="/static/simulator.js?v=20261126.2" defer></script>
+  <script src="/static/hcck.js?v=20261126.1" defer></script>
 </body>
 </html>
