@@ -8,7 +8,12 @@
     const meta = report.data_meta || {};
     frame.contentWindow.postMessage({type:'market-compass-intel-asset', symbol:meta.resolved_symbol || report.symbol}, location.origin);
   };
-  const sendView = () => frame.contentWindow?.postMessage({type:'market-compass-intel-select-view',view:selectedView},location.origin);
+  const sendView = () => {
+    frame.contentWindow?.postMessage({type:'market-compass-intel-select-view',view:selectedView},location.origin);
+    // The embedded application is same-origin. Call its existing room control as
+    // well so a delayed or missed message cannot leave the two rails out of sync.
+    frame.contentDocument?.querySelector(`[data-intel-view="${selectedView}"]`)?.click();
+  };
   window.addEventListener('marketcompassreport', event => {report = event.detail.report; send();});
   window.addEventListener('marketcompassintelview', event => {selectedView = event.detail.view; sendView();});
   frame.addEventListener('load', () => {send(); sendView();});
