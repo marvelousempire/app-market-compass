@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dot.setAttribute('r', '5');
       dot.setAttribute('fill', 'currentColor');
       const title = document.createElementNS('http://www.w3.org/2000/svg','title');
-      title.textContent = `${r.at}: ${r.index_points} points`;
+      title.textContent = `${human.date(r.at)}: ${Number(r.index_points.toFixed(1))} points`;
       dot.appendChild(title);
       svg.appendChild(dot);
     });
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       panel.appendChild(el('p', result.observed_points + ' calculated · ' + result.held_points + ' held · 0–100 method-relative points'));
       panel.appendChild(drawChart(result.records));
-      panel.appendChild(el('p', 'How the result was calculated: ' + human.value(result.formula)));
+      panel.appendChild(el('p', 'How the result was calculated: the method combines each measurement with its stated weight on a 0 to 100 scale.'));
       panel.appendChild(el('p', 'Study period: ' + human.date(result.timeframe.start) + ' to ' +
         human.date(result.timeframe.end) + ' · ' + result.timeframe.observations + ' observations'));
       panel.appendChild(el('p', 'Calculated: ' + human.date(result.timestamp)));
@@ -186,11 +186,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const list = el('div', '', 'universal-records');
       for (const row of result.records) {
         list.appendChild(el('p', human.date(row.at) + ' · ' + human.state(row.state) + ' · ' +
-          (row.index_points == null ? (row.reason + ': ' + row.missing.join(', ')) : row.index_points + ' points')));
+          (row.index_points == null ? (human.value(row.reason) + ': ' + row.missing.map(human.label).join(', ')) : Number(row.index_points.toFixed(1)) + ' points')));
       }
       panel.appendChild(list);
       const technical = document.createElement('details');
       technical.appendChild(el('summary', 'Technical receipt details'));
+      technical.appendChild(el('p', 'Exact calculation: ' + result.formula));
       technical.appendChild(el('p', 'Input fingerprint: ' + result.input_sha256));
       technical.appendChild(el('p', 'Receipt fingerprint: ' + result.receipt_sha256));
       panel.appendChild(technical);

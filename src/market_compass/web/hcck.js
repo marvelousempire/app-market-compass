@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!profile) return;
     if (seatWrapper) seatWrapper.hidden = profile.id !== 'participant-v1';
     detail.appendChild(node('h3', profile.title));
-    detail.appendChild(node('p', 'Domain: ' + profile.domain +
-      ' · Subject: ' + (profile.subject_kind || 'any') +
-      ' · Source: ' + profile.source_owner));
+    detail.appendChild(node('p', 'Study area: ' + human.label(profile.domain) +
+      ' · Subject: ' + human.label(profile.subject_kind || 'any') +
+      ' · Source: ' + human.value(profile.source_owner)));
     detail.appendChild(node('p', 'Required source fields: ' + profile.fields.map(field => human.label(field)).join(', ')));
-    detail.appendChild(node('p', 'Schedule: ' + human.value(profile.schedule.cadence) +
-      ' · ' + human.value(profile.schedule.clock) + ' clock · ' + profile.schedule.timezone +
-      ' · evidence reference: ' + (profile.schedule.evidence_required ? 'required' : 'optional')));
+    detail.appendChild(node('p', 'When to measure: ' + human.value(profile.schedule.cadence) +
+      ' · ' + human.value(profile.schedule.clock) + ' time · ' + profile.schedule.timezone +
+      ' · source evidence: ' + (profile.schedule.evidence_required ? 'required' : 'optional')));
     detail.appendChild(node('p', 'Example metric ideas: ' + profile.example_metrics.map(metric => human.label(metric)).join(', ')));
     detail.appendChild(node('p', profile.notes, 'trust-note'));
     if (profile.id === 'participant-v1') {
