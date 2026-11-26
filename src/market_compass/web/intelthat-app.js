@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let deskSymbol = '';
 
   const el = (tag, text, cls) => { const node = document.createElement(tag); node.textContent = String(text ?? ''); if (cls) node.className = cls; return node; };
-  const value = (input) => typeof input === 'object' ? JSON.stringify(input, null, 2) : String(input ?? '—');
+  const human = window.MarketCompassHuman;
+  const value = (input) => human.value(input);
   const history = () => { try { const rows = JSON.parse(safeStore.get('intelthat-app-runs') || '[]'); return Array.isArray(rows) ? rows : []; } catch { return []; } };
 
   function setProgress(state, message) {
@@ -77,14 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
     node.dataset.state = item.state || 'missing';
     const head = el('div', '', 'module-head');
     head.appendChild(el('h3', labels[kind] || kind));
-    head.appendChild(el('span', item.state || 'unknown'));
+    head.appendChild(el('span', human.state(item.state)));
     node.appendChild(head);
     node.appendChild(el('p', item.reason || 'No reason supplied.'));
     const list = document.createElement('dl');
     const rows = [
-      ['Timeframe', item.timeframe], ['As of', item.as_of], ['Freshness', item.freshness],
+      ['Timeframe', item.timeframe], ['As of', human.date(item.as_of)], ['Freshness', item.freshness],
       ['Confidence', item.confidence == null ? '—' : `${Math.round(Number(item.confidence) * 100)}%`],
-      ...Object.entries(item.metrics || {})
+      ...Object.entries(item.metrics || {}).map(([key, entry]) => [human.label(key), entry])
     ];
     rows.forEach(([label, entry]) => { list.appendChild(el('dt', label)); list.appendChild(el('dd', value(entry))); });
     node.appendChild(list);
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderFacts() {
-    const short = receipt?.receipt_sha256 ? `${receipt.receipt_sha256.slice(0, 12)}…` : '—';
+    const short = receipt?.receipt_sha256 ? 'Available to export' : 'Not available';
     const rows = [['Symbol', receipt?.symbol || symbolInput.value.toUpperCase()], ['Source', sourceLabel || 'Not run'], ['Receipt', short], ['Saved', saved ? 'Yes' : 'No']];
     facts.replaceChildren();
     rows.forEach(([label, entry]) => { facts.appendChild(el('dt', label)); facts.appendChild(el('dd', entry)); });
@@ -104,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderProof() {
     proof.replaceChildren();
-    Object.entries(receipt?.proof_health || {}).forEach(([state, count]) => proof.appendChild(el('span', `${state} ${count}`)));
+    Object.entries(receipt?.proof_health || {}).forEach(([state, count]) => proof.appendChild(el('span', `${human.state(state)}: ${count}`)));
   }
 
   function renderHistory() {
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const button = el('button', '', 'history-item');
       const copy = el('span');
       copy.appendChild(el('strong', `${row.receipt.symbol} · ${row.sourceLabel}`));
-      copy.appendChild(el('small', `${row.savedAt} · ${row.receipt.receipt_sha256?.slice(0, 16) || 'legacy receipt'}…`));
+      copy.appendChild(el('small', `${human.date(row.savedAt)} · Receipt available to export`));
       button.appendChild(copy);
       button.appendChild(el('b', '→'));
       button.addEventListener('click', () => {
@@ -139,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedKinds = activeView === 'cockpit' ? kinds : [activeView];
     stageKicker.textContent = activeView === 'cockpit' ? 'WHOLE RESEARCH RUN' : labels[activeView].toUpperCase();
     stageTitle.textContent = `${receipt.symbol} · ${sourceLabel}`;
-    stageCopy.textContent = `${receipt.contract || 'owner-receipt contract'} · as of ${receipt.as_of || 'source timestamps shown below'}`;
+    stageCopy.textContent = `Research as of ${human.date(receipt.as_of)}. Each source shows its own evidence.`;
     output.className = 'module-grid';
     output.replaceChildren(...selectedKinds.map((kind) => card(kind, receipt.sources?.[kind] || { state: 'missing', reason: 'No evidence object returned.' })));
     renderFacts(); renderProof();

@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const run = document.getElementById('universal-run');
   const exporter = document.getElementById('universal-export');
   let lastExport = null;
+  const human = window.MarketCompassHuman;
   if (!input || !output || !load || !run || !exporter) return;
 
   const demo = {
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let request;
     try { request = JSON.parse(input.value); }
     catch (err) {
-      output.replaceChildren(el('p', 'Invalid JSON: ' + err.message));
+      output.replaceChildren(el('p', 'The input could not be read. Check its format and try again.'));
       return;
     }
     run.disabled = true;
@@ -124,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const result = profiled ? payload.simulation : payload;
       const panel = el('div', '', 'universal-result');
-      panel.appendChild(el('h3', result.subject.name + ' · ' + result.method.id));
+      panel.appendChild(el('h3', result.subject.name + ' · ' + human.label(result.method.id)));
       if (profiled) {
         panel.appendChild(el('p', 'Hybrid CCK template: ' + payload.profile_id +
           ' · draft shape matched · not certified'));
@@ -133,24 +134,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       panel.appendChild(el('p', result.observed_points + ' calculated · ' + result.held_points + ' held · 0–100 method-relative points'));
       panel.appendChild(drawChart(result.records));
-      panel.appendChild(el('p', 'Formula: ' + result.formula));
-      panel.appendChild(el('p', 'Timeframe: ' + result.timeframe.start + ' → ' +
-        result.timeframe.end + ' · ' + result.timeframe.observations + ' observations'));
-      panel.appendChild(el('p', 'Timestamp: ' + result.timestamp));
-      panel.appendChild(el('p', 'Provenance: ' + result.provenance.method_author + ' · ' +
-        result.provenance.method_id + '@' + result.provenance.method_version + ' · source ' +
-        result.provenance.source_owner));
+      panel.appendChild(el('p', 'How the result was calculated: ' + human.value(result.formula)));
+      panel.appendChild(el('p', 'Study period: ' + human.date(result.timeframe.start) + ' to ' +
+        human.date(result.timeframe.end) + ' · ' + result.timeframe.observations + ' observations'));
+      panel.appendChild(el('p', 'Calculated: ' + human.date(result.timestamp)));
+      panel.appendChild(el('p', 'Method by ' + result.provenance.method_author + '; source provided by ' + result.provenance.source_owner));
       panel.appendChild(el('p', 'Confidence: ' + result.confidence.meaning));
       panel.appendChild(el('p', 'Volatility: ' +
         (result.volatility_points_per_observation == null ? 'not enough observations' : result.volatility_points_per_observation + ' index points per observation')));
       const list = el('div', '', 'universal-records');
       for (const row of result.records) {
-        list.appendChild(el('p', row.at + ' · ' + row.state + ' · ' +
+        list.appendChild(el('p', human.date(row.at) + ' · ' + human.state(row.state) + ' · ' +
           (row.index_points == null ? (row.reason + ': ' + row.missing.join(', ')) : row.index_points + ' points')));
       }
       panel.appendChild(list);
-      panel.appendChild(el('small', 'Input SHA-256: ' + result.input_sha256));
-      panel.appendChild(el('small', 'Receipt SHA-256: ' + result.receipt_sha256));
+      const technical = document.createElement('details');
+      technical.appendChild(el('summary', 'Technical receipt details'));
+      technical.appendChild(el('p', 'Input fingerprint: ' + result.input_sha256));
+      technical.appendChild(el('p', 'Receipt fingerprint: ' + result.receipt_sha256));
+      panel.appendChild(technical);
       panel.appendChild(el('small', 'Synthetic study only. No money, ownership transfer, real market, live ELSE link, or record storage.'));
       lastExport = {
         schema: 'market-compass.portable-study/v1',
