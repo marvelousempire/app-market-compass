@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
       panel.appendChild(el('p', 'How the result was calculated: the method combines each measurement with its stated weight on a 0 to 100 scale.'));
       panel.appendChild(el('p', 'Study period: ' + human.date(result.timeframe.start) + ' to ' +
         human.date(result.timeframe.end) + ' · ' + result.timeframe.observations + ' observations'));
-      panel.appendChild(el('p', 'Calculated: ' + human.date(result.timestamp)));
+      panel.appendChild(el('p', 'Latest observation: ' + human.date(result.timestamp)));
       panel.appendChild(el('p', 'Method by ' + result.provenance.method_author + '; source provided by ' + result.provenance.source_owner));
       panel.appendChild(el('p', 'Confidence: ' + result.confidence.meaning));
       panel.appendChild(el('p', 'Volatility: ' +
