@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let saved = false;
   let startedAt = 0;
   let timer = null;
+  let runSequence = 0;
+  let deskSymbol = '';
 
   const el = (tag, text, cls) => { const node = document.createElement(tag); node.textContent = String(text ?? ''); if (cls) node.className = cls; return node; };
   const value = (input) => typeof input === 'object' ? JSON.stringify(input, null, 2) : String(input ?? '—');
@@ -167,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function load(mode) {
+    const sequence = ++runSequence;
     runButton.disabled = true; ownerButton.disabled = true; saveButton.disabled = true; exportButton.disabled = true;
     saved = false; receipt = null; renderFacts(); proof.replaceChildren();
     setProgress('running', 'Resolving the symbol, then reading the four bounded research modules in parallel. Total work is source-dependent; no percentage is claimed.');
@@ -177,15 +180,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const path = mode === 'live' ? '/api/intelthat-workspace/' : '/api/intelthat/';
       const response = await fetch(path + encodeURIComponent(symbol), { headers: { Accept: 'application/json' }, credentials: 'same-origin' });
       const data = await response.json();
+      if (sequence !== runSequence) return;
       if (!response.ok) throw new Error(data.detail || 'Research request was refused.');
       receipt = data; sourceLabel = mode === 'live' ? 'Live research' : 'Owner receipts';
       activeSymbol.textContent = receipt.symbol || symbol; exportButton.disabled = false; saveButton.disabled = false;
       setProgress('ready', `Completed ${sourceLabel.toLowerCase()} for ${receipt.symbol}. Each module reports its own proof state.`);
       renderReceipt();
     } catch (error) {
+      if (sequence !== runSequence) return;
       setProgress('error', `Research held: ${error.message}`);
       output.className = 'error-state'; output.replaceChildren(el('strong', 'intelTHAT could not finish this run.'), el('p', error.message));
-    } finally { runButton.disabled = false; ownerButton.disabled = false; }
+    } finally { if (sequence === runSequence) { runButton.disabled = false; ownerButton.disabled = false; } }
   }
 
   form.addEventListener('submit', (event) => { event.preventDefault(); load('live'); });
@@ -217,5 +222,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }));
   const initialColor = safeStore.get('act-v1-color') || 'system'; document.documentElement.dataset.color = initialColor;
   document.querySelectorAll('[data-color]').forEach((item) => item.setAttribute('aria-checked', String(item.dataset.color === initialColor)));
+  if (new URLSearchParams(location.search).get('embedded') === '1') {
+    document.body.classList.add('embedded');
+    symbolInput.value = ''; activeSymbol.textContent = '—';
+    window.addEventListener('message', event => {
+      if (event.origin !== location.origin || event.source !== parent || event.data?.type !== 'market-compass-intel-asset') return;
+      const symbol = String(event.data.symbol || '').toUpperCase();
+      if (!/^[A-Z][A-Z0-9.^=_-]{0,9}$/.test(symbol) || symbol === deskSymbol) return;
+      deskSymbol = symbol; symbolInput.value = symbol; activeSymbol.textContent = symbol;
+      load('live');
+    });
+    const reportHeight = () => parent.postMessage({type:'market-compass-intel-height',height:document.documentElement.scrollHeight},location.origin);
+    new ResizeObserver(reportHeight).observe(document.body);
+    window.addEventListener('load', reportHeight);
+  }
   renderFacts(); selectView('cockpit');
 });

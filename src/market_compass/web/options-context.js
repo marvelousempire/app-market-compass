@@ -9,6 +9,7 @@
   const line = (text, parent) => { const node = document.createElement('div'); node.textContent = text; parent.append(node); };
   async function load() {
     const id = ++requestId, ticker = asset.value;
+    if (!ticker) { alpaca.textContent = 'Select a supported equity or ETF in the main desk.'; edgar.textContent = 'No company is selected.'; refresh.disabled = true; return; }
     alpaca.textContent = 'Loading quote context…';
     edgar.textContent = 'Loading company filings…';
     refresh.disabled = true;
@@ -36,7 +37,7 @@
       if (id === requestId) { alpaca.textContent = `Research unavailable: ${error.message}`; edgar.textContent = 'SEC filings unavailable.'; }
     } finally { if (id === requestId) refresh.disabled = false; }
   }
-  asset.addEventListener('change', load);
+  window.addEventListener('marketcompassasset', load);
   refresh.addEventListener('click', load);
-  if (asset.options.length) load(); else window.addEventListener('load', load, {once:true});
+  load();
 })();

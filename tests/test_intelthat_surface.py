@@ -60,7 +60,9 @@ def test_intelthat_is_a_real_application_surface():
 def test_market_compass_presents_intelthat_as_app_and_bridge():
     client = TestClient(app)
     page = client.get("/")
-    assert 'href="/intelthat/"' in page.text
+    assert 'href="#intelthat-app"' in page.text
+    assert 'id="intelthat-app-frame"' in page.text
+    assert '/intelthat/?embedded=1' in page.text
     assert "intelTHAT App" in page.text
     assert "INTELTHAT APP BRIDGE" in page.text
 

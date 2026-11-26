@@ -21,8 +21,8 @@
   const quote = (s,k,d,iv,typ) => wasm.option_quote(s,k,d,iv,flag(typ));
   const projected = () => ({s:Number(el('projected-spot').value),d:Number(el('projected-days').value),iv:Number(el('projected-iv').value)});
   const updateLimits = () => {
-    const spot=assets[asset], max=baseDays(), slider=el('projected-spot');
-    slider.min=(spot*.5).toFixed(2);slider.max=(spot*1.5).toFixed(2);slider.value=spot;
+    const spot=assets[asset], max=baseDays(), slider=el('projected-spot'); if(!Number.isFinite(spot)) return;
+    slider.min=(spot*.5).toFixed(2);slider.max=(spot*1.5).toFixed(2);slider.step=spot<20?'0.05':spot<100?'0.25':'0.5';slider.value=spot;
     el('projected-days').max=max;el('projected-days').value=max;
   };
   const oldRender = render;
@@ -43,7 +43,7 @@
     const bound=Math.max(100,...points.map(p=>Math.abs(p.y))), px=x=>35+(x-x0)/(x1-x0)*425, py=y=>110-y/bound*88;
     const line=points.map((p,i)=>(i?'L':'M')+px(p.x).toFixed(1)+' '+py(p.y).toFixed(1)).join(' ');
     const cursor=px(priceAxis?s:d), current=payoff(s);
-    svg.innerHTML=`<line x1="35" y1="110" x2="460" y2="110" stroke="#587465"/><path d="${line}" fill="none" stroke="#a8ee83" stroke-width="3"/><line x1="${cursor}" y1="18" x2="${cursor}" y2="198" stroke="#eaf0ed" stroke-dasharray="4 4"/><circle cx="${cursor}" cy="${py(current)}" r="5" fill="#eaf0ed"/><text x="35" y="215">${priceAxis?fmt(x0):'Expiration'}</text><text x="400" y="215">${priceAxis?fmt(x1):maxDays+' days'}</text><text x="38" y="28">+${fmt(bound)}</text><text x="38" y="190">−${fmt(bound)}</text>`;
+    svg.innerHTML=`<line x1="35" y1="110" x2="460" y2="110" stroke="var(--mc-line)"/><path d="${line}" fill="none" stroke="var(--mc-brand)" stroke-width="3"/><line x1="${cursor}" y1="18" x2="${cursor}" y2="198" stroke="var(--mc-ink)" stroke-dasharray="4 4"/><circle cx="${cursor}" cy="${py(current)}" r="5" fill="var(--mc-ink)"/><text x="35" y="215">${priceAxis?fmt(x0):'Expiration'}</text><text x="400" y="215">${priceAxis?fmt(x1):maxDays+' days'}</text><text x="38" y="28">+${fmt(bound)}</text><text x="38" y="190">−${fmt(bound)}</text>`;
     svg.setAttribute('aria-label',`Projected profit and loss ${priceAxis?'across underlying prices':'across time'}, selected return ${fmt(current)}`);
   };
   render = () => {oldRender(); const {s,d,iv}=projected();
@@ -60,6 +60,7 @@
   for(const id of ['projected-spot','projected-days','projected-iv','axis'])el(id).addEventListener('input',render);
   el('asset').addEventListener('change',()=>{updateLimits();render()});
   el('expiry').addEventListener('change',()=>{updateLimits();render()});
-  controls.forEach(id => { el(id).disabled=false; });
+  controls.forEach(id => { el(id).disabled=id==='asset'||!Number.isFinite(assets[asset]); });
   render();
+  window.addEventListener('marketcompassasset', () => {updateLimits(); controls.forEach(id => {el(id).disabled=id==='asset'||!Number.isFinite(assets[asset]);}); render();});
 })();

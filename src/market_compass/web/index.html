@@ -39,7 +39,7 @@
           <a href="#measurement-studio" data-act-shell-room="measurement"><span aria-hidden="true">◫</span><b>Measurement Studio</b></a>
           <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Compass Desk</b></a>
           <a href="#options-lab" data-act-shell-room="options"><span aria-hidden="true">◉</span><b>Options Lab</b></a>
-          <a href="/intelthat/" data-intelthat-app><span aria-hidden="true">◉</span><b>intelTHAT App</b></a>
+          <a href="#intelthat-app" data-act-shell-room="intel-app"><span aria-hidden="true">◉</span><b>intelTHAT App</b></a>
           <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">≣</span><b>intelTHAT Receipts</b></a>
           <a href="#decision-gates" data-act-shell-room="gates"><span aria-hidden="true">⊘</span><b>Decision Gates</b></a>
         </div>
@@ -319,7 +319,7 @@
         <section class="panel" id="intelthat-panel" aria-label="intelTHAT research receipts">
           <div class="section-head">
             <div><p class="eyebrow">INTELTHAT APP BRIDGE</p><h2>intelTHAT Receipts</h2></div>
-            <a class="button-link" href="/intelthat/">Open intelTHAT App ↗</a>
+            <a class="button-link" href="#intelthat-app">Open intelTHAT research ↓</a>
           </div>
           <p class="trust-note">This compact bridge reads intelTHAT output inside the Compass. The full intelTHAT application owns research runs, module navigation, saved sessions, evidence inspection, and exports. No broker, order, money movement, or score influence.</p>
           <div class="intelthat-toolbar" aria-label="intelTHAT workspace actions">
@@ -376,6 +376,10 @@
       <div class="options-embedded-heading"><div><p class="eyebrow">MARKET COMPASS / OPTIONS</p><h2 id="options-lab-title">Options Lab</h2><p>Explore theoretical outcomes, Alpaca market context, and SEC filings in the same workspace.</p></div><span>Virtual orders only</span></div>
       <iframe id="options-lab-frame" title="Market Compass Options Lab" src="/static/options.html?embedded=1" loading="lazy"></iframe>
     </section>
+    <section class="options-embedded panel" id="intelthat-app" aria-labelledby="intelthat-app-title">
+      <div class="options-embedded-heading"><div><p class="eyebrow">MARKET COMPASS / INTELTHAT</p><h2 id="intelthat-app-title">intelTHAT</h2><p>The desk's selected symbol flows into the four research rooms and their source receipts.</p></div><span>Research only</span></div>
+      <iframe id="intelthat-app-frame" title="intelTHAT research application" src="/intelthat/?embedded=1" loading="lazy"></iframe>
+    </section>
   </main>
 
   <aside class="act-supporting-rail" aria-label="Dashboard supporting rail" data-shell-node="supporting-rail">
@@ -399,6 +403,7 @@
 
   <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
   <script src="/static/options-embed.js" defer></script>
+  <script src="/static/intelthat-embed.js" defer></script>
   <script src="/static/app.js?v=20261106.2" defer></script>
   <script src="/static/analyst.js" defer></script>
   <script src="/static/intelthat.js" defer></script>
