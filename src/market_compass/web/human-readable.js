@@ -6,6 +6,10 @@ window.MarketCompassHuman = Object.freeze({
   },
   date(value) {
     if (!value) return 'Date unavailable';
+    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+      const day = new Date(`${value}T12:00:00`);
+      return Number.isNaN(day.getTime()) ? 'Date unavailable' : new Intl.DateTimeFormat(undefined,{dateStyle:'medium'}).format(day);
+    }
     const date = new Date(value);
     return Number.isNaN(date.getTime()) ? 'Date unavailable' : new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'}).format(date);
   },
