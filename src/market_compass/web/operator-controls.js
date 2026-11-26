@@ -9,7 +9,26 @@
 
   function setState(label, kind) { state.textContent = label; state.dataset.state = kind; }
   function show(title, payload) {
-    result.innerHTML = `<h3>${escapeHtml(title)}</h3><pre>${escapeHtml(JSON.stringify(payload, null, 2))}</pre>`;
+    let summary = '';
+    let facts = [];
+    if (payload.steps) {
+      summary = 'The research preview is ready. These are the steps it will follow:';
+      facts = payload.steps;
+    } else if (payload.runtime && payload.research) {
+      const proof = payload.research.proof_health || {};
+      summary = `Market Compass is running. Research for ${payload.research.symbol || 'this asset'} has ${proof.observed || 0} observed and ${proof.missing || 0} missing source modules.`;
+      facts = [payload.research.configured ? 'Research sources are configured.' : 'Research sources are not configured yet.', 'Trading is disabled.'];
+    } else if (payload.state === 'held' || payload.reason) {
+      summary = payload.reason || 'This action needs attention.';
+    } else if (payload.state === 'opened') {
+      summary = 'Opened another local Market Compass view.';
+    } else if (payload.state === 'stopping') {
+      summary = 'The local research preview is stopping.';
+    } else {
+      summary = payload.message || (payload.state === 'live' ? 'Market Compass is running on this Mac.' : 'The local research preview is ready.');
+      facts = [payload.mode === 'research_only' ? 'Research only. Trading is disabled.' : '', payload.commissioned ? 'Running the approved main source.' : 'Source promotion is unavailable here.'].filter(Boolean);
+    }
+    result.innerHTML = `<h3>${escapeHtml(title)}</h3><p>${escapeHtml(summary)}</p>${facts.length ? `<ul>${facts.map(fact => `<li>${escapeHtml(fact)}</li>`).join('')}</ul>` : ''}`;
     result.focus({ preventScroll: true });
   }
   async function request(path, options) {

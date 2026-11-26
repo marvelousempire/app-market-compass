@@ -84,7 +84,7 @@
     <label>Local file<input name="file" type="file"></label>
     <label class="source-wide">Requested research outcome<input name="outcome" required placeholder="What should this source help Market Compass measure or interpret?"></label>
     <div class="source-intake-actions"><button type="submit" class="secondary">Create intake receipt</button><button type="button" class="secondary" data-source-export disabled>Export receipt</button></div>
-    <pre class="source-intake-output" data-source-output>Complete the fields. The browser hashes local content; it never uploads or executes the donor.</pre>
+    <div class="source-intake-output" data-source-output>Complete the fields. The browser hashes local content; it never uploads or executes the donor.</div>
   </form>`;
 
   async function sha256(bytes) {
@@ -126,7 +126,7 @@
         placement: ['Brown’s Barometers', 'Wuda', 'Omo or Prince comp card', 'intelTHAT', 'calculateTHAT', 'Market Exchange'],
         rejected: ['broker adapters', 'orders', 'credentials', 'account mutation', 'money movement', 'unsupported performance claims']
       };
-      output.textContent = JSON.stringify(receipt, null, 2); exportButton.disabled = false;
+      output.textContent = `Intake recorded for ${receipt.source.locator}. Source type: ${kind}. Review the license and choose whether to reuse, adapt, reference, or reject this source. No donor code was run. You can export the full receipt for inspection.`; exportButton.disabled = false;
     });
     exportButton.addEventListener('click', () => receipt && downloadJson(receipt, 'market-source-refinery-intake.json'));
   }

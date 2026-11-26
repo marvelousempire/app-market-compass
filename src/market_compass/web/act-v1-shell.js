@@ -209,6 +209,11 @@
   selectRoom(initialRoom);
   focusCanvas(roomLanding[initialRoom]);
   window.addEventListener('marketcompassreport', () => focusCanvas(focusedSelector));
+  window.addEventListener('marketcompassanalysiscomplete', () => {
+    history.replaceState(null, '', '#market-workspace');
+    selectRoom('desk');
+    focusCanvas(roomLanding.desk);
+  });
   window.addEventListener('hashchange', () => {
     const link = links.find(item => item.getAttribute('href') === location.hash);
     if (link) {selectRoom(link.dataset.actShellRoom); focusCanvas(roomLanding[link.dataset.actShellRoom]);}
