@@ -1,52 +1,58 @@
 {
   "schema": "market-compass.documentation-freshness.v1",
-  "review_date": "2026-11-14",
-  "audited_revision": "1a93344317b8facd22e58c79268f594a315b7c15",
+  "review_date": "2026-11-26",
+  "audited_revision": "923d1b69f173d83e31e9e380a783ca31da702041",
   "areas": {
     "docs": {
       "updated": [
         "README.md",
-        "CHANGELOG.md",
-        "handbook/"
+        "docs/STATUS.md",
+        "handbook/README.md",
+        "handbook/index.md",
+        "handbook/chapter-01-start/page-01-research-workbench/01-research-workbench.md",
+        "handbook/chapter-02-use-market-compass/page-01-daily-workflow/01-daily-workflow.md",
+        "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/01-provider-lanes.md",
+        "handbook/chapter-09-research-v1-delivery/page-01-acceptance-and-release/01-acceptance-and-release.md"
       ],
       "current": [
-        "docs/STATUS.md",
         "docs/TROUBLESHOOTING.md"
       ],
-      "reason": "Navigation and approved design added. Current runtime and recovery procedure retained. Dated commissioning history preserved."
+      "reason": "Aligned operator text with the observed focused rooms, Analyze result, virtual Options Lab, embedded intelTHAT, and readable status. Historical commissioning receipts remain dated evidence."
     },
     "wiring_guides": {
-      "current": [
-        "docs/ARCHITECTURE.md"
+      "updated": [
+        "docs/handoff.md"
       ],
-      "reason": "Release changes documentation and leaves runtime wiring intact."
+      "current": [
+        "docs/ARCHITECTURE.md",
+        "docs/RUST-MIGRATION.md"
+      ],
+      "reason": "Corrected the live loopback address and first-screen navigation; Rust migration and ownership boundaries remain current."
     },
     "white_papers": {
       "current": [
         "docs/PRODUCT-REQUIREMENTS.md",
         "docs/DECISION-GATES-DESIGN.md"
       ],
-      "reason": "Existing product and decision definitions remain supporting sources."
+      "reason": "No product-goal or decision-authority change; virtual simulation remains within the existing no-broker boundary."
     },
     "building_skills": {
       "status": "not applicable",
-      "reason": "No shared teaching, binder or installation contract changed."
+      "reason": "No shared skill, app builder, or receiving contract changed."
     }
   },
   "checks": {
     "handbook_sync": "passed",
-    "tree_page_caps_relative_links_source_bindings_status_sections": "passed",
-    "ruff_owner_scope": "passed",
-    "pytest": "83 passed",
-    "named_door_health_and_operator_status": "passed",
-    "independent_review_correction": "Documented external Nephew generator, explicit checkout roots, check and missing-owner recovery; handbook index links maintenance instructions."
+    "tree_page_caps_relative_links_source_bindings_status_sections": "partial: source hashes and generated pages verified; no repository checker for full structural gate",
+    "pytest": "87 passed",
+    "named_door_health_and_operator_status": "passed"
   },
   "door_status": {
     "state": "live",
     "host": "fivemac.local",
-    "pid": 22921,
-    "started_at": "2026-11-13T23:12:10.332585+00:00",
-    "bind": "127.0.0.1:8000",
+    "pid": 73645,
+    "started_at": "2026-11-26T02:44:37.403378+00:00",
+    "bind": "127.0.0.1:18003",
     "mode": "research_only",
     "preview_only": false,
     "commissioned": true,
@@ -54,6 +60,6 @@
     "signal_generation": true,
     "score_influence": false,
     "authority": "gitea:averygoodman/app-market-compass@main",
-    "source_revision": "1a93344317b8facd22e58c79268f594a315b7c15"
+    "source_revision": "923d1b69f173d83e31e9e380a783ca31da702041"
   }
 }

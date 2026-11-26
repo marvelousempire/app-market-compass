@@ -1,10 +1,11 @@
 # Market Compass handoff — commissioned ACT v1 research runtime
 
-This handoff reflects the commissioned v0.8 source candidate, not the old developer-demo surface. The first
-screen follows the 8001 information sequence (header, identity, four summary cards, then the
-desk). The research workbench, indicators, multi-timeframe analysis, watchlist, catalysts,
-Evidence Board, node inspector, research backtest, Nephew analyst panel, Actor spaces and ACT v1
-Market Exchange remain visible.
+This handoff reflects the commissioned v0.8.1 research service. The left rail
+selects a room, the right rail selects that room's sections, and the center shows
+the current work. Analyze opens a completed report in Compass Desk. The research
+workbench, indicators, multi-timeframe analysis, watchlist, catalysts, Evidence
+Board, node inspector, research backtest, Nephew analyst panel, Actor spaces,
+Options Lab, intelTHAT, and ACT v1 Market Exchange remain available.
 
 ## Installed target
 
@@ -13,7 +14,7 @@ Market Exchange remain visible.
 | Canonical forge | Gitea `averygoodman/app-market-compass`; accepted `main` owns releases |
 | Downstream mirror | GitHub `marvelousempire/app-market-compass` follows accepted Gitea main |
 | Stable FiveMac checkout | `~/Developer/market-compass-live` |
-| Service and door | `ai.market-compass` at FiveMac `127.0.0.1:8000`; Make Doors operator URL `http://market-compass.localhost/` |
+| Service and door | `ai.market-compass` at FiveMac `127.0.0.1:18003`; Make Doors operator URL `http://market-compass.localhost/` |
 | Door ownership | Nephew owns the canonical registry and named, restartable FiveMac transport; Make Doors projects it. The raw `127.0.0.1:18003` forward is not the user-facing Door. |
 | Authority boundary | Commissioned research only; no trading, score influence, bank writes or money movement |
 
@@ -28,8 +29,8 @@ Market Exchange remain visible.
 Read the exact live revision rather than copying a dated SHA from this handoff:
 
 ```bash
-curl -fsS http://127.0.0.1:8000/api/operator/status
-curl -fsS http://127.0.0.1:8000/health
+curl -fsS http://market-compass.localhost/api/operator/status
+curl -fsS http://market-compass.localhost/health
 launchctl print gui/$(id -u)/ai.market-compass
 ```
 

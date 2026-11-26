@@ -32,7 +32,7 @@ Market Compass will not connect to a broker, submit an order, execute a trade, m
 
 ## Product status at a glance
 
-**Current release:** ACT v1 administrative shell plus the Market Compass research workbench, Market Exchange, native intelTHAT application, and Measurement Studio, `v0.8.1`
+**Current release:** ACT v1 focused rooms plus the Market Compass research workbench, Options Lab, Market Exchange, embedded intelTHAT application, and Measurement Studio, `v0.8.1`
 **Primary use case:** swing-trade research over days to several weeks  
 **Current interfaces:** browser app, CLI, FastAPI, CSV input  
 **Current default market-data source:** Yahoo public search/chart endpoints  
@@ -51,7 +51,7 @@ Market Compass is commissioned as a loopback-only research service on **FiveMac*
 | Canonical source | Gitea `averygoodman/app-market-compass` on `main` |
 | Stable checkout | `~/Developer/market-compass-live` |
 | User service | `ai.market-compass` |
-| Address | `http://127.0.0.1:8000` on FiveMac |
+| Address | `http://127.0.0.1:18003` on FiveMac (implementation detail) |
 | Operator Door | `http://market-compass.localhost/` through Make Doors on the operator Mac |
 | Door transport | Named, restartable `Market Compass FiveMac Door`; loopback-only, not LAN/WAN published |
 | Runtime mode | `research_only` |
@@ -61,8 +61,8 @@ Market Compass is commissioned as a loopback-only research service on **FiveMac*
 The exact running revision, PID and authority receipt are available from:
 
 ```bash
-curl -fsS http://127.0.0.1:8000/api/operator/status
-curl -fsS http://127.0.0.1:8000/health
+curl -fsS http://market-compass.localhost/api/operator/status
+curl -fsS http://market-compass.localhost/health
 launchctl print gui/$(id -u)/ai.market-compass
 ```
 
@@ -143,7 +143,7 @@ That distinction is a core product rule, not legal decoration.
 
 # What works today
 
-The current `v0.7` implementation includes the following real, runnable capabilities.
+The current `v0.8.1` implementation includes the following real, runnable capabilities.
 
 ## ACT v1 Market Exchange
 
@@ -417,7 +417,7 @@ make app
 Default address:
 
 ```text
-http://127.0.0.1:8000
+http://127.0.0.1:18003
 ```
 
 ### Runtime controls
@@ -441,7 +441,7 @@ The local runtime shows **Omo**, **Prince**, **Wuda**, and **Brown’s Barometer
 
 ### Native intelTHAT research application
 
-Open the full application at **`http://market-compass.localhost/intelthat/`**. The compact Market Compass section is a bridge into the product; it is not presented as the whole app. intelTHAT now owns six application rooms: Research Cockpit, Market Pack, Macro Conditions, News Intelligence, SEC Monitor, and Run History. A run resolves supported company names such as `Apple` to `AAPL`, reads the four research modules in parallel, reports measured elapsed time without inventing a percentage, and keeps module failures visible instead of failing the whole app.
+Open **intelTHAT App** from the main Market Compass left rail and select its six rooms from the right rail: Research Cockpit, Market Pack, Macro Conditions, News Intelligence, SEC Monitor, and Run History. The standalone **`http://market-compass.localhost/intelthat/`** address remains available. A run resolves supported company names such as `Apple` to `AAPL`, reads the four research modules in parallel, reports measured elapsed time without inventing a percentage, and keeps module failures visible instead of failing the whole app.
 
 The app has two deliberately separate readers:
 

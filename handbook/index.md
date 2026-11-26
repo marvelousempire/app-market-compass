@@ -4,8 +4,8 @@
 
 - [Market Compass Door](http://market-compass.localhost/)
 - Version `0.8.1`
-- FiveMac commissioned, observed November 14, 2026
-- Observed live revision `1a93344317b8facd22e58c79268f594a315b7c15`
+- FiveMac commissioned; named Door, health, Analyze flow, and room navigation observed November 26, 2026
+- App revision observed before this handbook edit: `923d1b69f173d83e31e9e380a783ca31da702041`
 - `research_only=true` (operator mode `research_only`)
 - `signal_generation=true`
 - `trade_execution=false`
@@ -13,7 +13,7 @@
 
 Commissioning remains **16/20**. The [November 12 historical closeout](../docs/CLOSEOUT-REPORT-2026-11-12.md) preserves the four remaining outcomes and the revision witnessed that day. Consult [product status](../docs/STATUS.md) and the [real operator readback](http://market-compass.localhost/api/operator/status) for current evidence.
 
-Research v1 is an approved build contract. Runtime proof is required before any approved target can be promoted to LIVE NOW.
+The current Door has focused rooms, Options Lab, and the embedded intelTHAT app. Research v1 remains an approved build contract with additional provider and commissioning work; the installed UI does not prove every planned target.
 
 ## Chapters
 

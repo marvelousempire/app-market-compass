@@ -24,4 +24,4 @@ Advanced model comparison and calibrated outcome models require separate evidenc
 
 ## Broker and financial effects — PERMANENTLY PROHIBITED
 
-Broker credentials, orders, execution, positions, and money movement remain excluded from every phase.
+Broker credentials, real orders, execution, real-account positions, and money movement remain excluded from every phase. Options Lab's virtual orders, positions, and journal are local simulation records, not broker effects.
