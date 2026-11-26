@@ -42,6 +42,15 @@ def test_hard_stop_outranks_positive_triggers():
     assert result["state"] == "DO_NOT_GO_SIGNAL"
 
 
+def test_trade_context_uses_report_levels_without_creating_an_order():
+    candidate = report(route=Route(direction="up", invalidation=7.0, next_bus_stops=[9.25], downside_stops=[7.5], reward_risk=2.5))
+    result = calculate_readiness(candidate)
+    assert result["trade_context"]["current_price"] == 8.0
+    assert result["trade_context"]["next_route_level"] == 9.25
+    assert result["trade_context"]["invalidation"] == 7.0
+    assert result["trade_execution"] is False
+
+
 def test_surface_names_calculatethat_and_trigger_boundary():
     from pathlib import Path
     web = Path(__file__).parents[1] / "src" / "market_compass" / "web"

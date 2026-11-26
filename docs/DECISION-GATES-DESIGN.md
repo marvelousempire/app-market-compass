@@ -21,6 +21,8 @@ Status: active research-signal contract. Market Compass permanently excludes tra
 
 Market Compass never returns `EXECUTE`, and signals do not require a trade-approval receipt.
 
+The canvas pairs the active gate result with a read-only trade scenario: current price, route direction, next directional level, invalidation, reward to risk, source and observation time. Missing levels remain unavailable. The calculation instrument shows evidence balance and confidence in labeled cards; confidence is evidence quality, not profit probability. Exact machine fields remain in the exported receipt.
+
 ## Default gates
 
 | Gate | Pass condition | Failure class |

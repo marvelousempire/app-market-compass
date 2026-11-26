@@ -62,6 +62,15 @@ def calculate_readiness(report: Report) -> dict[str, Any]:
         },
         "score_influence": False,
         "trade_execution": False,
+        "trade_context": {
+            "current_price": report.price,
+            "direction": report.route.direction,
+            "invalidation": report.route.invalidation,
+            "next_route_level": report.route.next_bus_stops[0] if report.route.next_bus_stops else None,
+            "reward_risk": reward_risk,
+            "as_of": timestamp,
+            "provider": report.data_meta.get("provider"),
+        },
         "approval_required_for_signal": False,
         "formula": {
             "evidence_edge": "abs(bull_evidence - bear_evidence)",
@@ -72,7 +81,7 @@ def calculate_readiness(report: Report) -> dict[str, Any]:
         "next_action": "Do not go; repair hard stops." if failed_hard else "Go signal is active for research review." if evidence_ready else "Watch signal is active; review incomplete gates.",
         "boundary": "Signals are active research outputs, not orders. Market Compass does not execute trades.",
     }
-    receipt_payload = {key: result[key] for key in ("instrument", "state", "symbol", "signal", "formula", "gates", "score_influence", "trade_execution")}
+    receipt_payload = {key: result[key] for key in ("instrument", "state", "symbol", "signal", "formula", "gates", "trade_context", "score_influence", "trade_execution")}
     result["receipt"] = {
         "schema": "market-compass.calculate-that-receipt.v1",
         "issued_at": timestamp,

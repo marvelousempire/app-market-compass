@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id);
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num=(value,digits=2)=>Number.isFinite(Number(value))?Number(value).toLocaleString(undefined,{maximumFractionDigits:digits}):'—';
 const pct=(value,digits=0)=>Number.isFinite(Number(value))?`${(Number(value)*100).toFixed(digits)}%`:'—';
-const price=value=>{const n=Number(value);if(!Number.isFinite(n))return '—';const digits=Math.abs(n)<1?6:Math.abs(n)<100?3:2;return n.toLocaleString(undefined,{maximumFractionDigits:digits});};
+const price=value=>{const n=Number(value);if(!Number.isFinite(n))return '—';const digits=Math.abs(n)<1?Math.min(6,Math.max(2,(String(value).split('.')[1]||'').length)):2;return n.toLocaleString(undefined,{minimumFractionDigits:digits,maximumFractionDigits:digits});};
 const badge=(text,tone='')=>`<span class="badge ${tone}">${esc(text)}</span>`;
 const toneScore=score=>Number(score)>.12?'good':Number(score)<-.12?'bad':'warn';
 const layer=key=>state.report?.layers?.[key]||{};
