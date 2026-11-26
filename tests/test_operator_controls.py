@@ -77,7 +77,7 @@ def test_stubthat_foundry_inventories_exchange_admin_and_bankthat_without_author
     assert script.count("'Bank & Accounts Console'") >= 1
     for module in ("bank-import", "ledger-journal", "balance-reconcile", "trading-portfolio", "storage-setup"):
         assert module in script
-    for boundary in ("owner authority preserved", "no broker execution", "no money movement", "auto-generate POST is excluded"):
+    for boundary in ("Owner controls preserved", "no broker execution", "no money movement", "auto-generate POST is excluded"):
         assert boundary in script
 
 

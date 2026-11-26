@@ -74,6 +74,10 @@
     jsTHAT: ['Local behavior ready', 'Provides selection, filters, validation, hashing, and export without executing donor code.'],
     stubTHAT: ['Contract assembled', 'Publishes the reviewed read-only contract and provenance receipt while owner engines remain authoritative.'],
   };
+  const human = window.MarketCompassHuman;
+  const authLabel = mode => ({oidc:'Connected account sign-in',api_key:'Owner-held API key',session_verify:'Verified local session'})[mode] || 'Sign-in method unavailable';
+  const sourceLabel = source => source.startsWith('catalog:') ? 'Market Exchange catalog' : source.startsWith('admin:') ? 'Market Exchange admin' : source.startsWith('Bank Reader') ? 'Bank Reader review' : source;
+  const pipelineLabel = {parseTHAT:'Inventory',decantTHAT:'Review boundaries',htmlTHAT:'Structure',cssTHAT:'Appearance',jsTHAT:'Local behavior',stubTHAT:'Read-only contract'};
 
   const layer = (name, text) => `<div><span>${name}</span><strong>${text}</strong></div>`;
   const sourceIntakeMarkup = `<form class="source-intake" id="source-intake">
@@ -137,8 +141,8 @@
       <div class="stubthat-inspector-head"><div><p class="eyebrow">SELECTED MODULE CONTRACT</p><h3>${item.name}</h3></div><span class="stub-state">${item.family === 'bankTHAT' ? 'reviewed · private · read only' : item.slug === 'market-source-refinery' ? 'intake workflow ready' : 'owner-bound contract'}</span></div>
       <p>${item.purpose}. This module exposes reviewed local behavior and contract evidence only; it does not claim donor execution, credentials, money movement, or authority owned by another product.</p>
       <div class="stubthat-contract">
-        ${layer('Owner', item.owner)}${layer('Console', item.console)}${layer('Source', item.source)}${layer('Classification', item.classification)}
-        ${layer('htmlTHAT', 'semantic shell ready')}${layer('cssTHAT', 'ACT v1 admin presentation ready')}${layer('jsTHAT', 'local inspect/select behavior only')}${layer('Authority', 'read-only · no broker execution · no money movement')}
+        ${layer('Owner', item.owner)}${layer('Console', item.console)}${layer('Source', sourceLabel(item.source))}${layer('Kind', human.label(item.classification))}
+        ${layer('Structure', 'Accessible controls ready')}${layer('Appearance', 'Market Compass style ready')}${layer('Behavior', 'Local inspection only')}${layer('Authority', 'read-only · no broker execution · no money movement')}
       </div>
       ${productTabs}
       ${item.slug === 'market-source-refinery' ? sourceIntakeMarkup : ''}
@@ -147,10 +151,10 @@
       const panel = inspector.querySelector('#exchange-product-panel');
       const drawPanel = name => {
         const content = {
-          General: [['Product ID', item.slug], ['Type', item.kind], ['Metadata', item.metadataMode], ['State', item.enabled ? 'enabled in source catalog' : 'off / coming soon']],
+          General: [['Product', item.name], ['Type', human.label(item.kind)], ['Presentation', human.label(item.metadataMode)], ['State', item.enabled ? 'Listed in the source catalog' : 'Not yet available']],
           UI: [['Surface', item.console], ['Presentation', 'Market Compass read-only adapter'], ['Owner UI', 'not embedded']],
-          'API & auth': [['Authentication', item.authMode], ['API base', 'held behind owner adapter'], ['Health', 'not probed by this stub']],
-          SSO: [['SSO contract', item.authMode === 'oidc' ? 'owner OIDC required' : 'not declared'], ['Session', 'no credential copied']],
+          'API & auth': [['Sign-in method', authLabel(item.authMode)], ['Connection', 'Managed by the owning app'], ['Health', 'Not checked here']],
+          SSO: [['Account sign-in', item.authMode === 'oidc' ? 'Managed by the owning app' : 'Not declared'], ['Session', 'No sign-in details copied']],
           Install: [['Installed state', item.enabled ? 'catalog-enabled; installation unverified' : 'not enabled'], ['Action', 'approval-gated; unavailable in stub']],
         }[name];
         panel.innerHTML = content.map(([label, value]) => `<div><span>${label}</span><strong>${value}</strong></div>`).join('');
@@ -175,7 +179,7 @@
 
   function drawExchangeProducts() {
     const items = filteredExchangeProducts();
-    grid.innerHTML = items.map(item => `<button type="button" class="stub-card exchange-product-card" data-stub-id="${item.id}"><span class="stub-family">${item.kind} · ${item.metadataMode}</span><strong>${item.name}</strong><small>${item.purpose}</small><span class="stub-layers"><i>${item.enabled ? 'ON' : 'OFF'}</i><i>${item.authMode}</i><i>READ ONLY</i></span><span class="stub-foot">Inspect product contract</span></button>`).join('') || '<p class="muted">No exchange tools match this search.</p>';
+    grid.innerHTML = items.map(item => `<button type="button" class="stub-card exchange-product-card" data-stub-id="${item.id}"><span class="stub-family">${human.label(item.kind)} · ${human.label(item.metadataMode)}</span><strong>${item.name}</strong><small>${item.purpose}</small><span class="stub-layers"><i>${item.enabled ? 'Listed' : 'Unavailable'}</i><i>${authLabel(item.authMode)}</i><i>READ ONLY</i></span><span class="stub-foot">Inspect product contract</span></button>`).join('') || '<p class="muted">No exchange tools match this search.</p>';
     grid.querySelectorAll('[data-stub-id]').forEach(button => button.addEventListener('click', () => {
       grid.querySelectorAll('.stub-card').forEach(card => card.classList.toggle('selected', card === button));
       renderInspector(exchangeProducts.find(item => item.id === button.dataset.stubId));
@@ -185,7 +189,7 @@
   function renderExchangeConsole() {
     const enabled = exchangeProducts.filter(item => item.enabled).length;
     exchangeConsole.hidden = false;
-    exchangeConsole.innerHTML = `<div class="exchange-dashboard">${[['Products',exchangeProducts.length],['Enabled',enabled],['Externals',exchangeProducts.filter(x=>x.kind==='external').length],['Connectors',exchangeProducts.filter(x=>x.kind==='connector').length]].map(([label,value])=>`<div><span>${label}</span><strong>${value}</strong></div>`).join('')}</div><div class="exchange-toolbar"><input type="search" id="exchange-search" placeholder="Search tools or module IDs…" aria-label="Search exchange tools"><div role="group" aria-label="Filter exchange tools">${['all','agent','external','connector','enabled','disabled'].map(name=>`<button type="button" data-exchange-filter="${name}" class="${name==='all'?'active':''}">${name}</button>`).join('')}</div></div><p class="trust-note">Catalog actions are inspect-only. Enable, save, install, API calls and SSO remain with their owners and require separate approval.</p>`;
+    exchangeConsole.innerHTML = `<div class="exchange-dashboard">${[['Products',exchangeProducts.length],['Listed',enabled],['External tools',exchangeProducts.filter(x=>x.kind==='external').length],['Connectors',exchangeProducts.filter(x=>x.kind==='connector').length]].map(([label,value])=>`<div><span>${label}</span><strong>${value}</strong></div>`).join('')}</div><div class="exchange-toolbar"><input type="search" id="exchange-search" placeholder="Search tools or names…" aria-label="Search exchange tools"><div role="group" aria-label="Filter exchange tools">${['all','agent','external','connector','enabled','disabled'].map(name=>`<button type="button" data-exchange-filter="${name}" class="${name==='all'?'active':''}">${human.label(name)}</button>`).join('')}</div></div><p class="trust-note">This catalog is for inspection. Changes to tools, accounts, or connections stay with their owning apps.</p>`;
     exchangeConsole.querySelector('#exchange-search').addEventListener('input', event => { exchangeQuery = event.target.value.trim().toLowerCase(); drawExchangeProducts(); });
     exchangeConsole.querySelectorAll('[data-exchange-filter]').forEach(button => button.addEventListener('click', () => {
       exchangeFilter = button.dataset.exchangeFilter;
@@ -209,14 +213,14 @@
   function render(family) {
     const items = families[family];
     const consoleCount = new Set(items.map(item => item.console)).size;
-    summary.innerHTML = `<b>${items.length} modules inventoried</b><span>${consoleCount} ${consoleCount === 1 ? 'console' : 'consoles'}</span><span>parseTHAT complete</span><span>decantTHAT boundaries applied</span><span>${family === 'bankthat' ? 'private evidence contracts reviewed' : 'owner authority preserved'}</span>`;
+    summary.innerHTML = `<b>${items.length} tools inventoried</b><span>${consoleCount} ${consoleCount === 1 ? 'room' : 'rooms'}</span><span>Sources inventoried</span><span>Reuse boundaries reviewed</span><span>${family === 'bankthat' ? 'Private evidence reviewed' : 'Owner controls preserved'}</span>`;
     if (family === 'exchange') {
       renderExchangeConsole();
     } else {
       exchangeConsole.hidden = true;
       grid.innerHTML = items.map(item => `<button type="button" class="stub-card${item.critical ? ' critical' : ''}" data-stub-id="${item.id}">
       <span class="stub-family">${item.console}</span><strong>${item.name}</strong><small>${item.purpose}</small>
-      <span class="stub-layers"><i>HTML</i><i>CSS</i><i>JS</i><i>STUB</i></span>
+      <span class="stub-layers"><i>Structure</i><i>Style</i><i>Behavior</i><i>Read only</i></span>
       <span class="stub-foot">${item.critical ? 'write hazard held' : 'read-only contract'}</span>
       </button>`).join('');
       grid.querySelectorAll('[data-stub-id]').forEach(button => button.addEventListener('click', () => {
@@ -236,7 +240,7 @@
   pipelineButtons.forEach(button => button.addEventListener('click', () => {
     const [state, detail] = pipeline[button.dataset.pipelineStage];
     pipelineButtons.forEach(other => other.classList.toggle('active', other === button));
-    inspector.innerHTML = `<div class="stubthat-inspector-head"><div><p class="eyebrow">MARKET EXCHANGE PIPELINE</p><h3>${button.dataset.pipelineStage}</h3></div><span class="stub-state">${state}</span></div><p>${detail}</p><div class="stubthat-contract">${layer('Inputs', 'reviewed source material')}${layer('Output', 'provenance-bound read-only contract')}${layer('Authority', 'research only')}${layer('Refusal', 'orders · credentials · money movement')}</div>`;
+    inspector.innerHTML = `<div class="stubthat-inspector-head"><div><p class="eyebrow">MARKET EXCHANGE REVIEW</p><h3>${pipelineLabel[button.dataset.pipelineStage]}</h3></div><span class="stub-state">${state}</span></div><p>${detail}</p><div class="stubthat-contract">${layer('Inputs', 'reviewed source material')}${layer('Output', 'source-backed read-only contract')}${layer('Authority', 'research only')}${layer('Unavailable', 'orders · account credentials · money movement')}</div>`;
     inspector.scrollIntoView({ block: 'nearest' });
   }));
   render('exchange');
