@@ -7,6 +7,8 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Options Lab right-rail sections now open one retained canvas cassette at a time, with section submenus for controls and results.
+
 - Added Rust-backed same-expiration two-leg projections for bull call spreads, bear put spreads, long straddles and long strangles. Strategy mode shows theoretical net debit, bounded expiration risk/reward, and price, time, and volatility scenarios without placing a multi-leg order.
 
 - Added the November 12 commissioning closeout report and machine-readable review receipt. The report records sixteen fully evidenced client-demo outcomes, four remaining proof or cross-owner governance debts, the live accepted revision, permanent authority refusals, and roadmap work without relabeling partial work as complete.

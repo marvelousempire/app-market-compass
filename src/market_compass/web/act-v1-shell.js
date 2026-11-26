@@ -19,7 +19,7 @@
     actors: [['Omo', 'cassette:omo'], ['Prince', 'cassette:prince'], ['Wuda', 'cassette:wuda'], ['Brown’s Barometers', 'cassette:browns-barometers']],
     exchange: [['Dashboard', 'exchange:dashboard'], ['Catalog', 'exchange:catalog'], ['All products', 'exchange:products'], ['Installed', 'exchange:installed'], ['APIs & MCPs', 'exchange:apis'], ['API Observatory', 'exchange:observatory']],
     measurement: [['Subject schedules', '#hcck-profiles'], ['Measure and simulate', '#universal-simulator'], ['Original market desk', '#market-workspace']],
-    options: [['Option chain', 'options-view:chain'], ['Trade builder', 'options-view:builder'], ['Returns', 'options-view:returns'], ['Strategies', 'options-view:strategies'], ['Alpaca data', 'options-view:alpaca'], ['SEC filings', 'options-view:edgar'], ['Positions', 'options-view:positions'], ['Journal', 'options-view:journal']],
+    options: [['Option chain', 'options-view:chain', [['Expiration','expiry'],['Calls and puts','types'],['Strike prices','strikes']]], ['Trade builder', 'options-view:builder', [['Action','action'],['Risk','risk'],['Virtual order','order']]], ['Returns', 'options-view:returns', [['Price and time','scenario'],['Volatility','volatility'],['Chart','chart']]], ['Strategies', 'options-view:strategies', [['Legs','legs'],['Risk','risk'],['Chart','chart']]], ['Alpaca data', 'options-view:alpaca', [['Quote','quote'],['Refresh','refresh']]], ['SEC filings', 'options-view:edgar', [['Filings','filings']]], ['Positions', 'options-view:positions', [['Open positions','open']]], ['Journal', 'options-view:journal', [['Entries','entries']]]],
     'intel-app': [['Cockpit', 'intel-view:cockpit'], ['Market Pack', 'intel-view:pack'], ['Macro Conditions', 'intel-view:macro'], ['News Intelligence', 'intel-view:rss'], ['SEC Monitor', 'intel-view:edgar'], ['Run History', 'intel-view:receipts']],
     desk: [['Intelligence overview', '.intelligence-overview'], ['Day Trader lens', '#day-trader-lens'], ['Price route', '#route-panel'], ['Timeframes', '#timeframe-panel'], ['Evidence', '#evidence-panel'], ['Catalysts', '#catalyst-panel']],
     intel: [['Day Trader lens', '#day-trader-lens'], ['Local receipts', '#intelthat-panel'], ['Historical analogs', '#history-panel'], ['Forecast', '#forecast-panel'], ['Evidence board', '#evidence-board']],
@@ -72,12 +72,25 @@
     if (active && roomLabel) roomLabel.textContent = active.querySelector('b')?.textContent || id;
     if (roomHelp) roomHelp.textContent = roomDescriptions[id] || '';
     if (roomSubmenu) {
-      roomSubmenu.replaceChildren(...(roomSubmenus[id] || []).map(([label, target]) => {
+      roomSubmenu.replaceChildren(...(roomSubmenus[id] || []).flatMap(([label, target, children]) => {
         const button = document.createElement('button');
         button.type = 'button';
         button.dataset.actSubmenuTarget = target;
         button.innerHTML = `<span>${label}</span><i aria-hidden="true">→</i>`;
-        return button;
+        if (!children) return [button];
+        button.setAttribute('aria-expanded', 'false');
+        const childGroup = document.createElement('div');
+        childGroup.className = 'act-room-submenu-children';
+        childGroup.hidden = true;
+        childGroup.setAttribute('aria-label', `${label} sections`);
+        childGroup.append(...children.map(([childLabel, focus]) => {
+          const child = document.createElement('button');
+          child.type = 'button';
+          child.dataset.actSubmenuTarget = `options-detail:${target.slice(13)}:${focus}`;
+          child.textContent = childLabel;
+          return child;
+        }));
+        return [button, childGroup];
       }));
     }
   };
@@ -106,6 +119,10 @@
     } else if (target.startsWith('options-view:')) {
       window.dispatchEvent(new CustomEvent('marketcompassoptionsview', { detail: { view: target.slice(13) } }));
       focusCanvas('#options-lab');
+    } else if (target.startsWith('options-detail:')) {
+      const [, view, focus] = target.split(':');
+      window.dispatchEvent(new CustomEvent('marketcompassoptionsview', { detail: { view, focus } }));
+      focusCanvas('#options-lab');
     } else if (target.startsWith('cassette:')) {
       document.querySelector(`[data-cassette="${target.slice(9)}"]`)?.click();
       focusCanvas('#actor-spaces');
@@ -118,6 +135,17 @@
       const node = revealTarget(target);
       if (node) focusCanvas(target);
     }
+  });
+  window.addEventListener('message', event => {
+    if (body.dataset.actRoom !== 'options' || event.origin !== location.origin || event.source !== document.querySelector('#options-lab-frame')?.contentWindow || event.data?.type !== 'market-compass-options-view') return;
+    const view = event.data.view;
+    roomSubmenu?.querySelectorAll('.act-room-submenu-children').forEach(group => { group.hidden = true; });
+    roomSubmenu?.querySelectorAll('button[data-act-submenu-target^="options-view:"]').forEach(button => {
+      const active = button.dataset.actSubmenuTarget === `options-view:${view}`;
+      button.setAttribute('aria-expanded', String(active));
+      if (active) button.setAttribute('aria-current', 'true'); else button.removeAttribute('aria-current');
+      if (active && button.nextElementSibling?.classList.contains('act-room-submenu-children')) button.nextElementSibling.hidden = false;
+    });
   });
   window.addEventListener('message', event => {
     if (body.dataset.actRoom !== 'intel-app' || event.origin !== location.origin || event.source !== document.querySelector('#intelthat-app-frame')?.contentWindow || event.data?.type !== 'market-compass-intel-view') return;

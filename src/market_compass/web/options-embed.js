@@ -2,6 +2,7 @@
   const frame = document.getElementById('options-lab-frame');
   if (!frame) return;
   let latestReport = null;
+  let requestedView = null;
   const sendTheme = () => {
     if (!frame.contentWindow) return;
     const css = getComputedStyle(document.documentElement);
@@ -25,9 +26,12 @@
       provider: meta.provider || 'Market Compass desk'
     }}, location.origin);
   };
-  window.addEventListener('marketcompassoptionsview', event => frame.contentWindow?.postMessage({type:'market-compass-options-select-view',view:event.detail.view},location.origin));
+  window.addEventListener('marketcompassoptionsview', event => {
+    requestedView = {type:'market-compass-options-select-view',view:event.detail.view,focus:event.detail.focus};
+    frame.contentWindow?.postMessage(requestedView,location.origin);
+  });
   window.addEventListener('marketcompassreport', event => { latestReport = event.detail.report; sendReport(); });
-  frame.addEventListener('load', () => { sendTheme(); sendReport(); });
+  frame.addEventListener('load', () => { sendTheme(); sendReport(); if (requestedView) frame.contentWindow?.postMessage(requestedView,location.origin); });
   window.addEventListener('actappearancechange', sendTheme);
   window.addEventListener('message', event => {
     if (event.origin !== location.origin || event.source !== frame.contentWindow || event.data?.type !== 'market-compass-options-height') return;

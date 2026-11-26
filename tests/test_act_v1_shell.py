@@ -8,7 +8,7 @@ def test_act_v1_is_the_outer_shell_not_an_inner_label():
     assert '<aside class="act-shell-rail"' in html
     assert 'aria-label="Market Compass rooms"' in html
     assert 'ADMINISTRATIVE CONTROL TOWER · ACT V1' not in html
-    assert '/static/act-v1-shell.css?v=20261125.7' in html
+    assert '/static/act-v1-shell.css?v=' in html
     assert '/static/act-v1-appearance.css' in html
     assert '/static/act-v1-shell.js?v=' in html
     for node in ('primary-rail', 'supporting-rail', 'bottom-rail'):

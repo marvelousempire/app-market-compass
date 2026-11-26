@@ -16,6 +16,7 @@
     document.querySelectorAll('.single-panel').forEach(panel => { panel.hidden = strategy; });
     el('strategy-panel').hidden = !strategy;
     if (strategy) render();
+    window.dispatchEvent(new CustomEvent('marketcompassoptionscassette', {detail: {view: strategy ? 'strategies' : 'chain'}}));
     parent.postMessage({type:'market-compass-options-height',height:document.documentElement.scrollHeight},location.origin);
   }
   el('mode-single').onclick = () => mode('single');
