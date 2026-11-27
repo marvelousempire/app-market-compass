@@ -43,3 +43,24 @@ def test_connection_settings_refuse_cross_origin_write(monkeypatch):
         "client_id": "client123", "client_secret": "secret123"},
         headers={"Origin": "http://other.localhost", "Host": "market-compass.localhost"})
     assert response.status_code == 403
+
+
+def test_configure_requires_keychain_readback(monkeypatch):
+    stored = {}
+    monkeypatch.setattr(alpaca_connect, "_read", lambda account: stored.get(account, ""))
+    monkeypatch.setattr(alpaca_connect, "_save", lambda account, value: stored.__setitem__(account, value) if account == "client-id" else None)
+    monkeypatch.setattr(alpaca_connect, "_delete", lambda account: stored.pop(account, None))
+    with pytest.raises(RuntimeError, match="could not be confirmed"):
+        alpaca_connect.configure("client123", "secret123")
+    assert stored.get("client-id") == "client123"
+    assert not alpaca_connect.status()["configured"]
+
+
+def test_configure_reports_saved_only_after_readback(monkeypatch):
+    stored = {}
+    monkeypatch.setattr(alpaca_connect, "_read", lambda account: stored.get(account, ""))
+    monkeypatch.setattr(alpaca_connect, "_save", lambda account, value: stored.__setitem__(account, value))
+    monkeypatch.setattr(alpaca_connect, "_delete", lambda account: stored.pop(account, None))
+    result = alpaca_connect.configure("client123", "secret123")
+    assert result["configured"] is True
+    assert "client_secret" not in result

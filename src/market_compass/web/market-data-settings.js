@@ -10,20 +10,25 @@ async function connectionStatus() {
     const response = await fetch('/api/alpaca-connect/status', {cache: 'no-store'});
     if (!response.ok) throw new Error('unavailable');
     const status = await response.json();
+    connection.dataset.saveState = status.configured ? 'saved' : 'empty';
     window.dispatchEvent(new CustomEvent('marketcompassalpacastatus', {detail: {configured: status.configured, connected: status.connected}}));
-    connection.textContent = status.connected ? 'Alpaca paper market-data sign-in saved. Check the price source below to confirm your feed.'
-      : status.configured ? 'Connect app saved on this Mac. Sign in with Alpaca to finish.'
+    connection.textContent = status.connected ? 'Alpaca connection saved on this Mac. Check the price source below to confirm your feed. The secret fields stay blank for safety.'
+      : status.configured ? 'App details saved on this Mac. The fields stay blank for safety. Next, select Connect with Alpaca.'
       : 'Alpaca is not connected. Add your Connect app credentials below.';
     if (start) start.disabled = !status.configured;
+    return status;
   } catch {
+    connection.dataset.saveState = 'error';
     window.dispatchEvent(new CustomEvent('marketcompassalpacastatus', {detail: null}));
     connection.textContent = 'Connection status unavailable. No credential was shown or changed.';
     if (start) start.disabled = true;
+    return null;
   }
 }
 
 form?.addEventListener('submit', async event => {
   event.preventDefault();
+  connection.dataset.saveState = 'saving';
   connection.textContent = 'Saving your Connect app in this Mac’s Keychain…';
   const client_id = form.elements.client_id.value.trim();
   const client_secret = form.elements.client_secret.value.trim();
@@ -36,9 +41,12 @@ form?.addEventListener('submit', async event => {
       const error = await response.json();
       throw new Error(error.detail || 'The Connect app could not be saved.');
     }
+    const saved = await response.json();
+    if (!saved.configured) throw new Error('The app details could not be confirmed as saved. Please try again.');
+    const verified = await connectionStatus();
+    if (!verified?.configured) throw new Error('The app details were not confirmed after saving. Your entries are still here; try again.');
     form.reset();
-    await connectionStatus();
-  } catch (error) { connection.textContent = error.message; }
+  } catch (error) { connection.dataset.saveState = 'error'; connection.textContent = error.message; }
 });
 
 start?.addEventListener('click', async () => {

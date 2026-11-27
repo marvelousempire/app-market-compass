@@ -52,6 +52,8 @@ def configure(client_id: str, client_secret: str) -> dict:
         _delete("data-token")
     _save("client-id", client_id)
     _save("client-secret", client_secret)
+    if _read("client-id") != client_id or _read("client-secret") != client_secret:
+        raise RuntimeError("The Alpaca app details could not be confirmed in Keychain. They were not accepted as saved.")
     return status()
 
 

@@ -50,6 +50,8 @@
 #market-data-settings .market-price-label{font-size:14px;font-weight:750;color:var(--act-muted)}
 #market-data-settings #market-data-current{font-size:clamp(17px,1.6vw,21px);line-height:1.4;font-weight:700;color:var(--act-ink)}
 #market-data-settings .alpaca-connect-status{font-size:16px;line-height:1.45;color:var(--act-muted)}
+#market-data-settings .alpaca-connect-status[data-save-state="saved"]{padding:12px 14px;border:1px solid var(--act-line);border-radius:12px;background:color-mix(in srgb,var(--act-brand) 6%,var(--act-surface));color:var(--act-ink);font-weight:700}
+#market-data-settings .alpaca-connect-status[data-save-state="error"]{color:var(--act-brand);font-weight:700}
 #market-data-settings .alpaca-setup-intro{font-size:17px;line-height:1.45;color:var(--act-ink)}
 #alpaca-connect-form{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:none}
 #alpaca-connect-form .alpaca-field{display:grid;gap:8px;min-width:0;font-size:16px;font-weight:700}
