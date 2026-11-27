@@ -7,40 +7,39 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 import json
-import subprocess
 
 from .intelthat_contract import symbol
 from .intelthat_native import _edgar
+from .alpaca_connect import data_token
 
 
 def _alpaca_credentials() -> tuple[str, str]:
-    """Read the service's data-only keys without placing them in the agent plist."""
+    """Read explicitly provisioned service credentials; never ingest brokerage keys from UI."""
     key = os.getenv('MARKET_COMPASS_ALPACA_KEY_ID', '').strip()
     secret = os.getenv('MARKET_COMPASS_ALPACA_SECRET_KEY', '').strip()
-    if key and secret:
-        return key, secret
-    if os.uname().sysname != 'Darwin':
-        return '', ''
-    def read(account: str) -> str:
-        try:
-            result = subprocess.run(
-                ['security', 'find-generic-password', '-s', 'ai.market-compass.alpaca',
-                 '-a', account, '-w'], capture_output=True, text=True, timeout=3, check=True)
-            return result.stdout.strip()
-        except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired):
-            return ''
-    return read('key-id'), read('secret-key')
+    return (key, secret) if key and secret else ('', '')
+
+
+def _alpaca_headers() -> dict[str, str]:
+    headers = {'Accept': 'application/json', 'User-Agent': 'MarketCompass/0.8 research-only'}
+    token = data_token()
+    if token:
+        headers['Authorization'] = f'Bearer {token}'
+    else:
+        key, secret = _alpaca_credentials()
+        if key and secret:
+            headers.update({'APCA-API-KEY-ID': key, 'APCA-API-SECRET-KEY': secret})
+    return headers
 
 
 def alpaca_quote(value: str) -> dict:
     ticker = symbol(value)
-    key, secret = _alpaca_credentials()
-    if not key or not secret:
+    headers = _alpaca_headers()
+    if 'Authorization' not in headers and 'APCA-API-KEY-ID' not in headers:
         return {'state': 'held', 'reason': 'Alpaca market-data credentials are not configured.', 'symbol': ticker,
                 'requiredSettings': ['MARKET_COMPASS_ALPACA_KEY_ID', 'MARKET_COMPASS_ALPACA_SECRET_KEY']}
     url = f'https://data.alpaca.markets/v2/stocks/{quote(ticker)}/quotes/latest'
-    request = Request(url, headers={'APCA-API-KEY-ID': key, 'APCA-API-SECRET-KEY': secret,
-                                    'Accept': 'application/json', 'User-Agent': 'MarketCompass/0.8 research-only'})
+    request = Request(url, headers=headers)
     try:
         with urlopen(request, timeout=6) as response:
             payload = json.load(response)
@@ -59,15 +58,14 @@ def alpaca_quote(value: str) -> dict:
 def alpaca_latest_trade(value: str) -> dict:
     """Read a dated trade from the explicitly selected Alpaca feed."""
     ticker = symbol(value)
-    key, secret = _alpaca_credentials()
-    if not key or not secret:
+    headers = _alpaca_headers()
+    if 'Authorization' not in headers and 'APCA-API-KEY-ID' not in headers:
         return {'state': 'held', 'symbol': ticker, 'reason': 'Alpaca market-data credentials are not configured.'}
     feed = os.getenv('MARKET_COMPASS_ALPACA_FEED', 'iex').strip().lower()
     if feed not in {'iex', 'sip', 'delayed_sip'}:
         return {'state': 'held', 'symbol': ticker, 'reason': 'The Alpaca feed setting is invalid.'}
     url = f'https://data.alpaca.markets/v2/stocks/{quote(ticker)}/trades/latest?feed={feed}'
-    request = Request(url, headers={'APCA-API-KEY-ID': key, 'APCA-API-SECRET-KEY': secret,
-                                    'Accept': 'application/json', 'User-Agent': 'MarketCompass/0.8 research-only'})
+    request = Request(url, headers=headers)
     try:
         with urlopen(request, timeout=6) as response:
             row = (json.load(response).get('trade') or {})

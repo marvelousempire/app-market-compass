@@ -15,8 +15,10 @@ from urllib.request import Request as URLRequest, urlopen
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import FileResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
 from .ai import AnalystRequest, AnalystRouter
+from . import alpaca_connect
 from .ai.providers import ProviderError
 from .asset_channel import read_asset_channel
 from .backtest import backtest_frame
@@ -37,6 +39,56 @@ analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
 PREVIEW_STARTED_AT = datetime.now(UTC).isoformat()
 app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
+
+
+class AlpacaConnectCredentials(BaseModel):
+    client_id: str
+    client_secret: str
+
+
+def _local_settings_request(request: Request) -> None:
+    origin = request.headers.get("origin", "")
+    if request.url.hostname not in {"market-compass.localhost", "127.0.0.1", "localhost"}:
+        raise HTTPException(403, "Open the local Market Compass app to change its connection.")
+    if origin != f"{request.url.scheme}://{request.headers.get('host', '')}":
+        raise HTTPException(403, "Open Market Compass Settings before changing its connection.")
+
+
+@app.get("/api/alpaca-connect/status")
+def alpaca_connect_status():
+    return JSONResponse(alpaca_connect.status(), headers={"Cache-Control": "no-store"})
+
+
+@app.post("/api/alpaca-connect/configure")
+def alpaca_connect_configure(credentials: AlpacaConnectCredentials, request: Request):
+    _local_settings_request(request)
+    try:
+        return JSONResponse(alpaca_connect.configure(credentials.client_id, credentials.client_secret),
+                            headers={"Cache-Control": "no-store"})
+    except ValueError as exc:
+        raise HTTPException(400, str(exc)) from exc
+    except RuntimeError as exc:
+        raise HTTPException(503, str(exc)) from exc
+
+
+@app.post("/api/alpaca-connect/start")
+def alpaca_connect_start(request: Request):
+    _local_settings_request(request)
+    try:
+        return JSONResponse({"url": alpaca_connect.authorization_url()}, headers={"Cache-Control": "no-store"})
+    except ValueError as exc:
+        raise HTTPException(400, str(exc)) from exc
+
+
+@app.get("/api/alpaca-connect/callback")
+def alpaca_connect_callback(code: str = "", state: str = "", error: str = ""):
+    if error:
+        return RedirectResponse("/?alpaca=declined#market-settings", status_code=303)
+    try:
+        alpaca_connect.exchange(code, state)
+    except Exception:
+        return RedirectResponse("/?alpaca=failed#market-settings", status_code=303)
+    return RedirectResponse("/?alpaca=connected#market-settings", status_code=303)
 
 SYMBOL_OWNER = "http://act-v5.localhost"
 SYMBOL_REVISION = re.compile(r"^[a-f0-9]{40}$")

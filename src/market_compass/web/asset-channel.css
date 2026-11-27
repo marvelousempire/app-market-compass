@@ -31,5 +31,16 @@
 .market-settings>section p{margin:0 0 12px;color:var(--muted)}
 #load-reviewed-imports,#reviewed-imports button{min-height:44px}
 #reviewed-imports{overflow-wrap:anywhere}
+.market-settings #market-data-current{color:var(--text);font-size:1rem;font-weight:650}
+#market-data-settings{display:grid;align-content:start;gap:8px}
+#market-data-settings p{margin:0}
+#market-data-settings button{justify-self:start;min-height:44px}
+#alpaca-connect-form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 16px;max-width:720px}
+#alpaca-connect-form label{font-weight:650}
+#alpaca-connect-form input{min-width:0;width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--border,#555);border-radius:10px;background:var(--surface,#151515);color:inherit;font:inherit}
+#alpaca-connect-form button{grid-column:1/-1}
+#alpaca-callback-uri{display:block;overflow-wrap:anywhere;font-size:16px}
+.alpaca-connect-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+@media(max-width:640px){#alpaca-connect-form{grid-template-columns:minmax(0,1fr)}}
 .reviewed-import-activity{max-width:100%;overflow-x:auto}
 .reviewed-import-actions{display:flex;flex-wrap:wrap;gap:8px}
