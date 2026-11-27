@@ -22,7 +22,7 @@ if (new URLSearchParams(location.search).get('embedded') === '1') {
       if (supported) {
         assets[symbol] = price; asset = symbol;
         select.add(new Option(symbol, symbol));
-        sourceInfo = {provider: String(next.provider || 'Market Compass desk'), asOf: String(next.asOf), spot: price};
+        sourceInfo = {provider: String(next.provider || 'Market Compass desk'), asOf: String(next.asOf), spot: price, feed: String(next.feed || ''), realTime: next.realTime === true};
         strike = null;
         document.getElementById('notice').textContent = '';
       } else {

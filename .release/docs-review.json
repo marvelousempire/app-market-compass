@@ -1,89 +1,96 @@
 {
   "schema": "release.documentation-review/v1",
   "repository": "averygoodman/app-market-compass",
-  "source_tree_sha256": "964a2617bf9aeea3fb87b41288f54627cc2fe896b17ba24c6127adcc35dc5a55",
-  "reviewer": "Codex resident readback and retained research review",
-  "reviewed_at": "2026-11-27T01:25:29.632919+00:00",
+  "source_tree_sha256": "4ce2c7f3c2402dcf45df1b670a7a4e8c6746d7406fb6825bd8ed8356e80d25d2",
+  "reviewer": "Codex source and actual-provider readback",
+  "reviewed_at": "2026-11-27T18:24:52.952184+00:00",
   "release": {
-    "summary": "Read confirmed Bank history through the independent uploadTHAT entrance.",
-    "target": "Existing FiveMac Market Compass research app",
+    "summary": "Observed stock prices in Desk and Options, source health and company evidence.",
+    "target": "Market Compass local Web Door",
     "proof": [
-      "118 Python tests, production browser recovery/paging test, changed Python lint, wheel asset byte equality and actual synthetic trading/crypto upload \u2192 Bank \u2192 candidate Market proof pass."
+      "133 Python suite tests plus required browser-test wrapper passed; 7 Node tests; candidate browser observed BB 9.06 in Desk and Options, source health, SEC filings and earnings."
     ],
     "limitations": [
-      "Installed receiving requires exact-source protected review, merge and guarded installation; dated candidate proof is not installed proof.",
-      "Fixtures are isolated bookkeeping test setup, not evidence of account or wallet creation UI.",
-      "Raw broker formats and position snapshots remain separately qualified; activity history does not establish current holdings."
+      "Exact-head required forge checks and installed Door proof pending.",
+      "Option premiums remain theoretical; no verified future earnings calendar or claim of marketwide attention."
     ]
   },
   "documents": [
     {
       "path": "README.md",
-      "sha256": "42cf41b1080019d6e58ea91bb65a1a46260bb465dfa50fd85bcb7bc168253a49",
+      "sha256": "cb61fd4bf05ed9826b12a50fe5c0f83c06649cea16caa8d953bb784352d94b58",
       "disposition": "updated",
-      "reason": "Reviewed the qualified existing Bank stream, normal Family connection, source opening and retained research boundary."
+      "reason": "Setup, actual provider wiring, source evidence and limits match candidate behavior."
     },
     {
-      "path": "docs/UPLOADTHAT.md",
-      "sha256": "030dd4ea27d5d61206e4f5634500bd15ae44a10894c6a23ea111435c3c3636d0",
+      "path": "CHANGELOG.md",
+      "sha256": "754de294b2d8fd43aa15006f7f4066fbc4f9c594647ea89703fe3b8511d0a087",
       "disposition": "updated",
-      "reason": "Reviewed the qualified existing Bank stream, normal Family connection, source opening and retained research boundary."
+      "reason": "Setup, actual provider wiring, source evidence and limits match candidate behavior."
     },
     {
-      "path": "docs/handoff.md",
-      "sha256": "fb8621912b241fae0858319bc92211f99a97adacebdec5e196aa3d516a9e67aa",
-      "disposition": "current",
-      "reason": "Reviewed the qualified existing Bank stream, normal Family connection, source opening and retained research boundary."
+      "path": "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/01-provider-lanes.md",
+      "sha256": "53b0ded6c4243ba35fb26b3fc0a8cc28326a152da8a0e7fb2b2f7c847fee6310",
+      "disposition": "updated",
+      "reason": "Setup, actual provider wiring, source evidence and limits match candidate behavior."
+    },
+    {
+      "path": "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/PAGE.md",
+      "sha256": "9984e2715e49148b19c015158030aa89f9b7fea0413be387f56e4aee03e3710b",
+      "disposition": "updated",
+      "reason": "Setup, actual provider wiring, source evidence and limits match candidate behavior."
     }
   ],
   "areas": [
     {
       "id": "docs",
       "disposition": "updated",
-      "reason": "Describe the actual entrance, confirmation and read-only result without implying installed acceptance.",
+      "reason": "Correct setup, source and scenario boundaries.",
       "documents": [
         "README.md",
-        "docs/UPLOADTHAT.md"
+        "CHANGELOG.md",
+        "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/01-provider-lanes.md",
+        "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/PAGE.md"
       ]
     },
     {
       "id": "wiring-guides",
       "disposition": "updated",
-      "reason": "Qualified TableTHAT Bank stream reaches the actual settlement database; no new listener, key or identity mapping. SME reads ignore environment proxies.",
+      "reason": "Handbook records callback, Publish app, consent, Keychain, CA bundle and SEC identity.",
       "documents": [
-        "docs/UPLOADTHAT.md",
-        "docs/handoff.md"
+        "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/01-provider-lanes.md",
+        "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/PAGE.md"
       ]
     },
     {
       "id": "white-papers",
       "disposition": "not-applicable",
-      "reason": "No scoring, pricing, research model or financial recommendation change.",
+      "reason": "No change to scoring formulas or option model.",
       "documents": []
     },
     {
       "id": "building-skills",
       "disposition": "not-applicable",
-      "reason": "Product-specific adapter consumes existing review/confirmation and owner readback contracts; no new reusable skill.",
+      "reason": "Existing provider and owner adapters; product-specific receiving documented in Handbook.",
       "documents": []
     }
   ],
   "checks": [
     {
-      "name": "Owner source, receiving regression and static checks",
+      "name": "Source and provider behavior",
       "status": "pass",
-      "evidence": "118 Python tests, production browser recovery/paging test, changed Python lint, wheel asset byte equality and actual synthetic trading/crypto upload \u2192 Bank \u2192 candidate Market proof pass."
+      "evidence": "Python/Node behavior tests and candidate browser source readback."
     }
   ],
   "consumer_sync": {
     "required": true,
-    "reason": "Real installed receiving is still required.",
+    "reason": "Installed Door verification after exact-head merge.",
     "targets": [
       {
         "id": "market-compass-web",
         "status": "pending",
         "revision": "candidate",
-        "receipt": "Accepted source install, named Door and real owner history readback/retained work still pending."
+        "receipt": "PR68 pending forge checks; candidate source preview verified."
       }
     ]
   }

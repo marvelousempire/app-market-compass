@@ -2,8 +2,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from market_compass import data
-from market_compass import research_sources
+from market_compass import data, research_sources
 from market_compass.engine import analyze_frame
 
 
@@ -40,6 +39,7 @@ def test_latest_bar_refuses_invalid_symbol():
 
 
 def test_alpaca_trade_requires_data_credentials(monkeypatch):
+    monkeypatch.setattr(research_sources, "data_token", lambda: "")
     monkeypatch.delenv("MARKET_COMPASS_ALPACA_KEY_ID", raising=False)
     monkeypatch.delenv("MARKET_COMPASS_ALPACA_SECRET_KEY", raising=False)
     result = research_sources.alpaca_latest_trade("BB")

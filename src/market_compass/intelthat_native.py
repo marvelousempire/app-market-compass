@@ -202,8 +202,13 @@ def _edgar(symbol_value: str, retrieved: str, getter: Callable[..., dict] = _get
         recent = filings.get("filings", {}).get("recent", {})
         forms = recent.get("form", [])
         dates = recent.get("filingDate", [])
-        wanted = {"8-K", "10-K", "10-Q", "4", "SC 13D", "SC 13G"}
-        selected = [{"form": form, "filed": dates[i] if i < len(dates) else None}
+        wanted = {"8-K", "10-K", "10-Q", "6-K", "20-F", "40-F", "4", "SC 13D", "SC 13G"}
+        selected = [{"form": form, "filed": dates[i] if i < len(dates) else None,
+                     "items": (recent.get("items", []) + [""] * len(forms))[i],
+                     "url": (f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/"
+                             f"{recent['accessionNumber'][i].replace('-', '')}/"
+                             f"{recent['accessionNumber'][i]}-index.html")
+                     if i < len(recent.get("accessionNumber", [])) else None}
                     for i, form in enumerate(forms) if form in wanted][:25]
         latest = selected[0]["filed"] if selected else None
         counts = {form: sum(x["form"] == form for x in selected) for form in sorted(wanted)}

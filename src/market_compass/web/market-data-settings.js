@@ -5,12 +5,32 @@ const form = document.getElementById('alpaca-connect-form');
 const start = document.getElementById('alpaca-connect-start');
 const saveButton = form?.querySelector('button[type="submit"]');
 
+let detailsSaved = false;
+let editingDetails = false;
+function paintSavedDetails(saved) {
+  detailsSaved = saved;
+  const locked = saved && !editingDetails;
+  for (const name of ['client_id', 'client_secret']) {
+    const field = form?.elements[name];
+    if (!field) continue;
+    field.disabled = locked;
+    field.placeholder = locked ? 'Saved in Keychain' : '';
+  }
+  if (saveButton) { saveButton.type = locked ? 'button' : 'submit'; saveButton.textContent = locked ? 'Change app details' : 'Save app details'; }
+}
+saveButton?.addEventListener('click', event => {
+  if (!detailsSaved || editingDetails) return;
+  event.preventDefault(); editingDetails = true; paintSavedDetails(true);
+  form.elements.client_id.focus();
+});
+
 async function connectionStatus() {
   if (!connection) return;
   try {
     const response = await fetch('/api/alpaca-connect/status', {cache: 'no-store'});
     if (!response.ok) throw new Error('unavailable');
     const status = await response.json();
+    paintSavedDetails(status.configured);
     connection.dataset.saveState = status.configured ? 'saved' : 'empty';
     window.dispatchEvent(new CustomEvent('marketcompassalpacastatus', {detail: {configured: status.configured, connected: status.connected}}));
     connection.textContent = status.connected ? 'Alpaca connection saved on this Mac. Check the price source below to confirm your feed. The secret fields stay blank for safety.'
@@ -50,6 +70,7 @@ form?.addEventListener('submit', async event => {
     const verified = await connectionStatus();
     if (!verified?.configured) throw new Error('The app details were not confirmed after saving. Your entries are still here; try again.');
     form.reset();
+    editingDetails = false; paintSavedDetails(true);
     // A successful readback is the only event allowed to start the celebration.
     void connection.offsetWidth;
     connection.classList.add('just-saved');

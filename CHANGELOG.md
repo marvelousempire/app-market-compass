@@ -1,5 +1,9 @@
 # Market Compass Change Log
 
+## November 27, 2026 — Alpaca Desk and Options inputs
+
+Compass Desk displays dated market observations and shares them with Options Lab’s underlying-price calculations. Source, feed, timestamp and theoretical option boundaries stay visible. Saved Connect credentials are labelled and lightly greyed out. Handbook records registration, Publish app, consent and the verified CA-bundle repair.
+
 See the [Market Compass Handbook](handbook/README.md) for operator guidance and the approved Research v1 delivery contract.
 
 This is the factual, chronological log of shipped repository changes. Product reasoning and

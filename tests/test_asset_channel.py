@@ -21,3 +21,18 @@ def test_channel_keeps_empty_source_explicit(monkeypatch):
     monkeypatch.setattr(asset_channel, "_search_symbol", lambda value, news_count: ({"symbol": "BB"}, [], []))
     monkeypatch.setattr(asset_channel, "edgar_filings", lambda value: {"state": "held", "reason": "Unavailable"})
     assert asset_channel.read_asset_channel("BB")["items"] == []
+
+
+def test_channel_exposes_earnings_and_recent_review_candidates(monkeypatch):
+    from datetime import UTC, datetime
+    rows = [{"title": "BB new contract and earnings results", "publisher": "Issuer",
+             "url": "https://example.com/issuer", "related_symbols": ["BB"],
+             "published": datetime.now(UTC).isoformat()}]
+    monkeypatch.setattr(asset_channel, "_search_symbol", lambda value, news_count: ({"symbol": "BB"}, rows, []))
+    monkeypatch.setattr(asset_channel, "edgar_filings", lambda value: {
+        "state": "observed", "inputs": {"filings": [{"form": "8-K", "items": "2.02", "filed": "2026-11-27"}]}})
+    result = asset_channel.read_asset_channel("BB")
+    assert len(result["earnings"]["releases"]) == 1
+    assert len(result["earnings"]["financial_reports"]) == 1
+    assert result["earnings"]["next_date"] is None
+    assert result["recent_events"][0]["assessment"].endswith("unverified.")

@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/static/stubthat.css?v=20261106.1">
   <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261127.4">
   <link rel="stylesheet" href="/static/decision-gates.css?v=20261126.2">
-  <link rel="stylesheet" href="/static/asset-channel.css?v=20261127.4">
+  <link rel="stylesheet" href="/static/asset-channel.css?v=alpaca6-20261127.4">
   <link rel="stylesheet" href="/static/market-studio.css?v=20261126.5">
   <link rel="stylesheet" href="/static/simulator.css?v=20261126.1">
   <link rel="stylesheet" href="/static/act-v1-appearance.css?v=20261106.1">
@@ -345,6 +345,12 @@
         </article>
       </section>
 
+      <section class="panel" id="desk-research">
+      <h2>Company research</h2><button type="button" id="desk-research-refresh">Refresh research</button>
+      <h3>SEC and EDGAR filings</h3><div id="desk-filings">Analyze a company to read its filings.</div>
+      <h3>Earnings and financial reports</h3><div id="desk-earnings">No company selected.</div>
+      <h3>Recent significant developments</h3><p>Source-linked candidates from the last 30 days. Significance and whether the market overlooked them require review.</p><div id="desk-events">No company selected.</div>
+      </section>
       <section class="panel" id="catalyst-panel">
         <div class="section-head">
           <div><p class="eyebrow">HUMAN FACTOR</p><h2>Catalyst Timeline</h2></div>
@@ -439,7 +445,7 @@
 <section class="panel asset-channel market-settings" id="market-settings" aria-labelledby="market-settings-title"><div class="section-head"><div><p class="eyebrow">MARKET COMPASS / SETTINGS</p><h2 id="market-settings-title">Settings</h2><p>Choose how research appears. Source receipts and market calculations keep their original values.</p></div></div><section id="market-data-settings" aria-labelledby="market-data-settings-title"><h3 id="market-data-settings-title">Market prices</h3><div class="market-price-observation"><div class="market-price-heading"><span class="market-price-label">Current price source</span><button type="button" class="market-price-refresh" id="market-data-refresh" aria-label="Refresh price source">Refresh</button></div><p id="market-data-current" role="status">Checking the current price source…</p></div><p class="alpaca-connect-status" id="alpaca-connect-status" role="status">Checking Alpaca connection…</p><form id="alpaca-connect-form" autocomplete="off"><label class="alpaca-field" for="alpaca-client-id"><span>Client ID</span><input id="alpaca-client-id" name="client_id" required autocomplete="off" spellcheck="false"></label><label class="alpaca-field" for="alpaca-client-secret"><span>Client Secret</span><input id="alpaca-client-secret" name="client_secret" type="password" required autocomplete="off" spellcheck="false"></label><button type="submit">Save app details</button></form><details class="alpaca-callback"><summary>Return address for Alpaca Connect</summary><p>Add this exact address to your Alpaca Connect app so sign-in can return here.</p><code id="alpaca-callback-uri">http://market-compass.localhost/api/alpaca-connect/callback</code><p>Use Connect app details, not Paper Trading API keys. Your saved details stay in this Mac’s Keychain. Alpaca may require app review.</p></details><div class="alpaca-connect-actions"><a class="secondary asset-channel-settings-link" href="https://app.alpaca.markets/connect" target="_blank" rel="noopener">Finish Alpaca app setup</a><button type="button" id="alpaca-connect-start">Connect with Alpaca</button></div></section><section id="market-settings-upload"><h3>Upload files</h3><p>Review files in UploadTHAT, the shared intake for your apps. Confirmed financial history can be read below. Transaction history alone does not establish current holdings.</p><a class="secondary asset-channel-settings-link" data-node-id="uploadthat.receive" href="https://uploadthat.localhost/?source=market-compass" target="_blank" rel="noopener">Open UploadTHAT</a><p>Return to this tab after review; your research stays here.</p><button type="button" class="secondary" id="load-reviewed-imports">Read reviewed imports</button><section id="reviewed-imports" aria-live="polite"></section></section><section id="market-settings-publishers"><h3>Player News publishers</h3><p>Choose which publishers appear for the selected player. This changes your display, not the source request or its exact receipt.</p><p id="market-settings-symbol">Selected player: BB</p><div id="asset-channel-publishers" class="asset-channel-publishers"></div></section><section id="market-settings-appearance"><h3>Appearance and layout</h3><p>Use the Appearance controls in the left rail to choose light or dark mode and the canvas layout.</p></section></section>
     <section class="options-embedded panel" id="options-lab" aria-labelledby="options-lab-title">
       <div class="options-embedded-heading"><div><p class="eyebrow">MARKET COMPASS / OPTIONS</p><h2 id="options-lab-title">Options Lab</h2><p>Explore theoretical outcomes, Alpaca market context, and SEC filings in the same workspace.</p></div><span>Virtual orders only</span></div>
-      <iframe id="options-lab-frame" title="Market Compass Options Lab" src="/static/options.html?embedded=1&amp;v=20261126.8" loading="lazy"></iframe>
+      <iframe id="options-lab-frame" title="Market Compass Options Lab" src="/static/options.html?embedded=1&amp;v=20261127.6" loading="lazy"></iframe>
     </section>
     <section class="options-embedded panel" id="intelthat-app" aria-labelledby="intelthat-app-title">
       <div class="options-embedded-heading"><div><p class="eyebrow">MARKET COMPASS / INTELTHAT</p><h2 id="intelthat-app-title">intelTHAT</h2><p>The desk's selected symbol flows into the four research rooms and their source receipts.</p></div><span>Research only</span></div>
@@ -448,7 +454,7 @@
   </main>
 
   <aside class="act-supporting-rail" aria-label="Dashboard supporting rail" data-shell-node="supporting-rail">
-    <section><p class="act-rail-eyebrow">MARKET PULSE</p><h2>Research Health</h2><div class="act-rail-stats"><p><span class="good"></span>Runtime <b>Live</b></p><p><span class="good"></span>Authority <b>Gitea</b></p><p><span class="good"></span>Signals <b>Active</b></p></div></section>
+    <section><p class="act-rail-eyebrow">MARKET PULSE</p><h2>Research Health</h2><div class="act-rail-stats"><p><span class="good"></span>Runtime <b>Live</b></p><p><span class="good"></span>Authority <b>Gitea</b></p><p><span class="good"></span>Signals <b>Active</b></p><p id="health-alpaca"><span class="warn"></span>Alpaca <b>Not checked</b></p><p id="health-market-data"><span class="warn"></span>Prices <b>Not checked</b></p><p id="health-sec"><span class="warn"></span>SEC / EDGAR <b>Not checked</b></p><p id="health-earnings"><span class="warn"></span>Earnings <b>Not checked</b></p><p id="health-events"><span class="warn"></span>Developments <b>Not checked</b></p></div></section>
     <section><p class="act-rail-eyebrow">QUICK WATCH</p><div class="act-quick-watch"><button type="button" data-act-symbol="BB">BB</button><button type="button" data-act-symbol="AAPL">AAPL</button><button type="button" data-act-symbol="QQQ">QQQ</button><button type="button" data-act-symbol="SPCX">SPCX</button></div></section>
     <section><p class="act-rail-eyebrow">CURRENT ROOM</p><h3 id="act-current-room">Overview</h3><p id="act-room-help">Top-line runtime, controls, Actors, and research status.</p></section>
     <section><p class="act-rail-eyebrow">IN THIS ROOM</p><nav class="act-room-submenu" id="act-room-submenu" aria-label="Current room sections"></nav></section>
@@ -468,8 +474,10 @@
   <dialog class="act-command-dialog" id="act-command-dialog" aria-labelledby="act-command-title"><div class="act-dialog-head"><div><p>MARKET COMPASS ACT</p><h2 id="act-command-title">Go to a room</h2></div><button type="button" data-act-dialog-close aria-label="Close menu">×</button></div><label><span>Search rooms</span><input id="act-command-search" type="search" placeholder="Search Overview, Actors, Exchange…"></label><div class="act-command-results" id="act-command-results"></div></dialog>
 
   <footer>Market Compass is research software. Evidence balance is not a calibrated probability and is not a guarantee of outcome.</footer>
-  <script src="/static/options-embed.js?v=20261126.5" defer></script>
+  <script src="/static/options-embed.js?v=20261127.6" defer></script>
   <script src="/static/intelthat-embed.js?v=20261125.6" defer></script>
+  <script src="/static/desk-research.js?v=20261127.6" defer></script>
+  <script src="/static/desk-market-price.js?v=20261127.6" defer></script>
   <script src="/static/app.js?v=20261126.2" defer></script>
   <script src="/static/analyst.js" defer></script>
   <script src="/static/human-readable.js?v=20261126.2" defer></script>
@@ -478,14 +486,14 @@
   <script src="/static/operator-controls.js?v=20261125.8" defer></script>
   <script src="/static/research-cassettes.js?v=20261126.1" defer></script>
   <script src="/static/stubthat.js?v=20261126.1" defer></script>
-  <script src="/static/act-v1-shell.js?v=20261127.5" defer></script>
+  <script src="/static/act-v1-shell.js?v=20261127.6" defer></script>
   <script src="/static/decision-gates.js?v=20261126.4" defer></script>
   <script src="/static/asset-channel.js?v=20261126.3" defer></script>
   <script src="/static/market-studio.js?v=20261126.5" defer></script>
   <script src="/static/simulator.js?v=20261126.4" defer></script>
   <script src="/static/hcck.js?v=20261126.2" defer></script>
 <script src="/static/uploadthat-resident.js" type="module"></script>
-<script src="/static/market-data-settings.js?v=20261127.5" type="module"></script>
+<script src="/static/market-data-settings.js?v=20261127.6" type="module"></script>
 <script src="/static/market-symbols.js?v=20261126.1" type="module"></script>
 </body>
 </html>

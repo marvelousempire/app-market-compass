@@ -9,8 +9,8 @@ function mount(configureOk) {
   const classes = new Set();
   const connection = {dataset: {}, textContent: '', offsetWidth: 1,
     classList: {add: name => classes.add(name), remove: name => classes.delete(name)}};
-  const button = {disabled: false};
-  const form = {elements: {client_id: {value: 'client123'}, client_secret: {value: 'secret123'}},
+  const button = {disabled: false, addEventListener(name, handler) { this[name] = handler; }};
+  const form = {elements: {client_id: {value: 'client123', focus() {}}, client_secret: {value: 'secret123'}},
     querySelector: () => button, addEventListener: (name, handler) => { form[name] = handler; },
     reset: () => { form.elements.client_id.value = ''; form.elements.client_secret.value = ''; }};
   const start = {disabled: true, addEventListener() {}};
@@ -53,3 +53,17 @@ test('failed save keeps entries and never plays success', async () => {
   assert.equal(form.elements.client_secret.value, 'secret123');
   assert.equal(button.disabled, false);
 });
+
+ test('saved credentials are labelled, disabled, and can be explicitly changed', async () => {
+  const {form, button} = mount(true);
+  await form.submit({preventDefault() {}});
+  for (const field of Object.values(form.elements)) {
+    assert.equal(field.disabled, true);
+    assert.equal(field.placeholder, 'Saved in Keychain');
+    assert.equal(field.value, '');
+  }
+  assert.equal(button.textContent, 'Change app details');
+  button.click({preventDefault() {}});
+  assert.equal(form.elements.client_secret.disabled, false);
+  assert.equal(button.type, 'submit');
+ });

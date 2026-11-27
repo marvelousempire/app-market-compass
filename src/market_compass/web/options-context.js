@@ -1,4 +1,4 @@
-/* Read-only research context; never changes virtual positions or illustrative prices. */
+/* Read-only research context; never changes virtual positions or theoretical option premiums. */
 (() => {
   const asset = document.getElementById('asset');
   const alpaca = document.getElementById('alpaca-context');

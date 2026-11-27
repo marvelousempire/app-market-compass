@@ -2,6 +2,7 @@
   const frame = document.getElementById('options-lab-frame');
   if (!frame) return;
   let latestReport = null;
+  let marketPrice = null;
   let requestedView = null;
   const sendTheme = () => {
     if (!frame.contentWindow) return;
@@ -21,16 +22,22 @@
       requested: meta.requested_symbol || report.symbol,
       symbol: meta.resolved_symbol || report.symbol,
       kind: quote.quoteType || quote.typeDisp || '',
-      price: report.price,
-      asOf: meta.price_session_date,
-      provider: meta.provider || 'Market Compass desk'
+      price: marketPrice?.price,
+      asOf: marketPrice?.as_of,
+      provider: marketPrice?.source,
+      feed: marketPrice?.feed,
+      realTime: marketPrice?.real_time
     }}, location.origin);
   };
   window.addEventListener('marketcompassoptionsview', event => {
     requestedView = {type:'market-compass-options-select-view',view:event.detail.view,focus:event.detail.focus};
     frame.contentWindow?.postMessage(requestedView,location.origin);
   });
-  window.addEventListener('marketcompassreport', event => { latestReport = event.detail.report; sendReport(); });
+  window.addEventListener('marketcompassreport', event => { latestReport = event.detail.report; marketPrice = null; sendReport(); });
+  window.addEventListener('marketcompassprice', event => {
+    if (event.detail.symbol !== latestReport?.symbol) return;
+    marketPrice = event.detail.observation; sendReport();
+  });
   frame.addEventListener('load', () => { sendTheme(); sendReport(); if (requestedView) frame.contentWindow?.postMessage(requestedView,location.origin); });
   window.addEventListener('actappearancechange', sendTheme);
   window.addEventListener('message', event => {
