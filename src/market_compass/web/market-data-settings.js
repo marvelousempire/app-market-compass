@@ -3,6 +3,7 @@ const refresh = document.getElementById('market-data-refresh');
 const connection = document.getElementById('alpaca-connect-status');
 const form = document.getElementById('alpaca-connect-form');
 const start = document.getElementById('alpaca-connect-start');
+const saveButton = form?.querySelector('button[type="submit"]');
 
 async function connectionStatus() {
   if (!connection) return;
@@ -28,6 +29,9 @@ async function connectionStatus() {
 
 form?.addEventListener('submit', async event => {
   event.preventDefault();
+  if (saveButton?.disabled) return;
+  if (saveButton) saveButton.disabled = true;
+  connection.classList.remove('just-saved');
   connection.dataset.saveState = 'saving';
   connection.textContent = 'Saving your Connect app in this Mac’s Keychain…';
   const client_id = form.elements.client_id.value.trim();
@@ -46,7 +50,16 @@ form?.addEventListener('submit', async event => {
     const verified = await connectionStatus();
     if (!verified?.configured) throw new Error('The app details were not confirmed after saving. Your entries are still here; try again.');
     form.reset();
-  } catch (error) { connection.dataset.saveState = 'error'; connection.textContent = error.message; }
+    // A successful readback is the only event allowed to start the celebration.
+    void connection.offsetWidth;
+    connection.classList.add('just-saved');
+  } catch (error) {
+    connection.classList.remove('just-saved');
+    connection.dataset.saveState = 'error';
+    connection.textContent = error.message;
+  } finally {
+    if (saveButton) saveButton.disabled = false;
+  }
 });
 
 start?.addEventListener('click', async () => {

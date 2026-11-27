@@ -51,7 +51,14 @@
 #market-data-settings #market-data-current{font-size:clamp(17px,1.6vw,21px);line-height:1.4;font-weight:700;color:var(--act-ink)}
 #market-data-settings .alpaca-connect-status{font-size:16px;line-height:1.45;color:var(--act-muted)}
 #market-data-settings .alpaca-connect-status[data-save-state="saved"]{padding:12px 14px;border:1px solid var(--act-line);border-radius:12px;background:color-mix(in srgb,var(--act-brand) 6%,var(--act-surface));color:var(--act-ink);font-weight:700}
+#market-data-settings .alpaca-connect-status[data-save-state="saved"]::before{content:'✓';display:inline-grid;place-items:center;width:28px;height:28px;margin-right:10px;border-radius:50%;background:var(--act-ink);color:var(--act-surface);font-size:18px;font-weight:800;vertical-align:middle}
+#market-data-settings .alpaca-connect-status.just-saved{animation:alpaca-save-arrive .65s cubic-bezier(.2,.8,.2,1) both}
+#market-data-settings .alpaca-connect-status.just-saved::before{animation:alpaca-save-check .55s cubic-bezier(.2,.8,.2,1) both}
+@keyframes alpaca-save-arrive{0%{transform:translateY(5px);opacity:.55;box-shadow:0 0 0 0 color-mix(in srgb,var(--act-brand) 18%,transparent)}65%{transform:translateY(0);opacity:1;box-shadow:0 0 0 8px color-mix(in srgb,var(--act-brand) 8%,transparent)}100%{transform:translateY(0);opacity:1;box-shadow:0 0 0 0 transparent}}
+@keyframes alpaca-save-check{0%{transform:scale(.55) rotate(-18deg);opacity:0}65%{transform:scale(1.12) rotate(0);opacity:1}100%{transform:scale(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){#market-data-settings .alpaca-connect-status.just-saved,#market-data-settings .alpaca-connect-status.just-saved::before{animation:none}}
 #market-data-settings .alpaca-connect-status[data-save-state="error"]{color:var(--act-brand);font-weight:700}
+#alpaca-connect-form button:disabled{opacity:.65;cursor:wait}
 #market-data-settings .alpaca-setup-intro{font-size:17px;line-height:1.45;color:var(--act-ink)}
 #alpaca-connect-form{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:none}
 #alpaca-connect-form .alpaca-field{display:grid;gap:8px;min-width:0;font-size:16px;font-weight:700}

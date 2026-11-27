@@ -24,6 +24,7 @@ Alpaca's ordinary Paper Trading API keys also permit paper orders. Do not enter 
 
 The Market prices cassette keeps the observed price, source time, credential fields, and next action in one readable view. Its return-address instructions expand when needed. Settings hides the unrelated research control bar while retaining its values; left and right rail labels remain readable in both light and dark modes.
 After saving Connect app details, Market Compass verifies both entries can be read back from Keychain before it reports success or clears the form. On return, the fields remain blank so the secret is never exposed; the status says plainly whether the app details are saved and whether Alpaca sign-in remains. If confirmation fails, the typed entries remain and the app shows a readable error.
+Only a confirmed save plays a brief checkmark and highlight. The saved message remains visible afterward and on return; Reduced Motion keeps the same confirmation without animation.
 The local Market Compass Door forwards Settings saves to its loopback service. The service accepts the exact Market Compass Door origin for that local route while refusing other browser origins. This prevents the visible Settings page from rejecting its own Save action.
 The left rail also offers **Connect Alpaca** as a direct entrance to that cassette. Opening the repository's `index.html` as a local file redirects to the running Market Compass Door, because local files cannot serve the app's `/static/` styles or `/api/` data.
 
