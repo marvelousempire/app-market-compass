@@ -41,6 +41,14 @@ body.act-room-mode .app-header{padding-top:10px;padding-bottom:8px;align-items:c
 body[data-act-room="settings"] .control-bar{display:none}
 .act-nav-items a[data-act-alpaca-entry]{background:color-mix(in srgb,var(--act-brand) 7%,var(--act-surface));color:var(--act-brand);font-weight:750}
 .act-nav-items a[data-act-alpaca-entry]:hover,.act-nav-items a[data-act-alpaca-entry]:focus-visible{background:color-mix(in srgb,var(--act-brand) 14%,var(--act-surface));color:var(--act-brand)}
+.act-supporting-rail{display:flex;flex-direction:column}
+.act-supporting-rail .act-connection-setup:not([hidden]){margin-top:auto;padding:16px;border:1px solid var(--act-line);border-radius:14px;background:color-mix(in srgb,var(--act-brand) 5%,var(--act-surface))}
+.act-connection-setup[hidden]{display:none!important}
+.act-connection-setup h3{font-size:18px}
+.act-connection-setup p{font-size:14px}
+.act-connection-setup button{width:100%;min-height:44px;margin-top:8px;border:0;border-radius:10px;background:var(--act-brand);color:#fff;font:700 14px/1.2 system-ui,sans-serif;cursor:pointer}
+.act-connection-setup button:hover,.act-connection-setup button:focus-visible{filter:brightness(.9);outline:2px solid var(--act-brand);outline-offset:2px}
+@media(max-width:1120px){.act-supporting-rail{display:none}}
 body.act-room-mode>footer:not(.act-shell-footer){display:none}
 @media(prefers-color-scheme:dark){html[data-act-color="system"]{--act-canvas:#0a0a0a;--act-surface:#171717;--act-line:#2b2b2b;--act-muted:#a3a3a3;--act-ink:#f5f5f5}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}

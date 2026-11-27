@@ -10,11 +10,13 @@ async function connectionStatus() {
     const response = await fetch('/api/alpaca-connect/status', {cache: 'no-store'});
     if (!response.ok) throw new Error('unavailable');
     const status = await response.json();
+    window.dispatchEvent(new CustomEvent('marketcompassalpacastatus', {detail: {configured: status.configured, connected: status.connected}}));
     connection.textContent = status.connected ? 'Alpaca paper market-data sign-in saved. Check the price source below to confirm your feed.'
       : status.configured ? 'Connect app saved on this Mac. Sign in with Alpaca to finish.'
       : 'Alpaca is not connected. Add your Connect app credentials below.';
     if (start) start.disabled = !status.configured;
   } catch {
+    window.dispatchEvent(new CustomEvent('marketcompassalpacastatus', {detail: null}));
     connection.textContent = 'Connection status unavailable. No credential was shown or changed.';
     if (start) start.disabled = true;
   }

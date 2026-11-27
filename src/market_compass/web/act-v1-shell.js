@@ -242,6 +242,15 @@
     focusCanvas('#market-data-settings');
     roomSubmenu?.querySelector('[data-act-submenu-target="#market-data-settings"]')?.setAttribute('aria-current', 'true');
   }));
+  window.addEventListener('marketcompassalpacastatus', ({detail}) => {
+    const setup = document.querySelector('#act-alpaca-setup');
+    if (!setup) return;
+    setup.hidden = !detail || detail.connected;
+    if (setup.hidden) return;
+    document.querySelector('#act-alpaca-setup-title').textContent = detail.configured ? 'Finish Alpaca setup' : 'Connect Alpaca';
+    document.querySelector('#act-alpaca-setup-help').textContent = detail.configured ? 'Your app details are saved. Sign in with Alpaca to finish.' : 'No Alpaca market-data connection yet. Add your Connect app details.';
+    setup.querySelector('button').textContent = detail.configured ? 'Finish connection' : 'Set up Alpaca';
+  });
   document.querySelectorAll('[data-act-dialog-close]').forEach((button) => button.addEventListener('click', () => dialog?.close()));
   dialogSearch?.addEventListener('input', () => renderCommands(dialogSearch.value));
   window.addEventListener('keydown', (event) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); openDialog(); } });
