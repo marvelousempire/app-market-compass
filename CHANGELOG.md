@@ -7,6 +7,9 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Added a guarded `make ship-install-go` command for an accepted Gitea main revision: qualify the source and Rust options build, fast-forward the commissioned checkout, refresh the Python installation and exact LaunchAgent revision, then verify and open the named Door.
+- Updated the Handbook for the live Player Exchange → individual Player Record → Player Market Studio flow and its source limits.
+
 - Options Lab right-rail sections now open one retained canvas cassette at a time, with section submenus for controls and results.
 
 - Added Rust-backed same-expiration two-leg projections for bull call spreads, bear put spreads, long straddles and long strangles. Strategy mode shows theoretical net debit, bounded expiration risk/reward, and price, time, and volatility scenarios without placing a multi-leg order.

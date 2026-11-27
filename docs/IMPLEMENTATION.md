@@ -199,12 +199,13 @@ make api
 
 ### Commissioned FiveMac runtime
 
-The accepted Gitea `main` tree is installed at `~/Developer/market-compass-live` and served by the named user LaunchAgent `ai.market-compass` on `127.0.0.1:8000`. The service environment binds `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMISSIONED=true`, `MARKET_COMPASS_SOURCE_REVISION`, and `MARKET_COMPASS_BIND` so runtime proof names its exact source.
+The accepted Gitea `main` tree is installed at `~/Developer/market-compass-live` and served by the named user LaunchAgent `ai.market-compass` on `127.0.0.1:18003`. The service environment binds `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMISSIONED=true`, `MARKET_COMPASS_SOURCE_REVISION`, and `MARKET_COMPASS_BIND` so runtime proof names its exact source.
 
 ```bash
-curl -fsS http://127.0.0.1:8000/api/operator/status
-curl -fsS http://127.0.0.1:8000/health
+curl -fsS http://market-compass.localhost/api/operator/status
+curl -fsS http://market-compass.localhost/health
 launchctl print gui/$(id -u)/ai.market-compass
+cd ~/Developer/market-compass-live && make ship-install-go
 ```
 
 Commissioning changes installation and source authority only. The runtime remains `research_only`; trade execution, score influence, Exchange mutations, bank writes and money movement remain unavailable.

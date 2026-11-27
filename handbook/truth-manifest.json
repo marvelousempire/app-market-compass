@@ -1,6 +1,6 @@
 {
   "schema": "market-compass.handbook-truth.v1",
-  "source_revision": "923d1b69f173d83e31e9e380a783ca31da702041",
+  "source_revision": "63c7858a4ca41d7850fd110fd27dfdc3f51f7cbc",
   "runtime_version": "0.8.1",
   "runtime_observed_on": "2026-11-26",
   "approved_plan_date": "2026-11-14",
@@ -10,12 +10,12 @@
     "historical_receipt": "docs/receipts/CLOSEOUT-REVIEW-2026-11-12.json"
   },
   "capability_sources": {
-    "docs/STATUS.md": "94b992761b6981199386820f47e71767e977c2b9e895497c4d130312957d5e2c",
+    "docs/STATUS.md": "313e7dd53948fd4fae891e71b7a45a0dbe9cc5073e787c9751d5c92c42cffee4",
     "docs/CLOSEOUT-REPORT-2026-11-12.md": "2a60db9935e074d2e43514e71601f004f39be8b40b9431b32e86a747fba41de6",
     "docs/receipts/CLOSEOUT-REVIEW-2026-11-12.json": "48d1a07da19a3c04685c36d910da9dc507af14ea5ea9ae185efbb3cf4517c5f6",
     "docs/TROUBLESHOOTING.md": "0207259be78eb8f232d32789b5c344e6ef9a0cf710cd03e51b3dcf2439e5ba6b",
-    "docs/DECISION-GATES-DESIGN.md": "c3aae1293f761c2250385c75fba45fb1153d0af83aa06db705117f5792318ae5",
-    "src/market_compass/api.py": "d8e170f7593be3d3d59a14a05ea2858ebd779ad293db49a1e09bcc7fada140bb",
+    "docs/DECISION-GATES-DESIGN.md": "0e4529943bac0342239a93f0aa3bf21783b4a90e1c45e11c24e08a95932c56de",
+    "src/market_compass/api.py": "df102e6dc134d8e7323c2dd42a32d40818b48aeac77265e280967e150c5c8b2f",
     "pyproject.toml": "b6f5868916cc5a312265d0a6e8f1a5420f6d5b9d401d2395b5d6cf5fedb7a32d"
   },
   "source_urls": [
@@ -57,27 +57,27 @@
     }
   ],
   "editable_leaf_sha256": {
-    "handbook/chapter-01-start/page-01-research-workbench/01-research-workbench.md": "0647bb2c5fc41399a2c08e43b81a56d77deffbb1a131811a50c5c5ae2a5a9ff2",
-    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/01-daily-workflow.md": "f1872f79b8fb17f6c2b110adc4cc4824d7ceac2c31cf886cc36dabde1bb11d92",
-    "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/01-read-a-research-signal.md": "ad61b646f9df213a3c50b82925a9021af5abe5ede794c5f365a3dc9951a6d508",
+    "handbook/chapter-01-start/page-01-research-workbench/01-research-workbench.md": "fd887bae94d995d86f2a51ee8beaceb8aec3572750dc97b4750319746c64234d",
+    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/01-daily-workflow.md": "257fdb610d3dd272b07cd8b237b18644d8a513ae30cf9a376914678aedd4d8a2",
+    "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/01-read-a-research-signal.md": "d1f39ce48d6a9f13ccd2c30470a1e904e0e5a0e8ae691bdcff3cdc86f4bb86f6",
     "handbook/chapter-04-actors-and-instruments/page-01-actor-owned-evidence/01-actor-owned-evidence.md": "c50b8480cd61ffb2c328cd30fcc2b85e175b2599cc8dbe513d407677f8123844",
     "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/01-provider-lanes.md": "3a4a36de42d0f4dbf1810030274c94eb857943d008103570d4ebe5b1c2540316",
     "handbook/chapter-06-event-watch/page-01-one-evolving-incident/01-one-evolving-incident.md": "412a168f9b316bc663255c4552a81182182ba32115ac1d379336af18d8b3bbe7",
     "handbook/chapter-07-alerts-and-receipts/page-01-governed-delivery/01-governed-delivery.md": "50c9f5b20468466cc38b33cf1745139e66127428cf890647193f61dc87f0eea7",
-    "handbook/chapter-08-operations-and-recovery/page-01-five-mac-service/01-five-mac-service.md": "7f2e038beb9470012dad7b4cb41af6391ee6037640dfe64e00a91889b266532e",
+    "handbook/chapter-08-operations-and-recovery/page-01-five-mac-service/01-five-mac-service.md": "5fc29b0331d335003720b91f470e3de6798cf81329bbc6e7af7ec4f7d816b0de",
     "handbook/chapter-09-research-v1-delivery/page-01-acceptance-and-release/01-acceptance-and-release.md": "941655206d9ada1ec68b69260412f6c953d0d594c71d2acef4c251c375b4249c"
   },
   "generated_file_sha256": {
     "handbook/LEAD-SHEET.md": "2e00297c093ccc9aa941f9aa46f3830c8e853ba2c702bb00513bf2cd474f3049",
     "handbook/chapter-01-start/LEAD-SHEET.md": "0327ad5ce25cae1b1b602834a53bc3eac0b2bfbcb5c3c7fa2d0ff70e37564992",
     "handbook/chapter-01-start/page-01-research-workbench/LEAD-SHEET.md": "c16ab4e4f0794c6e0f093b38e7fa0091cca5f45c3b762d9362f62b6e5ed3a7eb",
-    "handbook/chapter-01-start/page-01-research-workbench/PAGE.md": "6ec799a4cba666e34fbb9f9258e5eabf8fb301e271e0ab73bb7defa01ec436cb",
+    "handbook/chapter-01-start/page-01-research-workbench/PAGE.md": "2dad3d68e65e13a375bdc7019aeb861ea1b8a146dfd43cc4efb1e54cb2dcd6fa",
     "handbook/chapter-02-use-market-compass/LEAD-SHEET.md": "12a9e4d3d2ee0a6db65d5e3026deac1c8d79a21b2e63819999b1f7687676cc8f",
     "handbook/chapter-02-use-market-compass/page-01-daily-workflow/LEAD-SHEET.md": "0f51a1585cb8e93bd20d1961b632a932d680cd2575115759ab62e246b537ec86",
-    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/PAGE.md": "3ce706d4f6c210bddc935c069a33c6c47c182a0d2726b29c782a64286d304d28",
+    "handbook/chapter-02-use-market-compass/page-01-daily-workflow/PAGE.md": "21d09fe8351139ee1d5ecb2a0f3f30174ba1c3cd12034342416895c277ccf026",
     "handbook/chapter-03-evidence-and-signals/LEAD-SHEET.md": "b4df7a2ae76d72df773603c5a0c107ec51457f818b79137f64746354fc43bed4",
     "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/LEAD-SHEET.md": "d85351f9ec027a1b7e541353054d52c0cc6fa24855a8f395d8c48b27796013a4",
-    "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/PAGE.md": "88f65cbb98706156398e2eaa7de0ec495b1b1668a1fab51e94a62df79e24b1ff",
+    "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/PAGE.md": "f8b85a6105b587ec46f37dea92dd82f337514198132bbfb33af549909e6acc37",
     "handbook/chapter-04-actors-and-instruments/LEAD-SHEET.md": "8a25b167afa3626a7381e733cba2fdc1a909506c691d6a22b37ec27f5e75a18d",
     "handbook/chapter-04-actors-and-instruments/page-01-actor-owned-evidence/LEAD-SHEET.md": "a65edee52d43f39537082da328fb9640cd88d2f9db377469e1fbee3f7a894e2a",
     "handbook/chapter-04-actors-and-instruments/page-01-actor-owned-evidence/PAGE.md": "21da60e87837a0e939ddf6fcba09b8eed02cb54e32255a71bcd0692c649f493d",
@@ -92,7 +92,7 @@
     "handbook/chapter-07-alerts-and-receipts/page-01-governed-delivery/PAGE.md": "91903064e7d2ba5014a67ca224215b718452ca1d1ac9ca554d93ecf771a58471",
     "handbook/chapter-08-operations-and-recovery/LEAD-SHEET.md": "feeb475763a0280e6c8da61545dea5c9cf36705ab8c2d5f2ecbf7f70e8ef084d",
     "handbook/chapter-08-operations-and-recovery/page-01-five-mac-service/LEAD-SHEET.md": "0dd2135c8b5b9f5c3f7b2c3ccae07e10777283e43c712f5fb6a337cf7f28c0fc",
-    "handbook/chapter-08-operations-and-recovery/page-01-five-mac-service/PAGE.md": "392d3a348e194553b3d976ab688b9f351a1211d75580caff9d9665e325765480",
+    "handbook/chapter-08-operations-and-recovery/page-01-five-mac-service/PAGE.md": "41922c063c2787866c980752a4f6abeee224495a2da97a3c45a5731abe3be94f",
     "handbook/chapter-09-research-v1-delivery/LEAD-SHEET.md": "37f726201f7f3727658e2d6fa10e3b092deb0ddd874ce0c292bb8b190ca4a901",
     "handbook/chapter-09-research-v1-delivery/page-01-acceptance-and-release/LEAD-SHEET.md": "695def65e3a68311efdd889503ff4f6504cfa5d1bc0b064cd87179465cf36351",
     "handbook/chapter-09-research-v1-delivery/page-01-acceptance-and-release/PAGE.md": "ed349124d6535a5c914d57d81f6c48c3247078dfe6521d1a5deb4055d2f063f2"

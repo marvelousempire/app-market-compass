@@ -1,59 +1,59 @@
 {
   "schema": "market-compass.documentation-freshness.v1",
   "review_date": "2026-11-26",
-  "audited_revision": "923d1b69f173d83e31e9e380a783ca31da702041",
+  "audited_revision": "63c7858a4ca41d7850fd110fd27dfdc3f51f7cbc",
   "areas": {
     "docs": {
       "updated": [
         "README.md",
         "docs/STATUS.md",
+        "docs/IMPLEMENTATION.md",
         "handbook/README.md",
         "handbook/index.md",
         "handbook/chapter-01-start/page-01-research-workbench/01-research-workbench.md",
         "handbook/chapter-02-use-market-compass/page-01-daily-workflow/01-daily-workflow.md",
-        "handbook/chapter-05-live-and-delayed-market-data/page-01-provider-lanes/01-provider-lanes.md",
-        "handbook/chapter-09-research-v1-delivery/page-01-acceptance-and-release/01-acceptance-and-release.md",
+        "handbook/chapter-03-evidence-and-signals/page-01-read-a-research-signal/01-read-a-research-signal.md",
+        "handbook/chapter-08-operations-and-recovery/page-01-five-mac-service/01-five-mac-service.md",
         "CHANGELOG.md"
       ],
       "current": [
         "docs/TROUBLESHOOTING.md"
       ],
-      "reason": "Documented the one-cassette-at-a-time Options Lab canvas and right-rail submenus while retaining research-only simulation boundaries."
+      "reason": "Recorded the installed three-screen Player flow and the guarded one-line installation path; corrected the current Door port."
     },
     "wiring_guides": {
       "updated": [
-        "docs/handoff.md",
-        "docs/RUST-MIGRATION.md"
+        "docs/IMPLEMENTATION.md"
       ],
       "current": [
         "docs/ARCHITECTURE.md",
         "docs/RUST-MIGRATION.md"
       ],
-      "reason": "Corrected the live loopback address and first-screen navigation; Rust migration and ownership boundaries remain current."
+      "reason": "The install guide now uses the named Door and current loopback transport; engine and Rust migration ownership remain unchanged."
     },
     "white_papers": {
       "current": [
         "docs/PRODUCT-REQUIREMENTS.md",
         "docs/DECISION-GATES-DESIGN.md"
       ],
-      "reason": "No product-goal or decision-authority change; virtual simulation remains within the existing no-broker boundary."
+      "reason": "No new market-data authority, financial effect, or model claim."
     },
     "building_skills": {
       "status": "not applicable",
-      "reason": "No shared skill, app builder, or receiving contract changed."
+      "reason": "The product-specific ship command changes no shared app builder or receiving contract."
     }
   },
   "checks": {
-    "handbook_sync": "passed",
+    "handbook_sync": "passed: 0 generated drift",
     "tree_page_caps_relative_links_source_bindings_status_sections": "partial: source hashes and generated pages verified; no repository checker for full structural gate",
-    "pytest": "87 passed",
-    "named_door_health_and_operator_status": "passed"
+    "pytest": "90 passed",
+    "named_door_health_and_operator_status": "passed at source revision 63c7858a4ca41d7850fd110fd27dfdc3f51f7cbc"
   },
   "door_status": {
     "state": "live",
     "host": "fivemac.local",
-    "pid": 73645,
-    "started_at": "2026-11-26T02:44:37.403378+00:00",
+    "pid": 40065,
+    "started_at": "2026-11-27T00:31:27.740209+00:00",
     "bind": "127.0.0.1:18003",
     "mode": "research_only",
     "preview_only": false,
@@ -62,6 +62,6 @@
     "signal_generation": true,
     "score_influence": false,
     "authority": "gitea:averygoodman/app-market-compass@main",
-    "source_revision": "923d1b69f173d83e31e9e380a783ca31da702041"
+    "source_revision": "63c7858a4ca41d7850fd110fd27dfdc3f51f7cbc"
   }
 }

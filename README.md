@@ -66,6 +66,14 @@ curl -fsS http://market-compass.localhost/health
 launchctl print gui/$(id -u)/ai.market-compass
 ```
 
+After a checked Gitea pull request merges to main, build, install, verify, and open that exact release with one command from the commissioned checkout:
+
+```bash
+cd ~/Developer/market-compass-live && make ship-install-go
+```
+
+The command refuses local edits or a diverged checkout. It tests and builds the accepted source before advancing the live checkout, then verifies the named Door and operator revision. See the [operations handbook](handbook/chapter-08-operations-and-recovery/page-01-five-mac-service/PAGE.md).
+
 Commissioned means the accepted Gitea revision is installed behind a named, restartable user service. It enables active research signals, not order placement, brokerage access, Exchange mutations, bank writes or money movement.
 
 The operator Door is owned by Nephew's canonical Door registry and projected by Make Doors. The raw `127.0.0.1:18003` transport is an implementation detail and is not the client-facing address.

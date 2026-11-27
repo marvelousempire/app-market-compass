@@ -1,0 +1,2 @@
+# Nephew's handbook generator leaves a blank separator after the last section.
+handbook/**/PAGE.md whitespace=-blank-at-eof
