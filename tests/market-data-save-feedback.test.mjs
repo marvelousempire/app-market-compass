@@ -37,6 +37,7 @@ test('confirmed Keychain readback plays success and clears the fields', async ()
   await form.submit({preventDefault() {}});
   assert.equal(connection.dataset.saveState, 'saved');
   assert.match(connection.textContent, /saved on this Mac/);
+  assert.match(connection.textContent, /Finish your app registration in Alpaca/);
   assert.equal(classes.has('just-saved'), true);
   assert.equal(form.elements.client_secret.value, '');
   assert.equal(start.disabled, false);

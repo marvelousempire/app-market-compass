@@ -248,7 +248,7 @@
     setup.hidden = !detail || detail.connected;
     if (setup.hidden) return;
     document.querySelector('#act-alpaca-setup-title').textContent = detail.configured ? 'Finish Alpaca setup' : 'Connect Alpaca';
-    document.querySelector('#act-alpaca-setup-help').textContent = detail.configured ? 'Your app details are saved. Sign in with Alpaca to finish.' : 'No Alpaca market-data connection yet. Add your Connect app details.';
+    document.querySelector('#act-alpaca-setup-help').textContent = detail.configured ? 'App details saved. Finish Alpaca app registration, then connect.' : 'No Alpaca market-data connection yet. Add your Connect app details.';
     setup.querySelector('button').textContent = detail.configured ? 'Finish connection' : 'Set up Alpaca';
   });
   document.querySelectorAll('[data-act-dialog-close]').forEach((button) => button.addEventListener('click', () => dialog?.close()));

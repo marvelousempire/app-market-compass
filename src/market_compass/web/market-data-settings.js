@@ -14,7 +14,7 @@ async function connectionStatus() {
     connection.dataset.saveState = status.configured ? 'saved' : 'empty';
     window.dispatchEvent(new CustomEvent('marketcompassalpacastatus', {detail: {configured: status.configured, connected: status.connected}}));
     connection.textContent = status.connected ? 'Alpaca connection saved on this Mac. Check the price source below to confirm your feed. The secret fields stay blank for safety.'
-      : status.configured ? 'App details saved on this Mac. The fields stay blank for safety. Next, select Connect with Alpaca.'
+      : status.configured ? 'App details saved on this Mac. Finish your app registration in Alpaca, then select Connect with Alpaca. The fields stay blank for safety.'
       : 'Alpaca is not connected. Add your Connect app credentials below.';
     if (start) start.disabled = !status.configured;
     return status;
@@ -97,6 +97,6 @@ refresh?.addEventListener('click', checkPriceSource);
 checkPriceSource();
 const alpacaReturn = new URLSearchParams(window.location.search).get('alpaca');
 connectionStatus().then(() => {
-  if (alpacaReturn === 'failed') connection.textContent = 'Alpaca sign-in did not finish. Check the Redirect URI and app review status, then try again.';
+  if (alpacaReturn === 'failed') connection.textContent = 'Alpaca sign-in did not finish. Open Alpaca app setup to check its saved return address and registration status, then try again.';
   if (alpacaReturn === 'declined') connection.textContent = 'Alpaca sign-in was canceled. No connection was added.';
 });
