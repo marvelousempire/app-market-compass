@@ -87,13 +87,13 @@ Most trading tools give users disconnected pieces: a chart, an RSI value, a head
 
 Market Compass is building an **evidence system** instead.
 
-For any asset, the long-term product should answer seven practical questions:
+For any Player, the long-term product should answer seven practical questions:
 
-1. **What is this asset?** Is there enough real activity, liquidity, utility, business substance, or market participation to analyze it seriously?
+1. **Who is this Player?** Is there enough real activity, liquidity, utility, business substance, or market participation to analyze it seriously?
 2. **What is price doing?** Is the market trending, ranging, reversing, continuing, or becoming overextended?
 3. **Where has price reacted before?** How strong are support and resistance when measured across repeated tests and time?
 4. **Where could price go next?** What are the last and next “Bus Stops,” and where is the route invalidated?
-5. **What is happening around the asset?** Which headlines, economic events, sectors, suppliers, customers, technologies, regulators, or narratives matter?
+5. **What is happening around the Player?** Which headlines, economic events, sectors, suppliers, customers, technologies, regulators, or narratives matter?
 6. **Has something like this happened before?** What happened after similar historical setups, including examples where the setup failed?
 7. **What argues against the conclusion?** What is the strongest opposing evidence, and what information is missing?
 
@@ -155,7 +155,7 @@ Inside that shell, the browser presents the governed `parseTHAT → decantTHAT �
 
 The Exchange projection includes working local dashboard totals, product search and filters, product metadata/auth/install state, and General/UI/API/SSO/Install contract panels. These remain read-only adapters, not copied owner engines: enable, save, install and authenticated API/SSO effects are unavailable. The modules do not contain bank credentials or account payloads, persist financial records, influence Market Compass scores, place trades or move money. The Bank Reader Ledger empty-state auto-generation path is explicitly excluded until an approved, repeat-safe adapter has its own receipt.
 
-## 0. Asset reality / quality gate
+## 0. Player reality / quality gate
 
 **Status: Partial**
 
@@ -248,7 +248,7 @@ Only historical rows with a known future outcome are eligible for evaluation.
 
 **Status: Partial**
 
-The long-term product concept is an evidence board similar to an investigation wall: assets, companies, technologies, sectors, events, regulators, suppliers, and customers are nodes connected by sourced edges.
+The long-term product concept is an evidence board similar to an investigation wall: Players, companies, technologies, sectors, events, regulators, suppliers, and customers are nodes connected by sourced edges.
 
 The current implementation builds a NetworkX graph from related-news co-mentions and can find multi-hop paths.
 
@@ -526,7 +526,7 @@ The current backtest is a **research validation tool**. It respects historical t
 
 Before Market Compass makes stronger predictive or trading-performance claims, the project needs broader validation across:
 
-- different assets;
+- different Players;
 - different market regimes;
 - multiple horizons;
 - transaction-cost assumptions;
@@ -643,7 +643,7 @@ Production readiness will require, at minimum:
 - persistent source provenance and timestamps;
 - resilient caching and provider failover;
 - broader regression and integration testing;
-- model evaluation by asset class and regime;
+- model evaluation by Player class and regime;
 - probability calibration for probabilistic claims;
 - drift and degradation monitoring;
 - authentication and secure configuration;
@@ -660,3 +660,7 @@ Until then, this repository is best understood as a **working research platform 
 # Disclaimer
 
 Market Compass is research and decision-support software. It is not investment advice, does not guarantee outcomes, and will never place trades. Historical behavior may not repeat, market data may be incomplete, news can be wrong, and models can fail when regimes change.
+
+### Player Exchange, Player Record, and Player Market Studio
+
+The Player Exchange uses the existing symbol search and browser watchlist to open a ticker's individual Player Record. That record has routed Overview, Intelligence, Player News, Price history, Evidence and receipts, and My view sections. Its dated price tape and research facts come from the selected ticker's `/api/analyze` result; local snapshots and notes are labeled separately. The Player Market Studio opens from that record and follows the Ready Play market-desk pattern with pulse, candles, study switches, levels, scenario splits, reports, and contribution evidence. Options opens the existing Options Lab. Futures contracts are explicitly unavailable until a verified contract feed is connected. This does not copy Ready Play player records, execute trades, or imply that a research score is a return probability.

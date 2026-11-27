@@ -11,14 +11,17 @@
   const dialogResults = document.querySelector('#act-command-results');
   const recovery = document.querySelector('#act-layout-recovery');
   const roomDescriptions = {
-    overview: 'Top-line runtime, controls, Actors, and research status.', runtime: 'Commissioned source, host, safety mode, and runtime receipts.', settings: 'Publisher display choices and appearance controls.', actors: 'Omo, Prince, Wuda, and Brown’s governed Actor spaces.', exchange: 'Read-only Market Exchange and bankTHAT contract inventory.', measurement: 'Choose any subject and evaluate its measurements with a named method, using a transparent hypothetical index.', desk: 'Market analysis, price memory, momentum, and evidence.', options: 'Theoretical options, virtual positions, Alpaca context, and SEC filings.', 'intel-app': 'Four source-bound research rooms for the selected desk symbol.', intel: 'Independent local research and proof-health receipts.', gates: 'Transparent go, watch, do-not-go, and invalidation research signals.', channel: 'Ticker-linked articles, publisher links, filings, and spoken headlines.', route: 'Price path, bus stops, invalidation, and confluence.', timeframes: '4H, daily, and weekly alignment.', evidence: 'Score contributions and historical calibration.', catalysts: 'Recent human-factor and market-news evidence.'
+    overview: 'Top-line runtime, controls, Actors, and research status.', runtime: 'Commissioned source, host, safety mode, and runtime receipts.', settings: 'Publisher display choices and appearance controls.', actors: 'Omo, Prince, Wuda, and Brown’s governed Actor spaces.', exchange: 'Read-only Market Exchange and bankTHAT contract inventory.', 'player-exchange': 'Find players and open their individual records.', 'player-profile': 'One selected Player with intelligence, news, history, evidence, and your view.', 'player-market': 'Ticker-linked market charts, levels, options research, reports, and evidence.', measurement: 'Choose any subject and evaluate its measurements with a named method, using a transparent hypothetical index.', desk: 'Market analysis, price memory, momentum, and evidence.', options: 'Theoretical options, virtual positions, Alpaca context, and SEC filings.', 'intel-app': 'Four source-bound research rooms for the selected desk symbol.', intel: 'Independent local research and proof-health receipts.', gates: 'Transparent go, watch, do-not-go, and invalidation research signals.', channel: 'Ticker-linked articles, publisher links, filings, and spoken headlines.', route: 'Price path, bus stops, invalidation, and confluence.', timeframes: '4H, daily, and weekly alignment.', evidence: 'Score contributions and historical calibration.', catalysts: 'Recent human-factor and market-news evidence.'
   };
   const roomSubmenus = {
-    overview: [['Runtime status', '#operator-deck'], ['Asset controls', '.control-bar'], ['Actor Studio', '#actor-spaces'], ['Market Exchange', '#market-exchange']],
+    overview: [['Runtime status', '#operator-deck'], ['Player controls', '.control-bar'], ['Actor Studio', '#actor-spaces'], ['Market Exchange', '#market-exchange']],
     settings: [['Publisher choices', '#asset-channel-publishers']],
-    runtime: [['Preview controls', '#operator-deck'], ['Asset controls', '.control-bar'], ['Watchlist', '.watch-row']],
+    runtime: [['Preview controls', '#operator-deck'], ['Player controls', '.control-bar'], ['Watchlist', '.watch-row']],
     actors: [['Omo', 'cassette:omo'], ['Prince', 'cassette:prince'], ['Wuda', 'cassette:wuda'], ['Brown’s Barometers', 'cassette:browns-barometers']],
     exchange: [['Dashboard', 'exchange:dashboard'], ['Catalog', 'exchange:catalog'], ['All products', 'exchange:products'], ['Installed', 'exchange:installed'], ['APIs & MCPs', 'exchange:apis'], ['API Observatory', 'exchange:observatory']],
+    'player-exchange': [['All Players', 'player-filter:all'], ['Watched', 'player-filter:watched'], ['Studied', 'player-filter:studied'], ['No analysis', 'player-filter:unread'], ['Journaled', 'player-filter:journaled'], ['Market desk', '#player-market-studio']],
+    'player-profile': [['Overview', 'player-profile:overview'], ['Intelligence', 'player-profile:intelligence'], ['Player News', 'player-profile:news'], ['Price history', 'player-profile:history'], ['Evidence & receipts', 'player-profile:proof'], ['My view', 'player-profile:view'], ['Market Studio', '#player-market-studio']],
+    'player-market': [['Market pulse', 'player-market:pulse'], ['Chart room', 'player-market:chart'], ['Training translation', 'player-market:translation'], ['Levels & signals', 'player-market:levels'], ['Matchup splits', 'player-market:splits'], ['Option chain', 'player-market:options'], ['Futures board', 'player-market:futures'], ['Market reports', 'player-market:reports'], ['Market evidence', 'player-market:evidence'], ['My market desk', 'player-market:desk'], ['Method & safety', 'player-market:method']],
     measurement: [['Subject schedules', '#hcck-profiles'], ['Measure and simulate', '#universal-simulator'], ['Original market desk', '#market-workspace']],
     options: [['Option chain', 'options-view:chain', [['Expiration','expiry'],['Calls and puts','types'],['Strike prices','strikes']]], ['Trade builder', 'options-view:builder', [['Action','action'],['Risk','risk'],['Virtual order','order']]], ['Returns', 'options-view:returns', [['Price and time','scenario'],['Volatility','volatility'],['Chart','chart']]], ['Strategies', 'options-view:strategies', [['Legs','legs'],['Risk','risk'],['Chart','chart']]], ['Alpaca data', 'options-view:alpaca', [['Quote','quote'],['Refresh','refresh']]], ['SEC filings', 'options-view:edgar', [['Filings','filings']]], ['Positions', 'options-view:positions', [['Open positions','open']]], ['Journal', 'options-view:journal', [['Entries','entries']]]],
     'intel-app': [['Cockpit', 'intel-view:cockpit'], ['Market Pack', 'intel-view:pack'], ['Macro Conditions', 'intel-view:macro'], ['News Intelligence', 'intel-view:rss'], ['SEC Monitor', 'intel-view:edgar'], ['Run History', 'intel-view:receipts']],
@@ -31,7 +34,7 @@
     evidence: [['Contributions', '#contributions'], ['Historical calibration', '#calibration'], ['Bull and bear cases', '.contrast'], ['Evidence board', '#evidence-board']],
     catalysts: [['Catalyst timeline', '#catalyst-panel'], ['Decision gates', '#decision-gates'], ['intelTHAT receipts', '#intelthat-panel']]
   };
-  const roomLanding = {overview:'#operator-deck',runtime:'#operator-deck',settings:'#market-settings',actors:'#actor-spaces',exchange:'#market-exchange',measurement:'#measurement-studio',desk:'.intelligence-overview',options:'#options-lab','intel-app':'#intelthat-app',intel:'#intelthat-panel',gates:'#decision-gates',channel:'#asset-channel',route:'#route-panel',timeframes:'#timeframe-panel',evidence:'#evidence-panel',catalysts:'#catalyst-panel'};
+  const roomLanding = {overview:'#operator-deck',runtime:'#operator-deck',settings:'#market-settings',actors:'#actor-spaces',exchange:'#market-exchange','player-exchange':'#player-exchange','player-profile':'#player-profile','player-market':'#player-market-studio',measurement:'#measurement-studio',desk:'.intelligence-overview',options:'#options-lab','intel-app':'#intelthat-app',intel:'#intelthat-panel',gates:'#decision-gates',channel:'#asset-channel',route:'#route-panel',timeframes:'#timeframe-panel',evidence:'#evidence-panel',catalysts:'#catalyst-panel'};
   const main = document.querySelector('main.shell');
   let focusedSelector = roomLanding.overview;
   const focusCanvas = selector => {
@@ -125,6 +128,15 @@
       const [, view, focus] = target.split(':');
       window.dispatchEvent(new CustomEvent('marketcompassoptionsview', { detail: { view, focus } }));
       focusCanvas('#options-lab');
+    } else if (target.startsWith('player-filter:')) {
+      window.dispatchEvent(new CustomEvent('marketcompassplayerfilter', {detail:{filter:target.slice(14)}}));
+      focusCanvas('#player-exchange');
+    } else if (target.startsWith('player-profile:')) {
+      window.dispatchEvent(new CustomEvent('marketcompassprofileview', {detail:{view:target.slice(15)}}));
+      focusCanvas('#player-profile');
+    } else if (target.startsWith('player-market:')) {
+      window.dispatchEvent(new CustomEvent('marketcompassmarketview', {detail:{view:target.slice(14)}}));
+      focusCanvas('#player-market-studio');
     } else if (target.startsWith('channel-view:')) {
       window.dispatchEvent(new CustomEvent('marketcompasschannelview', {detail:{view:target.slice(13)}}));
       focusCanvas('#asset-channel');

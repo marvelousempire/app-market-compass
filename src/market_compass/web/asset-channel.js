@@ -30,7 +30,7 @@
     const sec=text('article','','asset-channel-source');sec.append(text('strong','SEC EDGAR filings'),text('p',data.filings?.state==='observed'?`${data.filings.metrics?.filingCount||0} company filings available`:'Unavailable in this installation; SEC access is not configured.'));sources.append(sec);
     const counts=new Map();data.items.forEach(item=>counts.set(item.publisher,(counts.get(item.publisher)||0)+1));
     const filters=byId('asset-channel-publishers');filters.replaceChildren();
-    byId('market-settings-symbol').textContent=`Selected asset: ${data.symbol}`;
+    byId('market-settings-symbol').textContent=`Selected player: ${data.symbol}`;
     filters.append(text('h4','Show articles from'));
     const all=document.createElement('button');all.type='button';all.className='secondary';all.textContent='Show all publishers';all.addEventListener('click',()=>{chosenPublishers=null;savePublishers();renderSources(data);renderArticles(data);});filters.append(all);
     for(const [publisher,count] of [...counts].sort((a,b)=>a[0].localeCompare(b[0]))){
@@ -42,7 +42,7 @@
   const renderFilings=data=>{
     const list=byId('asset-channel-filings');list.replaceChildren();const filing=data.filings||{};
     if(filing.state!=='observed'){
-      const reason=filing.reason?.includes('fair-access contact')?'SEC filings are unavailable until the app owner configures SEC access.':(filing.reason||'SEC filings are unavailable for this asset right now.');
+      const reason=filing.reason?.includes('fair-access contact')?'SEC filings are unavailable until the app owner configures SEC access.':(filing.reason||'SEC filings are unavailable for this player right now.');
       list.append(text('p',reason,'asset-channel-empty'));return;
     }
     const rows=filing.inputs?.filings||[];
@@ -51,10 +51,10 @@
     for(const row of rows){const card=document.createElement('article');card.className='asset-channel-item';card.append(text('strong',row.form),text('p',`Filed ${human.date(row.filed)}`));if(source){const link=document.createElement('a');link.href=source;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open SEC company submissions';card.append(link);}list.append(card);}
   };
   const load=async(symbol=selectedSymbol())=>{
-    if(!/^[A-Z0-9.^-]{1,16}$/.test(symbol)){byId('asset-channel-status').textContent='Choose a valid asset symbol.';return;}
+    if(!/^[A-Z0-9.^-]{1,16}$/.test(symbol)){byId('asset-channel-status').textContent='Choose a valid player ticker.';return;}
     const request=++serial;pending?.abort();pending=new AbortController();
     byId('asset-channel-status').textContent=`Loading ${symbol} articles and filings…`;
-    byId('asset-channel-current').textContent=`Selected asset: ${symbol}`;
+    byId('asset-channel-current').textContent=`Selected player: ${symbol}`;
     try{
       const response=await fetch(`/api/asset-channel/${encodeURIComponent(symbol)}`,{signal:pending.signal,credentials:'same-origin'});
       const data=await response.json();if(!response.ok)throw new Error(data.detail||'The channel could not load.');

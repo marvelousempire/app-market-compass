@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261126.2">
   <link rel="stylesheet" href="/static/decision-gates.css?v=20261126.2">
   <link rel="stylesheet" href="/static/asset-channel.css?v=20261126.1">
+  <link rel="stylesheet" href="/static/market-studio.css?v=20261126.4">
   <link rel="stylesheet" href="/static/simulator.css?v=20261126.1">
   <link rel="stylesheet" href="/static/act-v1-appearance.css?v=20261106.1">
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
@@ -38,13 +39,16 @@
         <div class="act-nav-items">
           <a href="#actor-spaces" data-act-shell-room="actors"><span aria-hidden="true">◎</span><b>Actor Studio</b></a>
           <a href="#market-exchange" data-act-shell-room="exchange"><span aria-hidden="true">◇</span><b>Market Exchange</b></a>
+          <a href="#player-exchange" data-act-shell-room="player-exchange"><span aria-hidden="true">◇</span><b>Player Exchange</b></a>
+          <a href="#player-profile" data-act-shell-room="player-profile"><span aria-hidden="true">◉</span><b>Player Record</b></a>
+          <a href="#player-market-studio" data-act-shell-room="player-market"><span aria-hidden="true">▥</span><b>Player Market Studio</b></a>
           <a href="#measurement-studio" data-act-shell-room="measurement"><span aria-hidden="true">◫</span><b>Measurement Studio</b></a>
           <a href="#market-workspace" data-act-shell-room="desk"><span aria-hidden="true">⌁</span><b>Compass Desk</b></a>
           <a href="#options-lab" data-act-shell-room="options"><span aria-hidden="true">◉</span><b>Options Lab</b></a>
           <a href="#intelthat-app" data-act-shell-room="intel-app"><span aria-hidden="true">◉</span><b>intelTHAT App</b></a>
           <a href="#intelthat-panel" data-act-shell-room="intel"><span aria-hidden="true">≣</span><b>intelTHAT Receipts</b></a>
           <a href="#decision-gates" data-act-shell-room="gates"><span aria-hidden="true">⊘</span><b>Decision Gates</b></a>
-          <a href="#asset-channel" data-act-shell-room="channel"><span aria-hidden="true">◫</span><b>Asset Channel</b></a>
+          <a href="#asset-channel" data-act-shell-room="channel"><span aria-hidden="true">◫</span><b>Player News</b></a>
         </div>
       </section>
       <section class="act-nav-group" data-nav-group="Evidence">
@@ -109,7 +113,7 @@
       </div>
     </section>
     <section class="control-bar panel">
-      <label class="search-field"><span>Asset</span><input id="symbol" value="BB" list="symbol-suggestions" autocomplete="off" spellcheck="false"><datalist id="symbol-suggestions"></datalist></label>
+      <label class="search-field"><span>Player</span><input id="symbol" value="BB" list="symbol-suggestions" autocomplete="off" spellcheck="false"><datalist id="symbol-suggestions"></datalist></label>
       <label><span>Horizon</span><input id="horizon" type="number" value="20" min="1" max="120"></label>
       <button id="analyze" class="primary">Analyze</button>
       <button id="watch-current" class="secondary">+ Watch</button>
@@ -186,6 +190,48 @@
       <section class="stubthat-inspector" id="stubthat-inspector" aria-live="polite" aria-label="Selected stub contract"></section>
     </section>
 
+    <section class="player-exchange panel" id="player-exchange" aria-labelledby="player-exchange-title">
+      <div class="player-exchange-command">
+        <p class="eyebrow">PLAYER EXCHANGE · STUDIO HUB</p>
+        <h2 id="player-exchange-title">See the players in this market.</h2>
+        <p>Every ticker is a player. Search, sort, compare what is known, then open a player’s market desk.</p>
+        <p class="player-exchange-authority">Market Compass reads dated market evidence. Watchlists and notes stay in this browser.</p>
+        <div class="player-exchange-summary" id="player-exchange-summary"></div>
+        <nav class="player-exchange-filters" id="player-exchange-filters" aria-label="Player groups"></nav>
+      </div>
+      <div class="player-exchange-pulse">
+        <p class="eyebrow">MARKET PULSE</p><h3>How ready are these player cards?</h3>
+        <p>Research coverage for the players in this view. A local study is not verified market proof.</p>
+        <div class="player-exchange-bars" id="player-exchange-bars"></div>
+      </div>
+      <div class="player-exchange-catalog">
+        <p class="eyebrow">THE CATALOG</p><h3>Complete player catalog</h3>
+        <p id="player-exchange-status" role="status">Loading watched players…</p>
+        <div class="player-exchange-controls">
+          <div class="player-exchange-sort" role="group" aria-label="Order players"><span>ORDER PLAYERS</span><button type="button" data-exchange-sort="recent">Recently studied</button><button type="button" data-exchange-sort="name">Name</button><button type="button" data-exchange-sort="symbol">Symbol</button><button type="button" data-exchange-sort="price">Price</button><button type="button" id="player-exchange-direction">Newest first</button></div>
+          <div class="player-exchange-sizes" role="group" aria-label="View size"><span>VIEW SIZE</span><button type="button" data-exchange-size="thin">Thin</button><button type="button" data-exchange-size="detail">Detail</button><button type="button" data-exchange-size="xs">XS</button><button type="button" data-exchange-size="s">S</button><button type="button" data-exchange-size="m">M</button><button type="button" data-exchange-size="l">L</button><button type="button" data-exchange-size="xl">XL</button><button type="button" data-exchange-size="mx">MX</button></div>
+          <label class="player-exchange-search-label"><span>Find a player</span><input id="player-exchange-search" type="search" placeholder="Search ticker or company name" autocomplete="off"></label>
+        </div>
+        <div id="player-exchange-grid" class="player-exchange-grid" data-size="thin"></div>
+      </div>
+    </section>
+
+    <section class="player-profile panel" id="player-profile" aria-labelledby="player-profile-title">
+      <div class="player-profile-top"><button type="button" id="player-profile-back">← Player Exchange</button><span>ONE PLAYER · ROUTED EVIDENCE</span></div>
+      <header class="player-profile-hero"><div><p class="eyebrow">PLAYER RECORD</p><h2 id="player-profile-title">Choose a Player</h2><p id="player-profile-description">Open a ticker from the Player Exchange to see its individual record.</p></div><div class="player-profile-quote"><strong id="player-profile-price">—</strong><small id="player-profile-date">No market reading yet</small></div></header>
+      <nav class="player-profile-tabs" aria-label="Player record sections"></nav>
+      <div class="player-profile-content" id="player-profile-content" aria-live="polite"></div>
+    </section>
+
+    <section class="player-market-studio panel" id="player-market-studio" aria-labelledby="player-market-title">
+      <div class="player-market-topbar"><div><strong id="player-market-topline">Player Market Studio</strong><small>TICKER EVIDENCE MARKET</small></div><button type="button" id="player-market-close" aria-label="Close Market Studio">×</button></div>
+      <header class="player-market-hero"><div><p class="eyebrow">MARKET COMPASS MARKET STUDIO</p><h2 id="player-market-title">Player market desk</h2><p id="player-market-context">Choose a player to load its market evidence.</p></div><div class="player-market-quote"><span id="player-market-symbol">—</span><strong id="player-market-price">—</strong><small id="player-market-date">Waiting for data</small></div></header>
+      <div class="player-market-books" id="player-market-books" aria-label="Three market evidence books"></div>
+      <nav class="player-market-tabs" aria-label="Player Market Studio rooms"></nav>
+      <section class="player-market-room" id="player-market-room" aria-live="polite"></section>
+      <footer class="player-market-boundaries"><p><b>Source-bound evidence</b><span>Only dated bars from the selected ticker become candles.</span></p><p><b>Player safety</b><span>Research makes no trade, wager, ownership, or score change.</span></p><p><b>Study tools only</b><span>Indicators and simulations do not rewrite source prices.</span></p></footer>
+    </section>
+
     <section class="watch-row panel compact-panel">
       <div><p class="eyebrow">WATCHLIST</p><div id="watchlist" class="chips"></div></div>
       <div class="snapshot-peek"><p class="eyebrow">RECENT SNAPSHOTS</p><div id="snapshot-chips" class="chips"></div></div>
@@ -206,7 +252,7 @@
         <div class="section-head overview-heading">
           <div>
             <p class="eyebrow">INTELLIGENCE OVERVIEW</p>
-            <h2>Asset Reality, State, Evidence &amp; Core Signals</h2>
+            <h2>Player Reality, State, Evidence &amp; Core Signals</h2>
           </div>
         </div>
         <section class="summary-grid" id="summary-grid"></section>
@@ -317,7 +363,7 @@
             <button type="button" class="secondary" id="day-trader-lens-load">Read Lens</button>
           </div>
           <p class="trust-note">Daily setup measurements and notable RSI crossings refined from a provenance-bound outside source. No score influence, broker, order, credential, or money movement.</p>
-          <div id="day-trader-lens-output" role="status" aria-live="polite"><p class="muted">Run an asset analysis to read this lens.</p></div>
+          <div id="day-trader-lens-output" role="status" aria-live="polite"><p class="muted">Run a player analysis to read this lens.</p></div>
         </section>
         <section class="panel" id="intelthat-panel" aria-label="intelTHAT research receipts">
           <div class="section-head">
@@ -376,15 +422,15 @@
       </section>
     </section>
     <section class="panel asset-channel" id="asset-channel" aria-labelledby="asset-channel-title">
-      <div class="section-head"><div><p class="eyebrow">MARKET COMPASS / ASSET CHANNEL</p><h2 id="asset-channel-title">News for BB</h2><p id="asset-channel-description">Articles linked to the selected asset, with source and publication time.</p></div><button type="button" class="secondary" id="asset-channel-refresh">Refresh channel</button></div>
-      <div class="asset-channel-picker" aria-label="Choose an asset channel"><button type="button" data-channel-symbol="BB">BB</button><button type="button" data-channel-symbol="AAPL">AAPL</button><button type="button" data-channel-symbol="QQQ">QQQ</button><button type="button" data-channel-symbol="SPCX">SPCX</button><span id="asset-channel-current">Selected asset: BB</span></div>
-      <p class="asset-channel-status" id="asset-channel-status" role="status">Loading the selected asset channel…</p>
-      <section class="asset-channel-view" data-channel-panel="articles" aria-label="Asset articles"><h3>Articles and videos</h3><div id="asset-channel-articles" class="asset-channel-list"></div></section>
-      <section class="asset-channel-view" data-channel-panel="filings" aria-label="Asset filings" hidden><h3>SEC filings</h3><div id="asset-channel-filings" class="asset-channel-list"></div></section>
+      <div class="section-head"><div><p class="eyebrow">MARKET COMPASS / PLAYER NEWS</p><h2 id="asset-channel-title">News for BB</h2><p id="asset-channel-description">Articles linked to the selected player, with source and publication time.</p></div><button type="button" class="secondary" id="asset-channel-refresh">Refresh channel</button></div>
+      <div class="asset-channel-picker" aria-label="Choose a player channel"><button type="button" data-channel-symbol="BB">BB</button><button type="button" data-channel-symbol="AAPL">AAPL</button><button type="button" data-channel-symbol="QQQ">QQQ</button><button type="button" data-channel-symbol="SPCX">SPCX</button><span id="asset-channel-current">Selected player: BB</span></div>
+      <p class="asset-channel-status" id="asset-channel-status" role="status">Loading the selected player channel…</p>
+      <section class="asset-channel-view" data-channel-panel="articles" aria-label="Player articles"><h3>Articles and videos</h3><div id="asset-channel-articles" class="asset-channel-list"></div></section>
+      <section class="asset-channel-view" data-channel-panel="filings" aria-label="Player filings" hidden><h3>SEC filings</h3><div id="asset-channel-filings" class="asset-channel-list"></div></section>
       <section class="asset-channel-view" data-channel-panel="sources" aria-label="Channel sources" hidden><h3>Where this comes from</h3><div id="asset-channel-sources" class="asset-channel-sources"></div><a class="secondary asset-channel-settings-link" href="#market-settings">Manage publishers in Settings</a></section>
       <section class="asset-channel-view" data-channel-panel="listen" aria-label="Listen to headlines" hidden><h3>Listen to headlines</h3><p>The app can read available headlines aloud on this Mac. Full article audio depends on its publisher.</p><div class="actor-actions"><button type="button" class="secondary" id="asset-channel-play">Read headlines</button><button type="button" class="secondary" id="asset-channel-stop">Stop reading</button></div><p id="asset-channel-audio-status" role="status"></p></section>
     </section>
-    <section class="panel asset-channel market-settings" id="market-settings" aria-labelledby="market-settings-title"><div class="section-head"><div><p class="eyebrow">MARKET COMPASS / SETTINGS</p><h2 id="market-settings-title">Settings</h2><p>Choose how research appears. Source receipts and market calculations keep their original values.</p></div></div><section><h3>Upload files</h3><p>Review files in UploadTHAT, the shared intake for your apps. Market Compass does not receive broker holdings from it yet.</p><a class="secondary asset-channel-settings-link" data-node-id="uploadthat.receive" href="https://search.jailynmarvin.com/uploadthat?source=market-compass-studio" target="_blank" rel="noopener">Open UploadTHAT</a></section><section><h3>Asset Channel publishers</h3><p>Choose which publishers appear for the selected asset. This changes your display, not the source request or its exact receipt.</p><p id="market-settings-symbol">Selected asset: BB</p><div id="asset-channel-publishers" class="asset-channel-publishers"></div></section><section><h3>Appearance and layout</h3><p>Use the Appearance controls in the left rail to choose light or dark mode and the canvas layout.</p></section></section>
+    <section class="panel asset-channel market-settings" id="market-settings" aria-labelledby="market-settings-title"><div class="section-head"><div><p class="eyebrow">MARKET COMPASS / SETTINGS</p><h2 id="market-settings-title">Settings</h2><p>Choose how research appears. Source receipts and market calculations keep their original values.</p></div></div><section><h3>Upload files</h3><p>Review files in UploadTHAT, the shared intake for your apps. Market Compass does not receive broker holdings from it yet.</p><a class="secondary asset-channel-settings-link" data-node-id="uploadthat.receive" href="https://search.jailynmarvin.com/uploadthat?source=market-compass-studio" target="_blank" rel="noopener">Open UploadTHAT</a></section><section><h3>Player News publishers</h3><p>Choose which publishers appear for the selected player. This changes your display, not the source request or its exact receipt.</p><p id="market-settings-symbol">Selected player: BB</p><div id="asset-channel-publishers" class="asset-channel-publishers"></div></section><section><h3>Appearance and layout</h3><p>Use the Appearance controls in the left rail to choose light or dark mode and the canvas layout.</p></section></section>
     <section class="options-embedded panel" id="options-lab" aria-labelledby="options-lab-title">
       <div class="options-embedded-heading"><div><p class="eyebrow">MARKET COMPASS / OPTIONS</p><h2 id="options-lab-title">Options Lab</h2><p>Explore theoretical outcomes, Alpaca market context, and SEC filings in the same workspace.</p></div><span>Virtual orders only</span></div>
       <iframe id="options-lab-frame" title="Market Compass Options Lab" src="/static/options.html?embedded=1&amp;v=20261126.7" loading="lazy"></iframe>
@@ -427,7 +473,8 @@
   <script src="/static/stubthat.js?v=20261126.1" defer></script>
   <script src="/static/act-v1-shell.js?v=20261126.4" defer></script>
   <script src="/static/decision-gates.js?v=20261126.3" defer></script>
-  <script src="/static/asset-channel.js?v=20261126.2" defer></script>
+  <script src="/static/asset-channel.js?v=20261126.3" defer></script>
+  <script src="/static/market-studio.js?v=20261126.4" defer></script>
   <script src="/static/simulator.js?v=20261126.4" defer></script>
   <script src="/static/hcck.js?v=20261126.2" defer></script>
 </body>

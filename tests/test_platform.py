@@ -63,7 +63,7 @@ def test_v05_workbench_surface_is_served():
     script = client.get("/static/app.js")
     assert script.status_code == 200
     for function in [
-        "renderIntelligenceOverview", "ASSET REALITY", "MARKET STATE", "FIBONACCI", "REVERSAL",
+            "renderIntelligenceOverview", "PLAYER REALITY", "MARKET STATE", "FIBONACCI", "REVERSAL",
         "renderCharts", "renderContributions", "renderCatalysts", "saveSnapshot",
         "summary-grid", "signal-grid", "Requested",
     ]:
