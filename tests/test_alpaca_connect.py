@@ -45,6 +45,23 @@ def test_connection_settings_refuse_cross_origin_write(monkeypatch):
     assert response.status_code == 403
 
 
+def test_connection_settings_accept_local_door_forwarded_to_loopback(monkeypatch):
+    monkeypatch.setattr(alpaca_connect, "configure", lambda *args: {"configured": True})
+    response = TestClient(app).post("/api/alpaca-connect/configure", json={
+        "client_id": "client123", "client_secret": "secret123"},
+        headers={"Origin": "http://market-compass.localhost", "Host": "127.0.0.1:18003"})
+    assert response.status_code == 200
+    assert response.json()["configured"] is True
+
+
+def test_connection_settings_still_refuse_other_origin_on_loopback(monkeypatch):
+    monkeypatch.setattr(alpaca_connect, "configure", lambda *args: pytest.fail("should not save"))
+    response = TestClient(app).post("/api/alpaca-connect/configure", json={
+        "client_id": "client123", "client_secret": "secret123"},
+        headers={"Origin": "http://other.localhost", "Host": "127.0.0.1:18003"})
+    assert response.status_code == 403
+
+
 def test_configure_requires_keychain_readback(monkeypatch):
     stored = {}
     monkeypatch.setattr(alpaca_connect, "_read", lambda account: stored.get(account, ""))

@@ -48,9 +48,15 @@ class AlpacaConnectCredentials(BaseModel):
 
 def _local_settings_request(request: Request) -> None:
     origin = request.headers.get("origin", "")
-    if request.url.hostname not in {"market-compass.localhost", "127.0.0.1", "localhost"}:
+    host = request.url.hostname
+    if host not in {"market-compass.localhost", "127.0.0.1", "localhost"}:
         raise HTTPException(403, "Open the local Market Compass app to change its connection.")
-    if origin != f"{request.url.scheme}://{request.headers.get('host', '')}":
+    # The local Door forwards to a loopback Uvicorn port. The browser still sends
+    # the public Door as Origin, so compare against that exact trusted origin too.
+    allowed_origins = {f"{request.url.scheme}://{request.headers.get('host', '')}"}
+    if host in {"127.0.0.1", "localhost"}:
+        allowed_origins.add("http://market-compass.localhost")
+    if origin not in allowed_origins:
         raise HTTPException(403, "Open Market Compass Settings before changing its connection.")
 
 
