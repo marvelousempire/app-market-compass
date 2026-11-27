@@ -235,6 +235,13 @@
   const openDialog = () => { renderCommands(); dialog?.showModal(); setTimeout(() => dialogSearch?.focus(), 0); };
   document.querySelectorAll('[data-act-command="menu"],[data-act-command="search"]').forEach((button) => button.addEventListener('click', openDialog));
   document.querySelectorAll('[data-act-command="settings"]').forEach((button) => button.addEventListener('click', () => {history.replaceState(null,'','#market-settings');selectRoom('settings');focusCanvas(roomLanding.settings);}));
+  document.querySelectorAll('[data-act-alpaca-entry]').forEach((link) => link.addEventListener('click', (event) => {
+    event.preventDefault();
+    history.replaceState(null, '', '#market-settings');
+    selectRoom('settings');
+    focusCanvas('#market-data-settings');
+    roomSubmenu?.querySelector('[data-act-submenu-target="#market-data-settings"]')?.setAttribute('aria-current', 'true');
+  }));
   document.querySelectorAll('[data-act-dialog-close]').forEach((button) => button.addEventListener('click', () => dialog?.close()));
   dialogSearch?.addEventListener('input', () => renderCommands(dialogSearch.value));
   window.addEventListener('keydown', (event) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); openDialog(); } });

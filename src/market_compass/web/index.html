@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>body.opened-as-file>*:not(#file-open-gate){display:none!important}#file-open-gate[hidden]{display:none}#file-open-gate{max-width:36rem;margin:10vh auto;padding:2rem;font:18px/1.5 system-ui,sans-serif;color:#171717;background:#fff;border-radius:16px}#file-open-gate a{display:inline-block;margin-top:1rem;padding:12px 18px;border-radius:10px;background:#171717;color:#fff;text-decoration:none}</style>
+  <script>if(location.protocol==='file:')location.replace('http://market-compass.localhost/#market-settings');</script>
   <link rel="stylesheet" href="/static/market-symbols.css?v=20261126.1">
   <meta name="color-scheme" content="light dark">
   <title>Market Compass</title>
@@ -14,7 +16,7 @@
   <link rel="stylesheet" href="/static/operator-controls.css">
   <link rel="stylesheet" href="/static/research-cassettes.css?v=20261106.1">
   <link rel="stylesheet" href="/static/stubthat.css?v=20261106.1">
-  <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261127.2">
+  <link rel="stylesheet" href="/static/act-v1-shell.css?v=20261127.3">
   <link rel="stylesheet" href="/static/decision-gates.css?v=20261126.2">
   <link rel="stylesheet" href="/static/asset-channel.css?v=20261127.2">
   <link rel="stylesheet" href="/static/market-studio.css?v=20261126.5">
@@ -23,6 +25,8 @@
   <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
+  <div id="file-open-gate" hidden><h1>Open Market Compass</h1><p>This source file needs the running app for its styling and market data.</p><a href="http://market-compass.localhost/#market-settings">Open the working app</a></div>
+  <script>if(location.protocol==='file:'){document.body.classList.add('opened-as-file');document.getElementById('file-open-gate').hidden=false}</script>
   <aside class="act-shell-rail" aria-label="Market Compass rooms" data-shell-node="primary-rail">
     <a class="act-shell-brand" href="#market-overview" aria-label="Market Compass home"><span aria-hidden="true"></span><strong>MARKET COMPASS</strong><small>Admin Control Tower</small></a>
     <nav class="act-shell-nav" aria-label="Admin studios">
@@ -33,6 +37,7 @@
           <a href="#operator-deck" data-act-shell-room="runtime"><span aria-hidden="true">⬢</span><b>Runtime Status</b></a>
           <a href="/handbook"><span aria-hidden="true">▤</span><b>Handbook</b></a>
           <a href="#market-settings" data-act-shell-room="settings"><span aria-hidden="true">⚙</span><b>Settings</b></a>
+          <a href="#market-settings" data-act-alpaca-entry><span aria-hidden="true">↗</span><b>Connect Alpaca</b></a>
         </div>
       </section>
       <section class="act-nav-group" data-nav-group="Studios">
@@ -472,7 +477,7 @@
   <script src="/static/operator-controls.js?v=20261125.8" defer></script>
   <script src="/static/research-cassettes.js?v=20261126.1" defer></script>
   <script src="/static/stubthat.js?v=20261126.1" defer></script>
-  <script src="/static/act-v1-shell.js?v=20261127.1" defer></script>
+  <script src="/static/act-v1-shell.js?v=20261127.3" defer></script>
   <script src="/static/decision-gates.js?v=20261126.4" defer></script>
   <script src="/static/asset-channel.js?v=20261126.3" defer></script>
   <script src="/static/market-studio.js?v=20261126.5" defer></script>
