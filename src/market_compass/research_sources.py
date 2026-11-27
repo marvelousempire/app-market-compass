@@ -7,15 +7,34 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 import json
+import subprocess
 
 from .intelthat_contract import symbol
 from .intelthat_native import _edgar
 
 
-def alpaca_quote(value: str) -> dict:
-    ticker = symbol(value)
+def _alpaca_credentials() -> tuple[str, str]:
+    """Read the service's data-only keys without placing them in the agent plist."""
     key = os.getenv('MARKET_COMPASS_ALPACA_KEY_ID', '').strip()
     secret = os.getenv('MARKET_COMPASS_ALPACA_SECRET_KEY', '').strip()
+    if key and secret:
+        return key, secret
+    if os.uname().sysname != 'Darwin':
+        return '', ''
+    def read(account: str) -> str:
+        try:
+            result = subprocess.run(
+                ['security', 'find-generic-password', '-s', 'ai.market-compass.alpaca',
+                 '-a', account, '-w'], capture_output=True, text=True, timeout=3, check=True)
+            return result.stdout.strip()
+        except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired):
+            return ''
+    return read('key-id'), read('secret-key')
+
+
+def alpaca_quote(value: str) -> dict:
+    ticker = symbol(value)
+    key, secret = _alpaca_credentials()
     if not key or not secret:
         return {'state': 'held', 'reason': 'Alpaca market-data credentials are not configured.', 'symbol': ticker,
                 'requiredSettings': ['MARKET_COMPASS_ALPACA_KEY_ID', 'MARKET_COMPASS_ALPACA_SECRET_KEY']}
@@ -40,8 +59,7 @@ def alpaca_quote(value: str) -> dict:
 def alpaca_latest_trade(value: str) -> dict:
     """Read a dated trade from the explicitly selected Alpaca feed."""
     ticker = symbol(value)
-    key = os.getenv('MARKET_COMPASS_ALPACA_KEY_ID', '').strip()
-    secret = os.getenv('MARKET_COMPASS_ALPACA_SECRET_KEY', '').strip()
+    key, secret = _alpaca_credentials()
     if not key or not secret:
         return {'state': 'held', 'symbol': ticker, 'reason': 'Alpaca market-data credentials are not configured.'}
     feed = os.getenv('MARKET_COMPASS_ALPACA_FEED', 'iex').strip().lower()

@@ -7,6 +7,19 @@ from market_compass import research_sources
 from market_compass.engine import analyze_frame
 
 
+def test_alpaca_credentials_read_keychain_without_exposing_values(monkeypatch):
+    monkeypatch.delenv('MARKET_COMPASS_ALPACA_KEY_ID', raising=False)
+    monkeypatch.delenv('MARKET_COMPASS_ALPACA_SECRET_KEY', raising=False)
+    monkeypatch.setattr(research_sources.os, 'uname', lambda: type('U', (), {'sysname': 'Darwin'})())
+    calls = []
+    def lookup(command, **kwargs):
+        calls.append(command)
+        return type('Result', (), {'stdout': 'private-value\n'})()
+    monkeypatch.setattr(research_sources.subprocess, 'run', lookup)
+    assert research_sources._alpaca_credentials() == ('private-value', 'private-value')
+    assert [call[-2] for call in calls] == ['key-id', 'secret-key']
+
+
 def test_report_study_close_keeps_source_bar_time(sample_data):
     report = analyze_frame("TEST", sample_data)
     assert report.data_meta["price_session_date"] == sample_data.bars.index[-1].date().isoformat()

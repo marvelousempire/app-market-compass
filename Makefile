@@ -5,7 +5,10 @@ RUN_PYTHON = $(if $(wildcard $(VENV_PYTHON)),$(VENV_PYTHON),$(PYTHON))
 ASSET ?= HYPE
 HORIZON ?= 20
 
-.PHONY: setup test lint analyze node backtest app api doctor clean ship-install-go
+.PHONY: setup test lint analyze node backtest app api doctor clean ship-install-go setup-alpaca-data
+
+setup-alpaca-data:
+	bash scripts/setup-alpaca-data.sh
 
 ship-install-go:
 	bash scripts/ship-install-go.sh $(if $(SHIP_NO_OPEN),--no-open,)

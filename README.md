@@ -446,6 +446,10 @@ These controls do not merge code, push branches, change Gitea authority, connect
 
 The commissioned service binds `MARKET_COMPASS_AUTHORITY`, `MARKET_COMPASS_COMMISSIONED=true`, and `MARKET_COMPASS_SOURCE_REVISION` at launch. Those values make the installed source auditable. Research-signal generation is active; broker execution remains permanently absent, and calculateTHAT reads rather than mutates the evidence score.
 
+### Alpaca live price setup on this Mac
+
+Run `make setup-alpaca-data` from the installed Market Compass checkout. It privately prompts for the Alpaca market-data key ID and secret, stores them as two items in the macOS login Keychain, and checks a real quote through the running app. The app reads those items on request; the LaunchAgent has no secret values. Its default feed is IEX, which is live only for trades on that exchange and may differ from consolidated prices. A trade is labelled Live only when its actual timestamp is recent; closed-market observations remain dated. A broader SIP feed requires a corresponding Alpaca entitlement and an explicit `MARKET_COMPASS_ALPACA_FEED=sip` service setting. Do not paste keys into chat or commit them to Git.
+
 The browser starts on **BB** with **BB**, **AAPL**, **QQQ**, and the operator-requested literal **SPCX** in the default watch choices. An untouched legacy default list is migrated once; a personally edited watchlist is preserved.
 
 The local runtime shows **Omo**, **Prince**, **Wuda**, and **Brown’s Barometers** as report-bound Actors. Omo scouts current named evidence; Prince frames horizon, route, and invalidation; Wuda presents trend plus directional RSI crossings around 35, 50, and 65; Brown owns the consolidated metrics and technical-instrument bench. Every Actor keeps its trading psychology inside its own comp card and can export a receipt with inputs, formula context, timeframe, timestamp, provenance, confidence, and the permanent research-only authority boundary. Marvin’s Metrics is absent.
