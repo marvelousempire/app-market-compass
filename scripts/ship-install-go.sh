@@ -42,7 +42,19 @@ git worktree add --detach "$stage/source" "$revision" >/dev/null
   exit 1
 }
 git merge --ff-only "$revision"
-"$python" -m pip install --no-deps --no-build-isolation -e "$root"
+# This commissioned service runs from its source tree via the LaunchAgent's
+# PYTHONPATH. Verify that binding instead of requiring an editable wheel build.
+"$python" - "$plist" "$root/src" <<'PY'
+import os,plistlib,sys
+path,source=sys.argv[1:]
+with open(path,'rb') as file: data=plistlib.load(file)
+if data.get('EnvironmentVariables',{}).get('PYTHONPATH') != source:
+    raise SystemExit('The commissioned source path differs from this checkout; preserve the service and inspect its LaunchAgent.')
+sys.path.insert(0,source)
+import market_compass
+if not os.path.samefile(os.path.dirname(market_compass.__file__),os.path.join(source,'market_compass')):
+    raise SystemExit('Python is not loading Market Compass from the commissioned checkout.')
+PY
 
 old_receipt="$($python - "$door/api/operator/status" <<'PY'
 import json,sys,urllib.request
