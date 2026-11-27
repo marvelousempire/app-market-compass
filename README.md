@@ -58,6 +58,8 @@ Market Compass is commissioned as a loopback-only research service on **FiveMac*
 | Signal and execution boundary | active research signals; `trade_execution:false` permanently |
 | Mirror | GitHub `marvelousempire/app-market-compass` follows accepted Gitea main |
 
+Control icons in the Market Compass Web Door receive semantic roles from the installed ACT V5 symbol catalog. Web uses the catalog's coherent outlines; native Apple targets use the corresponding SF Symbol names. Player initials and ticker symbols remain data.
+
 The exact running revision, PID and authority receipt are available from:
 
 ```bash

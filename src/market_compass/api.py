@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import signal
 import socket
 from concurrent.futures import ThreadPoolExecutor
@@ -9,9 +10,10 @@ from datetime import UTC, datetime
 from pathlib import Path
 from threading import Timer
 from urllib.error import URLError
+from urllib.request import Request as URLRequest, urlopen
 
 from fastapi import FastAPI, HTTPException, Query, Request
-from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from .ai import AnalystRequest, AnalystRouter
@@ -35,6 +37,44 @@ analyst_router = AnalystRouter()
 WEB_DIR = Path(__file__).with_name("web")
 PREVIEW_STARTED_AT = datetime.now(UTC).isoformat()
 app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
+
+SYMBOL_OWNER = "http://act-v5.localhost"
+SYMBOL_REVISION = re.compile(r"^[a-f0-9]{40}$")
+
+
+def _symbol_owner_read(path: str) -> bytes:
+    try:
+        request = URLRequest(SYMBOL_OWNER + path, headers={"Cache-Control": "no-cache"})
+        with urlopen(request, timeout=3) as response:
+            return response.read(512_001)
+    except (OSError, URLError) as exc:
+        raise HTTPException(503, "The shared symbol catalog is unavailable.") from exc
+
+
+@app.get("/api/ui-symbols/manifest")
+def ui_symbol_manifest():
+    try:
+        manifest = json.loads(_symbol_owner_read("/core/v1/manifest.json"))
+        revision = manifest["revision"]
+    except (ValueError, KeyError, TypeError) as exc:
+        raise HTTPException(503, "The shared symbol catalog is unavailable.") from exc
+    if not isinstance(revision, str) or not SYMBOL_REVISION.fullmatch(revision):
+        raise HTTPException(503, "The shared symbol revision is invalid.")
+    return JSONResponse({"revision": revision}, headers={"Cache-Control": "no-store"})
+
+
+@app.get("/api/ui-symbols/r/{revision}/symbols.mjs")
+def ui_symbol_module(revision: str):
+    if not SYMBOL_REVISION.fullmatch(revision):
+        raise HTTPException(404, "Unknown symbol revision.")
+    manifest = ui_symbol_manifest().body
+    if json.loads(manifest)["revision"] != revision:
+        raise HTTPException(409, "The shared symbol revision changed. Reload this page.")
+    path = f"/core/v1/r/{revision}/symbols.mjs"
+    module = _symbol_owner_read(path)
+    if len(module) > 512_000 or b"export const SYMBOL_CORE_REVISION=" not in module[:240]:
+        raise HTTPException(503, "The shared symbol module is unavailable.")
+    return Response(module, media_type="text/javascript", headers={"Cache-Control": "no-store"})
 
 
 @app.get("/", response_class=FileResponse)

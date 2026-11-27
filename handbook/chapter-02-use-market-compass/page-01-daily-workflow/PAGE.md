@@ -16,6 +16,10 @@ Search by symbol or company, select a result, and press **Analyze**. The complet
 
 In Compass Desk, open Price Route to inspect the last and next Bus Stops, invalidation, and downside structure. Select an available timeframe and check the observation window. Use Appearance for System, Light, or Dark. Open an Actor from the current report and export its receipt from the comp card. The Overview runtime controls report status in plain language; they do not analyze a Player.
 
+## Symbols and control labels
+
+The left rail, bottom controls, room menu, runtime actions, and intelTHAT rooms use one shared symbol language. Read the word beside an icon for its action; the symbol does not change what the control does. Market Compass Web receives the ACT V5 catalog's outline drawings for semantic roles. Native Apple apps can use the corresponding SF Symbol names from that same catalog. Player initials and ticker symbols remain names, not control icons. If the shared catalog is unavailable, the original control labels remain and the page reports that symbol receiving is unavailable.
+
 ## Player Exchange, Record, and Market Studio — LIVE
 
 In **Player Exchange**, BB, AAPL, QQQ, and other ticker symbols are Players. Search by ticker or company name, filter and sort the catalog, then select a card. That opens the individual **Player Record** in the same center canvas. Its right rail chooses Overview, Intelligence, Player News, Price history, Evidence and receipts, or My view. Price history uses dated market bars; saved studies and notes are browser-local and labeled separately. A missing current reading stays unknown until analysis returns.

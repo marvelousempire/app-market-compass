@@ -1,0 +1,5 @@
+.mc-symbol{display:inline-flex;align-items:center;justify-content:center;flex:none;width:1em;height:1em;vertical-align:-.125em;line-height:1}
+.mc-symbol svg{display:block;width:100%;height:100%;overflow:visible}
+.act-nav-group-toggle .mc-symbol svg{transform:rotate(90deg)}
+.act-nav-group-toggle[aria-expanded="false"] .mc-symbol svg{transform:rotate(0deg)}
+.mc-symbol-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

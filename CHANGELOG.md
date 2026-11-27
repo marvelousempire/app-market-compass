@@ -7,8 +7,9 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Connected the Web Door and intelTHAT room controls to the ACT V5 semantic symbol catalog through a same-origin, revision-checked public reader. The Web uses catalog outlines; native Apple targets retain SF Symbol names. Original labels and control behavior remain in place when the catalog is unavailable.
 - Added reviewed uploadTHAT history receiving with independent Bank operation checks, a retained research tab, and the unchanged Bank history presenter. The upload entrance uses the registered source identity; the reader reuses the qualified Bank owner stream that matches settlement. History remains separate from current holdings and simulations.
-- Added a guarded `make ship-install-go` command for an accepted Gitea main revision: qualify the source and Rust options build, fast-forward the commissioned checkout, refresh the Python installation and exact LaunchAgent revision, then verify and open the named Door.
+- Added a guarded `make ship-install-go` command for an accepted Gitea main revision: qualify the source and Rust options build, fast-forward the commissioned checkout, verify its Python source binding and exact LaunchAgent revision, then verify and open the named Door.
 - Updated the Handbook for the live Player Exchange → individual Player Record → Player Market Studio flow and its source limits.
 
 - Options Lab right-rail sections now open one retained canvas cassette at a time, with section submenus for controls and results.
