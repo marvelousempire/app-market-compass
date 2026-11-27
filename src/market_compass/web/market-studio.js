@@ -10,6 +10,7 @@
     ? Number(value).toLocaleString(undefined, {minimumFractionDigits: digits, maximumFractionDigits: digits}) : '—';
   const money = value => value != null && value !== '' && Number.isFinite(Number(value)) ? `$${number(value)}` : '—';
   const percent = value => value != null && value !== '' && Number.isFinite(Number(value)) ? `${number(Number(value) * 100, 1)}%` : '—';
+  const sessionDate = value => value ? new Date(`${String(value).slice(0,10)}T12:00:00`).toLocaleDateString() : 'Date unavailable';
   const dateLabel = value => { const date = new Date(value); return Number.isNaN(date.getTime()) ? 'Date unavailable' : date.toLocaleString(); };
   const readablePrices = value => String(value || '').replace(/asset reality/gi,'Player reality').replace(/\bnear\s+([0-9]+(?:\.[0-9]+)?)(?![%\d])/gi, (_, amount) => `near ${money(amount)}`);
   const fact = (label, value, detail = '') => `<article class="player-market-fact"><span>${escape(label)}</span><strong>${escape(value)}</strong>${detail ? `<small>${escape(detail)}</small>` : ''}</article>`;
@@ -31,6 +32,21 @@
   let searchTimer = 0;
   let searchSerial = 0;
   const names = new Map();
+  const marketPrices = new Map();
+  const priceObservation = symbol => marketPrices.get(symbol);
+  const priceNote = item => item ? `${item.real_time && Date.now()-new Date(item.as_of).getTime() <= 120000 ? 'Live' : 'Last observed'} · ${item.source === 'Yahoo Finance' ? 'Yahoo 1m close' : `Alpaca ${item.feed} trade`} · ${dateLabel(item.as_of)}` : 'Price unavailable';
+  async function refreshPrices() {
+    const symbols = [...new Set([...watched(), selectedSymbol].filter(Boolean))].slice(0,20);
+    await Promise.all(symbols.map(async symbol => {
+      try {
+        const response = await fetch(`/api/market-price/${encodeURIComponent(symbol)}`, {cache:'no-store'});
+        if (!response.ok) throw Error('Price unavailable');
+        const item = await response.json();
+        if (item.state === 'observed' && item.symbol === symbol) marketPrices.set(symbol,item);
+      } catch { marketPrices.delete(symbol); }
+    }));
+    renderExchange(); renderProfile(); if (report) header();
+  }
   const getStorage = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; } catch { return fallback; } };
   const setStorage = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); } catch {} };
   const catalogKey = 'market-compass-player-exchange-v1';
@@ -69,7 +85,7 @@
     const direction = catalogState.direction === 'asc' ? 1 : -1;
     list.sort((a,b) => {
       if (sort === 'recent') return direction * ((new Date(a.study?.at || 0)).getTime() - (new Date(b.study?.at || 0)).getTime()) || a.symbol.localeCompare(b.symbol);
-      if (sort === 'price') return direction * ((Number(a.study?.price) || 0) - (Number(b.study?.price) || 0)) || a.symbol.localeCompare(b.symbol);
+      if (sort === 'price') return direction * ((Number(priceObservation(a.symbol)?.price) || 0) - (Number(priceObservation(b.symbol)?.price) || 0)) || a.symbol.localeCompare(b.symbol);
       return direction * String(a[sort] || '').localeCompare(String(b[sort] || ''));
     });
     return list;
@@ -95,7 +111,8 @@
     grid.innerHTML = shown.map(player => {
       const last = player.study;
       const status = player.note?.text ? 'Journaled' : last ? 'Studied' : player.watched ? 'Watching' : 'New';
-      return `<button type="button" class="player-exchange-card" data-player-symbol="${escape(player.symbol)}" aria-label="Open ${escape(player.symbol)} Player record"><span class="player-exchange-card-mark">${escape(player.symbol.slice(0,2))}</span><span class="player-exchange-card-body"><strong>${escape(player.symbol)}</strong><span>${escape(player.name)}</span><small>${escape(player.type)}${player.exchange ? ` · ${escape(player.exchange)}` : ''}</small></span><span class="player-exchange-card-end"><b>${last ? money(last.price) : '—'}</b><small>${status}${last?.at ? ` · ${escape(dateLabel(last.at))}` : ''}</small></span></button>`;
+      const quote = priceObservation(player.symbol);
+      return `<button type="button" class="player-exchange-card" data-player-symbol="${escape(player.symbol)}" aria-label="Open ${escape(player.symbol)} Player record"><span class="player-exchange-card-mark">${escape(player.symbol.slice(0,2))}</span><span class="player-exchange-card-body"><strong>${escape(player.symbol)}</strong><span>${escape(player.name)}</span><small>${escape(player.type)}${player.exchange ? ` · ${escape(player.exchange)}` : ''}</small></span><span class="player-exchange-card-end"><b>${quote ? money(quote.price) : '—'}</b><small>${escape(quote ? priceNote(quote) : 'Price unavailable')} · ${status}</small></span></button>`;
     }).join('') || '<p class="player-exchange-empty">No players in this group. Search a ticker or choose another group.</p>';
     exchange.querySelectorAll('[data-exchange-sort]').forEach(button => button.classList.toggle('active',button.dataset.exchangeSort===catalogState.sort));
     exchange.querySelectorAll('[data-exchange-size]').forEach(button => button.classList.toggle('active',button.dataset.exchangeSize===catalogState.size));
@@ -119,6 +136,7 @@
       $('a[data-act-shell-room="player-profile"]')?.click();
       $('#symbol').value=symbol;
       window.dispatchEvent(new CustomEvent('marketcompasschannelanalyze',{detail:{symbol}}));
+      refreshPrices();
     }
   });
   window.addEventListener('marketcompassplayerfilter',event => { if (groups.some(([key])=>key===event.detail.filter)) {catalogState.filter=event.detail.filter;saveCatalog();} });
@@ -150,6 +168,9 @@
       if (exact) { names.set(symbol,exact); renderExchange(); }
     } catch {}
   });
+  refreshPrices();
+  setInterval(() => { if (!document.hidden) refreshPrices(); }, 60000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshPrices(); });
 
   const profileRooms = [['overview','Overview'],['intelligence','Intelligence'],['news','Player News'],['history','Price history'],['proof','Evidence & receipts'],['view','My view']];
   const profileAction = (label, target) => `<button type="button" class="player-profile-action" data-profile-action="${target}">${escape(label)} →</button>`;
@@ -160,13 +181,14 @@
     const saved=snapshots().filter(item=>item.symbol===symbol).slice(0,12);
     $('#player-profile-title').textContent=symbol ? `${player.name || symbol} · ${symbol}` : 'Choose a Player';
     $('#player-profile-description').textContent=symbol ? `${player.type || 'Player'}${player.exchange ? ` · ${player.exchange}` : ''} · Individual market record` : 'Open a ticker from the Player Exchange to see its individual record.';
-    $('#player-profile-price').textContent=current ? money(current.price) : player.study ? money(player.study.price) : '—';
-    $('#player-profile-date').textContent=current ? `As of ${dateLabel(current.as_of)}` : player.study?.at ? `Last studied ${dateLabel(player.study.at)}` : 'No market reading yet';
+    const quote=priceObservation(symbol);
+    $('#player-profile-price').textContent=quote ? money(quote.price) : '—';
+    $('#player-profile-date').textContent=priceNote(quote);
     $('.player-profile-tabs',profile).innerHTML=profileRooms.map(([key,label])=>`<button type="button" data-profile-room="${key}" ${key===profileRoom ? 'aria-current="page"' : ''}>${label}</button>`).join('');
     const lead=`<div class="player-profile-section-head"><p class="eyebrow">${escape(profileRooms.find(([key])=>key===profileRoom)?.[1] || 'PLAYER RECORD')}</p><h3>${escape(symbol || 'Choose a Player')}</h3><p>Source dates and missing evidence stay visible. Market Compass does not change the source record.</p></div>`;
     const empty='<p class="player-profile-empty">Select a Player and wait for its dated market analysis.</p>';
     let content=empty;
-    if (symbol && profileRoom==='overview') content=`<div class="player-profile-facts">${fact('Current price',current?money(current.price):player.study?money(player.study.price):'—')}${fact('Market state',current?.action||'Not studied')}${fact('Research confidence',current?percent(current.confidence):'—')}${fact('Source',current?.data_meta?.provider||'Not loaded')}</div><div class="player-profile-story"><h4>The Player at a glance</h4><p>${escape(readablePrices(current?.summary || 'A current market reading has not loaded yet. Price and evidence will appear when the selected ticker responds.'))}</p></div>${profileAction('Open Player Market Studio','studio')}`;
+    if (symbol && profileRoom==='overview') content=`<div class="player-profile-facts">${fact('Latest available price',quote?money(quote.price):'—',priceNote(quote))}${fact('Study close',current?money(current.price):'—',current?sessionDate(current.data_meta?.price_session_date):'No study')}${fact('Market state',current?.action||'Not studied')}${fact('Research confidence',current?percent(current.confidence):'—')}</div><div class="player-profile-story"><h4>The Player at a glance</h4><p>${escape(readablePrices(current?.summary || 'A dated market reading has not loaded yet. Price and evidence will appear when the selected ticker responds.'))}</p></div>${profileAction('Open Player Market Studio','studio')}`;
     if (symbol && profileRoom==='intelligence') content=current ? `<div class="player-profile-facts">${fact('Bull evidence',current.bull_evidence??'—')}${fact('Bear evidence',current.bear_evidence??'—')}${fact('Trend',current.layers?.trend?.state||'Unknown')}${fact('Momentum',current.layers?.momentum?.state||'Unknown')}</div><div class="player-profile-story"><h4>What would change this view?</h4><p>${escape(current.invalidation?.summary||current.invalidation||'Open Decision Gates for the current invalidation and risk levels.')}</p></div>${profileAction('Open Decision Gates','gates')}` : empty;
     if (symbol && profileRoom==='news') content=`<div class="player-profile-story"><h4>The living record of ${escape(player.name||symbol)}</h4><p>News, SEC filings, and publication times belong to this selected ticker. Open Player News to check the current source feed.</p></div>${profileAction('Open Player News','news')}`;
     if (symbol && profileRoom==='history') {const tape=current?.timeframes?.['1d']?.chart||current?.chart||{};const bars=(tape.date||[]).slice(-12).map((date,i,dates)=>{const n=(tape.date||[]).length-dates.length+i;return `<article><b>${escape(dateLabel(date))}</b><span>Close ${money(tape.close?.[n])} · Volume ${number(tape.volume?.[n],0)}</span></article>`;}).reverse();content=`<div class="player-profile-story"><h4>Dated price tape</h4><p>Recent market closes for ${escape(symbol)}. Saved research snapshots are listed separately. Neither is a broker transaction.</p></div><div class="player-profile-ledger">${bars.join('')||'<p>No dated price bars available.</p>'}</div><div class="player-profile-story"><h4>Saved studies</h4><p>${saved.length} browser-local snapshots</p></div><div class="player-profile-ledger">${saved.map(item=>`<article><b>${escape(dateLabel(item.at||item.saved_at))}</b><span>${money(item.price)} · Bull ${escape(item.bull??'—')} / Bear ${escape(item.bear??'—')}</span></article>`).join('')||'<p>No saved studies for this Player yet.</p>'}</div>${profileAction('Open chart room','chart')}`;}
@@ -193,8 +215,9 @@
     $('#player-market-title').textContent=report ? `${symbol} market desk` : 'Player market desk';
     $('#player-market-context').textContent=report ? 'Three separate evidence books. One player. Every move opens back to dated market proof.' : 'Choose a player to load its market evidence.';
     $('#player-market-symbol').textContent=symbol;
-    $('#player-market-price').textContent=report ? money(report.price) : '—';
-    $('#player-market-date').textContent=report ? `As of ${dateLabel(report.as_of)}` : 'Waiting for data';
+    const quote=priceObservation(report?.symbol);
+    $('#player-market-price').textContent=quote ? money(quote.price) : '—';
+    $('#player-market-date').textContent=report ? priceNote(quote) : 'Waiting for data';
     $('#player-market-books').innerHTML=report ? [
       ['Price tape',money(report.price),'Dated market close','chart'],
       ['Bull case',report.bull_evidence??'—','Evidence for the upside','splits'],
@@ -231,7 +254,7 @@
   }
   const pulse = () => {
     const trend=report.layers?.trend||{},momentum=report.layers?.momentum||{},barCount=series().date?.length||0;
-    return `<div class="player-market-panel-head"><p class="eyebrow">MARKET COMMAND CENTER</p><h3>Player market pulse</h3><p>Read the three books, check source health, then open the study behind the move.</p></div><div class="player-market-grid">${fact('Dated closes',barCount)}${fact('Trend',trend.state||'Unknown')}${fact('Momentum',momentum.state||'Unknown')}${fact('Research confidence',percent(report.confidence))}${fact('Current price',money(report.price))}${fact('As of',dateLabel(report.as_of))}</div><div class="player-market-launches">${roomLink('Audit evidence','#evidence-panel')}${roomLink('Read levels','#route-panel')}${roomLink('Open player news','#asset-channel')}</div>`;
+    return `<div class="player-market-panel-head"><p class="eyebrow">MARKET COMMAND CENTER</p><h3>Player market pulse</h3><p>Read the three books, check source health, then open the study behind the move.</p></div><div class="player-market-grid">${fact('Dated closes',barCount)}${fact('Trend',trend.state||'Unknown')}${fact('Momentum',momentum.state||'Unknown')}${fact('Research confidence',percent(report.confidence))}${fact('Study close',money(report.price))}${fact('Daily session',sessionDate(report.data_meta?.price_session_date))}</div><div class="player-market-launches">${roomLink('Audit evidence','#evidence-panel')}${roomLink('Read levels','#route-panel')}${roomLink('Open player news','#asset-channel')}</div>`;
   };
   const chartRoom = () => {
     const data=series(),momentum=report.layers?.momentum?.metrics||{};
@@ -240,7 +263,7 @@
   const translation = () => `<div class="player-market-panel-head"><p class="eyebrow">SIGNALS VS OUTCOMES</p><h3>Training translation</h3><p>Here, “training” is the earlier price and research record. A useful translation into future returns requires dated out-of-sample proof.</p></div><div class="player-market-split"><article><h4>Observed record</h4>${fact('Dated bars',series().date?.length||0)}${fact('Trend',report.layers?.trend?.state||'Unknown')}${fact('Momentum',report.layers?.momentum?.state||'Unknown')}</article><article><h4>Forward proof</h4>${fact('Historical analogs',report.calibration?.sample_size??'—')}${fact('Forecast state',report.forecast?.state||'Unknown')}<p>No future price is treated as observed.</p></article></div>${roomLink('Inspect historical evidence','#evidence-panel')}`;
   const levels = () => {
     const route=report.route||{}, memory=report.layers?.memory?.metrics||{};
-    return `<div class="player-market-panel-head"><p class="eyebrow">RANGE · SUPPORT · RESISTANCE</p><h3>Levels & signals</h3><p>Observed route levels and tested price memory. Study markers are not orders.</p></div><div class="player-market-grid">${fact('Current',money(report.price))}${fact('Next upside',money(route.next_bus_stops?.[0]))}${fact('Next downside',money(route.downside_stops?.[0]))}${fact('Invalidation',money(route.invalidation))}${fact('Reward / risk',number(route.reward_risk))}${fact('Direction',route.direction||'Unknown')}</div><div class="player-market-split"><article><h4>Support</h4>${(memory.supports||[]).slice(0,4).map(x=>fact('Tested level',money(x.price),`${x.touches||0} tests`)).join('')||'<p>No tested support returned.</p>'}</article><article><h4>Resistance</h4>${(memory.resistances||[]).slice(0,4).map(x=>fact('Tested level',money(x.price),`${x.touches||0} tests`)).join('')||'<p>No tested resistance returned.</p>'}</article></div>${roomLink('Open full price route','#route-panel')}`;
+    return `<div class="player-market-panel-head"><p class="eyebrow">RANGE · SUPPORT · RESISTANCE</p><h3>Levels & signals</h3><p>Observed route levels and tested price memory. Study markers are not orders.</p></div><div class="player-market-grid">${fact('Study close',money(report.price),sessionDate(report.data_meta?.price_session_date))}${fact('Next upside',money(route.next_bus_stops?.[0]))}${fact('Next downside',money(route.downside_stops?.[0]))}${fact('Invalidation',money(route.invalidation))}${fact('Reward / risk',number(route.reward_risk))}${fact('Direction',route.direction||'Unknown')}</div><div class="player-market-split"><article><h4>Support</h4>${(memory.supports||[]).slice(0,4).map(x=>fact('Tested level',money(x.price),`${x.touches||0} tests`)).join('')||'<p>No tested support returned.</p>'}</article><article><h4>Resistance</h4>${(memory.resistances||[]).slice(0,4).map(x=>fact('Tested level',money(x.price),`${x.touches||0} tests`)).join('')||'<p>No tested resistance returned.</p>'}</article></div>${roomLink('Open full price route','#route-panel')}`;
   };
   const splits = () => `<div class="player-market-panel-head"><p class="eyebrow">TWO SIDES OF THE TAPE</p><h3>Matchup splits</h3><p>Compare the strongest upside case with the fair challenge from the same report.</p></div><div class="player-market-split"><article><h4>Bull talk · the case for</h4>${Object.values(report.layers||{}).flatMap(layer=>layer.evidence||[]).slice(0,6).map(x=>`<p>${escape(x.text)}</p>`).join('')||'<p>No bullish case recorded.</p>'}</article><article><h4>Bear talk · the fair challenge</h4>${Object.values(report.layers||{}).flatMap(layer=>layer.counter_evidence||[]).slice(0,6).map(x=>`<p>${escape(x.text)}</p>`).join('')||'<p>No bearish case recorded.</p>'}</article></div>`;
   const options = () => `<div class="player-market-panel-head"><p class="eyebrow">PLAYER MARKET STUDIO · OPTIONS</p><h3>Option chain</h3><p>Open the existing Options Lab for ${escape(report.symbol)} contracts and theoretical strategy studies. Its market-data status remains separate from this price tape.</p></div>${roomLink('Open Options Lab','#options-lab')}<p class="player-market-limit">No contract or premium is invented in this room. Options Lab states which feeds are available.</p>`;

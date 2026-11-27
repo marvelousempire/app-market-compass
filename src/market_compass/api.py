@@ -20,7 +20,7 @@ from .ai import AnalystRequest, AnalystRouter
 from .ai.providers import ProviderError
 from .asset_channel import read_asset_channel
 from .backtest import backtest_frame
-from .data import get_market_data, search_symbols
+from .data import get_market_data, latest_available_bar, search_symbols
 from .decision_readiness import calculate_readiness
 from .engine import analyze
 from .hcck_profiles import ProfiledSimulationRequest, profile_directory, run_profiled_simulation
@@ -29,7 +29,7 @@ from .intelthat_native import build_native_workspace
 from .pack002 import desk_from_bars
 from .registry import NODE_REGISTRY, node_output
 from .research_lenses import build_day_trader_lens
-from .research_sources import alpaca_quote, edgar_filings
+from .research_sources import alpaca_latest_trade, alpaca_quote, edgar_filings
 from .simulation import SimulationRequest, simulate
 
 app = FastAPI(title="Market Compass", version="0.8.1")
@@ -274,6 +274,18 @@ def options_context_api(symbol: str):
             return {"alpaca": alpaca_future.result(), "edgar": edgar_future.result()}
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.get("/api/market-price/{symbol}")
+def market_price_api(symbol: str):
+    """The newest observed price and its actual source time, separate from study bars."""
+    try:
+        observed = alpaca_latest_trade(symbol)
+        if observed["state"] == "observed":
+            return JSONResponse(observed, headers={"Cache-Control": "no-store"})
+        return JSONResponse(latest_available_bar(symbol), headers={"Cache-Control": "no-store"})
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
 
 
 @app.get("/api/asset-channel/{symbol}")

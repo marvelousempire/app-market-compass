@@ -22,7 +22,7 @@
       symbol: meta.resolved_symbol || report.symbol,
       kind: quote.quoteType || quote.typeDisp || '',
       price: report.price,
-      asOf: report.chart?.date?.at(-1) || report.as_of,
+      asOf: meta.price_session_date,
       provider: meta.provider || 'Market Compass desk'
     }}, location.origin);
   };

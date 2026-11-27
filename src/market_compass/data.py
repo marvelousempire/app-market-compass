@@ -152,6 +152,20 @@ def direct_market_data(symbol: str, range_: str = "1mo", interval: str = "1d") -
     })
 
 
+def latest_available_bar(symbol: str) -> dict:
+    """A dated source bar, never a claim that the quote is consolidated or live."""
+    ticker = symbol.strip().upper()
+    if not ticker or len(ticker) > 24 or not all(c.isalnum() or c in '.^-' for c in ticker):
+        raise ValueError("Enter a valid market symbol.")
+    bars, meta = _chart_bars(ticker, "1d", "1m")
+    if bars.empty:
+        raise ValueError("No dated market bar is available.")
+    return {"state": "observed", "symbol": ticker, "price": round(float(bars.close.iloc[-1]), 6),
+            "as_of": bars.index[-1].isoformat(), "retrieved_at": datetime.now(UTC).isoformat(),
+            "source": "Yahoo Finance", "feed": "Yahoo chart", "kind": "minute bar close",
+            "currency": meta.get("currency") or "USD", "real_time": False}
+
+
 def get_market_data(symbol: str, csv_path: str | None = None) -> MarketData:
     return load_csv(csv_path) if csv_path else yahoo_market_data(symbol)
 

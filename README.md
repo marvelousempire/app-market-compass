@@ -36,6 +36,7 @@ Market Compass will not connect to a broker, submit an order, execute a trade, m
 **Primary use case:** swing-trade research over days to several weeks  
 **Current interfaces:** browser app, CLI, FastAPI, CSV input  
 **Current default market-data source:** Yahoo public search/chart endpoints  
+**Price freshness:** Player cards show a dated last observation. Daily research uses a separate session close. Alpaca trades require configured market-data credentials and feed entitlement; without them the app does not claim real-time pricing.
 **Runtime model:** 115 stable IP node IDs routed through compact shared Python implementations  
 **AI interpretation:** Nephew/local/cloud provider mesh with explicit privacy consent and model receipts
 **Signal generation:** active research output

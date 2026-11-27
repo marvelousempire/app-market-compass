@@ -7,6 +7,8 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Corrected misleading price freshness: Player Exchange and Record now show a separate sourced, dated price observation and refresh it while visible. Research and Decision Gates label their daily-bar input as Study close with the actual bar time. Alpaca's configured feed can supply a recent trade; without market-data credentials the Yahoo minute bar is labeled latest available, not live.
+
 - Connected the Web Door and intelTHAT room controls to the ACT V5 semantic symbol catalog through a same-origin, revision-checked public reader. The Web uses catalog outlines; native Apple targets retain SF Symbol names. Original labels and control behavior remain in place when the catalog is unavailable.
 - Added reviewed uploadTHAT history receiving with independent Bank operation checks, a retained research tab, and the unchanged Bank history presenter. The upload entrance uses the registered source identity; the reader reuses the qualified Bank owner stream that matches settlement. History remains separate from current holdings and simulations.
 - Added a guarded `make ship-install-go` command for an accepted Gitea main revision: qualify the source and Rust options build, fast-forward the commissioned checkout, verify its Python source binding and exact LaunchAgent revision, then verify and open the named Door.

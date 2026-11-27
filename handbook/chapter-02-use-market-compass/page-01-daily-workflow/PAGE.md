@@ -16,6 +16,12 @@ Search by symbol or company, select a result, and press **Analyze**. The complet
 
 In Compass Desk, open Price Route to inspect the last and next Bus Stops, invalidation, and downside structure. Select an available timeframe and check the observation window. Use Appearance for System, Light, or Dark. Open an Actor from the current report and export its receipt from the comp card. The Overview runtime controls report status in plain language; they do not analyze a Player.
 
+## Prices and freshness
+
+Player Exchange and Player Record check each watched Player's newest available price when opened and about once a minute while the page is visible. Every price names its source, kind, and actual source time. A fresh Alpaca trade from the configured IEX or SIP feed may say **Live**; an older trade, delayed feed, or Yahoo minute bar says **Latest available**. Alpaca market-data credentials and feed entitlement must be configured with the service owner for live coverage. Without them, Market Compass cannot promise real-time prices. An unavailable source leaves a dash rather than reusing an old study as a quote.
+
+Analyze uses dated daily bars for research. Its **Study close**, route levels, chart, Decision Gates, and options input use the last analysis bar, with the bar's date shown separately from the time the study was run. They are not current trade prices. Compare the source time and feed before using a number; a fresh page load alone does not refresh a closed market.
+
 ## Symbols and control labels
 
 The left rail, bottom controls, room menu, runtime actions, and intelTHAT rooms use one shared symbol language. Read the word beside an icon for its action; the symbol does not change what the control does. Market Compass Web receives the ACT V5 catalog's outline drawings for semantic roles. Native Apple apps can use the corresponding SF Symbol names from that same catalog. Player initials and ticker symbols remain names, not control icons. If the shared catalog is unavailable, the original control labels remain and the page reports that symbol receiving is unavailable.

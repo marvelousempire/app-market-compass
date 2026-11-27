@@ -93,7 +93,9 @@ def analyze_frame(
         f"({consensus.get('agreement', 0)}). Correlated technical and news-derived layers are discounted before aggregation."
     )
     catalysts = (news.metrics or {}).get("timeline", [])
-    meta = attach_pack_002(data.meta | {"bars": len(data.bars), "quote": data.quote}, symbol, data.bars)
+    meta = attach_pack_002(data.meta | {"bars": len(data.bars), "quote": data.quote,
+                                   "price_session_date": data.bars.index[-1].date().isoformat(),
+                                   "price_kind": "daily_bar_close"}, symbol, data.bars)
     return Report(
         symbol=symbol.upper(), horizon_days=horizon, price=float(x.close.iloc[-1]), action=action,
         bull_evidence=bull, bear_evidence=bear, confidence=round(confidence, 3), summary=summary,
