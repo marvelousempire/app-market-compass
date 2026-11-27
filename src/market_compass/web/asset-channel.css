@@ -42,5 +42,51 @@
 #alpaca-callback-uri{display:block;overflow-wrap:anywhere;font-size:16px}
 .alpaca-connect-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
 @media(max-width:640px){#alpaca-connect-form{grid-template-columns:minmax(0,1fr)}}
+
+/* Market prices is a focused connection instrument, not a generic browser form. */
+#market-data-settings{gap:16px;padding:clamp(20px,3vw,32px);border-color:var(--act-line);background:var(--act-surface);color:var(--act-ink)}
+#market-data-settings h3{font-size:clamp(24px,2.4vw,32px);letter-spacing:-.035em;line-height:1.1}
+#market-data-settings .market-price-observation{display:grid;gap:4px;padding:16px 18px;border-radius:14px;background:var(--act-canvas);border:1px solid var(--act-line)}
+#market-data-settings .market-price-label{font-size:14px;font-weight:750;color:var(--act-muted)}
+#market-data-settings #market-data-current{font-size:clamp(17px,1.6vw,21px);line-height:1.4;font-weight:700;color:var(--act-ink)}
+#market-data-settings .alpaca-connect-status{font-size:16px;line-height:1.45;color:var(--act-muted)}
+#market-data-settings .alpaca-setup-intro{font-size:17px;line-height:1.45;color:var(--act-ink)}
+#alpaca-connect-form{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:none}
+#alpaca-connect-form .alpaca-field{display:grid;gap:8px;min-width:0;font-size:16px;font-weight:700}
+#alpaca-connect-form input{width:100%;height:52px;padding:0 15px;background:var(--act-canvas);color:var(--act-ink);border:1.5px solid var(--act-line);border-radius:12px;font-size:17px;outline:none;transition:border-color .15s,box-shadow .15s}
+#alpaca-connect-form input:focus-visible{border-color:var(--act-brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--act-brand) 16%,transparent)}
+#alpaca-connect-form button{min-height:48px;padding:0 22px;border:0;border-radius:12px;background:var(--act-ink);color:var(--act-surface);font-size:16px;font-weight:750}
+#alpaca-connect-form button:hover{opacity:.88}
+#market-data-settings .alpaca-callback{display:grid;gap:7px;padding:14px 16px;border:1px solid var(--act-line);border-radius:12px;background:var(--act-canvas)}
+#market-data-settings .alpaca-callback strong{font-size:16px}
+#market-data-settings .alpaca-callback p{font-size:15px;line-height:1.4;color:var(--act-muted)}
+#alpaca-callback-uri{font-size:15px;line-height:1.5;color:var(--act-ink)}
+.alpaca-connect-actions{gap:10px}
+#market-data-settings .alpaca-connect-actions button,#market-data-settings .alpaca-connect-actions a{min-height:48px;padding:0 18px;border-radius:12px;font-size:15px;font-weight:700}
+#market-data-settings .alpaca-connect-actions #alpaca-connect-start{border:0;background:var(--act-brand);color:#fff}
+#market-data-settings .alpaca-connect-actions #alpaca-connect-start:disabled{background:var(--act-line);color:var(--act-muted);cursor:not-allowed}
+#market-data-settings .alpaca-connect-note{font-size:14px;line-height:1.45;color:var(--act-muted)}
+@media(max-width:700px){#alpaca-connect-form{grid-template-columns:minmax(0,1fr)}#market-data-settings{padding:18px}}
+#market-data-settings{gap:12px;padding:20px 24px}
+#market-data-settings h3{margin:0;font-size:27px}
+#market-data-settings .market-price-observation{gap:4px;padding:12px 16px}
+#market-data-settings .market-price-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#market-data-settings .market-price-refresh{min-height:36px;padding:0 10px;border:0;background:transparent;color:var(--act-brand);font-size:14px;font-weight:750}
+#market-data-settings .market-price-refresh:hover{text-decoration:underline}
+#market-data-settings #market-data-current{font-size:18px}
+#market-data-settings .alpaca-connect-status{font-size:16px}
+#alpaca-connect-form{gap:12px}
+#alpaca-connect-form .alpaca-field{gap:6px}
+#alpaca-connect-form input{height:48px}
+#alpaca-connect-form button{min-height:46px}
+#market-data-settings .alpaca-callback{display:block;padding:0;border:0;background:transparent}
+#market-data-settings .alpaca-callback summary{min-height:44px;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:16px;font-weight:700;color:var(--act-ink)}
+#market-data-settings .alpaca-callback summary::before{content:'›';font-size:24px;line-height:1;transition:transform .15s}
+#market-data-settings .alpaca-callback[open] summary::before{transform:rotate(90deg)}
+#market-data-settings .alpaca-callback p{margin:8px 0;font-size:15px;line-height:1.45;color:var(--act-muted)}
+#market-data-settings .alpaca-callback code{padding:12px 14px;border:1px solid var(--act-line);border-radius:10px;background:var(--act-canvas)}
+#market-data-settings .alpaca-callback a{margin-top:12px}
+#market-data-settings .alpaca-connect-actions #alpaca-connect-start{min-width:210px}
+@media(prefers-reduced-motion:reduce){#market-data-settings .alpaca-callback summary::before{transition:none}}
 .reviewed-import-activity{max-width:100%;overflow-x:auto}
 .reviewed-import-actions{display:flex;flex-wrap:wrap;gap:8px}
