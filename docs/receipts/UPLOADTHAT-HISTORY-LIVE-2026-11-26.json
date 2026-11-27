@@ -1,0 +1,107 @@
+{
+  "schema": "market-compass.uploadthat-history-proof/v1",
+  "scope": "Synthetic acceptance history only; no real assets or trades",
+  "upload_workflow": {
+    "review": "ce7dc2bb-1727-4dc0-aec9-cfe0fb48eba3",
+    "operation": "9f9aa7c8-1b3d-4036-8d63-0798a3553e1f",
+    "stage": "settled",
+    "revision": 7,
+    "original_sha256": "29cd8db6b4bffbbaf2d36a4ff8756099f1e7be96b31b1b4fe999d08d67104e27",
+    "sheet_sha256": "f338d8b542677c95c94cb41884addf476cb578881d869aafc01ece6a20c20fe2",
+    "profile_sha256": "381449ddba7994c2d196390644af01e3766200158ec0478e406e08bcae4a145e",
+    "rows": 2,
+    "preconfirmation_history_rows": 0,
+    "corrected_notes_saved_and_reopened": true,
+    "settled_reload": true,
+    "original_download_hash_matches": true,
+    "ai_summaries": false,
+    "semantic_index": false
+  },
+  "fixture_setup": "Isolated local bookkeeping fixtures; not evidence of the Bank account-creation UI. The remote fixture was seeded as test setup, outside the upload workflow.",
+  "bank_readback": {
+    "rows": 2,
+    "dates": [
+      "2026-01-02",
+      "2026-01-04"
+    ],
+    "quantities": [
+      "2.00000000",
+      "0.50000000"
+    ],
+    "account_balance_before": 0,
+    "account_balance_after": 0,
+    "trading_positions_after": 0
+  },
+  "market_candidate_receiving": {
+    "state": "passed",
+    "target": "Private HTTPS candidate on port18004; not the installed Door",
+    "schema": "market-compass.uploadthat-imports/v1",
+    "readOnly": true,
+    "verified_operation_matches_upload": true,
+    "same_mounted_research_field_after_read": true,
+    "same_mounted_receiving_work_after_overview_return": true,
+    "retained_player_draft": "AAPL",
+    "retained_horizon_draft": "37",
+    "source_review_and_original_open_in_new_tab": true,
+    "normal_family_connection": "Existing canonical sign-in recognized this Mac; no credentials copied",
+    "narrow_reduced_motion": {
+      "width": 390,
+      "height": 844,
+      "document_width": 390,
+      "primary_text_px": 16,
+      "controls_height_px": 44,
+      "final_control_bottom": 754.046875,
+      "usable_canvas_bottom": 774
+    }
+  },
+  "market_installed_receiving": "pending exact-source review, merge and guarded installation",
+  "validation": {
+    "pytest": 118,
+    "browser_module": "Family401 recovery,101-record paging, exact decimal text, safe source link, no markup interpretation and no extra fetch from paging",
+    "ruff": "passed"
+  },
+  "authority_effects": {
+    "orders": false,
+    "transfers": false,
+    "position_updates": false,
+    "balance_updates": false,
+    "paper_trade_updates": false,
+    "current_holdings_established": false
+  },
+  "qualified_transport": {
+    "owner": "averygoodman/table-that",
+    "revision": "2f9b66f77acf5cf8c0e33a71cdf5fa3a73e55a62",
+    "program_sha256": "b733242c2565cc7d5710571b948d11863ba39b72bdd86bde575bcf418b1ce8e3",
+    "route": "tablethat-bank",
+    "bank_source_observed": "cad9d67720ae302f95a3a345466b96ebe6bf8f41",
+    "identity_mapping_changes": false,
+    "new_credentials": false,
+    "new_listener": false
+  },
+  "source_bindings": {
+    "src/market_compass/bank_owner_reader.py": "d4f7784b922c2c6a03d12c7a2b40427acffecebfcbcd0bf5b7824003c29b0ac2",
+    "src/market_compass/uploadthat_resident.py": "c4bd79eb43e0adf03df4331622c6aea319835687a6ee2a9dce8945729ce4dc32",
+    "src/market_compass/web/uploadthat-resident.js": "55a158cf9450fdd3b40250bd7882721d2b39fc2125b405a4f23910f964b4fed4",
+    "src/market_compass/web/index.html": "3642be91183c18c0eebad3d615b79f05bc2ebd1e830bcdeaf8b14aa3e291a4f0",
+    "src/market_compass/web/asset-channel.css": "3b84d2da2845ff9af4bc6ad2b2e86a93afaa60b849a7f5bd525af1f596cfefa1",
+    "src/market_compass/web/vendor/bank-reader/market-compass-projection.mjs": "8b0daafb79b3d647f2ae22d4c8241e863994f5113a1f990a3e76ef3c0e21a710"
+  },
+  "crypto_workflow": {
+    "review": "8e3de68d-717b-42e4-8a92-81c29b269030",
+    "operation": "84d7ce7f-d964-444b-abcf-7dfd03b7111a",
+    "original_sha256": "58528e836747892a57d4d2d0e0a17b2d9032ae60920f991bfa56e577f7a8daff",
+    "sheet_sha256": "d69afd4403c6b45fbabae9e25aef2950f0c39d3d4a8b0966b1cf01d6cdb51cb6",
+    "stage": "settled",
+    "rows": 1,
+    "date": "2026-02-02",
+    "quantity_display": "0.00000001",
+    "preconfirmation_history_rows": 0,
+    "preconfirmation_holdings": 0,
+    "bank_history_rows_after": 1,
+    "bank_holdings_after": 0,
+    "saved_upload_reopened_after_reload": true,
+    "market_candidate_both_routes_visible": true,
+    "research_draft_retained": "AAPL / 37",
+    "fixture_setup": "Existing member; isolated synthetic bookkeeping wallet seeded as test setup. No wallet address, key, transfer, real assets or holdings."
+  }
+}

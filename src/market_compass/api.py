@@ -4,19 +4,19 @@ import json
 import os
 import signal
 import socket
-from datetime import UTC, datetime
 from concurrent.futures import ThreadPoolExecutor
+from datetime import UTC, datetime
 from pathlib import Path
 from threading import Timer
 from urllib.error import URLError
 
-from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import FileResponse, RedirectResponse
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from .ai import AnalystRequest, AnalystRouter
-from .asset_channel import read_asset_channel
 from .ai.providers import ProviderError
+from .asset_channel import read_asset_channel
 from .backtest import backtest_frame
 from .data import get_market_data, search_symbols
 from .decision_readiness import calculate_readiness
@@ -271,3 +271,15 @@ def day_trader_lens_api(symbol: str):
         return build_day_trader_lens(symbol, data.bars, data_meta=data.meta)
     except Exception as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.get("/api/uploadthat/imports")
+def uploadthat_imports_api(request: Request):
+    from .uploadthat_resident import ImportUnavailable, read_imports
+    try:
+        return JSONResponse(read_imports(request.headers.get('cookie', '')),
+                            headers={'Cache-Control': 'no-store'})
+    except PermissionError as error:
+        raise HTTPException(401, str(error)) from error
+    except ImportUnavailable as error:
+        raise HTTPException(503, str(error)) from error

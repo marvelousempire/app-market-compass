@@ -29,3 +29,7 @@
 .market-settings>section{border:1px solid var(--border);border-radius:12px;padding:16px}
 .market-settings>section h3{margin:0 0 7px;font-size:1.15rem}
 .market-settings>section p{margin:0 0 12px;color:var(--muted)}
+#load-reviewed-imports,#reviewed-imports button{min-height:44px}
+#reviewed-imports{overflow-wrap:anywhere}
+.reviewed-import-activity{max-width:100%;overflow-x:auto}
+.reviewed-import-actions{display:flex;flex-wrap:wrap;gap:8px}

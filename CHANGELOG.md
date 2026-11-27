@@ -7,6 +7,7 @@ founder direction are recorded separately in [`docs/FEATURE-JOURNAL.md`](docs/FE
 
 ## Unreleased
 
+- Added reviewed uploadTHAT history receiving with independent Bank operation checks, a retained research tab, and the unchanged Bank history presenter. The upload entrance uses the registered source identity; the reader reuses the qualified Bank owner stream that matches settlement. History remains separate from current holdings and simulations.
 - Added a guarded `make ship-install-go` command for an accepted Gitea main revision: qualify the source and Rust options build, fast-forward the commissioned checkout, refresh the Python installation and exact LaunchAgent revision, then verify and open the named Door.
 - Updated the Handbook for the live Player Exchange → individual Player Record → Player Market Studio flow and its source limits.
 

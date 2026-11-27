@@ -672,3 +672,7 @@ Market Compass is research and decision-support software. It is not investment a
 ### Player Exchange, Player Record, and Player Market Studio
 
 The Player Exchange uses the existing symbol search and browser watchlist to open a ticker's individual Player Record. That record has routed Overview, Intelligence, Player News, Price history, Evidence and receipts, and My view sections. Its dated price tape and research facts come from the selected ticker's `/api/analyze` result; local snapshots and notes are labeled separately. The Player Market Studio opens from that record and follows the Ready Play market-desk pattern with pulse, candles, study switches, levels, scenario splits, reports, and contribution evidence. Options opens the existing Options Lab. Futures contracts are explicitly unavailable until a verified contract feed is connected. This does not copy Ready Play player records, execute trades, or imply that a research score is a return probability.
+
+### uploadTHAT receiving
+
+Settings opens the independent uploadTHAT app and keeps the original research tab mounted. **Read reviewed imports** receives independently verified Bank-owned trading/crypto history; current holdings remain unknown without position evidence. See [the receiving contract, dated proof and recovery steps](docs/UPLOADTHAT.md). Source acceptance and actual installed receiving have separate receipts; the current runtime revision is available from `/api/operator/status`.

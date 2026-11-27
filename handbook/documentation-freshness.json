@@ -63,5 +63,35 @@
     "score_influence": false,
     "authority": "gitea:averygoodman/app-market-compass@main",
     "source_revision": "63c7858a4ca41d7850fd110fd27dfdc3f51f7cbc"
+  },
+  "uploadthat_receiving": {
+    "review_date": "2026-11-26",
+    "base_revision": "452cb1d404fb27e567f228141393896b5d1bc8d8",
+    "state": "source candidate; actual installed revision and proof remain independent",
+    "updated": [
+      "README.md",
+      "CHANGELOG.md",
+      "docs/UPLOADTHAT.md",
+      "docs/receipts/UPLOADTHAT-HISTORY-LIVE-2026-11-26.json"
+    ],
+    "source_bindings": {
+      "src/market_compass/bank_owner_reader.py": "d4f7784b922c2c6a03d12c7a2b40427acffecebfcbcd0bf5b7824003c29b0ac2",
+      "src/market_compass/uploadthat_resident.py": "c4bd79eb43e0adf03df4331622c6aea319835687a6ee2a9dce8945729ce4dc32",
+      "src/market_compass/web/uploadthat-resident.js": "55a158cf9450fdd3b40250bd7882721d2b39fc2125b405a4f23910f964b4fed4",
+      "src/market_compass/web/index.html": "3642be91183c18c0eebad3d615b79f05bc2ebd1e830bcdeaf8b14aa3e291a4f0",
+      "src/market_compass/web/asset-channel.css": "3b84d2da2845ff9af4bc6ad2b2e86a93afaa60b849a7f5bd525af1f596cfefa1",
+      "src/market_compass/web/vendor/bank-reader/market-compass-projection.mjs": "8b0daafb79b3d647f2ae22d4c8241e863994f5113a1f990a3e76ef3c0e21a710"
+    },
+    "validation": {
+      "pytest": 118,
+      "browser_module": "Family401 recovery,101-record paging, exact decimal text, safe source link, no markup interpretation and no extra fetch from paging",
+      "ruff": "passed"
+    },
+    "teaching_roles": {
+      "skill": "current: existing cherrypick/ACT receiving and owner delivery methods; no new shared skill",
+      "rule": "current: existing exact-owner, same-person, no-write and truthful-proof requirements",
+      "guideline": "updated in the existing receiving guide: qualify the actual settlement owner, never a Door name alone",
+      "handbook": "updated with actual source opening, Family connection and recovery behavior"
+    }
   }
 }

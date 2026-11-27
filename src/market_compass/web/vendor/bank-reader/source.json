@@ -1,0 +1,9 @@
+{
+  "schema": "market-compass.owner-source/v1",
+  "owner": "averygoodman/bank-reader",
+  "revision": "a9f0fa8c06c5012650b9f1615933ed7c236c1f54",
+  "source": "services/upload/market-compass-projection.mjs",
+  "sha256": "8b0daafb79b3d647f2ae22d4c8241e863994f5113a1f990a3e76ef3c0e21a710",
+  "purpose": "Read-only view of the current independently verified financial owner operation; current holdings remain unknown.",
+  "acceptance": "Bank PR474 exact-head checks successful and normal merged readback; receiving runtime remains separate."
+}
